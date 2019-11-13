@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29503.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foco", "Foco\Foco.csproj", "{94A43B2C-BCAD-4B95-BDCA-1C077B0824E1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{94A43B2C-BCAD-4B95-BDCA-1C077B0824E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94A43B2C-BCAD-4B95-BDCA-1C077B0824E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94A43B2C-BCAD-4B95-BDCA-1C077B0824E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94A43B2C-BCAD-4B95-BDCA-1C077B0824E1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5A250068-6D5C-4C86-85A2-9EA8E6FD17F1}
+	EndGlobalSection
+EndGlobal

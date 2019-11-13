@@ -1,0 +1,13 @@
+C:\Users\Maziar\source\repos\Foco\Foco\bin\Debug\Foco.exe.config
+C:\Users\Maziar\source\repos\Foco\Foco\bin\Debug\Foco.exe
+C:\Users\Maziar\source\repos\Foco\Foco\bin\Debug\Foco.pdb
+C:\Users\Maziar\source\repos\Foco\Foco\obj\Debug\MainWindow.g.cs
+C:\Users\Maziar\source\repos\Foco\Foco\obj\Debug\App.g.cs
+C:\Users\Maziar\source\repos\Foco\Foco\obj\Debug\Foco_MarkupCompile.cache
+C:\Users\Maziar\source\repos\Foco\Foco\obj\Debug\Foco_MarkupCompile.lref
+C:\Users\Maziar\source\repos\Foco\Foco\obj\Debug\MainWindow.baml
+C:\Users\Maziar\source\repos\Foco\Foco\obj\Debug\Foco.g.resources
+C:\Users\Maziar\source\repos\Foco\Foco\obj\Debug\Foco.Properties.Resources.resources
+C:\Users\Maziar\source\repos\Foco\Foco\obj\Debug\Foco.csproj.GenerateResource.cache
+C:\Users\Maziar\source\repos\Foco\Foco\obj\Debug\Foco.exe
+C:\Users\Maziar\source\repos\Foco\Foco\obj\Debug\Foco.pdb
