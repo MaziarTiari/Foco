@@ -1,0 +1,2 @@
+# This file makes git to not track files or folders specified here
+.vs
