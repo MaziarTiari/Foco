@@ -2,39 +2,24 @@
 using System.Runtime.InteropServices;
 namespace testFoco.models
 {
-    class LinkAttachment
+    class LinkAttachment : Attachment
     {
-        private string link;
-        public LinkAttachment(string link)
+        public LinkAttachment(string title, string link)
         {
-            this.Link = link;
+            Title = title;
+            Content = link;
+            Type = AttachmentType.link;
         }
-        public string Link { get => link; set => link = value; }
-        void OpenUrl(string url)
+        public void OpenUrl()
         {
             try
             {
-                Process.Start(url);
+                Process.Start(Content);
             }
             catch
             {
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                {
-                    url = url.Replace("&", "^&");
-                    Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
-                }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                {
-                    Process.Start("xdg-open", url);
-                }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-                {
-                    Process.Start("open", url);
-                }
-                else
-                {
-                    throw;
-                }
+                Content = Content.Replace("&", "^&");
+                Process.Start(new ProcessStartInfo("cmd", $"/c start {Content}") { CreateNoWindow = true });
             }
         }
     }
