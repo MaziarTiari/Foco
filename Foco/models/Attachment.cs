@@ -2,22 +2,21 @@
 
 namespace testFoco.models
 {
+    public enum AttachmentType { link, comment}
     public class Attachment
     {
+        protected AttachmentType type;
         protected string title;
-        protected string description;
-        private List<Comment> comments = new List<Comment>();
+        protected string content;
+        public Attachment()
+        {
+        }
         public Attachment(string title)
         {
             this.Title = title;
         }
         public string Title { get => title; set => title = value; }
-        public string Description { get => description; set => description = value; }
-        protected List<Comment> Comments => comments;
-
-        public void AddComment(string comment)
-        {
-            Comments.Add(new Comment("comment"));
-        }
+        public string Content { get => content; set => content = value; }
+        public AttachmentType Type { get => type; set => type = value; }
     }
 }
