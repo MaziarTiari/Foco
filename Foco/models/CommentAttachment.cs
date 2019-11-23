@@ -1,16 +1,19 @@
 ﻿using System;
 
-namespace testFoco.models
+namespace Foco.models
 {
-    public class CommentAttachment: Attachment
+    public class CommentAttachment : Attachment
     {
+
         private DateTime date;
-        public CommentAttachment(string comment)
+        
+        public CommentAttachment(string comment, DateTime date) : base(comment)
         {
-            Content = comment;
-            this.date = DateTime.UtcNow;
-            Type = AttachmentType.comment;
+            Date = date;
+            Type = AttachmentType.Comment;
         }
-        public DateTime Date => date;
+        
+        public DateTime Date { get => date; set => date = value; }
+
     }
 }
