@@ -232,7 +232,11 @@ namespace Foco.sqlite
                                     task.Attachments.Add(attachment);
                                 }
 
+                                taskAttachmentReader.Close();
+
                             }
+
+                            taskReader.Close();
 
                             SqliteCommand taskgroupAttachmentCommand = new SqliteCommand(string.Format(SELECT_TASKGROUP_ATTACHMENT, taskgroupId), sqliteConnection);
                             SqliteDataReader taskgroupAttachmentReader = taskgroupAttachmentCommand.ExecuteReader();
@@ -253,12 +257,20 @@ namespace Foco.sqlite
                                 taskgroup.Attachments.Add(attachment);
                             }
 
+                            taskgroupAttachmentReader.Close();
+
                         }
+
+                        taskgroupReader.Close();
 
                     }
 
+                    projectReader.Close();
 
                 }
+
+                goalReader.Close();
+
                 return goals;
             }
             catch
