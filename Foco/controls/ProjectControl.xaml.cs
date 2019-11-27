@@ -78,8 +78,19 @@ namespace Foco.ui
         // Benutzer hat auf Löschen geklickt
         private void OnDeleteClicked(object sender, RoutedEventArgs e)
         {
-            goalControl.Goal.Projects.Remove(project);
-            goalControl.Update();
+            ConfirmWindow confirmWindow = new ConfirmWindow("Projekt löschen", "Sind sie sicher, dass sie das Projekt \"" + project.Name + "\" inkl. aller Aufgaben löschen möchten?", ConfirmDeleteCallback);
+            confirmWindow.ShowDialog();
+        }
+
+
+        // Benutzer hat Löschen bestätigt oder abgebrochen
+        private void ConfirmDeleteCallback(ConfirmState confirmState)
+        {
+            if (confirmState == ConfirmState.YES)
+            {
+                goalControl.Goal.Projects.Remove(project);
+                goalControl.Update();
+            }
         }
 
         // Benutzer hat auf Control geklickt

@@ -113,6 +113,9 @@
     <Compile Include="controls\ProjectControl.xaml.cs">
       <DependentUpon>ProjectControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windows\ConfirmWindow.xaml.cs">
+      <DependentUpon>ConfirmWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\GoalEditWindow.xaml.cs">
       <DependentUpon>GoalEditWindow.xaml</DependentUpon>
     </Compile>
@@ -153,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="controls\ProjectControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\ConfirmWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
