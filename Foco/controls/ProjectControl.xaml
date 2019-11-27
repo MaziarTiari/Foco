@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Foco.ui"
              mc:Ignorable="d" Height="100" Width="180" Margin="5" MouseLeftButtonDown="OnClicked">
 
-    <Border Name="ProjectBorder" BorderBrush="Black" BorderThickness="2" CornerRadius="5" Height="100" Width="180">
+    <Border Name="ProjectBorder" BorderBrush="Black" BorderThickness="2" CornerRadius="5" Height="100" Width="180" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave">
         <DockPanel>
             <Label DockPanel.Dock="Top" Height="32" FontSize="16" FontWeight="Bold" Name="NameLabel">Musterprojekt</Label>
             <Label DockPanel.Dock="Top" Height="30" FontSize="14" Name="TasksLabel">0 / 3 Aufgaben</Label>

@@ -32,6 +32,8 @@ namespace Foco.ui
 
         private void Update()
         {
+            DeleteButton.Visibility = Visibility.Hidden;
+            EditButton.Visibility = Visibility.Hidden;
             if (project != null)
             {
                 NameLabel.Content = project.Name;
@@ -46,16 +48,12 @@ namespace Foco.ui
                     }
                 }
                 TasksLabel.Content = countDone + " / " + countAll + " Aufgaben";
-                DeleteButton.Visibility = Visibility.Visible;
-                EditButton.Visibility = Visibility.Visible;
             }
             else
             {
                 NameLabel.Content = "Hinzufügen";
                 ProjectBorder.Background = new SolidColorBrush(Colors.White);
                 TasksLabel.Content = "";
-                DeleteButton.Visibility = Visibility.Hidden;
-                EditButton.Visibility = Visibility.Hidden;
             }
         }
 
@@ -113,6 +111,23 @@ namespace Foco.ui
             Project project = new Project(projectName, projectColor);
             goalControl.Goal.Projects.Add(project);
             goalControl.Update();
+        }
+
+        // Benutzer beginnt Hover
+        private void OnMouseEnter(object sender, MouseEventArgs e)
+        {
+            if (project != null)
+            {
+                DeleteButton.Visibility = Visibility.Visible;
+                EditButton.Visibility = Visibility.Visible;
+            }
+        }
+
+        // Benutzer endet Hover
+        private void OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            DeleteButton.Visibility = Visibility.Hidden;
+            EditButton.Visibility = Visibility.Hidden;
         }
 
     }
