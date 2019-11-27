@@ -9,7 +9,7 @@
 
     <Grid Height="92" Width="300">
         <Label Content="Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="50"/>
-        <TextBox Name="NameBox" HorizontalAlignment="Left" Height="23" Margin="65,13,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="225"/>
+        <TextBox Name="NameBox" MaxLines="1" HorizontalAlignment="Left" Height="23" Margin="65,13,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="225"/>
         <Button Content="Speichern" HorizontalAlignment="Left" Margin="221,56,0,0" VerticalAlignment="Top" Width="69" Height="26" Click="OnSaveClicked"/>
         <Button Content="Abbrechen" HorizontalAlignment="Left" Margin="144,56,0,0" VerticalAlignment="Top" Width="72" Height="26" Click="OnCancelClicked"/>
     </Grid>
