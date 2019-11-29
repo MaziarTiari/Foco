@@ -42,8 +42,16 @@ namespace Foco.windows
         // Benutzer hat auf Speichern geklickt
         private void OnSaveClicked(object sender, RoutedEventArgs e)
         {
-            Close();
-            projectSaveCallback(NameBox.Text, new ColorConverter().ConvertToString(color));
+            if (string.IsNullOrWhiteSpace(NameBox.Text))
+            {
+                NameBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                Close();
+                projectSaveCallback(NameBox.Text, new ColorConverter().ConvertToString(color));
+            }
+
         }
 
         // Benutzer hat auf Cancel geklickt

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Media;
 
 namespace Foco.windows
 {
@@ -26,8 +27,15 @@ namespace Foco.windows
         // Benutzer hat auf Speichern geklickt
         private void OnSaveClicked(object sender, RoutedEventArgs e)
         {
-            Close();
-            goalSaveCallback(NameBox.Text);
+            if (string.IsNullOrWhiteSpace(NameBox.Text))
+            {
+                NameBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                goalSaveCallback(NameBox.Text);
+                Close();
+            }
         }
 
         // Benutzer hat auf Cancel geklickt
