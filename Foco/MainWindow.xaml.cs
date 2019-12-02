@@ -48,6 +48,12 @@ namespace Foco
 
         }
 
+        public void ShowProject(Project project)
+        {
+            boardPage.Project = project;
+            PageFrame.Content = boardPage;
+        }
+
         // wird aufgerufen, wenn das MainWindow geschlossen wird
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
