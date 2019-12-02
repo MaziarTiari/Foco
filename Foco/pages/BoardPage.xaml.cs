@@ -1,7 +1,6 @@
 ﻿using Foco.controls;
 using Foco.models;
 using System;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace Foco
@@ -21,21 +20,16 @@ namespace Foco
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
-            int column = 0;
             foreach (State state in Enum.GetValues(typeof(State)))
             {
-                ColumnDefinition columnDefinition = new ColumnDefinition();
-                columnDefinition.Width = new GridLength(1, GridUnitType.Star);
-                BoardGrid.ColumnDefinitions.Add(columnDefinition);
                 BoardLaneControl boardLaneControl = new BoardLaneControl(state);
-                BoardGrid.Children.Add(boardLaneControl);
-                Grid.SetColumn(boardLaneControl, column++);
+                BoardStack.Children.Add(boardLaneControl);
             }
         }
 
         private void Update()
         {
-            foreach (BoardLaneControl boardLaneControl in BoardGrid.Children)
+            foreach (BoardLaneControl boardLaneControl in BoardStack.Children)
             {
                 boardLaneControl.Project = project;
             }

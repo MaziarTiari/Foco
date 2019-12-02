@@ -8,8 +8,8 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="BoardPage">
 
-    <Grid Name="BoardGrid">
+    <StackPanel Name="BoardStack" Orientation="Horizontal">
         
-    </Grid>
+    </StackPanel>
     
 </Page>

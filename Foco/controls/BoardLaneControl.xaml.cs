@@ -27,9 +27,9 @@ namespace Foco.controls
             TaskgroupStack.Children.Clear();
             switch (state)
             {
-                case State.Todo: TitleText.Text = "Todo"; break;
-                case State.InProgress: TitleText.Text = "In Bearbeitung"; break;
-                case State.Done: TitleText.Text = "Fertig"; break;
+                case State.Todo: TitleLabel.Content = "Todo"; break;
+                case State.InProgress: TitleLabel.Content = "In Bearbeitung"; break;
+                case State.Done: TitleLabel.Content = "Fertig"; break;
             }
             if (project != null)
             {
