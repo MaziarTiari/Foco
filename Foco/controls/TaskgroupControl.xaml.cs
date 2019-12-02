@@ -14,6 +14,8 @@ namespace Foco.controls
 
         private readonly Taskgroup taskgroup;
 
+        public Taskgroup Taskgroup { get => taskgroup; }
+
         public TaskgroupControl(Taskgroup taskgroup)
         {
             InitializeComponent();

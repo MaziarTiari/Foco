@@ -7,12 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="250">
 
-    <Border BorderBrush="Black" BorderThickness="3" Margin="10" Width="230">
+    <Border BorderBrush="Black" BorderThickness="2" Margin="10" Width="230">
         <DockPanel>
-            <Label DockPanel.Dock="Top" Name="TitleLabel" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="20" Background="LightGray">Name</Label>
-            <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
-                <StackPanel Name="TaskgroupStack">
-                </StackPanel>
+            <Label DockPanel.Dock="Top" Name="TitleLabel" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="20" Background="Black" Foreground="White">Name</Label>
+            <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden" DragEnter="OnDragEnter">
+                <StackPanel Name="TaskgroupStack" Background="LightGray" MouseLeftButtonDown="OnMouseLeftButtonDown" Drop="OnDrop" AllowDrop="True"/>
             </ScrollViewer>
         </DockPanel>
     </Border>
