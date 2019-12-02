@@ -8,7 +8,8 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="BoardPage">
 
-    <Grid>
-        <TextBlock>BoardPage</TextBlock>
+    <Grid Name="BoardGrid">
+        
     </Grid>
+    
 </Page>

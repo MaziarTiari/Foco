@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Foco.controls;
+using Foco.models;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Foco
 {
@@ -20,9 +11,37 @@ namespace Foco
     /// </summary>
     public partial class BoardPage : Page
     {
-        public BoardPage()
+
+        private readonly MainWindow mainWindow;
+        private Project project;
+
+        public Project Project { get => project; set { project = value; Update(); } }
+
+        public BoardPage(MainWindow mainWindow)
         {
             InitializeComponent();
+            this.mainWindow = mainWindow;
+            int column = 0;
+            foreach (State state in Enum.GetValues(typeof(State)))
+            {
+                ColumnDefinition columnDefinition = new ColumnDefinition();
+                columnDefinition.Width = new GridLength(1, GridUnitType.Star);
+                BoardGrid.ColumnDefinitions.Add(columnDefinition);
+                BoardLaneControl boardLaneControl = new BoardLaneControl(state);
+                BoardGrid.Children.Add(boardLaneControl);
+                Grid.SetColumn(boardLaneControl, column++);
+            }
         }
+
+        private void Update()
+        {
+            foreach (BoardLaneControl boardLaneControl in BoardGrid.Children)
+            {
+                boardLaneControl.Project = project;
+            }
+        }
+
+
+
     }
 }

@@ -39,7 +39,7 @@ namespace Foco
             }
 
             homePage = new HomePage(this);
-            boardPage = new BoardPage();
+            boardPage = new BoardPage(this);
             listPage = new ListPage();
             calendarPage = new CalendarPage();
 
