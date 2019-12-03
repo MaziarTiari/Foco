@@ -50,7 +50,7 @@ namespace Foco.controls
                 else
                 {
                     DeadlineBorder.Visibility = Visibility.Visible;
-                    DeadlineLabel.Content = taskgroup.Deadline;
+                    DeadlineLabel.Content = taskgroup.Deadline.ToString("dd.MM.yyyy HH:mm");
                 }
                 int countAll = 0, countDone = 0;
                 foreach (Task task in taskgroup.Tasks)

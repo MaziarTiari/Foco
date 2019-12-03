@@ -13,8 +13,8 @@
                 <Border Name="PriorityBorder" DockPanel.Dock="Left" CornerRadius="5" Background="Orange" Height="25">
                     <Label FontSize="10" Name="PriorityLabel" Foreground="White">Normal</Label>
                 </Border>
-                <Border Name="DeadlineBorder" DockPanel.Dock="Right" CornerRadius="5" Background="Red" Height="25" HorizontalAlignment="Right">
-                    <Label FontSize="10" Name="DeadlineLabel" Foreground="White" >28.11.2019</Label>
+                <Border Name="DeadlineBorder" DockPanel.Dock="Right" CornerRadius="5" Background="DarkGray" Height="25" HorizontalAlignment="Right">
+                    <Label FontSize="10" Name="DeadlineLabel" Foreground="White">28.11.2019 15:30</Label>
                 </Border>
             </DockPanel>
             <Label DockPanel.Dock="Top" Height="30" FontSize="14" Name="TasksLabel">0 / 3 Aufgaben</Label>
