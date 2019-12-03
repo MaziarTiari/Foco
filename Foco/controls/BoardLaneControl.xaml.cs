@@ -5,14 +5,18 @@ using System.Windows.Input;
 
 namespace Foco.controls
 {
+
     /// <summary>
     /// Interaktionslogik für BoardLaneControl.xaml
     /// </summary>
     public partial class BoardLaneControl : UserControl
     {
 
+        private enum Sort { None, AlphanumericAscending, AlphanumericDescending, PriorityAscending, PriorityDescending, DeadlineAscending, DeadlineDescending }
+
         private Project project;
         private State state;
+        private Sort sort;
 
         public Project Project { get => project; set { project = value; Update(); } }
         public State State { get => state; set { state = value; Update(); } }
@@ -21,6 +25,7 @@ namespace Foco.controls
         {
             InitializeComponent();
             this.state = state;
+            this.sort = Sort.None;
             Update();
         }
 
@@ -35,12 +40,20 @@ namespace Foco.controls
             }
             if (project != null)
             {
+                switch (sort)
+                {
+                    case Sort.PriorityAscending: project.Taskgroups.Sort((x, y) => x.Prio.CompareTo(y.Prio)); break;
+                    case Sort.PriorityDescending: project.Taskgroups.Sort((x, y) => y.Prio.CompareTo(x.Prio)); break;
+                    case Sort.AlphanumericAscending: project.Taskgroups.Sort((x, y) => x.Title.CompareTo(y.Title)); break;
+                    case Sort.AlphanumericDescending: project.Taskgroups.Sort((x, y) => y.Title.CompareTo(x.Title)); break;
+                    case Sort.DeadlineAscending: project.Taskgroups.Sort((x, y) => x.Deadline.CompareTo(y.Deadline)); break;
+                    case Sort.DeadlineDescending: project.Taskgroups.Sort((x, y) => y.Deadline.CompareTo(x.Deadline)); break;
+                    default: break;
+                }
                 foreach (Taskgroup taskgroup in project.Taskgroups)
                 {
                     if (taskgroup.State == state)
-                    {
                         TaskgroupStack.Children.Add(new TaskgroupControl(taskgroup));
-                    }
                 }
             }
         }
@@ -65,6 +78,9 @@ namespace Foco.controls
                 TaskgroupControl draggingTaskgroupControl = (TaskgroupControl)e.Data.GetData(DataFormats.Xaml);
                 draggingTaskgroupControl.Opacity = 1.0;
                 draggingTaskgroupControl.Taskgroup.State = state;
+                sort = Sort.None; // Durch den Drop geht die Sortierung kaputt
+                foreach (MenuItem menuItem in SortMenuItem.Items)
+                    menuItem.IsChecked = false;
             }
         }
 
@@ -129,6 +145,24 @@ namespace Foco.controls
             }
         }
 
+        // Benutzer klickt auf MenuItem von Sortierung
+        private void OnSortMenuItemClick(object sender, RoutedEventArgs e)
+        {
+            MenuItem clickedMenuItem = (MenuItem)sender;
+            switch ((string)clickedMenuItem.Tag)
+            {
+                case "AA": sort = Sort.AlphanumericAscending; break;
+                case "AD": sort = Sort.AlphanumericDescending; break;
+                case "PA": sort = Sort.PriorityAscending; break;
+                case "PD": sort = Sort.PriorityDescending; break;
+                case "DA": sort = Sort.DeadlineAscending; break;
+                case "DD": sort = Sort.DeadlineDescending; break;
+                default: sort = Sort.None; break;
+            }
+            foreach (MenuItem menuItem in SortMenuItem.Items)
+                menuItem.IsChecked = menuItem.Tag.Equals(clickedMenuItem.Tag);
+            Update();
+        }
 
     }
 }

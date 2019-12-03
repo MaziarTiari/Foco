@@ -9,10 +9,29 @@
 
     <Border BorderBrush="Black" BorderThickness="2" Margin="10" Width="230">
         <DockPanel>
-            <Label DockPanel.Dock="Top" Name="TitleLabel" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="20" Background="Black" Foreground="White">Name</Label>
+
+            <!-- Kopfbereich -->
+            <Border DockPanel.Dock="Top" Width="230" Background="Black">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Label Name="TitleLabel" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="20" Foreground="White">Name</Label>
+                    <Menu Height="20" Width="20">
+                        <MenuItem Name="SortMenuItem" Background="Black" Foreground="White" BorderThickness="0" Header="▼" Width="20" Height="20">
+                            <MenuItem Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="AA" Header="Alphabetisch aufsteigend"></MenuItem>
+                            <MenuItem Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="AD" Header="Alphabetisch absteigend"></MenuItem>
+                            <MenuItem Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="PA" Header="Priorität aufsteigend"></MenuItem>
+                            <MenuItem Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="PD" Header="Priorität absteigend"></MenuItem>
+                            <MenuItem Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="DA" Header="Deadline aufsteigend"></MenuItem>
+                            <MenuItem Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="DD" Header="Deadline absteigend"></MenuItem>
+                        </MenuItem>
+                    </Menu>
+                </StackPanel>
+            </Border>
+
+            <!-- Inhalt -->
             <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
                 <StackPanel Name="TaskgroupStack" Background="LightGray" MouseLeftButtonDown="OnMouseLeftButtonDown" DragOver="OnDragOver" Drop="OnDrop" AllowDrop="True"/>
             </ScrollViewer>
+
         </DockPanel>
     </Border>
 
