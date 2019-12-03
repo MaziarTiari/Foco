@@ -10,8 +10,8 @@
     <Border BorderBrush="Black" BorderThickness="2" Margin="10" Width="230">
         <DockPanel>
             <Label DockPanel.Dock="Top" Name="TitleLabel" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="20" Background="Black" Foreground="White">Name</Label>
-            <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden" DragEnter="OnDragEnter">
-                <StackPanel Name="TaskgroupStack" Background="LightGray" MouseLeftButtonDown="OnMouseLeftButtonDown" Drop="OnDrop" AllowDrop="True"/>
+            <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
+                <StackPanel Name="TaskgroupStack" Background="LightGray" MouseLeftButtonDown="OnMouseLeftButtonDown" DragOver="OnDragOver" Drop="OnDrop" AllowDrop="True"/>
             </ScrollViewer>
         </DockPanel>
     </Border>

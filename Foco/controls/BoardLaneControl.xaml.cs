@@ -31,7 +31,7 @@ namespace Foco.controls
             {
                 case State.Todo: TitleLabel.Content = "Warteschlange"; break;
                 case State.InProgress: TitleLabel.Content = "In Bearbeitung"; break;
-                case State.Done: TitleLabel.Content = "Fertig"; break;
+                case State.Done: TitleLabel.Content = "Abgeschlossen"; break;
             }
             if (project != null)
             {
@@ -69,7 +69,7 @@ namespace Foco.controls
         }
 
         // Benutzer verschiebt einen Drag über das BoardLaneControl
-        private void OnDragEnter(object sender, DragEventArgs e)
+        private void OnDragOver(object sender, DragEventArgs e)
         {
             if (e.Data.GetData(DataFormats.Xaml) is TaskgroupControl)
             {
