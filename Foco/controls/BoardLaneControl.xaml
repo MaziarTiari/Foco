@@ -8,10 +8,17 @@
              d:DesignHeight="450" d:DesignWidth="250">
 
     <Border BorderBrush="Black" BorderThickness="2" Margin="10" Width="230">
-        <DockPanel>
+        <Grid>
+
+            <!-- Row Definitions -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
             <!-- Kopfbereich -->
-            <Border DockPanel.Dock="Top" Width="230" Background="Black">
+            <Border Grid.Row="0" Width="230" Background="Black">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Label Name="TitleLabel" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="20" Foreground="White">Name</Label>
                     <Menu Height="20" Width="20">
@@ -28,11 +35,16 @@
             </Border>
 
             <!-- Inhalt -->
-            <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
                 <StackPanel Name="TaskgroupStack" Background="LightGray" MouseLeftButtonDown="OnMouseLeftButtonDown" DragOver="OnDragOver" Drop="OnDrop" AllowDrop="True"/>
             </ScrollViewer>
+            
+            <!-- Fußbereich -->
+            <Border Grid.Row="2" Background="Black" MouseLeftButtonDown="OnAddGroupClicked">
+                <Label Foreground="White" FontSize="16">+ Gruppe hinzufügen</Label>
+            </Border>
 
-        </DockPanel>
+        </Grid>
     </Border>
 
 </UserControl>

@@ -164,5 +164,10 @@ namespace Foco.controls
             Update();
         }
 
+        // Benutzer hat auf Hinzufügen geklickt
+        private void OnAddGroupClicked(object sender, MouseButtonEventArgs e)
+        {
+            // TODO
+        }
     }
 }
