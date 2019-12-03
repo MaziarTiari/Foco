@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Foco.controls"
              mc:Ignorable="d" >
 
-    <Border BorderBrush="Black" Background="White" BorderThickness="2" CornerRadius="5" Height="130" Width="180" Margin="5">
+    <Border BorderBrush="Black" Background="White" BorderThickness="2" CornerRadius="5" Height="130" Width="180" Margin="5" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave">
         <DockPanel>
             <Label DockPanel.Dock="Top" Height="32" FontSize="16" FontWeight="Bold" Name="NameLabel">Gruppenbezeichnung</Label>
             <DockPanel DockPanel.Dock="Top" Height="30" Margin="5,0,5,0">
