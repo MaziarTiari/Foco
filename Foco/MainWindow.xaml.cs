@@ -21,16 +21,13 @@ namespace Foco
         private List<Goal> goals;
         private DatabaseManager databaseManager;
 
+        public List<Goal> Goals { get => goals; }
+
         // wird aufgerufen, wenn das MainWindow erstellt wird
         public MainWindow()
         {
             InitializeComponent();
-            homePage = new HomePage();
-            boardPage = new BoardPage();
-            listPage = new ListPage();
-            calendarPage = new CalendarPage();
-            PageFrame.Content = homePage;
-
+            
             // TODO Pfad später evtl. in Konfiguration o.ä. auslagern
             databaseManager = new DatabaseManager("foco.sqlite");
 
@@ -38,7 +35,16 @@ namespace Foco
             {
                 MessageBox.Show("Es kann nicht mit der Datenbank kommuniziert werden.\nDie Anwendung wird nun beendet.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
                 Application.Current.Shutdown();
+                return;
             }
+
+            homePage = new HomePage(this);
+            boardPage = new BoardPage();
+            listPage = new ListPage();
+            calendarPage = new CalendarPage();
+
+            PageFrame.Content = homePage;
+            homePage.Update();
 
         }
 
@@ -64,6 +70,7 @@ namespace Foco
             {
                 case "Home":
                     PageFrame.Content = homePage;
+                    homePage.Update();
                     break;
                 case "Board":
                     PageFrame.Content = boardPage;
