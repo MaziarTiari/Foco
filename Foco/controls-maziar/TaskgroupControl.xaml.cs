@@ -13,20 +13,31 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Foco.pages
+namespace Foco.controls_maziar
 {
     /// <summary>
-    /// Interaktionslogik für ListPage.xaml
+    /// Interaktionslogik für TaskgroupControl.xaml
     /// </summary>
-    public partial class ListPage : Page
+    public partial class TaskgroupControl : UserControl
     {
-        public ListPage()
+        public TaskgroupControl()
         {
             InitializeComponent();
         }
-        public void CreateTaskgroup(object sender, RoutedEventArgs e)
+
+        private void RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            MessageBox.Show("click");
+
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
