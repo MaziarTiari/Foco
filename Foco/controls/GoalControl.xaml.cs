@@ -55,15 +55,18 @@ namespace Foco.ui
         // Benutzer hat auf Editieren geklickt
         private void OnEditClicked(object sender, RoutedEventArgs e)
         {
-            GoalEditWindow goalEditWindow = new GoalEditWindow("Ziel bearbeiten", goal.Title, EditedCallback);
-            goalEditWindow.ShowDialog();
+            InputWindow inputWindow = new InputWindow("Ziel bearbeiten", "Name:", goal.Title, EditedCallback, false);
+            inputWindow.ShowDialog();
         }
 
         // Benutzer hat beim Editieren gespeichert
-        private void EditedCallback(string goalName)
+        private void EditedCallback(InputState inputState, string inputText)
         {
-            goal.Title = goalName;
-            Update();
+            if (inputState == InputState.Save)
+            {
+                goal.Title = inputText;
+                Update();
+            }
         }
 
         // Benutzer hat auf ein Goal geklickt
@@ -71,17 +74,20 @@ namespace Foco.ui
         {
             if (goal == null)
             {
-                GoalEditWindow goalEditWindow = new GoalEditWindow("Ziel erstellen", "", CreatedCallback);
-                goalEditWindow.ShowDialog();
+                InputWindow inputWindow = new InputWindow("Ziel erstellen", "Name:", "", CreatedCallback, false);
+                inputWindow.ShowDialog();
             }
         }
 
         // Benutzer hat beim Erstellen gespeichert
-        private void CreatedCallback(string goalName)
+        private void CreatedCallback(InputState inputState, string inputText)
         {
-            Goal goal = new Goal(goalName);
-            homePage.Goals.Add(goal);
-            homePage.Update();
+            if (inputState == InputState.Save)
+            {
+                Goal goal = new Goal(inputText);
+                homePage.Goals.Add(goal);
+                homePage.Update();
+            }
         }
 
         // Benutzer hat auf Löschen geklickt
