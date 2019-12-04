@@ -22,12 +22,12 @@ namespace Foco
             this.mainWindow = mainWindow;
             foreach (State state in Enum.GetValues(typeof(State)))
             {
-                BoardLaneControl boardLaneControl = new BoardLaneControl(state);
+                BoardLaneControl boardLaneControl = new BoardLaneControl(this, state);
                 BoardStack.Children.Add(boardLaneControl);
             }
         }
 
-        private void Update()
+        public void Update()
         {
             foreach (BoardLaneControl boardLaneControl in BoardStack.Children)
             {

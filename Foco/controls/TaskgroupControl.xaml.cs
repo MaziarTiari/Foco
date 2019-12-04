@@ -1,4 +1,5 @@
 ﻿using Foco.models;
+using Foco.windows;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,15 +15,17 @@ namespace Foco.controls
     {
 
         private readonly Taskgroup taskgroup;
+        private readonly BoardPage boardPage;
 
         public Taskgroup Taskgroup { get => taskgroup; }
 
-        public TaskgroupControl(Taskgroup taskgroup)
+        public TaskgroupControl(BoardPage boardPage, Taskgroup taskgroup)
         {
-            if (taskgroup == null)
+            if (taskgroup == null || boardPage == null)
                 throw new ArgumentNullException();
             InitializeComponent();
             this.taskgroup = taskgroup;
+            this.boardPage = boardPage;
             Update();
         }
 
@@ -78,5 +81,27 @@ namespace Foco.controls
             EditButton.Visibility = Visibility.Hidden;
         }
 
+        // Benutzer drückt auf löschen
+        private void OnDeleteClicked(object sender, RoutedEventArgs e)
+        {
+            ConfirmWindow confirmWindow = new ConfirmWindow("Aufgabengruppe löschen", "Sind sie sicher, dass sie die Aufgabengruppe \"" + taskgroup.Title + "\" inkl. aller Aufgaben löschen möchten?", ConfirmDeleteCallback);
+            confirmWindow.ShowDialog();
+        }
+
+        // Benutzer hat Löschen bestätigt oder abgebrochen
+        private void ConfirmDeleteCallback(ConfirmState confirmState)
+        {
+            if (confirmState == ConfirmState.YES)
+            {
+                boardPage.Project.Taskgroups.Remove(taskgroup);
+                boardPage.Update();
+            }
+        }
+
+        // Benutzer hat auf Editieren geklickt
+        private void OnEditClicked(object sender, RoutedEventArgs e)
+        {
+            // TODO
+        }
     }
 }

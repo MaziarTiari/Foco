@@ -17,14 +17,16 @@ namespace Foco.controls
         private Project project;
         private State state;
         private Sort sort;
+        private readonly BoardPage boardPage;
 
         public Project Project { get => project; set { project = value; Update(); } }
         public State State { get => state; set { state = value; Update(); } }
 
-        public BoardLaneControl(State state)
+        public BoardLaneControl(BoardPage boardPage, State state)
         {
             InitializeComponent();
             this.state = state;
+            this.boardPage = boardPage;
             this.sort = Sort.None;
             Update();
         }
@@ -53,7 +55,7 @@ namespace Foco.controls
                 foreach (Taskgroup taskgroup in project.Taskgroups)
                 {
                     if (taskgroup.State == state)
-                        TaskgroupStack.Children.Add(new TaskgroupControl(taskgroup));
+                        TaskgroupStack.Children.Add(new TaskgroupControl(boardPage, taskgroup));
                 }
             }
         }
