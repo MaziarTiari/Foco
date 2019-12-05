@@ -19,5 +19,4 @@
         </StackPanel>
         <WrapPanel Name="ProjectWrap" Orientation="Horizontal"></WrapPanel>
     </StackPanel>
-
 </UserControl>

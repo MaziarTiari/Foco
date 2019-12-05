@@ -21,7 +21,7 @@ namespace Foco
         private List<Goal> goals;
         private DatabaseManager databaseManager;
 
-        public List<Goal> Goals { get => goals; }
+        public List<Goal> Goals => goals;
 
         // wird aufgerufen, wenn das MainWindow erstellt wird
         public MainWindow()
