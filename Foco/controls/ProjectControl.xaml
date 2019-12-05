@@ -8,7 +8,7 @@
 
     <Border Name="ProjectBorder" BorderBrush="Black" BorderThickness="2" CornerRadius="5" Height="100" Width="180" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave">
         <DockPanel>
-            <Label DockPanel.Dock="Top" Height="32" FontSize="16" FontWeight="Bold" Name="NameLabel">Musterprojekt</Label>
+            <Label DockPanel.Dock="Top" Height="32" FontSize="16" FontWeight="Bold" Name="NameLabel" MouseDoubleClick="goToProjectView">Musterprojekt</Label>
             <Label DockPanel.Dock="Top" Height="30" FontSize="14" Name="TasksLabel">0 / 3 Aufgaben</Label>
             <StackPanel DockPanel.Dock="Bottom" Height="38" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Name="EditButton" Width="36" Height="36" Click="OnEditClicked">E</Button>

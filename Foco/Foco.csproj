@@ -113,6 +113,9 @@
     <Compile Include="controls\ProjectControl.xaml.cs">
       <DependentUpon>ProjectControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="controls\TaskgroupControl.xaml.cs">
+      <DependentUpon>TaskgroupControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\ConfirmWindow.xaml.cs">
       <DependentUpon>ConfirmWindow.xaml</DependentUpon>
     </Compile>
@@ -120,8 +123,19 @@
       <DependentUpon>InputWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="windows\ProjectEditWindow.xaml.cs">
-      <DependentUpon>ProjectEditWindow.xaml</DependentUpon>
+      <DependentUpon>ProjectOrEditWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="controls\TaskControl.xaml.cs">
+      <DependentUpon>TaskControl.xaml</DependentUpon>
+    </Compile>
+    <Page Include="controls\TaskgroupControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\TaskControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pages\BoardPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

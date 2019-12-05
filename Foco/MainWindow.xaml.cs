@@ -14,14 +14,20 @@ namespace Foco
     public partial class MainWindow : Window
     {
 
-        private HomePage homePage;
-        private BoardPage boardPage;
-        private ListPage listPage;
-        private CalendarPage calendarPage;
-        private List<Goal> goals;
+        private readonly HomePage homePage;
+        private readonly BoardPage boardPage;
+        private readonly ListPage listPage;
+        private readonly CalendarPage calendarPage;
+        private readonly List<Goal> goals;
+        //private readonly Project projectForView;
         private DatabaseManager databaseManager;
 
-        public List<Goal> Goals { get => goals; }
+        public List<Goal> Goals => goals;
+        public HomePage HomePage => homePage;
+        public BoardPage BoardPage => boardPage;
+        public ListPage ListPage => listPage;
+        public CalendarPage CalendarPage => calendarPage;
+        //public Project ProjectForView { get => projectForView; set => projectForView = value; }
 
         // wird aufgerufen, wenn das MainWindow erstellt wird
         public MainWindow()
@@ -40,11 +46,11 @@ namespace Foco
 
             homePage = new HomePage(this);
             boardPage = new BoardPage();
-            listPage = new ListPage();
+            listPage = new ListPage(this);
             calendarPage = new CalendarPage();
 
-            PageFrame.Content = homePage;
-            homePage.Update();
+            PageFrame.Content = HomePage;
+            HomePage.Update();
 
         }
 
@@ -69,17 +75,20 @@ namespace Foco
             switch (menuButton.Tag)
             {
                 case "Home":
-                    PageFrame.Content = homePage;
-                    homePage.Update();
+                    PageFrame.Content = HomePage;
+                    HomePage.Update();
+                    Board.Visibility = Visibility.Hidden;
+                    Calender.Visibility = Visibility.Hidden;
+                    List.Visibility = Visibility.Hidden;
                     break;
                 case "Board":
-                    PageFrame.Content = boardPage;
+                    PageFrame.Content = BoardPage;
                     break;
                 case "List":
-                    PageFrame.Content = listPage;
+                    PageFrame.Content = ListPage;
                     break;
                 case "Calendar":
-                    PageFrame.Content = calendarPage;
+                    PageFrame.Content = CalendarPage;
                     break;
             }
         }
