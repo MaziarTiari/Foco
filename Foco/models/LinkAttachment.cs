@@ -1,15 +1,14 @@
 ﻿using System.Diagnostics;
-using System.Runtime.InteropServices;
-namespace testFoco.models
+namespace Foco.models
 {
     class LinkAttachment : Attachment
     {
-        public LinkAttachment(string title, string link)
+        
+        public LinkAttachment(string title, string link) : base(title, link)
         {
-            Title = title;
-            Content = link;
-            Type = AttachmentType.link;
+            Type = AttachmentType.Link;
         }
+        
         public void OpenUrl()
         {
             try
@@ -22,5 +21,6 @@ namespace testFoco.models
                 Process.Start(new ProcessStartInfo("cmd", $"/c start {Content}") { CreateNoWindow = true });
             }
         }
+    
     }
 }

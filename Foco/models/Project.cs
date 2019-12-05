@@ -1,21 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace testFoco.models
+namespace Foco.models
 {
     public class Project
     {
+
         private string name;
         private List<Taskgroup> taskgroups;
         private string color;
 
         public Project(string name, string color)
         {
-            this.Name = name;
-            this.color = color;
+            Taskgroups = new List<Taskgroup>();
+            Name = name;
+            Color = color;
         }
 
-        public string Name { get => name; set => name = value; }
-        public string Color { get => color; set => color = value; }
-        List<Taskgroup> Taskgroups { get => taskgroups; set => taskgroups = value; }
+        public string Name { get => name; set { if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(); name = value; } }
+        public string Color { get => color; set { if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(); color = value; } }
+        public List<Taskgroup> Taskgroups { get => taskgroups; set { if (value == null) throw new ArgumentNullException(); taskgroups = value; } }
+
     }
 }

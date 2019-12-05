@@ -1,22 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using System;
 
-namespace testFoco.models
+namespace Foco.models
 {
-    public enum AttachmentType { link, comment}
-    public class Attachment
+
+    public enum AttachmentType { Link, Comment } // Reihenfolge bitte nicht ändern!
+
+    public abstract class Attachment
     {
+
         protected AttachmentType type;
         protected string title;
         protected string content;
-        public Attachment()
+
+        public Attachment(string content)
         {
+            Content = content;
         }
-        public Attachment(string title)
+
+        public Attachment(string title, string content)
         {
-            this.Title = title;
+            Content = content;
+            Title = title;
         }
-        public string Title { get => title; set => title = value; }
-        public string Content { get => content; set => content = value; }
+
+        public string Title { get => title; set { if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(); title = value; } }
+        public string Content { get => content; set { if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(); content = value; } }
         public AttachmentType Type { get => type; set => type = value; }
+
     }
 }
