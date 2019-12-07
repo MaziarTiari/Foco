@@ -9,9 +9,9 @@ using System.Windows.Media;
 namespace Foco.controls
 {
     /// <summary>
-    /// Interaktionslogik für TaskgroupControl.xaml
+    /// Interaktionslogik für BoardGroupControl.xaml
     /// </summary>
-    public partial class TaskgroupControl : UserControl
+    public partial class BoardGroupControl : UserControl
     {
 
         private readonly Taskgroup taskgroup;
@@ -19,7 +19,7 @@ namespace Foco.controls
 
         public Taskgroup Taskgroup { get => taskgroup; }
 
-        public TaskgroupControl(BoardPage boardPage, Taskgroup taskgroup)
+        public BoardGroupControl(BoardPage boardPage, Taskgroup taskgroup)
         {
             if (taskgroup == null || boardPage == null)
                 throw new ArgumentNullException();

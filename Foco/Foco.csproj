@@ -91,8 +91,8 @@
     <Compile Include="controls\BoardLaneControl.xaml.cs">
       <DependentUpon>BoardLaneControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="controls\TaskgroupControl.xaml.cs">
-      <DependentUpon>TaskgroupControl.xaml</DependentUpon>
+    <Compile Include="controls\BoardGroupControl.xaml.cs">
+      <DependentUpon>BoardGroupControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="models\Attachment.cs" />
     <Compile Include="models\CommentAttachment.cs" />
@@ -132,7 +132,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="controls\TaskgroupControl.xaml">
+    <Page Include="controls\BoardGroupControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

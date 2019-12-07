@@ -55,31 +55,31 @@ namespace Foco.controls
                 foreach (Taskgroup taskgroup in project.Taskgroups)
                 {
                     if (taskgroup.State == state)
-                        TaskgroupStack.Children.Add(new TaskgroupControl(boardPage, taskgroup));
+                        TaskgroupStack.Children.Add(new BoardGroupControl(boardPage, taskgroup));
                 }
             }
         }
 
-        // Benutzer startet Drag eines TaskgroupControls
+        // Benutzer startet Drag eines BoardGroupControls
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.Source is TaskgroupControl)
+            if (e.Source is BoardGroupControl)
             {
-                TaskgroupControl taskgroupControl = (TaskgroupControl)e.Source;
-                taskgroupControl.Opacity = 0.3;
-                DataObject dataObject = new DataObject(DataFormats.Xaml, taskgroupControl);
+                BoardGroupControl boardGroupControl = (BoardGroupControl)e.Source;
+                boardGroupControl.Opacity = 0.3;
+                DataObject dataObject = new DataObject(DataFormats.Xaml, boardGroupControl);
                 DragDrop.DoDragDrop((DependencyObject)e.Source, dataObject, DragDropEffects.Move);
             }
         }
 
-        // Benutzer droppt ein TaskgroupControl
+        // Benutzer droppt ein BoardGroupControl
         private void OnDrop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetData(DataFormats.Xaml) is TaskgroupControl)
+            if (e.Data.GetData(DataFormats.Xaml) is BoardGroupControl)
             {
-                TaskgroupControl draggingTaskgroupControl = (TaskgroupControl)e.Data.GetData(DataFormats.Xaml);
-                draggingTaskgroupControl.Opacity = 1.0;
-                draggingTaskgroupControl.Taskgroup.State = state;
+                BoardGroupControl draggingBoardGroupControl = (BoardGroupControl)e.Data.GetData(DataFormats.Xaml);
+                draggingBoardGroupControl.Opacity = 1.0;
+                draggingBoardGroupControl.Taskgroup.State = state;
                 sort = Sort.None; // Durch den Drop geht die Sortierung kaputt
                 foreach (MenuItem menuItem in SortMenuItem.Items)
                     menuItem.IsChecked = false;
@@ -89,10 +89,10 @@ namespace Foco.controls
         // Benutzer verschiebt einen Drag über das BoardLaneControl
         private void OnDragOver(object sender, DragEventArgs e)
         {
-            if (e.Data.GetData(DataFormats.Xaml) is TaskgroupControl)
+            if (e.Data.GetData(DataFormats.Xaml) is BoardGroupControl)
             {
 
-                TaskgroupControl draggingTaskgroupControl = (TaskgroupControl)e.Data.GetData(DataFormats.Xaml);
+                BoardGroupControl draggingBoardGroupControl = (BoardGroupControl)e.Data.GetData(DataFormats.Xaml);
                 int insertIndex = 0;
                 StackPanel stackPanel = null;
 
@@ -107,9 +107,9 @@ namespace Foco.controls
                         insertIndex = -1;
                     else
                     {
-                        foreach (TaskgroupControl taskgroupControl in stackPanel.Children)
+                        foreach (BoardGroupControl boardGroupControl in stackPanel.Children)
                         {
-                            double height = taskgroupControl.ActualHeight;
+                            double height = boardGroupControl.ActualHeight;
                             if (mousePosition.Y >= heightSum && mousePosition.Y <= heightSum + height)
                                 break; // Mauszeiger liegt innerhalb dieses Elements, Abbruch weil Index gefunden
                             heightSum += height;
@@ -118,30 +118,30 @@ namespace Foco.controls
                     }
                 }
 
-                // DropEnter auf TaskgroupControl => Der Index entspricht dem des gehoverten Elements, Insert in das Parent des gehoverten Elements
-                else if (e.Source is TaskgroupControl)
+                // DropEnter auf BoardGroupControl => Der Index entspricht dem des gehoverten Elements, Insert in das Parent des gehoverten Elements
+                else if (e.Source is BoardGroupControl)
                 {
-                    TaskgroupControl hoveringTaskgroupControl = (TaskgroupControl)e.Source;
-                    stackPanel = (StackPanel)hoveringTaskgroupControl.Parent;
-                    insertIndex = stackPanel.Children.IndexOf(hoveringTaskgroupControl);
+                    BoardGroupControl hoveringBoardGroupControl = (BoardGroupControl)e.Source;
+                    stackPanel = (StackPanel)hoveringBoardGroupControl.Parent;
+                    insertIndex = stackPanel.Children.IndexOf(hoveringBoardGroupControl);
                 }
 
                 // aus dem alten Panel entfernen
-                if (draggingTaskgroupControl.Parent != null)
+                if (draggingBoardGroupControl.Parent != null)
                 {
-                    StackPanel oldPanel = (StackPanel)draggingTaskgroupControl.Parent;
-                    oldPanel.Children.Remove(draggingTaskgroupControl); // aus dem alten Panel entfernen
+                    StackPanel oldPanel = (StackPanel)draggingBoardGroupControl.Parent;
+                    oldPanel.Children.Remove(draggingBoardGroupControl); // aus dem alten Panel entfernen
                 }
 
                 try
                 {
                     // versuche Insert an der Stelle vom berechneten Index
-                    stackPanel.Children.Insert(insertIndex, draggingTaskgroupControl);
+                    stackPanel.Children.Insert(insertIndex, draggingBoardGroupControl);
                 }
                 catch
                 {
                     // wenn Index -1 (oder ungültig) ist das Panel leer, also Add statt Insert
-                    stackPanel.Children.Add(draggingTaskgroupControl);
+                    stackPanel.Children.Add(draggingBoardGroupControl);
                 }
 
             }
