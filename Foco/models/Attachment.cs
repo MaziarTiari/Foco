@@ -7,28 +7,24 @@ namespace Foco.models
 
     public abstract class Attachment
     {
-        
+
         protected AttachmentType type;
         protected string title;
         protected string content;
 
         public Attachment(string content)
         {
-            if(string.IsNullOrWhiteSpace(content))
-                throw new ArgumentNullException();
-            this.content = content;
+            Content = content;
         }
 
         public Attachment(string title, string content)
         {
-            if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(content))
-                throw new ArgumentNullException();
-            this.content = content;
-            this.title = title;
+            Content = content;
+            Title = title;
         }
 
-        public string Title { get => title; set => title = value; }
-        public string Content { get => content; set => content = value; }
+        public string Title { get => title; set { if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(); title = value; } }
+        public string Content { get => content; set { if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(); content = value; } }
         public AttachmentType Type { get => type; set => type = value; }
 
     }
