@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 namespace Foco.models
 {
-    class LinkAttachment : Attachment
+    public class LinkAttachment : Attachment
     {
         
         public LinkAttachment(string title, string link) : base(title, link)
