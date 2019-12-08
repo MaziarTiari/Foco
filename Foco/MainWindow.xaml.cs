@@ -39,13 +39,19 @@ namespace Foco
             }
 
             homePage = new HomePage(this);
-            boardPage = new BoardPage();
+            boardPage = new BoardPage(this);
             listPage = new ListPage();
             calendarPage = new CalendarPage();
 
             PageFrame.Content = homePage;
             homePage.Update();
 
+        }
+
+        public void ShowProject(Project project)
+        {
+            boardPage.Project = project;
+            PageFrame.Content = boardPage;
         }
 
         // wird aufgerufen, wenn das MainWindow geschlossen wird

@@ -14,6 +14,7 @@ namespace Foco.pages
 
         private readonly MainWindow mainWindow;
         public List<Goal> Goals { get => mainWindow.Goals; }
+        public MainWindow MainWindow { get => mainWindow;  }
 
         public HomePage(MainWindow mainWindow)
         {
