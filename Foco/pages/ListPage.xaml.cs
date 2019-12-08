@@ -25,40 +25,43 @@ namespace Foco.pages
     public partial class ListPage : Page
     {
         private readonly MainWindow mainWindow;
-        public MainWindow MainWindow => mainWindow;
         private Project project;
-        TaskgroupControl taskgroupControl;
-        private const int maxTaskgroupWidth = 750;
-        private int taskgroupWidth;
 
         public ListPage(MainWindow mainWindow)
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
-            Update();
         }
+        
         public Project Project { get => project; set => project = value; }
-        public int TaskgroupWidth { get => taskgroupWidth; set => taskgroupWidth = value; }
+        public MainWindow MainWindow => mainWindow;
+        public int IndexOfLastTaskgroupControl => TaskgroupContainer.Children.Count - 1;
 
-        public void CreateTaskgroupGui(object sender, RoutedEventArgs e)
+        public void RequestNewTaskgroupByListPage()
         {
-            InputWindow inputWindow = new InputWindow("Aufgabengruppe erstellen:", "Name:", "", CreatedCallback, false);
+            InputWindow inputWindow = new InputWindow("Aufgabengruppe erstellen:", "Name:", "", WindowCallback, false);
             inputWindow.ShowDialog();
         }
 
-        private void CreatedCallback(InputState inputState, string title)
+        private void WindowCallback(InputState inputState, string title)
         {
             if (inputState == InputState.Save)
             {
-                int tgCount = project.Taskgroups.Count;
-                project.Taskgroups.Add(new Taskgroup(title));
-                this.taskgroupControl = new TaskgroupControl(title, this);
-                if (tgCount == 2) 
-                    this.taskgroupWidth = maxTaskgroupWidth / 2;
-                if (tgCount >= 3)
-                    this.taskgroupWidth = maxTaskgroupWidth / 3;
-                taskgroupControl.Width = this.taskgroupWidth;
-                TaskgroupContainer.Children.Add(taskgroupControl);
+                CreateTaskgroup(title);
+            }
+        }
+
+        private void CreateTaskgroup(string title)
+        {
+            if (!this.Project.Taskgroups.Exists(x => x.Title == title))
+            {
+                Taskgroup taskgroup = new Taskgroup(title);
+                this.project.Taskgroups.Add(taskgroup);
+                TaskgroupContainer.Children.Insert( IndexOfLastTaskgroupControl, new TaskgroupControl(taskgroup, this) );
+            }
+            else
+            {
+                MessageBox.Show("Dieser Titel existiert bereits in diesem Projekt!");
             }
         }
 
@@ -67,17 +70,13 @@ namespace Foco.pages
             TaskgroupContainer.Children.Clear();
             if (project != null && project.Taskgroups.Count > 0)
             {
-                if (project.Taskgroups.Count > 3)
-                    this.taskgroupWidth = maxTaskgroupWidth / 3;
-                else
-                    this.taskgroupWidth = maxTaskgroupWidth / project.Taskgroups.Count;
                 foreach (Taskgroup taskgroup in project.Taskgroups)
                 {
-                    TaskgroupControl taskgroupControl = new TaskgroupControl(taskgroup.Title, this);
-                    taskgroupControl.Width = this.taskgroupWidth;
+                    TaskgroupControl taskgroupControl = new TaskgroupControl(taskgroup, this);
                     TaskgroupContainer.Children.Add(taskgroupControl);
                 }
             }
+            TaskgroupContainer.Children.Add(new TaskgroupCreateLabelControl(this));
         }
     }
 }

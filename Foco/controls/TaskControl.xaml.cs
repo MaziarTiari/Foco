@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Foco.models;
 
 namespace Foco.ui
 {
@@ -21,31 +21,66 @@ namespace Foco.ui
     public partial class TaskControl : UserControl
     {
         private readonly TaskgroupControl taskgroupControl;
+        private Task task;
+        private readonly int index;
 
-        public TaskgroupControl TaskgroupControl => taskgroupControl;
-
-        public TaskControl(TaskgroupControl taskgroupControl)
+        public TaskControl(Task task, TaskgroupControl taskgroupControl)
         {
             InitializeComponent();
             this.taskgroupControl = taskgroupControl;
+            this.task = task;
+            TaskTextBox.Text = task.Title;
+            this.index = taskgroupControl.TaskContainer.Children.Count;
         }
 
-        private void TaskTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        public TaskgroupControl TaskgroupControl => taskgroupControl;
+
+        public int Index => index;
+
+        public Task Task { get => task; set => task = value; }
+
+        private void TaskControl_LostFocus(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void TaskTextBox_PreviewMouseDown_1(object sender, MouseButtonEventArgs e)
-        {
-
+            if (!string.IsNullOrWhiteSpace(TaskTextBox.Text))
+                Task.Title = TaskTextBox.Text;
+            else
+                DeleteTask();
         }
 
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Return)
+            var key = e.Key;
+            switch (key)
             {
-                taskgroupControl.CreateTaskGui();
+                case Key.Return:
+                    if (! string.IsNullOrWhiteSpace(TaskTextBox.Text))
+                    {
+                        Task.Title = TaskTextBox.Text;
+                        TaskgroupControl.Taskgroup.Tasks[Index] = Task;
+                    }
+                    else
+                    {
+                        DeleteTask();
+                    }
+                    break;
+                case Key.Escape:
+                    if (string.IsNullOrWhiteSpace(this.TaskTextBox.Text))
+                    {
+                        DeleteTask();
+                    }
+                    break;
             }
+        }
+
+        public void DeleteTaskMouseEvent(object sender, MouseButtonEventArgs e)
+        {
+            DeleteTask();
+        }
+
+        private void DeleteTask()
+        {
+            TaskgroupControl.TaskContainer.Children.Remove(this);
+            taskgroupControl.Taskgroup.Tasks.Remove(Task);
         }
     }
 }
