@@ -1,6 +1,5 @@
 ﻿using Foco.models;
 using Foco.windows;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -103,7 +102,7 @@ namespace Foco.ui
             }
             else
             {
-                // TODO Projekt in View zeigen
+                goalControl.HomePage.MainWindow.ShowProject(project);
             }
         }
 
