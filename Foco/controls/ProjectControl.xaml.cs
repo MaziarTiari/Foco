@@ -130,15 +130,5 @@ namespace Foco.ui
             DeleteButton.Visibility = Visibility.Hidden;
             EditButton.Visibility = Visibility.Hidden;
         }
-        private void goToProjectView(object sender, MouseEventArgs e)
-        {
-            MainWindow mainWindow = goalControl.HomePage.MainWindow;
-            mainWindow.PageFrame.Content = mainWindow.ListPage;
-            mainWindow.ListPage.Project = this.Project;
-            mainWindow.ListPage.Update();
-            mainWindow.List.Visibility = Visibility.Visible;
-            mainWindow.Board.Visibility = Visibility.Visible;
-            mainWindow.Calender.Visibility = Visibility.Visible;
-        }
     }
 }

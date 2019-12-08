@@ -31,9 +31,10 @@ namespace Foco.pages
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
+            Update();
         }
         
-        public Project Project { get => project; set => project = value; }
+        public Project Project { get => project; set { project = value; Update(); } }
         public MainWindow MainWindow => mainWindow;
         public int IndexOfLastTaskgroupControl => TaskgroupContainer.Children.Count - 1;
 

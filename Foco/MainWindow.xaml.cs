@@ -58,6 +58,11 @@ namespace Foco
         {
             boardPage.Project = project;
             PageFrame.Content = boardPage;
+            ListPage.Project = project;
+            PageFrame.Content = ListPage;
+            List.Visibility = Visibility.Visible;
+            Board.Visibility = Visibility.Visible;
+            Calender.Visibility = Visibility.Visible;
         }
 
         // wird aufgerufen, wenn das MainWindow geschlossen wird
