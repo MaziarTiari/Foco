@@ -94,8 +94,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="controls\LinktAttachmentControl.xaml.cs">
-      <DependentUpon>LinktAttachmentControl.xaml</DependentUpon>
+    <Compile Include="controls\LinkAttachmentControl.xaml.cs">
+      <DependentUpon>LinkAttachmentControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="models\Attachment.cs" />
     <Compile Include="models\CommentAttachment.cs" />
@@ -131,7 +131,7 @@
     <Compile Include="windows\ProjectEditWindow.xaml.cs">
       <DependentUpon>ProjectEditWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="controls\LinktAttachmentControl.xaml">
+    <Page Include="controls\LinkAttachmentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
