@@ -1,5 +1,6 @@
 ﻿using Foco.models;
 using Microsoft.WindowsAPICodePack.Shell;
+using System.IO;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -25,14 +26,27 @@ namespace Foco.controls
         {
             TitleText.Text = linkAttachment.Title;
             ContentText.Text = linkAttachment.Content;
-            ShellFile shellFile = ShellFile.FromFilePath(linkAttachment.Content);
-            FileImg.Source = shellFile.Thumbnail.MediumBitmapSource;
+            if (!linkAttachment.IsWebUrl())
+            {
+                // Anhang ist normale Datei: einfach das Thumbnail auslesen
+                ShellFile shellFile = ShellFile.FromFilePath(linkAttachment.Content);
+                FileImg.Source = shellFile.Thumbnail.MediumBitmapSource;
+            }
+            else
+            {
+                // Anhang ist URL: dummy.html anlegen und davon das Thumbnail auslesen
+                string dummyPath = Path.GetTempPath() + "foco_dummy.html";
+                File.WriteAllText(dummyPath, ""); // erstellt und schließt
+                ShellFile shellFile = ShellFile.FromFilePath(dummyPath);
+                FileImg.Source = shellFile.Thumbnail.MediumBitmapSource;
+                File.Delete(dummyPath);
+            }
         }
 
         private void OnControlClicked(object sender, MouseButtonEventArgs e)
         {
             linkAttachment.OpenUrl();
         }
-        
+
     }
 }
