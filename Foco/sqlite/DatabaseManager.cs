@@ -291,73 +291,82 @@ namespace Foco.sqlite
         public bool SaveAll(List<Goal> goals)
         {
 
-            SqliteCommand sqliteCommand = new SqliteCommand();
-            sqliteCommand.Connection = sqliteConnection;
-            sqliteCommand.Transaction = sqliteConnection.BeginTransaction();
-
             try
             {
 
-                sqliteCommand.CommandText = DELETE_ALL;
-                sqliteCommand.ExecuteNonQuery();
+                SqliteCommand sqliteCommand = new SqliteCommand();
+                sqliteCommand.Connection = sqliteConnection;
+                sqliteCommand.Transaction = sqliteConnection.BeginTransaction();
 
-                foreach (Goal goal in goals)
+                try
                 {
 
-                    sqliteCommand.CommandText = string.Format(INSERT_GOAL, goal.Title);
+                    sqliteCommand.CommandText = DELETE_ALL;
                     sqliteCommand.ExecuteNonQuery();
-                    sqliteCommand.CommandText = SELECT_LAST_ID;
-                    long goalId = (long)sqliteCommand.ExecuteScalar();
 
-                    foreach (Project project in goal.Projects)
+                    foreach (Goal goal in goals)
                     {
 
-                        sqliteCommand.CommandText = string.Format(INSERT_PROJECT, project.Name, project.Color, goalId);
+                        sqliteCommand.CommandText = string.Format(INSERT_GOAL, goal.Title);
                         sqliteCommand.ExecuteNonQuery();
                         sqliteCommand.CommandText = SELECT_LAST_ID;
-                        long projectId = (long)sqliteCommand.ExecuteScalar();
+                        long goalId = (long)sqliteCommand.ExecuteScalar();
 
-                        foreach (Taskgroup taskgroup in project.Taskgroups)
+                        foreach (Project project in goal.Projects)
                         {
-                            string deadline = taskgroup.Deadline == DateTime.MinValue ? "NULL" : "'" + taskgroup.Deadline.ToString() + "'";
-                            sqliteCommand.CommandText = string.Format(INSERT_TASKGROUP, taskgroup.Title, projectId, (int)taskgroup.State, (int)taskgroup.Prio, deadline);
+
+                            sqliteCommand.CommandText = string.Format(INSERT_PROJECT, project.Name, project.Color, goalId);
                             sqliteCommand.ExecuteNonQuery();
                             sqliteCommand.CommandText = SELECT_LAST_ID;
-                            long taskgroupId = (long)sqliteCommand.ExecuteScalar();
+                            long projectId = (long)sqliteCommand.ExecuteScalar();
 
-                            foreach (Task task in taskgroup.Tasks)
+                            foreach (Taskgroup taskgroup in project.Taskgroups)
                             {
-
-                                sqliteCommand.CommandText = string.Format(INSERT_TASK, task.Title, task.Description, task.Done, taskgroupId);
+                                string deadline = taskgroup.Deadline == DateTime.MinValue ? "NULL" : "'" + taskgroup.Deadline.ToString() + "'";
+                                sqliteCommand.CommandText = string.Format(INSERT_TASKGROUP, taskgroup.Title, projectId, (int)taskgroup.State, (int)taskgroup.Prio, deadline);
                                 sqliteCommand.ExecuteNonQuery();
                                 sqliteCommand.CommandText = SELECT_LAST_ID;
-                                long taskId = (long)sqliteCommand.ExecuteScalar();
+                                long taskgroupId = (long)sqliteCommand.ExecuteScalar();
 
-                                foreach (Attachment attachment in task.Attachments)
+                                foreach (Task task in taskgroup.Tasks)
+                                {
+
+                                    sqliteCommand.CommandText = string.Format(INSERT_TASK, task.Title, task.Description, task.Done, taskgroupId);
+                                    sqliteCommand.ExecuteNonQuery();
+                                    sqliteCommand.CommandText = SELECT_LAST_ID;
+                                    long taskId = (long)sqliteCommand.ExecuteScalar();
+
+                                    foreach (Attachment attachment in task.Attachments)
+                                    {
+                                        string date = (attachment.Type == AttachmentType.Comment) ? "'" + ((CommentAttachment)attachment).Date.ToString() + "'" : "NULL";
+                                        sqliteCommand.CommandText = string.Format(INSERT_ATTACHMENT, attachment.Title, attachment.Content, (int)attachment.Type, taskId, "NULL", date);
+                                        sqliteCommand.ExecuteNonQuery();
+                                    }
+
+                                }
+
+                                foreach (Attachment attachment in taskgroup.Attachments)
                                 {
                                     string date = (attachment.Type == AttachmentType.Comment) ? "'" + ((CommentAttachment)attachment).Date.ToString() + "'" : "NULL";
-                                    sqliteCommand.CommandText = string.Format(INSERT_ATTACHMENT, attachment.Title, attachment.Content, (int)attachment.Type, taskId, "NULL", date);
+                                    sqliteCommand.CommandText = string.Format(INSERT_ATTACHMENT, attachment.Title, attachment.Content, (int)attachment.Type, "NULL", taskgroupId, date);
                                     sqliteCommand.ExecuteNonQuery();
                                 }
 
                             }
-
-                            foreach (Attachment attachment in taskgroup.Attachments)
-                            {
-                                string date = (attachment.Type == AttachmentType.Comment) ? "'" + ((CommentAttachment)attachment).Date.ToString() + "'" : "NULL";
-                                sqliteCommand.CommandText = string.Format(INSERT_ATTACHMENT, attachment.Title, attachment.Content, (int)attachment.Type, "NULL", taskgroupId, date);
-                                sqliteCommand.ExecuteNonQuery();
-                            }
-
                         }
                     }
+                    sqliteCommand.Transaction.Commit();
+                    return true;
                 }
-                sqliteCommand.Transaction.Commit();
-                return true;
+                catch
+                {
+                    sqliteCommand.Transaction.Rollback();
+                    return false;
+                }
+
             }
             catch
             {
-                sqliteCommand.Transaction.Rollback();
                 return false;
             }
 

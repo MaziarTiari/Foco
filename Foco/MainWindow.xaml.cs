@@ -18,8 +18,10 @@ namespace Foco
         private readonly BoardPage boardPage;
         private readonly ListPage listPage;
         private readonly CalendarPage calendarPage;
+        private readonly TaskgroupPage taskgroupPage;
+        
         private readonly List<Goal> goals;
-        private DatabaseManager databaseManager;
+        private readonly DatabaseManager databaseManager;
 
         public List<Goal> Goals => goals;
         public HomePage HomePage => homePage;
