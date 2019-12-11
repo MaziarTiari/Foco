@@ -103,5 +103,11 @@ namespace Foco.controls
         {
             // TODO
         }
+
+        // Benutzer hat auf Control geklickt
+        private void OnControlClicked(object sender, MouseButtonEventArgs e)
+        {
+            boardPage.MainWindow.ShowTaskgroup(taskgroup);
+        }
     }
 }

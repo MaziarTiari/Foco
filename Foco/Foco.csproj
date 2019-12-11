@@ -94,6 +94,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="controls\AttachmentListControl.xaml.cs">
+      <DependentUpon>AttachmentListControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="controls\LinkAttachmentControl.xaml.cs">
       <DependentUpon>LinkAttachmentControl.xaml</DependentUpon>
     </Compile>
@@ -128,6 +131,9 @@
     <Compile Include="controls\ProjectControl.xaml.cs">
       <DependentUpon>ProjectControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="pages\TaskgroupPage.xaml.cs">
+      <DependentUpon>TaskgroupPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\ConfirmWindow.xaml.cs">
       <DependentUpon>ConfirmWindow.xaml</DependentUpon>
     </Compile>
@@ -137,6 +143,10 @@
     <Compile Include="windows\ProjectEditWindow.xaml.cs">
       <DependentUpon>ProjectEditWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="controls\AttachmentListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="controls\LinkAttachmentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -183,6 +193,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="controls\ProjectControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\TaskgroupPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

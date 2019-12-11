@@ -18,16 +18,17 @@ namespace Foco
         private BoardPage boardPage;
         private ListPage listPage;
         private CalendarPage calendarPage;
+        private TaskgroupPage taskgroupPage;
         private List<Goal> goals;
         private DatabaseManager databaseManager;
 
-        public List<Goal> Goals { get => goals; }
+        public List<Goal> Goals => goals;
 
         // wird aufgerufen, wenn das MainWindow erstellt wird
         public MainWindow()
         {
             InitializeComponent();
-            
+
             // TODO Pfad später evtl. in Konfiguration o.ä. auslagern
             databaseManager = new DatabaseManager("foco.sqlite");
 
@@ -42,6 +43,7 @@ namespace Foco
             boardPage = new BoardPage(this);
             listPage = new ListPage();
             calendarPage = new CalendarPage();
+            taskgroupPage = new TaskgroupPage(null);
 
             PageFrame.Content = homePage;
             homePage.Update();
@@ -52,6 +54,12 @@ namespace Foco
         {
             boardPage.Project = project;
             PageFrame.Content = boardPage;
+        }
+
+        public void ShowTaskgroup(Taskgroup taskgroup)
+        {
+            taskgroupPage.Taskgroup = taskgroup;
+            PageFrame.Content = taskgroupPage;
         }
 
         // wird aufgerufen, wenn das MainWindow geschlossen wird
