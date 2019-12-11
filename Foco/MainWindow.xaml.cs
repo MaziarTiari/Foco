@@ -14,15 +14,18 @@ namespace Foco
     public partial class MainWindow : Window
     {
 
-        private HomePage homePage;
-        private BoardPage boardPage;
-        private ListPage listPage;
-        private CalendarPage calendarPage;
-        private TaskgroupPage taskgroupPage;
-        private List<Goal> goals;
+        private readonly HomePage homePage;
+        private readonly BoardPage boardPage;
+        private readonly ListPage listPage;
+        private readonly CalendarPage calendarPage;
+        private readonly List<Goal> goals;
         private DatabaseManager databaseManager;
 
         public List<Goal> Goals => goals;
+        public HomePage HomePage => homePage;
+        public BoardPage BoardPage => boardPage;
+        public ListPage ListPage => listPage;
+        public CalendarPage CalendarPage => calendarPage;
 
         // wird aufgerufen, wenn das MainWindow erstellt wird
         public MainWindow()
@@ -41,12 +44,12 @@ namespace Foco
 
             homePage = new HomePage(this);
             boardPage = new BoardPage(this);
-            listPage = new ListPage();
+            listPage = new ListPage(this);
             calendarPage = new CalendarPage();
             taskgroupPage = new TaskgroupPage(null);
 
-            PageFrame.Content = homePage;
-            homePage.Update();
+            PageFrame.Content = HomePage;
+            HomePage.Update();
 
         }
 
@@ -54,6 +57,11 @@ namespace Foco
         {
             boardPage.Project = project;
             PageFrame.Content = boardPage;
+            ListPage.Project = project;
+            PageFrame.Content = ListPage;
+            List.Visibility = Visibility.Visible;
+            Board.Visibility = Visibility.Visible;
+            Calender.Visibility = Visibility.Visible;
         }
 
         public void ShowTaskgroup(Taskgroup taskgroup)
@@ -83,20 +91,22 @@ namespace Foco
             switch (menuButton.Tag)
             {
                 case "Home":
-                    PageFrame.Content = homePage;
-                    homePage.Update();
+                    PageFrame.Content = HomePage;
+                    HomePage.Update();
+                    Board.Visibility = Visibility.Hidden;
+                    Calender.Visibility = Visibility.Hidden;
+                    List.Visibility = Visibility.Hidden;
                     break;
                 case "Board":
-                    PageFrame.Content = boardPage;
+                    PageFrame.Content = BoardPage;
                     break;
                 case "List":
-                    PageFrame.Content = listPage;
+                    PageFrame.Content = ListPage;
                     break;
                 case "Calendar":
-                    PageFrame.Content = calendarPage;
+                    PageFrame.Content = CalendarPage;
                     break;
             }
         }
-
     }
 }
