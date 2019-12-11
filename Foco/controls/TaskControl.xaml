@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Foco.ui"
              mc:Ignorable="d" Width="Auto" Height="Auto"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="50" d:DesignWidth="400">
     <Grid>
         <Grid Width="Auto"  Margin="10" Height="Auto">
             <Grid.ColumnDefinitions>
@@ -13,12 +13,12 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <CheckBox Name="TaskCheckBox" Grid.Column="0"></CheckBox>
+            <CheckBox Name="TaskCheckBox" Grid.Column="0" Checked="OnCheckBoxChanged" Unchecked="OnLostFocus"></CheckBox>
             <TextBox Name="TaskTextBox" Grid.Column="1" Margin="10, 0, 0, 0" Background="Transparent" TextWrapping="Wrap" BorderThickness="0" 
                      AcceptsReturn="False" ScrollViewer.HorizontalScrollBarVisibility="Auto" KeyDown="OnKeyDownHandler"
-                     LostFocus="TaskControl_LostFocus">
+                     LostFocus="OnLostFocus" GotFocus="OnGotFocus">
             </TextBox>
-            <Label Grid.Column="2" MouseLeftButtonDown="DeleteTaskMouseEvent" VerticalAlignment="Top" VerticalContentAlignment="Top">D</Label>
+            <Button Grid.Column="2" Click="DeleteTaskMouseEvent" VerticalAlignment="Top" VerticalContentAlignment="Top">D</Button>
         </Grid>
     </Grid>
 </UserControl>

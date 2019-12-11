@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Foco.models;
 
 namespace Foco.ui
@@ -21,66 +11,61 @@ namespace Foco.ui
     public partial class TaskControl : UserControl
     {
         private readonly TaskgroupControl taskgroupControl;
-        private Task task;
-        private readonly int index;
+        private readonly Task task;
 
         public TaskControl(Task task, TaskgroupControl taskgroupControl)
         {
             InitializeComponent();
             this.taskgroupControl = taskgroupControl;
             this.task = task;
+            TaskCheckBox.IsChecked = task.Done;
             TaskTextBox.Text = task.Title;
-            this.index = taskgroupControl.TaskContainer.Children.Count;
         }
 
-        public TaskgroupControl TaskgroupControl => taskgroupControl;
-
-        public int Index => index;
-
-        public Task Task { get => task; set => task = value; }
-
-        private void TaskControl_LostFocus(object sender, RoutedEventArgs e)
+        private void OnLostFocus(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(TaskTextBox.Text))
-                Task.Title = TaskTextBox.Text;
-            else
-                DeleteTask();
+            SaveOrDeleteTask();
         }
 
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
-            var key = e.Key;
-            switch (key)
+            switch (e.Key)
             {
-                case Key.Return:
-                    if (! string.IsNullOrWhiteSpace(TaskTextBox.Text))
-                    {
-                        Task.Title = TaskTextBox.Text;
-                        TaskgroupControl.Taskgroup.Tasks[Index] = Task;
-                    }
-                    else
-                    {
-                        DeleteTask();
-                    }
-                    break;
                 case Key.Escape:
-                    if (string.IsNullOrWhiteSpace(this.TaskTextBox.Text))
-                    {
-                        DeleteTask();
-                    }
+                case Key.Return:
+                    SaveOrDeleteTask();
                     break;
             }
         }
 
-        public void DeleteTaskMouseEvent(object sender, MouseButtonEventArgs e)
+        public void DeleteTaskMouseEvent(object sender, RoutedEventArgs e)
         {
             DeleteTask();
         }
 
+        private void SaveOrDeleteTask()
+        {
+            if (!string.IsNullOrWhiteSpace(TaskTextBox.Text))
+                task.Title = TaskTextBox.Text;
+            else
+                DeleteTask();
+        }
+
         private void DeleteTask()
         {
-            TaskgroupControl.TaskContainer.Children.Remove(this);
-            taskgroupControl.Taskgroup.Tasks.Remove(Task);
+            taskgroupControl.TaskContainer.Children.Remove(this);
+            taskgroupControl.Taskgroup.Tasks.Remove(task);
         }
+
+        private void OnCheckBoxChanged(object sender, RoutedEventArgs e)
+        {
+            task.Done = TaskCheckBox.IsChecked == true;
+        }
+
+        private void OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            taskgroupControl.OnTaskFocused(task);
+        }
+
     }
 }

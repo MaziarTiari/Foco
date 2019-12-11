@@ -1,8 +1,6 @@
 ﻿using Foco.models;
 using Foco.pages;
-using Foco.sqlite;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -19,9 +17,7 @@ namespace Foco
         private readonly ListPage listPage;
         private readonly CalendarPage calendarPage;
         private readonly TaskgroupPage taskgroupPage;
-        
         private readonly List<Goal> goals;
-        private readonly DatabaseManager databaseManager;
 
         public List<Goal> Goals => goals;
         public HomePage HomePage => homePage;
@@ -29,38 +25,23 @@ namespace Foco
         public ListPage ListPage => listPage;
         public CalendarPage CalendarPage => calendarPage;
 
-        // wird aufgerufen, wenn das MainWindow erstellt wird
-        public MainWindow()
+        public MainWindow(List<Goal> goals)
         {
             InitializeComponent();
-
-            // TODO Pfad später evtl. in Konfiguration o.ä. auslagern
-            databaseManager = new DatabaseManager("foco.sqlite");
-
-            if (!databaseManager.Connect() || (goals = databaseManager.LoadAll()) == null)
-            {
-                MessageBox.Show("Es kann nicht mit der Datenbank kommuniziert werden.\nDie Anwendung wird nun beendet.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
-                Application.Current.Shutdown();
-                return;
-            }
-
+            this.goals = goals;
             homePage = new HomePage(this);
             boardPage = new BoardPage(this);
             listPage = new ListPage(this);
             calendarPage = new CalendarPage();
             taskgroupPage = new TaskgroupPage(null);
-
             PageFrame.Content = HomePage;
-            HomePage.Update();
-
         }
 
         public void ShowProject(Project project)
         {
             boardPage.Project = project;
-            PageFrame.Content = boardPage;
             ListPage.Project = project;
-            PageFrame.Content = ListPage;
+            PageFrame.Content = BoardPage; // default Ansicht
             List.Visibility = Visibility.Visible;
             Board.Visibility = Visibility.Visible;
             Calender.Visibility = Visibility.Visible;
@@ -70,20 +51,6 @@ namespace Foco
         {
             taskgroupPage.Taskgroup = taskgroup;
             PageFrame.Content = taskgroupPage;
-        }
-
-        // wird aufgerufen, wenn das MainWindow geschlossen wird
-        private void OnWindowClosing(object sender, CancelEventArgs e)
-        {
-            if (databaseManager.SaveAll(goals))
-            {
-                databaseManager.Disconnect();
-            }
-            else
-            {
-                MessageBox.Show("Es kann nicht mit der Datenbank kommuniziert werden.\nDie Anwendung kann solange nicht beendet werden.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
-                e.Cancel = true;
-            }
         }
 
         // wird aufgerufen, wenn ein Button in der Menüleiste gedrückt wird
@@ -100,9 +67,11 @@ namespace Foco
                     List.Visibility = Visibility.Hidden;
                     break;
                 case "Board":
+                    BoardPage.Update();
                     PageFrame.Content = BoardPage;
                     break;
                 case "List":
+                    ListPage.Update();
                     PageFrame.Content = ListPage;
                     break;
                 case "Calendar":
@@ -110,5 +79,6 @@ namespace Foco
                     break;
             }
         }
+
     }
 }

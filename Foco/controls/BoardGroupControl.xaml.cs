@@ -56,7 +56,7 @@ namespace Foco.controls
             else
             {
                 DeadlineBorder.Visibility = Visibility.Visible;
-                DeadlineLabel.Content = taskgroup.Deadline.ToString("dd.MM.yyyy HH:mm");
+                DeadlineLabel.Content = taskgroup.Deadline.ToString("dd.MM.yyyy");
             }
             int countAll = 0, countDone = 0;
             foreach (Task task in taskgroup.Tasks)
@@ -104,10 +104,11 @@ namespace Foco.controls
             // TODO
         }
 
-        // Benutzer hat auf Control geklickt
-        private void OnControlClicked(object sender, MouseButtonEventArgs e)
+        // Benutzer machte Doppelklick auf das Control
+        private void OnControlDoubleClicked(object sender, MouseButtonEventArgs e)
         {
             boardPage.MainWindow.ShowTaskgroup(taskgroup);
         }
+
     }
 }

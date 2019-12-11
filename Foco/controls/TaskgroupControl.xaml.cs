@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Foco.models;
 using Foco.pages;
 using Task = Foco.models.Task;
@@ -24,20 +14,41 @@ namespace Foco.ui
     public partial class TaskgroupControl : UserControl
     {
         private readonly ListPage listPage;
+        private readonly TaskgroupPage taskgroupPage;
         private Taskgroup taskgroup;
 
-        public TaskgroupControl(Taskgroup taskgroup, ListPage listPage)
+        public Taskgroup Taskgroup { get => taskgroup; set { if (value == null) value = new Taskgroup("Dummy"); taskgroup = value; Update(); } }
+        public ListPage ListPage => listPage;
+        public TaskgroupPage TaskgroupPage => taskgroupPage;
+
+        private TaskgroupControl(Taskgroup taskgroup)
         {
             InitializeComponent();
-            this.listPage = listPage;
-            this.Taskgroup = taskgroup;
-            TaskgroupHeader.Content = this.taskgroup.Title;
+            Taskgroup = taskgroup;
+        }
+
+        private void Update()
+        {
+            TaskgroupHeader.Content = taskgroup.Title;
+            PrioCombo.SelectedIndex = (int)taskgroup.Prio;
+            StateCombo.SelectedIndex = (int)taskgroup.State;
+            if (taskgroup.Deadline == DateTime.MinValue)
+                DeadlinePicker.SelectedDate = null;
+            else
+                DeadlinePicker.SelectedDate = taskgroup.Deadline;
+            TaskContainer.Children.Clear();
             LoadTaskControls();
         }
 
-        public Taskgroup Taskgroup { get => taskgroup; set => taskgroup = value; }
+        public TaskgroupControl(Taskgroup taskgroup, ListPage listPage) : this(taskgroup)
+        {
+            this.listPage = listPage;
+        }
 
-        public ListPage ListPage => listPage;
+        public TaskgroupControl(Taskgroup taskgroup, TaskgroupPage taskgroupPage) : this(taskgroup)
+        {
+            this.taskgroupPage = taskgroupPage;
+        }
 
         /**
          * Alle verfügbare Tasks sollen in die TaskgroupControl geladen werden
@@ -83,17 +94,55 @@ namespace Foco.ui
             Task task = new Task(title);
             TaskControl taskControl = new TaskControl(task, this);
             TaskContainer.Children.Add(taskControl);
-            this.Height =+ taskControl.Height;
             Taskgroup.Tasks.Add(task);
         }
 
         /**
          * Lösche TaskgroupControl
          */
-        public void DeleteTaskgroupControl(object sender, MouseButtonEventArgs e)
+        public void DeleteTaskgroupControl(object sender, RoutedEventArgs e)
         {
-            ListPage.TaskgroupContainer.Children.Remove(this);
-            ListPage.Project.Taskgroups.Remove(this.Taskgroup);
+            if (ListPage != null)
+            {
+                ListPage.TaskgroupContainer.Children.Remove(this);
+                ListPage.Project.Taskgroups.Remove(this.Taskgroup);
+            }
+            else if (TaskgroupPage != null)
+            {
+                // TODO
+            }
+
         }
+
+        // Benutzer klickte auf Control
+        private void OnTaskgroupClicked(object sender, MouseButtonEventArgs e)
+        {
+            if (ListPage != null)
+            {
+                ListPage.MainWindow.ShowTaskgroup(taskgroup);
+            }
+        }
+
+        private void OnStatusComboChanged(object sender, SelectionChangedEventArgs e)
+        {
+            taskgroup.State = (State)StateCombo.SelectedIndex;
+        }
+
+        private void OnPrioComboChanged(object sender, SelectionChangedEventArgs e)
+        {
+            taskgroup.Prio = (Priority)PrioCombo.SelectedIndex;
+        }
+
+        private void OnDeadlinePickerChanged(object sender, SelectionChangedEventArgs e)
+        {
+            taskgroup.Deadline = DeadlinePicker.SelectedDate == null ? DateTime.MinValue : (DateTime)DeadlinePicker.SelectedDate;
+        }
+
+        public void OnTaskFocused(Task task)
+        {
+            if (taskgroupPage != null)
+                taskgroupPage.CurrentTask = task;
+        }
+
     }
 }

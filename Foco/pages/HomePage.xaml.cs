@@ -20,6 +20,7 @@ namespace Foco.pages
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
+            Update();
         }
 
         public void Update()
