@@ -16,6 +16,8 @@ namespace Foco.ui
         private readonly Project project;
         private readonly GoalControl goalControl;
 
+        public Project Project => project;
+
         public ProjectControl(GoalControl goalControl)
         {
             this.goalControl = goalControl;
@@ -128,6 +130,5 @@ namespace Foco.ui
             DeleteButton.Visibility = Visibility.Hidden;
             EditButton.Visibility = Visibility.Hidden;
         }
-
     }
 }
