@@ -21,8 +21,9 @@ namespace Foco
         private void OnAppStart(object sender, StartupEventArgs e)
         {
             databaseManager = new DatabaseManager(DB_PATH);
-            if ((isConnected = databaseManager.Connect()) == true && (goals = databaseManager.LoadAll()) != null)
+            if (databaseManager.Connect() && (goals = databaseManager.LoadAll()) != null)
             {
+                isConnected = true;
                 new MainWindow(goals).Show();
             }
             else

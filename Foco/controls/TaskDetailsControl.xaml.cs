@@ -25,21 +25,12 @@ namespace Foco.controls
             TaskDescriptionEditor.Text = null;
             if (task != null)
             {
+                TaskDescriptionEditor.Text = task.Description;
                 foreach (Attachment attachment in task.Attachments)
                 {
-                    switch (attachment.Type)
-                    {
-                        case AttachmentType.Link:
-                            AttachmentStack.Children.Add(new LinkAttachmentControl((LinkAttachment)attachment));
-                            break;
-                        case AttachmentType.Comment:
-                            // TODO
-                            break;
-                    }
+                    AttachmentStack.Children.Add(new AttachmentControl(attachment));
                 }
-                TaskDescriptionEditor.Text = task.Description;
             }
-
         }
 
         private void OnAddAttachmentMenuItemClick(object sender, System.Windows.RoutedEventArgs e)

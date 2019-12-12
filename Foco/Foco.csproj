@@ -99,8 +99,8 @@
     <Compile Include="controls\TaskDetailsControl.xaml.cs">
       <DependentUpon>TaskDetailsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="controls\LinkAttachmentControl.xaml.cs">
-      <DependentUpon>LinkAttachmentControl.xaml</DependentUpon>
+    <Compile Include="controls\AttachmentControl.xaml.cs">
+      <DependentUpon>AttachmentControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="controls\TaskgroupCreateLabelControl.xaml.cs">
       <DependentUpon>TaskgroupCreateLabelControl.xaml</DependentUpon>
@@ -111,10 +111,8 @@
     <Compile Include="controls\BoardGroupControl.xaml.cs">
       <DependentUpon>BoardGroupControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="models\Attachment.cs" />
-    <Compile Include="models\CommentAttachment.cs" />
     <Compile Include="models\Goal.cs" />
-    <Compile Include="models\LinkAttachment.cs" />
+    <Compile Include="models\Attachment.cs" />
     <Compile Include="models\Project.cs" />
     <Compile Include="models\Task.cs" />
     <Compile Include="models\Taskgroup.cs" />
@@ -159,7 +157,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="controls\LinkAttachmentControl.xaml">
+    <Page Include="controls\AttachmentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

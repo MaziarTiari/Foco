@@ -9,14 +9,14 @@ namespace Foco.controls
     /// <summary>
     /// Interaktionslogik für LinkAttachmentControl.xaml
     /// </summary>
-    public partial class LinkAttachmentControl : UserControl
+    public partial class AttachmentControl : UserControl
     {
 
-        private LinkAttachment linkAttachment;
+        private Attachment linkAttachment;
 
-        public LinkAttachment LinkAttachment { get => linkAttachment; set { linkAttachment = value; Update(); } }
+        public Attachment LinkAttachment { get => linkAttachment; set { linkAttachment = value; Update(); } }
 
-        public LinkAttachmentControl(LinkAttachment linkAttachment)
+        public AttachmentControl(Attachment linkAttachment)
         {
             InitializeComponent();
             LinkAttachment = linkAttachment;
@@ -25,11 +25,11 @@ namespace Foco.controls
         private void Update()
         {
             TitleText.Text = linkAttachment.Title;
-            ContentText.Text = linkAttachment.Content;
+            ContentText.Text = linkAttachment.Link;
             if (!linkAttachment.IsWebUrl())
             {
                 // Anhang ist normale Datei: einfach das Thumbnail auslesen
-                ShellFile shellFile = ShellFile.FromFilePath(linkAttachment.Content);
+                ShellFile shellFile = ShellFile.FromFilePath(linkAttachment.Link);
                 FileImg.Source = shellFile.Thumbnail.MediumBitmapSource;
             }
             else
