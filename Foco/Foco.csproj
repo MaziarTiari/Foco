@@ -93,6 +93,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="controls\EditableLabel.xaml.cs">
+      <DependentUpon>EditableLabel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="controls\TaskDetailsControl.xaml.cs">
       <DependentUpon>TaskDetailsControl.xaml</DependentUpon>
     </Compile>
@@ -148,6 +151,10 @@
     <Compile Include="windows\ProjectEditWindow.xaml.cs">
       <DependentUpon>ProjectEditWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="controls\EditableLabel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="controls\TaskDetailsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

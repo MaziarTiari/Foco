@@ -24,35 +24,21 @@ namespace Foco.ui
         public void Update()
         {
             TaskCheckBox.IsChecked = task.Done;
-            TaskTextBox.Text = task.Title;
+            EditableTaskLabel.Text = task.Title;
             AttachmentInfoText.Text = task.Attachments.Count > 0 ? task.Attachments.Count + "📎 " : null;
         }
 
-        private void OnLostFocus(object sender, RoutedEventArgs e)
-        {
-            SaveOrDeleteTask();
-        }
-
-        private void OnKeyDownHandler(object sender, KeyEventArgs e)
-        {
-            switch (e.Key)
-            {
-                case Key.Escape:
-                case Key.Return:
-                    SaveOrDeleteTask();
-                    break;
-            }
-        }
-
+        // Benutzer drückt auf Löschen
         public void DeleteTaskMouseEvent(object sender, RoutedEventArgs e)
         {
             DeleteTask();
         }
 
-        private void SaveOrDeleteTask()
+        // Benutzer schließt Editieren ab
+        private void OnLabelEdited(string text)
         {
-            if (!string.IsNullOrWhiteSpace(TaskTextBox.Text))
-                task.Title = TaskTextBox.Text;
+            if (!string.IsNullOrWhiteSpace(text))
+                task.Title = text;
             else
                 DeleteTask();
         }
@@ -68,10 +54,9 @@ namespace Foco.ui
             task.Done = TaskCheckBox.IsChecked == true;
         }
 
-        private void OnGotFocus(object sender, RoutedEventArgs e)
+        private void OnControlClicked(object sender, MouseButtonEventArgs e)
         {
             taskgroupControl.OnTaskFocused(task);
         }
-
     }
 }
