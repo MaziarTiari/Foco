@@ -18,8 +18,14 @@ namespace Foco.ui
             InitializeComponent();
             this.taskgroupControl = taskgroupControl;
             this.task = task;
+            Update();
+        }
+
+        public void Update()
+        {
             TaskCheckBox.IsChecked = task.Done;
             TaskTextBox.Text = task.Title;
+            AttachmentInfoText.Text = task.Attachments.Count > 0 ? task.Attachments.Count + "📎 " : null;
         }
 
         private void OnLostFocus(object sender, RoutedEventArgs e)

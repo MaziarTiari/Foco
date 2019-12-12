@@ -12,13 +12,15 @@
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <CheckBox Name="TaskCheckBox" Grid.Column="0" Checked="OnCheckBoxChanged" Unchecked="OnLostFocus"></CheckBox>
+            <CheckBox Name="TaskCheckBox" Grid.Column="0" Checked="OnCheckBoxChanged" Unchecked="OnCheckBoxChanged"></CheckBox>
             <TextBox Name="TaskTextBox" Grid.Column="1" Margin="10, 0, 0, 0" Background="Transparent" TextWrapping="Wrap" BorderThickness="0" 
                      AcceptsReturn="False" ScrollViewer.HorizontalScrollBarVisibility="Auto" KeyDown="OnKeyDownHandler"
-                     LostFocus="OnLostFocus" GotFocus="OnGotFocus">
+                     LostFocus="OnLostFocus" GotFocus="OnGotFocus" Text="Beispielaufgabe">
             </TextBox>
-            <Button Grid.Column="2" Click="DeleteTaskMouseEvent" VerticalAlignment="Top" VerticalContentAlignment="Top">D</Button>
+            <TextBlock Name="AttachmentInfoText" Grid.Column="2" Background="Transparent">3📎</TextBlock>
+            <Button Grid.Column="3" Width="20" Height="20" Click="DeleteTaskMouseEvent" VerticalAlignment="Top" VerticalContentAlignment="Top">D</Button>
         </Grid>
     </Grid>
 </UserControl>
