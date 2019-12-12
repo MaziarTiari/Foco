@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -42,13 +43,13 @@ namespace Foco.controls
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter && isEditing)
+            if (e.Key == Key.Enter && isEditing && !Keyboard.IsKeyDown(Key.LeftShift) && !Keyboard.IsKeyDown(Key.RightShift))
             {
                 EditRow.Height = new GridLength(0);
                 LabelRow.Height = new GridLength(1, GridUnitType.Star);
                 EditLabel.Text = EditTextBox.Text;
                 isEditing = false;
-                if(editedCallback != null)
+                if (editedCallback != null)
                     editedCallback(EditLabel.Text);
             }
         }

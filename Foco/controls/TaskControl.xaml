@@ -19,7 +19,7 @@
             <!--<TextBox Name="TaskTextBox" Grid.Column="1" Margin="10, 0, 0, 0" Background="Transparent" TextWrapping="Wrap" BorderThickness="0" 
                      AcceptsReturn="False" ScrollViewer.HorizontalScrollBarVisibility="Auto" KeyDown="OnKeyDownHandler"
                      LostFocus="OnLostFocus" GotFocus="OnGotFocus" Text="Beispielaufgabe">-->
-            <controls:EditableLabel Margin="10,0,10,0" MouseLeftButtonDown="OnControlClicked" EditedCallbackFunction="OnLabelEdited" Grid.Column="1" x:Name="EditableTaskLabel"></controls:EditableLabel>
+            <controls:EditableLabel Text="Beispielaufgabe" Margin="10,0,10,0" MouseLeftButtonDown="OnControlClicked" EditedCallbackFunction="OnLabelEdited" Grid.Column="1" x:Name="EditableTaskLabel"></controls:EditableLabel>
             <TextBlock Name="AttachmentInfoText" Grid.Column="2" Background="Transparent">3📎</TextBlock>
             <Button Grid.Column="3" Width="20" Height="20" Click="DeleteTaskMouseEvent" VerticalAlignment="Top" VerticalContentAlignment="Top">D</Button>
         </Grid>
