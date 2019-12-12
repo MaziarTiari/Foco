@@ -1,0 +1,71 @@
+﻿using Foco.models;
+using System.ComponentModel;
+using System.IO;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+
+namespace Foco.windows
+{
+    /// <summary>
+    /// Interaktionslogik für AttachmentEditWindow.xaml
+    /// </summary>
+    public partial class AttachmentEditWindow : Window
+    {
+
+        public enum AttachmentEditWindowType { WebUrl, File }
+        public delegate void InputCallback(InputState inputState, string titleText, string linkText);
+
+        private readonly InputCallback inputCallback;
+        private readonly AttachmentEditWindowType type;
+
+        public AttachmentEditWindow(string windowTitle, string defaultTitle, string defaultLink, InputCallback inputCallback, AttachmentEditWindowType type)
+        {
+            InitializeComponent();
+            this.inputCallback = inputCallback;
+            this.type = type;
+            Owner = Application.Current.MainWindow;
+            Title = windowTitle;
+            LinkLabel.Content = type == AttachmentEditWindowType.File ? "Datei:" : "URL:";
+            TitleBox.Text = defaultTitle;
+            LinkBox.Text = defaultLink;
+            TitleBox.Focus();
+            TitleBox.CaretIndex = TitleBox.Text.Length;
+        }
+
+        // Benutzer hat auf Button geklickt
+        private void OnButtonClicked(object sender, RoutedEventArgs e)
+        {
+            switch ((string)((Button)sender).Tag)
+            {
+                case "Save":
+                    if (string.IsNullOrWhiteSpace(TitleBox.Text))
+                    {
+                        TitleBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                        return;
+                    }
+                    if (string.IsNullOrWhiteSpace(LinkBox.Text)
+                        || (type == AttachmentEditWindowType.WebUrl && !Attachment.IsWebUrl(LinkBox.Text))
+                        || (type == AttachmentEditWindowType.File && !File.Exists(LinkBox.Text)))
+                    {
+                        LinkBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                        return;
+                    }
+                    inputCallback(InputState.Save, TitleBox.Text, LinkBox.Text);
+                    Close();
+                    break;
+                case "Cancel":
+                    inputCallback(InputState.Cancel, TitleBox.Text, LinkBox.Text);
+                    Close();
+                    break;
+            }
+        }
+
+        // Benutzer schließt Fenster
+        private void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            inputCallback(InputState.Close, TitleBox.Text, LinkBox.Text);
+        }
+
+    }
+}

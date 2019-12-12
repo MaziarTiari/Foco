@@ -143,6 +143,9 @@
     <Compile Include="windows\ConfirmWindow.xaml.cs">
       <DependentUpon>ConfirmWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windows\AttachmentEditWindow.xaml.cs">
+      <DependentUpon>AttachmentEditWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\InputWindow.xaml.cs">
       <DependentUpon>InputWindow.xaml</DependentUpon>
     </Compile>
@@ -187,6 +190,10 @@
     <Page Include="pages\BoardPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\AttachmentEditWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

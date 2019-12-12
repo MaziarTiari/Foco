@@ -43,7 +43,6 @@
                                 <MenuItem Name="AddMenuItem" Background="Black" Foreground="White" BorderThickness="0" Header="▼" Width="20" Height="20">
                                     <MenuItem Foreground="Black" Click="OnAddAttachmentMenuItemClick" Tag="URL" Header="Webadresse anhängen"></MenuItem>
                                     <MenuItem Foreground="Black" Click="OnAddAttachmentMenuItemClick" Tag="FILE" Header="Lokale Datei anhängen"></MenuItem>
-                                    <MenuItem Foreground="Black" Click="OnAddAttachmentMenuItemClick" Tag="COM" Header="Kommentar anhängen"></MenuItem>
                                 </MenuItem>
                             </Menu>
                         </StackPanel>
