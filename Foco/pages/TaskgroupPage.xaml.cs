@@ -16,7 +16,7 @@ namespace Foco.pages
         private readonly TaskgroupControl taskgroupControl;
         private readonly TaskDetailsControl taskDetailsControl;
 
-        public Taskgroup Taskgroup { get => taskgroup; set { taskgroup = value; Update(); } }
+        public Taskgroup Taskgroup { get => taskgroup; set { taskgroup = value; UpdateTaskgroup(); } }
         public Task CurrentTask { get => currentTask; set { currentTask = value; ShowTaskDetails(); } }
 
         public TaskgroupPage(Taskgroup taskgroup)
@@ -25,14 +25,18 @@ namespace Foco.pages
             this.taskgroup = taskgroup;
             taskgroupControl = new TaskgroupControl(taskgroup, this);
             taskDetailsControl = new TaskDetailsControl(null);
-            ContentStack.Children.Add(taskgroupControl);
-            ContentStack.Children.Add(taskDetailsControl);
+            ContentGrid.Children.Add(taskgroupControl);
+            ContentGrid.Children.Add(taskDetailsControl);
+            Grid.SetColumn(taskgroupControl, 0);
+            Grid.SetColumn(taskDetailsControl, 1);
+            Grid.SetRow(taskgroupControl, 0);
+            Grid.SetRow(taskDetailsControl, 0);
         }
 
-        private void Update()
+        private void UpdateTaskgroup()
         {
             taskgroupControl.Taskgroup = taskgroup;
-            taskDetailsControl.Task = null;
+            taskgroupControl.OnTaskClicked(taskgroup.Tasks.Count > 0 ? taskgroup.Tasks[0] : null);
         }
 
         private void ShowTaskDetails()

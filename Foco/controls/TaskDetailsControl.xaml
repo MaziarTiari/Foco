@@ -4,10 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Foco.controls"
-             mc:Ignorable="d" Width="500" Height="Auto" Margin="20">
+             mc:Ignorable="d" Width="500" Height="Auto" Margin="10">
 
     <Border BorderBrush="Black" BorderThickness="3" CornerRadius="5">
-        <Grid>
+        <Grid Name="ContentGrid">
 
             <!-- Row Definitions -->
             <Grid.RowDefinitions>

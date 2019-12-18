@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
 
 namespace Foco.windows
 {
@@ -26,7 +27,16 @@ namespace Foco.windows
             this.type = type;
             Owner = Application.Current.MainWindow;
             Title = windowTitle;
-            LinkLabel.Content = type == AttachmentEditWindowType.File ? "Datei:" : "URL:";
+            if (type == AttachmentEditWindowType.File)
+            {
+                LinkLabel.Content = "Datei:";
+            }
+            else
+            {
+                LinkLabel.Content = "URL:";
+                FileButton.Visibility = Visibility.Hidden;
+                LinkBox.Width = TitleBox.Width;
+            }
             TitleBox.Text = defaultTitle;
             LinkBox.Text = defaultLink;
             TitleBox.Focus();
@@ -67,5 +77,15 @@ namespace Foco.windows
             inputCallback(InputState.Close, TitleBox.Text, LinkBox.Text);
         }
 
+        // Benutzer klickt auf [...] Button
+        private void OnFileButtonClicked(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Datei zum Anhängen auswählen";
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                LinkBox.Text = openFileDialog.FileName;
+            }
+        }
     }
 }

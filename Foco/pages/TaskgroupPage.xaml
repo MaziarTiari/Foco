@@ -9,8 +9,14 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TaskgroupPage">
 
-    <StackPanel Name="ContentStack" Orientation="Horizontal">
-
-    </StackPanel>
+    <Grid Name="ContentGrid" HorizontalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+    </Grid>
     
 </Page>

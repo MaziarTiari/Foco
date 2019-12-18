@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Foco.models;
 using Foco.pages;
+using Foco.windows;
 using Task = Foco.models.Task;
 
 namespace Foco.ui
@@ -29,7 +30,7 @@ namespace Foco.ui
 
         private void Update()
         {
-            TaskgroupHeader.Content = taskgroup.Title;
+            TaskgroupHeader.Text = taskgroup.Title;
             PrioCombo.SelectedIndex = (int)taskgroup.Prio;
             StateCombo.SelectedIndex = (int)taskgroup.State;
             if (taskgroup.Deadline == DateTime.MinValue)
@@ -48,6 +49,14 @@ namespace Foco.ui
         public TaskgroupControl(Taskgroup taskgroup, TaskgroupPage taskgroupPage) : this(taskgroup)
         {
             this.taskgroupPage = taskgroupPage;
+        }
+
+        private void OnLabelEdited(string text)
+        {
+            if (!string.IsNullOrWhiteSpace(text))
+                taskgroup.Title = text;
+            else
+                TaskgroupHeader.Text = taskgroup.Title;
         }
 
         /**
@@ -97,52 +106,71 @@ namespace Foco.ui
             Taskgroup.Tasks.Add(task);
         }
 
-        /**
-         * Lösche TaskgroupControl
-         */
-        public void DeleteTaskgroupControl(object sender, RoutedEventArgs e)
+        // Benutzer klickte auf Löschen
+        private void OnDeleteClicked(object sender, RoutedEventArgs e)
         {
-            if (ListPage != null)
-            {
-                ListPage.TaskgroupContainer.Children.Remove(this);
-                ListPage.Project.Taskgroups.Remove(this.Taskgroup);
-            }
-            else if (TaskgroupPage != null)
-            {
-                // TODO
-            }
-
+            ConfirmWindow confirmWindow = new ConfirmWindow("Aufgabengruppe löschen", "Sind Sie sicher, dass Sie die Aufgabengruppe \"" + taskgroup.Title + "\" inkl. aller Aufgaben löschen möchten?", ConfirmDeleteCallback);
+            confirmWindow.ShowDialog();
         }
 
-        // Benutzer klickte auf Control
-        private void OnTaskgroupClicked(object sender, MouseButtonEventArgs e)
+        // Benutzer hat Löschen bestätigt
+        private void ConfirmDeleteCallback(ConfirmState confirmState)
         {
-            if (ListPage != null)
+            if (confirmState == ConfirmState.YES)
             {
-                ListPage.MainWindow.ShowTaskgroup(taskgroup);
+                if (ListPage != null)
+                {
+                    ListPage.TaskgroupContainer.Children.Remove(this);
+                    ListPage.Project.Taskgroups.Remove(this.Taskgroup);
+                }
+                else if (TaskgroupPage != null)
+                {
+                    // TODO
+                }
             }
         }
 
+        // Benutzer ändert Status
         private void OnStatusComboChanged(object sender, SelectionChangedEventArgs e)
         {
             taskgroup.State = (State)StateCombo.SelectedIndex;
         }
 
+        // Benutzer ändert Priorität
         private void OnPrioComboChanged(object sender, SelectionChangedEventArgs e)
         {
             taskgroup.Prio = (Priority)PrioCombo.SelectedIndex;
         }
 
+        // Benutzer ändert Deadline
         private void OnDeadlinePickerChanged(object sender, SelectionChangedEventArgs e)
         {
             taskgroup.Deadline = DeadlinePicker.SelectedDate == null ? DateTime.MinValue : (DateTime)DeadlinePicker.SelectedDate;
         }
 
-        public void OnTaskFocused(Task task)
+        // Benutzer klickt auf Task
+        public void OnTaskClicked(Task task)
         {
             if (taskgroupPage != null)
+            {
                 taskgroupPage.CurrentTask = task;
+                foreach (TaskControl taskControl in TaskContainer.Children)
+                    taskControl.Highlighted = (taskControl.Task == task);
+            }
         }
 
+        // Ein Task wurde (bereits) gelöscht
+        public void OnTaskDeleted(Task task)
+        {
+            if (taskgroupPage != null && taskgroupPage.CurrentTask == task)
+                taskgroupPage.CurrentTask = null;
+        }
+
+        // Benutzer klickt auf Info
+        private void OnInfoClicked(object sender, RoutedEventArgs e)
+        {
+            if (ListPage != null)
+                ListPage.MainWindow.ShowTaskgroup(taskgroup);
+        }
     }
 }

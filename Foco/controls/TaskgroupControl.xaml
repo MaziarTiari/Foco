@@ -4,46 +4,59 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Foco.ui"
-             mc:Ignorable="d" Width="400" Height="Auto" VerticalAlignment="Top" HorizontalAlignment="Center">
+             xmlns:controls="clr-namespace:Foco.controls"
+             mc:Ignorable="d" Width="425" Height="480" VerticalAlignment="Top" HorizontalAlignment="Center">
 
-    <Border Margin="10, 10, 10, 20" CornerRadius="10" BorderThickness="2" Background="Aqua" BorderBrush="Aqua" Width="Auto" Height="Auto">
-        <StackPanel>
-            <StackPanel.Resources>
+    <Border Margin="10" CornerRadius="5" BorderThickness="3" Background="#F9F9F9" BorderBrush="Black">
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.Resources>
                 <Style TargetType="ComboBox">
-                    <Setter Property="FontSize" Value="10"></Setter>
+                    <Setter Property="FontSize" Value="12"></Setter>
                 </Style>
                 <Style TargetType="ComboBoxItem">
-                    <Setter Property="FontSize" Value="10"></Setter>
+                    <Setter Property="FontSize" Value="12"></Setter>
                 </Style>
-            </StackPanel.Resources>
+            </Grid.Resources>
 
             <!-- Reihe 0: Titel -->
-            <Label Name="TaskgroupHeader" Width="Auto" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0" FontWeight="Bold" FontSize="16" MouseLeftButtonDown="OnTaskgroupClicked">Titel</Label>
+            <!--<Label Name="TaskgroupHeader" Width="Auto" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0" FontWeight="Bold" FontSize="16" MouseLeftButtonDown="OnTaskgroupClicked">Titel</Label>-->
+            <controls:EditableLabel Grid.Row="0" x:Name="TaskgroupHeader" Width="Auto" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0" FontWeight="Bold" FontSize="16" Text="Titel" EditedCallbackFunction="OnLabelEdited" AllowNewLine="False" MaxLength="50"></controls:EditableLabel>
 
             <!-- Reihe 1: Combo, Combo, Date, Button -->
-            <StackPanel Orientation="Horizontal">
-                <ComboBox Height="20" Width="105" Margin="5,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="OnStatusComboChanged" Name="StateCombo">
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <ComboBox Height="25" Width="105" Margin="5,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="OnStatusComboChanged" Name="StateCombo">
                     <ComboBoxItem>Warteschlange</ComboBoxItem>
                     <ComboBoxItem>In Bearbeitung</ComboBoxItem>
                     <ComboBoxItem>Abgeschlossen</ComboBoxItem>
                 </ComboBox>
-                <ComboBox Height="20" Width="105" Margin="5,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="OnPrioComboChanged" Name="PrioCombo">
+                <ComboBox Height="25" Width="105" Margin="5,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="OnPrioComboChanged" Name="PrioCombo">
                     <ComboBoxItem>Niedrig</ComboBoxItem>
                     <ComboBoxItem>Normal</ComboBoxItem>
                     <ComboBoxItem>Hoch</ComboBoxItem>
                 </ComboBox>
-                <DatePicker BorderThickness="0" Name="DeadlinePicker" SelectedDateChanged="OnDeadlinePickerChanged"></DatePicker>
-                <Button BorderThickness="1" Click="DeleteTaskgroupControl">D</Button>
+                <DatePicker Height="25" Margin="5,0,0,0" Width="105" Name="DeadlinePicker" SelectedDateChanged="OnDeadlinePickerChanged"></DatePicker>
+                <Button Margin="5,0,0,0" Height="25" Width="25" Click="OnInfoClicked">I</Button>
+                <Button Margin="5,0,0,0" Height="25" Width="25" Click="OnDeleteClicked">D</Button>
             </StackPanel>
 
             <!-- Reihe 2: Tasks -->
-            <StackPanel Name="TaskContainer" Width="Auto">
-            </StackPanel>
+            <ScrollViewer Grid.Row="2" Name="TaskContainerScroll" Margin="10" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
+                <StackPanel Name="TaskContainer" Width="360">
+                </StackPanel>
+            </ScrollViewer>
 
             <!-- Reihe 3: Neuer Task -->
-            <Grid Width="Auto">
-                <TextBox x:Name="TaskCreateEditor" Margin="0, 10, 0, 10" TextWrapping="Wrap" HorizontalAlignment="Center" Width="370" MinHeight="20" AcceptsReturn="True" PreviewKeyDown="TaskEditorPreviewKeyDown"/>
-                <TextBlock IsHitTestVisible="False" Text="Neue Aufgabe" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Foreground="DarkGray">
+            <Grid Grid.Row="3" Width="Auto">
+                <TextBox x:Name="TaskCreateEditor" Margin="0, 0, 0, 10" TextWrapping="Wrap" HorizontalAlignment="Center" Width="380" MinHeight="20" AcceptsReturn="True" PreviewKeyDown="TaskEditorPreviewKeyDown"/>
+                <TextBlock IsHitTestVisible="False" Text="Neue Aufgabe" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,0,0,10" Foreground="DarkGray">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Visibility" Value="Collapsed"/>
@@ -56,6 +69,7 @@
                     </TextBlock.Style>
                 </TextBlock>
             </Grid>
-        </StackPanel>
+
+        </Grid>
     </Border>
 </UserControl>

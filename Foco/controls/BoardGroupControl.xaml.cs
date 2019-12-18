@@ -32,8 +32,8 @@ namespace Foco.controls
         private void Update()
         {
             DeleteButton.Visibility = Visibility.Hidden;
-            EditButton.Visibility = Visibility.Hidden;
-            NameLabel.Content = taskgroup.Title;
+            InfoButton.Visibility = Visibility.Hidden;
+            NameLabel.Text = taskgroup.Title;
             switch (taskgroup.Prio)
             {
                 case Priority.High:
@@ -71,20 +71,20 @@ namespace Foco.controls
         private void OnMouseEnter(object sender, MouseEventArgs e)
         {
             DeleteButton.Visibility = Visibility.Visible;
-            EditButton.Visibility = Visibility.Visible;
+            InfoButton.Visibility = Visibility.Visible;
         }
 
         // Benutzer endet Hover
         private void OnMouseLeave(object sender, MouseEventArgs e)
         {
             DeleteButton.Visibility = Visibility.Hidden;
-            EditButton.Visibility = Visibility.Hidden;
+            InfoButton.Visibility = Visibility.Hidden;
         }
 
         // Benutzer drückt auf löschen
         private void OnDeleteClicked(object sender, RoutedEventArgs e)
         {
-            ConfirmWindow confirmWindow = new ConfirmWindow("Aufgabengruppe löschen", "Sind sie sicher, dass sie die Aufgabengruppe \"" + taskgroup.Title + "\" inkl. aller Aufgaben löschen möchten?", ConfirmDeleteCallback);
+            ConfirmWindow confirmWindow = new ConfirmWindow("Aufgabengruppe löschen", "Sind Sie sicher, dass Sie die Aufgabengruppe \"" + taskgroup.Title + "\" inkl. aller Aufgaben löschen möchten?", ConfirmDeleteCallback);
             confirmWindow.ShowDialog();
         }
 
@@ -98,16 +98,19 @@ namespace Foco.controls
             }
         }
 
-        // Benutzer hat auf Editieren geklickt
-        private void OnEditClicked(object sender, RoutedEventArgs e)
-        {
-            // TODO
-        }
-
-        // Benutzer machte Doppelklick auf das Control
-        private void OnControlDoubleClicked(object sender, MouseButtonEventArgs e)
+        // Benutzer hat auf Info geklickt
+        private void OnInfoClicked(object sender, RoutedEventArgs e)
         {
             boardPage.MainWindow.ShowTaskgroup(taskgroup);
+        }
+
+        // Benutzer hat Label bearbeitet
+        private void OnLabelEdited(string text)
+        {
+            if (!string.IsNullOrWhiteSpace(text))
+                taskgroup.Title = text;
+            else
+                NameLabel.Text = taskgroup.Title;
         }
 
     }

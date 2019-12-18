@@ -5,29 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Foco.controls">
 
-    <Border Background="White" Width="300" Height="100" BorderBrush="Black" BorderThickness="3" CornerRadius="5" MouseLeftButtonDown="OnControlClicked">
-        <StackPanel Orientation="Horizontal">
+    <Border Background="White" Width="Auto" Height="45" BorderBrush="Black" BorderThickness="1" MouseLeftButtonDown="OnControlClicked" Margin="5" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave">
+        <Grid>
 
-            <!-- Image -->
-            <Border Height="80" Width="80" BorderBrush="Black" BorderThickness="1" Margin="7">
-                <Image Name="FileImg"></Image>
-            </Border>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
 
-            <DockPanel Height="90" Width="195" Margin="7,7,0,0">
+            <Image Grid.Column="0" Name="FileImg" Width="35" Height="35" Margin="5,0,0,0"></Image>
+            <Label Grid.Column="1" Name="TitleText" Margin="5" FontSize="14">Titel des Attachments</Label>
+            <Button Grid.Column="2" Name="EditButton" Width="30" Margin="2" Height="30" Click="OnEditClicked">E</Button>
+            <Button Grid.Column="3" Name="DeleteButton" Width="30" Margin="2" Height="30" Click="OnDeleteClicked">D</Button>
 
-                <!-- Title u. Content -->
-                <TextBlock DockPanel.Dock="Top" Name="TitleText" FontWeight="Bold" FontSize="14">Titel des Attachments</TextBlock>
-                <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Height="40" Name="ContentText" FontSize="10">C:\Pfad\zur\lokalen\Datei.txt oder https://url/der/Website.html oder C:\sehr\langer\Pfad\zur\Datei.txt</TextBlock>
 
-                <!-- Buttons -->
-                <StackPanel DockPanel.Dock="Bottom" Height="28" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Name="EditButton" Width="28" Height="28">E</Button>
-                    <Button Name="DeleteButton" Width="28" Height="28">D</Button>
-                </StackPanel>
-
-            </DockPanel>
-
-        </StackPanel>
+        </Grid>
     </Border>
 
 </UserControl>
