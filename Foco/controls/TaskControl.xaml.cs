@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Foco.models;
 
 namespace Foco.ui
@@ -20,67 +11,71 @@ namespace Foco.ui
     /// </summary>
     public partial class TaskControl : UserControl
     {
+
         private readonly TaskgroupControl taskgroupControl;
-        private Task task;
-        private readonly int index;
+        private readonly Task task;
+        private bool isHighlighted;
+
+        public bool Highlighted { get => isHighlighted; set { isHighlighted = value; Update(); } }
+        public Task Task => task;
 
         public TaskControl(Task task, TaskgroupControl taskgroupControl)
         {
             InitializeComponent();
             this.taskgroupControl = taskgroupControl;
             this.task = task;
-            TaskTextBox.Text = task.Title;
-            this.index = taskgroupControl.TaskContainer.Children.Count;
+            DeleteButton.Visibility = Visibility.Hidden;
+            Update();
         }
 
-        public TaskgroupControl TaskgroupControl => taskgroupControl;
-
-        public int Index => index;
-
-        public Task Task { get => task; set => task = value; }
-
-        private void TaskControl_LostFocus(object sender, RoutedEventArgs e)
+        public void Update()
         {
-            if (!string.IsNullOrWhiteSpace(TaskTextBox.Text))
-                Task.Title = TaskTextBox.Text;
-            else
-                DeleteTask();
+            TaskCheckBox.IsChecked = task.Done;
+            EditableTaskLabel.Text = task.Title;
+            AttachmentInfoText.Text = task.Attachments.Count > 0 ? task.Attachments.Count + "📎 " : null;
+            ControlContainer.Background = isHighlighted ? new SolidColorBrush(Color.FromArgb(50, 0, 0, 0)) : null;
         }
 
-        private void OnKeyDownHandler(object sender, KeyEventArgs e)
-        {
-            var key = e.Key;
-            switch (key)
-            {
-                case Key.Return:
-                    if (! string.IsNullOrWhiteSpace(TaskTextBox.Text))
-                    {
-                        Task.Title = TaskTextBox.Text;
-                        TaskgroupControl.Taskgroup.Tasks[Index] = Task;
-                    }
-                    else
-                    {
-                        DeleteTask();
-                    }
-                    break;
-                case Key.Escape:
-                    if (string.IsNullOrWhiteSpace(this.TaskTextBox.Text))
-                    {
-                        DeleteTask();
-                    }
-                    break;
-            }
-        }
-
-        public void DeleteTaskMouseEvent(object sender, MouseButtonEventArgs e)
+        // Benutzer drückt auf Löschen
+        public void DeleteTaskMouseEvent(object sender, RoutedEventArgs e)
         {
             DeleteTask();
         }
 
+        // Benutzer schließt Editieren ab
+        private void OnLabelEdited(string text)
+        {
+            if (!string.IsNullOrWhiteSpace(text))
+                task.Title = text;
+            else
+                DeleteTask();
+        }
+
         private void DeleteTask()
         {
-            TaskgroupControl.TaskContainer.Children.Remove(this);
-            taskgroupControl.Taskgroup.Tasks.Remove(Task);
+            taskgroupControl.TaskContainer.Children.Remove(this);
+            taskgroupControl.Taskgroup.Tasks.Remove(task);
+            taskgroupControl.OnTaskDeleted(task);
+        }
+
+        private void OnCheckBoxChanged(object sender, RoutedEventArgs e)
+        {
+            task.Done = TaskCheckBox.IsChecked == true;
+        }
+
+        private void OnControlClicked(object sender, MouseButtonEventArgs e)
+        {
+            taskgroupControl.OnTaskClicked(task);
+        }
+
+        private void OnMouseEnter(object sender, MouseEventArgs e)
+        {
+            DeleteButton.Visibility = Visibility.Visible;
+        }
+
+        private void OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            DeleteButton.Visibility = Visibility.Hidden;
         }
     }
 }

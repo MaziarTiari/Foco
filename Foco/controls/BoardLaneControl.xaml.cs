@@ -1,4 +1,5 @@
 ﻿using Foco.models;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -42,22 +43,34 @@ namespace Foco.controls
             }
             if (project != null)
             {
-                switch (sort)
-                {
-                    case Sort.PriorityAscending: project.Taskgroups.Sort((x, y) => x.Prio.CompareTo(y.Prio)); break;
-                    case Sort.PriorityDescending: project.Taskgroups.Sort((x, y) => y.Prio.CompareTo(x.Prio)); break;
-                    case Sort.AlphanumericAscending: project.Taskgroups.Sort((x, y) => x.Title.CompareTo(y.Title)); break;
-                    case Sort.AlphanumericDescending: project.Taskgroups.Sort((x, y) => y.Title.CompareTo(x.Title)); break;
-                    case Sort.DeadlineAscending: project.Taskgroups.Sort((x, y) => x.Deadline.CompareTo(y.Deadline)); break;
-                    case Sort.DeadlineDescending: project.Taskgroups.Sort((x, y) => y.Deadline.CompareTo(x.Deadline)); break;
-                    default: break;
-                }
                 foreach (Taskgroup taskgroup in project.Taskgroups)
                 {
                     if (taskgroup.State == state)
                         TaskgroupStack.Children.Add(new BoardGroupControl(boardPage, taskgroup));
                 }
+                SortElements();
             }
+        }
+
+        private void SortElements()
+        {
+            if (sort == Sort.None) return;
+            List<BoardGroupControl> boardGroupControls = new List<BoardGroupControl>();
+            foreach (BoardGroupControl boardGroupControl in TaskgroupStack.Children)
+                boardGroupControls.Add(boardGroupControl);
+            switch (sort)
+            {
+                case Sort.PriorityAscending: boardGroupControls.Sort((x, y) => x.Taskgroup.Prio.CompareTo(y.Taskgroup.Prio)); break;
+                case Sort.PriorityDescending: boardGroupControls.Sort((x, y) => y.Taskgroup.Prio.CompareTo(x.Taskgroup.Prio)); break;
+                case Sort.AlphanumericAscending: boardGroupControls.Sort((x, y) => x.Taskgroup.Title.CompareTo(y.Taskgroup.Title)); break;
+                case Sort.AlphanumericDescending: boardGroupControls.Sort((x, y) => y.Taskgroup.Title.CompareTo(x.Taskgroup.Title)); break;
+                case Sort.DeadlineAscending: boardGroupControls.Sort((x, y) => x.Taskgroup.Deadline.CompareTo(y.Taskgroup.Deadline)); break;
+                case Sort.DeadlineDescending: boardGroupControls.Sort((x, y) => y.Taskgroup.Deadline.CompareTo(x.Taskgroup.Deadline)); break;
+                default: break;
+            }
+            TaskgroupStack.Children.Clear();
+            foreach (BoardGroupControl boardGroupControl in boardGroupControls)
+                TaskgroupStack.Children.Add(boardGroupControl);
         }
 
         // Benutzer startet Drag eines BoardGroupControls
@@ -163,13 +176,23 @@ namespace Foco.controls
             }
             foreach (MenuItem menuItem in SortMenuItem.Items)
                 menuItem.IsChecked = menuItem.Tag.Equals(clickedMenuItem.Tag);
-            Update();
+            SortElements();
         }
 
         // Benutzer hat auf Hinzufügen geklickt
         private void OnAddGroupClicked(object sender, MouseButtonEventArgs e)
         {
-            // TODO
+            string title = "Neue Gruppe";
+            int i = 1;
+            while (Project.Taskgroups.Exists(x => x.Title == title))
+                title = title.Split(' ')[0] + " " + title.Split(' ')[1] + " " + (++i);
+            Taskgroup taskgroup = new Taskgroup(title);
+            taskgroup.State = state;
+            project.Taskgroups.Add(taskgroup);
+            BoardGroupControl boardGroupControl = new BoardGroupControl(boardPage, taskgroup);
+            TaskgroupStack.Children.Add(boardGroupControl);
+            boardGroupControl.NameLabel.BeginEditing();
         }
+
     }
 }

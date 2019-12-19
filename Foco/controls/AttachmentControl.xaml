@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Foco.controls.AttachmentControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Foco.controls">
+
+    <Border Background="White" Width="Auto" Height="45" BorderBrush="Black" BorderThickness="1" MouseLeftButtonDown="OnControlClicked" Margin="5" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave">
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0" Name="FileImg" Width="35" Height="35" Margin="5,0,0,0"></Image>
+            <Label Grid.Column="1" Name="TitleText" Margin="5" FontSize="14">Titel des Attachments</Label>
+            <Button Grid.Column="2" Name="EditButton" Width="30" Margin="2" Height="30" Click="OnEditClicked">E</Button>
+            <Button Grid.Column="3" Name="DeleteButton" Width="30" Margin="2" Height="30" Click="OnDeleteClicked">D</Button>
+
+
+        </Grid>
+    </Border>
+
+</UserControl>

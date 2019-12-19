@@ -15,6 +15,7 @@ namespace Foco
         private Project project;
 
         public Project Project { get => project; set { project = value; Update(); } }
+        public MainWindow MainWindow => mainWindow;
 
         public BoardPage(MainWindow mainWindow)
         {
