@@ -102,9 +102,6 @@
     <Compile Include="controls\AttachmentControl.xaml.cs">
       <DependentUpon>AttachmentControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="controls\TaskgroupCreateLabelControl.xaml.cs">
-      <DependentUpon>TaskgroupCreateLabelControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="controls\BoardLaneControl.xaml.cs">
       <DependentUpon>BoardLaneControl.xaml</DependentUpon>
     </Compile>
@@ -172,10 +169,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="controls\TaskControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="controls\TaskgroupCreateLabelControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

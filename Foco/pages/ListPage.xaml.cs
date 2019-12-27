@@ -3,6 +3,7 @@ using Foco.ui;
 using Foco.windows;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Foco.pages
 {
@@ -11,6 +12,7 @@ namespace Foco.pages
     /// </summary>
     public partial class ListPage : Page
     {
+
         private readonly MainWindow mainWindow;
         private Project project;
 
@@ -23,19 +25,20 @@ namespace Foco.pages
 
         public Project Project { get => project; set { project = value; Update(); } }
         public MainWindow MainWindow => mainWindow;
-        public int IndexOfLastTaskgroupControl => TaskgroupContainer.Children.Count - 1;
 
-        public void RequestNewTaskgroupByListPage()
+        // Benutzer klickte auf Hinzufügen
+        private void OnAddTaskgroupClicked(object sender, RoutedEventArgs e)
         {
             string title = "Neue Gruppe";
             int i = 1;
-            while(Project.Taskgroups.Exists(x => x.Title == title))
+            while (Project.Taskgroups.Exists(x => x.Title == title))
                 title = title.Split(' ')[0] + " " + title.Split(' ')[1] + " " + (++i);
             Taskgroup taskgroup = new Taskgroup(title);
             project.Taskgroups.Add(taskgroup);
             TaskgroupControl taskgroupControl = new TaskgroupControl(taskgroup, this);
-            TaskgroupContainer.Children.Insert(IndexOfLastTaskgroupControl, taskgroupControl);
+            TaskgroupContainer.Children.Add(taskgroupControl);
             taskgroupControl.TaskgroupHeader.BeginEditing();
+            TaskgroupScroll.ScrollToBottom();
         }
 
         public void Update()
@@ -49,7 +52,7 @@ namespace Foco.pages
                     TaskgroupContainer.Children.Add(taskgroupControl);
                 }
             }
-            TaskgroupContainer.Children.Add(new TaskgroupCreateLabelControl(this));
         }
+
     }
 }
