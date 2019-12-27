@@ -83,27 +83,18 @@ namespace Foco.ui
             switch (e.Key)
             {
                 case Key.Enter:
-                    if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)))
+                    if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) && !string.IsNullOrWhiteSpace(TaskCreateEditor.Text))
                     {
-                        CreateNewTask(TaskCreateEditor.Text);
+                        Task task = new Task(TaskCreateEditor.Text);
+                        TaskControl taskControl = new TaskControl(task, this);
+                        TaskContainer.Children.Add(taskControl);
+                        TaskContainerScroll.ScrollToBottom();
+                        Taskgroup.Tasks.Add(task);
                         TaskCreateEditor.Text = null;
                         e.Handled = true;
                     }
                     break;
             }
-        }
-
-        /**
-         * Eine neue Task erstellen
-         */
-        public void CreateNewTask(string title)
-        {
-            if (string.IsNullOrWhiteSpace(title))
-                return;
-            Task task = new Task(title);
-            TaskControl taskControl = new TaskControl(task, this);
-            TaskContainer.Children.Add(taskControl);
-            Taskgroup.Tasks.Add(task);
         }
 
         // Benutzer klickte auf Löschen
