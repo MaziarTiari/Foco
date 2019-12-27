@@ -192,6 +192,7 @@ namespace Foco.controls
             BoardGroupControl boardGroupControl = new BoardGroupControl(boardPage, taskgroup);
             TaskgroupStack.Children.Add(boardGroupControl);
             boardGroupControl.NameLabel.BeginEditing();
+            TaskgroupStackScroll.ScrollToBottom();
         }
 
     }
