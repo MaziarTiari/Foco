@@ -76,8 +76,8 @@ namespace Foco
                     PageFrame.Content = ListPage;
                     break;
                 case "Calendar":
-                    PageFrame.Content = CalendarPage;
                     CalendarPage.Update();
+                    PageFrame.Content = CalendarPage;
                     break;
             }
         }

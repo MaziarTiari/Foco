@@ -38,6 +38,16 @@ namespace Foco.models
                 return Month + 1;
         }
 
+        public void AddOrRaplaceDeadline(Deadline deadline)
+        {
+            int index = Deadlines.FindIndex(d => d.Title == deadline.Title);
+            if (index <= -1)
+                Deadlines.Add(deadline);
+            else
+                Deadlines[index] = deadline;
+            Update();
+        }
+
         private void Update()
         {
             DateTime date = new DateTime(year, month, 1);

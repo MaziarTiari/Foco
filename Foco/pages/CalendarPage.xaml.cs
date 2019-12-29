@@ -15,43 +15,41 @@ namespace Foco.pages
     {
         private readonly MainWindow mainWindow;
         private List<Deadline> deadlines = new List<Deadline>();
-        private CalenderMonth calenderMonth;
+        private readonly CalenderMonth calenderMonth;
         private Project project;
-        private DateTime today = DateTime.Today;
+        private readonly DateTime today = DateTime.Today;
 
         public CalendarPage(MainWindow mainWindow)
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
-            CalenderMonth = new CalenderMonth(Today.Year, Today.Month);
+            this.calenderMonth = new CalenderMonth(Today.Year, Today.Month);
         }
         
         public MainWindow MainWindow => mainWindow;
-        public Project Project
-        {
-            get => project; 
-            set { project = value; UpdateDeadlines(); Update(); }
-        }
+        public Project Project { get => project; set { project = value; Update();} }
         public List<Deadline> Deadlines { get => deadlines; set => deadlines = value; }
-        public CalenderMonth CalenderMonth { get => calenderMonth; set => calenderMonth = value; }
-        public DateTime Today { get => today; set => today = value; }
+        public CalenderMonth CalenderMonth => calenderMonth;
+        public DateTime Today  => today;
 
         private void UpdateDeadlines()
         {
+            //Project project = mainWindow.Goals.Find();
             if (this.Project.Taskgroups.Count < 1)
                 return;
+            CalenderMonth.Deadlines = new List<Deadline>();
             foreach(Taskgroup taskgroup in this.Project.Taskgroups)
             {
-                this.Deadlines.Add(new Deadline(taskgroup.Title, taskgroup.Deadline));
+                if (taskgroup.Deadline != null)
+                    CalenderMonth.AddOrRaplaceDeadline(new Deadline(taskgroup.Title, taskgroup.Deadline));
             }
         }
 
         public void Update()
         {
-            CalenderMonth.Deadlines = this.Deadlines;
-            MonthTag.Text = Convert.ToString(CalenderMonth.Month);
-            YearTag.Text = Convert.ToString(CalenderMonth.Year);
-            
+            DayControlContainer.Children.Clear();
+            UpdateDeadlines();
+            InitialCalender();
             CalenderDay[] days = CalenderMonth.Days;
             int i = 0;
             for(int r = 1; r < 7; r++)
@@ -67,17 +65,15 @@ namespace Foco.pages
                     }
                     if(days[i].Date < Today)
                     {
-                        dayControl.DayInfoContainer.Background = Brushes.WhiteSmoke;
-                        dayControl.DayInfoContainer.BorderBrush = Brushes.White;
-                        dayControl.Date.Foreground = Brushes.DarkSlateGray;
+                        SetViewForPastDays(dayControl);
                     }
                     if (!days[i].FromSelectedMonth) {
                         dayControl.Date.Foreground = Brushes.DarkGray;
                         dayControl.Date.Text += (" " + CalenderMonth.Months[days[i].Date.Month - 1]);
                     }
-
-                    if (isToday(days[i].Date))
+                    if (IsToday(days[i].Date))
                         dayControl.DayInfoContainer.Background = Brushes.LightSkyBlue;
+                    // Add dayControl to the CalenderPage
                     dayControl.SetValue(Grid.RowProperty, r);
                     dayControl.SetValue(Grid.ColumnProperty, c);
                     DayControlContainer.Children.Add(dayControl);
@@ -86,7 +82,22 @@ namespace Foco.pages
             }
         }
 
-        private bool isToday(DateTime day)
+        // Show the month and year the Calender is showing
+        private void InitialCalender()
+        {
+            MonthTag.Text = Convert.ToString(CalenderMonth.Month);
+            YearTag.Text = Convert.ToString(CalenderMonth.Year);
+        }
+
+        // Set diffrent style for days in the past
+        private void SetViewForPastDays(CalenderDayControl dayControl)
+        {
+            dayControl.DayInfoContainer.Background = Brushes.WhiteSmoke;
+            dayControl.DayInfoContainer.BorderBrush = Brushes.White;
+            dayControl.Date.Foreground = Brushes.DarkSlateGray;
+        }
+
+        private bool IsToday(DateTime day)
         {
             if (day == Today)
                 return true;
