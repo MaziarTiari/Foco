@@ -93,6 +93,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="controls\CalenderDayControl.xaml.cs">
+      <DependentUpon>CalenderDayControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="controls\EditableLabel.xaml.cs">
       <DependentUpon>EditableLabel.xaml</DependentUpon>
     </Compile>
@@ -111,6 +114,9 @@
     <Compile Include="controls\BoardGroupControl.xaml.cs">
       <DependentUpon>BoardGroupControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="models\CalenderDay.cs" />
+    <Compile Include="models\CalenderMonth.cs" />
+    <Compile Include="models\Deadline.cs" />
     <Compile Include="models\Goal.cs" />
     <Compile Include="models\Attachment.cs" />
     <Compile Include="models\Project.cs" />
@@ -152,6 +158,10 @@
     <Compile Include="windows\ProjectEditWindow.xaml.cs">
       <DependentUpon>ProjectEditWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="controls\CalenderDayControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="controls\EditableLabel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
+using Foco.models;
+using Foco.controls;
+using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Foco.pages
 {
@@ -20,9 +13,109 @@ namespace Foco.pages
     /// </summary>
     public partial class CalendarPage : Page
     {
-        public CalendarPage()
+        private readonly MainWindow mainWindow;
+        private List<Deadline> deadlines = new List<Deadline>();
+        private CalenderMonth calenderMonth;
+        private Project project;
+        private DateTime today = DateTime.Today;
+
+        public CalendarPage(MainWindow mainWindow)
         {
             InitializeComponent();
+            this.mainWindow = mainWindow;
+            CalenderMonth = new CalenderMonth(Today.Year, Today.Month);
+        }
+        
+        public MainWindow MainWindow => mainWindow;
+        public Project Project
+        {
+            get => project; 
+            set { project = value; UpdateDeadlines(); Update(); }
+        }
+        public List<Deadline> Deadlines { get => deadlines; set => deadlines = value; }
+        public CalenderMonth CalenderMonth { get => calenderMonth; set => calenderMonth = value; }
+        public DateTime Today { get => today; set => today = value; }
+
+        private void UpdateDeadlines()
+        {
+            if (this.Project.Taskgroups.Count < 1)
+                return;
+            foreach(Taskgroup taskgroup in this.Project.Taskgroups)
+            {
+                this.Deadlines.Add(new Deadline(taskgroup.Title, taskgroup.Deadline));
+            }
+        }
+
+        public void Update()
+        {
+            CalenderMonth.Deadlines = this.Deadlines;
+            MonthTag.Text = Convert.ToString(CalenderMonth.Month);
+            YearTag.Text = Convert.ToString(CalenderMonth.Year);
+            
+            CalenderDay[] days = CalenderMonth.Days;
+            int i = 0;
+            for(int r = 1; r < 7; r++)
+            {
+                for (int c = 0; c < 7; c++)
+                {
+                    CalenderDayControl dayControl = new CalenderDayControl(days[i].Date.Day);
+                    foreach(string appointment in days[i].Appointments)
+                    {
+                        TextBlock tb = new TextBlock();
+                        tb.Text = appointment;
+                        dayControl.AppointmentContainer.Children.Add(tb) ;
+                    }
+                    if(days[i].Date < Today)
+                    {
+                        dayControl.DayInfoContainer.Background = Brushes.WhiteSmoke;
+                        dayControl.DayInfoContainer.BorderBrush = Brushes.White;
+                        dayControl.Date.Foreground = Brushes.DarkSlateGray;
+                    }
+                    if (!days[i].FromSelectedMonth) {
+                        dayControl.Date.Foreground = Brushes.DarkGray;
+                        dayControl.Date.Text += (" " + CalenderMonth.Months[days[i].Date.Month - 1]);
+                    }
+
+                    if (isToday(days[i].Date))
+                        dayControl.DayInfoContainer.Background = Brushes.LightSkyBlue;
+                    dayControl.SetValue(Grid.RowProperty, r);
+                    dayControl.SetValue(Grid.ColumnProperty, c);
+                    DayControlContainer.Children.Add(dayControl);
+                    i++;
+                }
+            }
+        }
+
+        private bool isToday(DateTime day)
+        {
+            if (day == Today)
+                return true;
+            else
+                return false;
+        }
+
+        private void LastYearHandler(object sender, RoutedEventArgs e)
+        {
+            CalenderMonth.Year = CalenderMonth.Year - 1;
+            Update();
+        }
+
+        private void NextYearHandler(object sender, RoutedEventArgs e)
+        {
+            CalenderMonth.Year = CalenderMonth.Year + 1;
+            Update();
+        }
+
+        private void LastMonthHandler(object sender, RoutedEventArgs e)
+        {
+            CalenderMonth.setLastMonth();
+            Update();
+        }
+
+        private void NextMonthHandler(object sender, RoutedEventArgs e)
+        {
+            CalenderMonth.setNextMonth();
+            Update();
         }
     }
 }

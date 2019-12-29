@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Foco.controls.CalenderDayControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Foco.controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Border BorderBrush="DarkSlateGray" BorderThickness="1" Background="White"  Name="DayInfoContainer">
+        <StackPanel Margin="2">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="VerticalAlignment" Value="Top"/>
+                    <Setter Property="Margin" Value="1"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="10"/>
+                </Style>
+            </StackPanel.Resources>
+            <DockPanel>
+                <TextBlock Margin="1 1 1 1" Name="Date" Text="" VerticalAlignment="Top"/>
+                <TextBlock Margin="10 0 0 0" Name="Month"/>
+            </DockPanel>
+            <StackPanel Background="Red" VerticalAlignment="Top" Name="AppointmentContainer">
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</UserControl>

@@ -32,15 +32,16 @@ namespace Foco
             homePage = new HomePage(this);
             boardPage = new BoardPage(this);
             listPage = new ListPage(this);
-            calendarPage = new CalendarPage();
+            calendarPage = new CalendarPage(this);
             taskgroupPage = new TaskgroupPage(null);
             PageFrame.Content = HomePage;
         }
 
         public void ShowProject(Project project)
         {
-            boardPage.Project = project;
+            BoardPage.Project = project;
             ListPage.Project = project;
+            CalendarPage.Project = project;
             PageFrame.Content = BoardPage; // default Ansicht
             List.Visibility = Visibility.Visible;
             Board.Visibility = Visibility.Visible;
@@ -76,6 +77,7 @@ namespace Foco
                     break;
                 case "Calendar":
                     PageFrame.Content = CalendarPage;
+                    CalendarPage.Update();
                     break;
             }
         }
