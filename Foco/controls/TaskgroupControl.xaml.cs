@@ -50,6 +50,8 @@ namespace Foco.ui
         public TaskgroupControl(Taskgroup taskgroup, TaskgroupPage taskgroupPage) : this(taskgroup)
         {
             this.taskgroupPage = taskgroupPage;
+            InfoButton.Visibility = Visibility.Collapsed;
+            DeleteButton.Visibility = Visibility.Collapsed;
         }
 
         private void OnLabelEdited(string text)
@@ -114,10 +116,6 @@ namespace Foco.ui
                 {
                     ListPage.TaskgroupContainer.Children.Remove(this);
                     ListPage.Project.Taskgroups.Remove(this.Taskgroup);
-                }
-                else if (TaskgroupPage != null)
-                {
-                    // TODO
                 }
             }
         }
