@@ -1,6 +1,7 @@
 ﻿using Foco.controls;
 using Foco.models;
 using Foco.ui;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Foco.pages
@@ -48,6 +49,14 @@ namespace Foco.pages
         {
             taskDetailsControl.Task = currentTask;
         }
+
+        private void AdjustTaskgroupHeight()
+        {
+            taskgroupControl.Height = ContentGrid.RowDefinitions[0].ActualHeight;
+        }
+
+        private void OnPageLoaded(object sender, RoutedEventArgs e) => AdjustTaskgroupHeight();
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e) => AdjustTaskgroupHeight();
 
     }
 }
