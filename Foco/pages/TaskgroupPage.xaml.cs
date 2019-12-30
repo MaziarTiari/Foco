@@ -24,13 +24,18 @@ namespace Foco.pages
             InitializeComponent();
             this.taskgroup = taskgroup;
             taskgroupControl = new TaskgroupControl(taskgroup, this);
-            taskDetailsControl = new TaskDetailsControl(null);
+            taskDetailsControl = new TaskDetailsControl(null, this);
             ContentGrid.Children.Add(taskgroupControl);
             ContentGrid.Children.Add(taskDetailsControl);
             Grid.SetColumn(taskgroupControl, 0);
             Grid.SetColumn(taskDetailsControl, 1);
             Grid.SetRow(taskgroupControl, 0);
             Grid.SetRow(taskDetailsControl, 0);
+        }
+
+        public void UpdateSelectedTask()
+        {
+            taskgroupControl.HighlightedTask.Update();
         }
 
         private void UpdateTaskgroup()

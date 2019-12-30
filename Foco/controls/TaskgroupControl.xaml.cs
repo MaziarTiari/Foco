@@ -19,6 +19,7 @@ namespace Foco.ui
         private Taskgroup taskgroup;
 
         public Taskgroup Taskgroup { get => taskgroup; set { if (value == null) value = new Taskgroup("Dummy"); taskgroup = value; Update(); } }
+        public TaskControl HighlightedTask { get { foreach (TaskControl taskControl in TaskContainer.Children) { if (taskControl.Highlighted) return taskControl; } return null; } }
         public ListPage ListPage => listPage;
         public TaskgroupPage TaskgroupPage => taskgroupPage;
 
@@ -163,5 +164,6 @@ namespace Foco.ui
             if (ListPage != null)
                 ListPage.MainWindow.ShowTaskgroup(taskgroup);
         }
+
     }
 }

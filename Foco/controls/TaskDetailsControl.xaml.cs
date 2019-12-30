@@ -1,4 +1,5 @@
 ﻿using Foco.models;
+using Foco.pages;
 using Foco.windows;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,13 +14,15 @@ namespace Foco.controls
     {
 
         private Task task;
+        private readonly TaskgroupPage taskgroupPage;
 
         public Task Task { get => task; set { task = value; Update(); } }
 
-        public TaskDetailsControl(Task task)
+        public TaskDetailsControl(Task task, TaskgroupPage taskgroupPage)
         {
             InitializeComponent();
             Task = task;
+            this.taskgroupPage = taskgroupPage;
         }
 
         private void Update()
@@ -58,12 +61,14 @@ namespace Foco.controls
                 Attachment attachment = new Attachment(title, link);
                 task.Attachments.Add(attachment);
                 AttachmentStack.Children.Add(new AttachmentControl(this, attachment));
+                taskgroupPage.UpdateSelectedTask();
             }
         }
 
         public void DeleteAttachment(Attachment attachment)
         {
             task.Attachments.Remove(attachment);
+            taskgroupPage.UpdateSelectedTask();
             Update();
         }
 
