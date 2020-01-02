@@ -11,8 +11,7 @@
         <Label Content="Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="50"/>
         <TextBox MaxLines="1" TextWrapping="NoWrap" Name="NameBox" HorizontalAlignment="Left" Height="23" Margin="65,13,0,0" Text="" VerticalAlignment="Top" Width="225" MaxLength="30"/>
         <Label Content="Farbe:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-        <Border Name="ColorBox" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="26" Margin="65,41,0,0" VerticalAlignment="Top" Width="130"/>
-        <Button Content="Wählen" HorizontalAlignment="Left" Margin="200,41,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.258,-0.067" Height="26" Click="OnChooseColorClicked"/>
+        <ComboBox Name="ColorCombo"  Height="23" Margin="66,43,10,0" VerticalAlignment="Top"/>
         <Button Content="Speichern" HorizontalAlignment="Left" Margin="221,94,0,0" VerticalAlignment="Top" Width="69" Height="26" Click="OnSaveClicked"/>
         <Button Content="Abbrechen" HorizontalAlignment="Left" Margin="144,94,0,0" VerticalAlignment="Top" Width="72" Height="26" Click="OnCancelClicked"/>
     </Grid>
