@@ -13,7 +13,7 @@
             
             <controls:EditableLabel x:Name="NameLabel" FontSize="32" FontFamily="Century Gothic" VerticalAlignment="Top" Text="Ziel" EditedCallbackFunction="OnLabelEdited"></controls:EditableLabel>
             
-            <Button x:Name="DeleteButton" Width="40" Height="40" Click="OnDeleteClicked" Style="{StaticResource IconButtonStyle}">
+            <Button x:Name="DeleteButton" Width="40" Height="40" Click="OnDeleteClicked" Style="{StaticResource IconButtonStyle}" ToolTip="Ziel löschen">
                 <Image Height="40" Source="/icons/icons8-delete-bin-96.png" Stretch="Fill" Width="40"/>
             </Button>
             

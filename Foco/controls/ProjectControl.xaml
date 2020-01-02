@@ -8,14 +8,26 @@
 
 
     <Border Name="ProjectBorder" BorderBrush="Black" BorderThickness="2" CornerRadius="5" Height="100" Width="180" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave">
+
+        <Border.Style>
+            <Style TargetType="Border">
+                <Setter Property="Cursor" Value="Hand"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+        
         <DockPanel>
             <Label DockPanel.Dock="Top" Height="32" FontSize="16" FontWeight="Bold" Name="NameLabel" FontFamily="Century Gothic">Musterprojekt</Label>
             <Label DockPanel.Dock="Top" Height="30" FontSize="14" Name="TasksLabel" FontFamily="Century Gothic">0 / 3 Aufgaben</Label>
             <StackPanel DockPanel.Dock="Bottom" Height="38" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="EditButton" Width="30" Height="38" Click="OnEditClicked" Style="{StaticResource IconButtonStyle}">
+                <Button x:Name="EditButton" Width="30" Height="38" Click="OnEditClicked" Style="{StaticResource IconButtonStyle}" ToolTip="Projekt bearbeiten">
                     <Image Height="26" Source="/icons/icons8-edit-file-80.png" Stretch="Fill" Width="26"/>
                 </Button>
-                <Button x:Name="DeleteButton" Width="30" Height="38" Click="OnDeleteClicked" Style="{StaticResource IconButtonStyle}">
+                <Button x:Name="DeleteButton" Width="30" Height="38" Click="OnDeleteClicked" Style="{StaticResource IconButtonStyle}" ToolTip="Projekt löschen">
                     <Image Height="30" Source="/icons/icons8-delete-bin-96.png" Width="30"/>
                 </Button>
             </StackPanel>

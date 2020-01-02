@@ -13,7 +13,7 @@
             <RowDefinition Name="LabelRow" Height="*"></RowDefinition>
             <RowDefinition Name="EditRow" Height="0"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Name="EditLabel" TextWrapping="Wrap"></TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="0" Name="EditLabel" TextWrapping="Wrap" ToolTip="Doppelklick zum Bearbeiten des Titels"></TextBlock>
         <TextBox Grid.Row="1" Grid.Column="0" Name="EditTextBox" TextWrapping="Wrap" PreviewKeyDown="OnKeyDown" LostFocus="OnLostFocus" AcceptsReturn="True"></TextBox>
     </Grid>
 </UserControl>
