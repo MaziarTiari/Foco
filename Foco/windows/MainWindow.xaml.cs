@@ -35,6 +35,7 @@ namespace Foco
             calendarPage = new CalendarPage();
             taskgroupPage = new TaskgroupPage(null);
             PageFrame.Content = HomePage;
+            MenuGrid.Visibility = Visibility.Hidden;
         }
 
         public void ShowProject(Project project)
@@ -42,9 +43,7 @@ namespace Foco
             boardPage.Project = project;
             ListPage.Project = project;
             PageFrame.Content = BoardPage; // default Ansicht
-            List.Visibility = Visibility.Visible;
-            Board.Visibility = Visibility.Visible;
-            Calender.Visibility = Visibility.Visible;
+            MenuGrid.Visibility = Visibility.Visible;
         }
 
         public void ShowTaskgroup(Taskgroup taskgroup)
@@ -60,11 +59,9 @@ namespace Foco
             switch (menuButton.Tag)
             {
                 case "Home":
+                    MenuGrid.Visibility = Visibility.Hidden;
                     PageFrame.Content = HomePage;
                     HomePage.Update();
-                    Board.Visibility = Visibility.Hidden;
-                    Calender.Visibility = Visibility.Hidden;
-                    List.Visibility = Visibility.Hidden;
                     break;
                 case "Board":
                     BoardPage.Update();

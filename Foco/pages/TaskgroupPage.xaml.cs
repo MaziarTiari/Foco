@@ -1,6 +1,7 @@
 ﻿using Foco.controls;
 using Foco.models;
 using Foco.ui;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Foco.pages
@@ -24,13 +25,18 @@ namespace Foco.pages
             InitializeComponent();
             this.taskgroup = taskgroup;
             taskgroupControl = new TaskgroupControl(taskgroup, this);
-            taskDetailsControl = new TaskDetailsControl(null);
+            taskDetailsControl = new TaskDetailsControl(null, this);
             ContentGrid.Children.Add(taskgroupControl);
             ContentGrid.Children.Add(taskDetailsControl);
             Grid.SetColumn(taskgroupControl, 0);
             Grid.SetColumn(taskDetailsControl, 1);
             Grid.SetRow(taskgroupControl, 0);
             Grid.SetRow(taskDetailsControl, 0);
+        }
+
+        public void UpdateSelectedTask()
+        {
+            taskgroupControl.HighlightedTask.Update();
         }
 
         private void UpdateTaskgroup()
@@ -43,6 +49,14 @@ namespace Foco.pages
         {
             taskDetailsControl.Task = currentTask;
         }
+
+        private void AdjustTaskgroupHeight()
+        {
+            taskgroupControl.Height = ContentGrid.RowDefinitions[0].ActualHeight;
+        }
+
+        private void OnPageLoaded(object sender, RoutedEventArgs e) => AdjustTaskgroupHeight();
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e) => AdjustTaskgroupHeight();
 
     }
 }

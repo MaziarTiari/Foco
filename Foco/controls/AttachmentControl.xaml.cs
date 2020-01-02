@@ -6,6 +6,9 @@ using System.Windows.Input;
 using System.Windows;
 using Foco.windows;
 using static Foco.windows.AttachmentEditWindow;
+using System.Net;
+using System.Drawing;
+using System.Windows.Media.Imaging;
 
 namespace Foco.controls
 {
@@ -14,6 +17,8 @@ namespace Foco.controls
     /// </summary>
     public partial class AttachmentControl : UserControl
     {
+
+        private const string GOOGLE_API_LINK = "http://www.google.com/s2/favicons?domain=";
 
         private Attachment attachment;
         private readonly TaskDetailsControl taskDetailsControl;
@@ -40,12 +45,29 @@ namespace Foco.controls
             }
             else
             {
-                // Anhang ist URL: dummy.html anlegen und davon das Thumbnail auslesen
-                string dummyPath = Path.GetTempPath() + "foco_dummy.html";
-                File.WriteAllText(dummyPath, ""); // erstellt und schließt
-                ShellFile shellFile = ShellFile.FromFilePath(dummyPath);
-                FileImg.Source = shellFile.Thumbnail.SmallBitmapSource;
-                File.Delete(dummyPath);
+                try
+                {
+                    // Optimal: Favicon der Website mithilfe von Googles API auslesen
+                    WebClient webClient = new WebClient();
+                    byte[] faviconData = webClient.DownloadData(GOOGLE_API_LINK + attachment.Link);
+                    MemoryStream memoryStream = new MemoryStream(faviconData);
+                    BitmapImage bitmapImage = new BitmapImage();
+                    memoryStream.Position = 0;
+                    bitmapImage.BeginInit();
+                    bitmapImage.StreamSource = memoryStream;
+                    bitmapImage.EndInit();
+                    FileImg.Source = bitmapImage;
+                }
+                catch
+                {
+                    // Geht nicht? Dann temporäre foco_dummy.html anlegen und davon das File Icon
+                    string dummyPath = Path.GetTempPath() + "foco_dummy.html";
+                    File.WriteAllText(dummyPath, ""); // erstellt und schließt
+                    ShellFile shellFile = ShellFile.FromFilePath(dummyPath);
+                    FileImg.Source = shellFile.Thumbnail.SmallBitmapSource;
+                    File.Delete(dummyPath);
+                }
+
             }
         }
 
@@ -78,7 +100,7 @@ namespace Foco.controls
 
         private void OnAttachmentEditedCallback(InputState inputState, string title, string link)
         {
-            if(inputState == InputState.Save)
+            if (inputState == InputState.Save)
             {
                 attachment.Title = title;
                 attachment.Link = link;
@@ -94,7 +116,7 @@ namespace Foco.controls
 
         private void OnAttachmentDeletedCallback(ConfirmState confirmState)
         {
-            if(confirmState == ConfirmState.YES)
+            if (confirmState == ConfirmState.YES)
             {
                 taskDetailsControl.DeleteAttachment(attachment);
             }

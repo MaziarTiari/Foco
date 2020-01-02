@@ -31,11 +31,7 @@ namespace Foco.controls
             allowEditing = true;
         }
 
-        private void OnDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            BeginEditing();
-        }
-
+        // Beginnt das Editieren
         public void BeginEditing()
         {
             if (!isEditing && allowEditing)
@@ -43,20 +39,25 @@ namespace Foco.controls
                 EditRow.Height = new GridLength(1, GridUnitType.Star);
                 LabelRow.Height = new GridLength(0);
                 EditTextBox.Text = EditLabel.Text;
-                EditTextBox.Focus();
-                EditTextBox.SelectAll();
-                isEditing = true;
 
                 // Workaround fuer den Fokus der Textbox (von stackoverflow.com):
                 // https://stackoverflow.com/questions/13955340/keyboard-focus-does-not-work-on-text-box-in-wpf
-                Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() => EditTextBox.Focus()));
+                Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() => _BeginEditingThread())); ;
+
+                void _BeginEditingThread()
+                {
+                    EditTextBox.Focus();
+                    EditTextBox.SelectAll();
+                    isEditing = true;
+                }
 
             }
         }
 
-        private void OnKeyDown(object sender, KeyEventArgs e)
+        // beendet das Editieren und ruft das Callback auf
+        public void EndEditing()
         {
-            if (e.Key == Key.Enter && isEditing && !Keyboard.IsKeyDown(Key.LeftShift) && !Keyboard.IsKeyDown(Key.RightShift))
+            if (isEditing)
             {
                 EditRow.Height = new GridLength(0);
                 LabelRow.Height = new GridLength(1, GridUnitType.Star);
@@ -65,6 +66,25 @@ namespace Foco.controls
                 if (editedCallback != null)
                     editedCallback(EditLabel.Text);
             }
+        }
+
+        // Doppelklick beginnt das Editieren
+        private void OnDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BeginEditing();
+        }
+
+        // Fokusverlust beendet das Editieren
+        private void OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            EndEditing();
+        }
+
+        // Enter (ohne Shift) beendet das Editieren
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter && isEditing && !Keyboard.IsKeyDown(Key.LeftShift) && !Keyboard.IsKeyDown(Key.RightShift))
+                EndEditing();
         }
 
     }

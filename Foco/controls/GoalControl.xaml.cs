@@ -56,6 +56,7 @@ namespace Foco.ui
         // Benutzer hat auf Editieren geklickt
         private void OnEditClicked(object sender, RoutedEventArgs e)
         {
+
             InputWindow inputWindow = new InputWindow("Ziel bearbeiten", "Name:", goal.Title, EditedCallback, false);
             inputWindow.ShowDialog();
         }
@@ -75,6 +76,7 @@ namespace Foco.ui
         {
             if (goal == null)
             {
+
                 InputWindow inputWindow = new InputWindow("Ziel erstellen", "Name:", "", CreatedCallback, false);
                 inputWindow.ShowDialog();
             }

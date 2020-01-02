@@ -14,6 +14,6 @@
             <RowDefinition Name="EditRow" Height="0"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Name="EditLabel" TextWrapping="Wrap"></TextBlock>
-        <TextBox Grid.Row="1" Grid.Column="0" Name="EditTextBox" TextWrapping="Wrap" PreviewKeyDown="OnKeyDown" AcceptsReturn="True"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="0" Name="EditTextBox" TextWrapping="Wrap" PreviewKeyDown="OnKeyDown" LostFocus="OnLostFocus" AcceptsReturn="True"></TextBox>
     </Grid>
 </UserControl>

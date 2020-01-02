@@ -8,9 +8,9 @@
         Title="Confirm Title" ResizeMode="NoResize" ShowInTaskbar="False" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow" >
 
     <DockPanel Width="300">
-        <TextBlock DockPanel.Dock="Top" Name="Message" TextWrapping="Wrap" Text="Confirm Message" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="280"/>
-        <Button DockPanel.Dock="Right" Content="Ja" Tag="Yes" HorizontalAlignment="Right" Margin="5" Width="70" Height="26" Click="OnButtonClicked"/>
-        <Button DockPanel.Dock="Right" Content="Nein" Tag="No" HorizontalAlignment="Right" Width="70" Height="26" Click="OnButtonClicked"/>
+        <TextBlock DockPanel.Dock="Top" x:Name="Message" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="280" FontFamily="Century Gothic"><Run Text="Confirm Message"/></TextBlock>
+        <Button DockPanel.Dock="Right" Content="Ja" Tag="Yes" HorizontalAlignment="Right" Margin="5" Width="70" Height="26" Click="OnButtonClicked" FontFamily="Century Gothic"/>
+        <Button DockPanel.Dock="Right" Content="Nein" Tag="No" HorizontalAlignment="Right" Width="70" Height="26" Click="OnButtonClicked" FontFamily="Century Gothic"/>
     </DockPanel>
 
 </Window>

@@ -35,7 +35,7 @@
             </Border>
 
             <!-- Inhalt -->
-            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden" Name="TaskgroupStackScroll">
                 <StackPanel Name="TaskgroupStack" Background="LightGray" MouseLeftButtonDown="OnMouseLeftButtonDown" DragOver="OnDragOver" Drop="OnDrop" AllowDrop="True"/>
             </ScrollViewer>
             
