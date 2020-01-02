@@ -51,29 +51,29 @@ namespace Foco.models
         private void Update()
         {
             DateTime date = new DateTime(year, month, 1);
-            int firstDayOfMonthIndex = date.DayOfWeek.GetHashCode();
+            int firstDayOfMonthIndex = date.DayOfWeek.GetHashCode(); // Check with which day of the Week selected month starts
             int daysInMonth = DateTime.DaysInMonth(year, month);
             int daysInLastMonth = DateTime.DaysInMonth( year, LastMonth() );
-            int daysFromMonthBefore = daysInLastMonth;
+            int daysShowingFromMonthBefore = daysInLastMonth;
 
-            for (int i = 0; i < Days.Length; i++)
+            for (int i = 0; i < Days.Length; i++) // Calender has 7 columns and 6 rows which means 42 days to show
             {
-                if (i == 0 && firstDayOfMonthIndex > i)
-                    daysFromMonthBefore = daysInLastMonth - firstDayOfMonthIndex;
-                if (daysFromMonthBefore < daysInLastMonth)
+                if (i == 0 && firstDayOfMonthIndex > i) // if first day of the month is not a sunday
+                    daysShowingFromMonthBefore = daysInLastMonth - firstDayOfMonthIndex; // check how many days to show from last month
+                if (daysShowingFromMonthBefore < daysInLastMonth) // continue with days from last month till we reach end of the last month
                 {
-                    daysFromMonthBefore++;
+                    daysShowingFromMonthBefore++;
                     if(Month == 1)
-                        SetDay(i, new DateTime(Year -1, LastMonth() ,daysFromMonthBefore));
+                        SetDay(i, new DateTime(Year -1, LastMonth() ,daysShowingFromMonthBefore));
                     else
-                        SetDay(i, new DateTime(Year - 1, LastMonth(), daysFromMonthBefore));
+                        SetDay(i, new DateTime(Year, LastMonth(), daysShowingFromMonthBefore));
                     Days[i].FromSelectedMonth = false;
                 }
                 else
                 {
-                    if (i < daysInMonth + firstDayOfMonthIndex) // days for selected month
+                    if (i < daysInMonth + firstDayOfMonthIndex) // set days for selected month
                         SetDay( i, new DateTime(Year, Month, (i + 1 - firstDayOfMonthIndex)) );
-                    else // days are for the month after
+                    else // set days for the month after
                     {
                         if(Month == 12)
                             SetDay( i, new DateTime(Year + 1, NextMonth(), ((i + 1 - firstDayOfMonthIndex) % daysInMonth) ) );
@@ -87,7 +87,6 @@ namespace Foco.models
 
         private void SetDay(int index, DateTime date)
         {
-            //MessageBox.Show(Convert.ToString(Deadlines.Count));
             Days[index] = new CalenderDay(date);
             if (Deadlines.Count < 1)
                 return;
@@ -96,7 +95,6 @@ namespace Foco.models
                 if ( deadline.Date == Days[index].Date && !(Days[index].Appointments.Contains(deadline.Title)) )
                 {
                     Days[index].Appointments.Add(deadline.Title);
-                    //MessageBox.Show(deadline.Title);
                 }
             }
         }

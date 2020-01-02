@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Foco.pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,12 +21,21 @@ namespace Foco.controls
     /// </summary>
     public partial class CalenderDayControl : UserControl
     {
-        public CalenderDayControl(int date)
+        private CalenderPage CalenderPage;
+        public CalenderDayControl(int date, CalenderPage calenderPage)
         {
             InitializeComponent();
 
             Date.Text = Convert.ToString(date);
             
         }
+
+        public CalenderPage CalenderPage1 { get => CalenderPage; set => CalenderPage = value; }
+    
+        public void CreateNewTaskgroup(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

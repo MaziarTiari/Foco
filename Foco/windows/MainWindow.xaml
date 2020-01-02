@@ -13,7 +13,7 @@
             <Grid>
                 <Button Name="Home" Tag="Home" Width="55" Height="55" Margin="10,10,730,10" Click="OnMenuButtonClick">Home</Button>
                 <Button Name="Board" Tag="Board" Width="55" Height="55" Visibility="Hidden" Margin="307,10,432.6,10.2" Click="OnMenuButtonClick">Board</Button>
-                <Button Name="Calender"  Tag="Calendar" Width="55" Height="55" Visibility="Hidden" Margin="366,10,373.6,10.2" Click="OnMenuButtonClick">Calendar</Button>
+                <Button Name="Calender"  Tag="Calender" Width="55" Height="55" Visibility="Hidden" Margin="366,10,373.6,10.2" Click="OnMenuButtonClick">Calendar</Button>
                 <Button Name="List" Tag="List" Width="55" Height="55" Visibility="Hidden" Margin="425,10,314.6,10.2" Click="OnMenuButtonClick">List</Button>
             </Grid>
         </Border>

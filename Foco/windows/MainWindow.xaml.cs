@@ -15,7 +15,7 @@ namespace Foco
         private readonly HomePage homePage;
         private readonly BoardPage boardPage;
         private readonly ListPage listPage;
-        private readonly CalendarPage calendarPage;
+        private readonly CalenderPage calendarPage;
         private readonly TaskgroupPage taskgroupPage;
         private readonly List<Goal> goals;
 
@@ -23,7 +23,7 @@ namespace Foco
         public HomePage HomePage => homePage;
         public BoardPage BoardPage => boardPage;
         public ListPage ListPage => listPage;
-        public CalendarPage CalendarPage => calendarPage;
+        public CalenderPage CalenderPage => calendarPage;
 
         public MainWindow(List<Goal> goals)
         {
@@ -32,7 +32,7 @@ namespace Foco
             homePage = new HomePage(this);
             boardPage = new BoardPage(this);
             listPage = new ListPage(this);
-            calendarPage = new CalendarPage(this);
+            calendarPage = new CalenderPage(this);
             taskgroupPage = new TaskgroupPage(null);
             PageFrame.Content = HomePage;
         }
@@ -41,7 +41,7 @@ namespace Foco
         {
             BoardPage.Project = project;
             ListPage.Project = project;
-            CalendarPage.Project = project;
+            CalenderPage.Project = project;
             PageFrame.Content = BoardPage; // default Ansicht
             List.Visibility = Visibility.Visible;
             Board.Visibility = Visibility.Visible;
@@ -75,9 +75,10 @@ namespace Foco
                     ListPage.Update();
                     PageFrame.Content = ListPage;
                     break;
-                case "Calendar":
-                    CalendarPage.Update();
-                    PageFrame.Content = CalendarPage;
+                case "Calender":
+                    CalenderPage.setCurrentDate();
+                    CalenderPage.Update();
+                    PageFrame.Content = CalenderPage;
                     break;
             }
         }

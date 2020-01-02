@@ -11,7 +11,7 @@ namespace Foco.pages
     /// <summary>
     /// Interaktionslogik für CalendarPage.xaml
     /// </summary>
-    public partial class CalendarPage : Page
+    public partial class CalenderPage : Page
     {
         private readonly MainWindow mainWindow;
         private List<Deadline> deadlines = new List<Deadline>();
@@ -19,7 +19,7 @@ namespace Foco.pages
         private Project project;
         private readonly DateTime today = DateTime.Today;
 
-        public CalendarPage(MainWindow mainWindow)
+        public CalenderPage(MainWindow mainWindow)
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
@@ -56,14 +56,14 @@ namespace Foco.pages
             {
                 for (int c = 0; c < 7; c++)
                 {
-                    CalenderDayControl dayControl = new CalenderDayControl(days[i].Date.Day);
+                    CalenderDayControl dayControl = new CalenderDayControl(days[i].Date.Day, this);
                     foreach(string appointment in days[i].Appointments)
                     {
                         TextBlock tb = new TextBlock();
                         tb.Text = appointment;
                         dayControl.AppointmentContainer.Children.Add(tb) ;
                     }
-                    if(days[i].Date < Today)
+                    if( DateTime.Compare(days[i].Date, Today) < 0 )
                     {
                         SetViewForPastDays(dayControl);
                     }
@@ -80,6 +80,12 @@ namespace Foco.pages
                     i++;
                 }
             }
+        }
+
+        public void setCurrentDate()
+        {
+            CalenderMonth.Year = Today.Year;
+            CalenderMonth.Month = Today.Month;
         }
 
         // Show the month and year the Calender is showing

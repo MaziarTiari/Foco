@@ -125,8 +125,8 @@
     <Compile Include="pages\BoardPage.xaml.cs">
       <DependentUpon>BoardPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="pages\CalendarPage.xaml.cs">
-      <DependentUpon>CalendarPage.xaml</DependentUpon>
+    <Compile Include="pages\CalenderPage.xaml.cs">
+      <DependentUpon>CalenderPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -218,7 +218,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="pages\CalendarPage.xaml">
+    <Page Include="pages\CalenderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
