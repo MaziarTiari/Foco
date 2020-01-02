@@ -8,10 +8,23 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HomePage">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Name="HomeStackpanel" Orientation="Vertical">
+    <Grid>
 
-        </StackPanel>
-    </ScrollViewer>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.Column="0" FontSize="20" Width="160" Height="35" Content="Ziel hinzufügen" Margin="0,0,10,0" FontFamily="Century Gothic" Click="OnAddGoalClicked">
+            <Button.LayoutTransform>
+                <RotateTransform Angle="90"/>
+            </Button.LayoutTransform>
+        </Button>
+        
+        <ScrollViewer Name="HomeScrollViewer" Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Name="HomeStackpanel" Orientation="Vertical"/>
+        </ScrollViewer>
+
+    </Grid>
 
 </Page>

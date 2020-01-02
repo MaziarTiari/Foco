@@ -4,18 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Foco.ui"
+             xmlns:controls="clr-namespace:Foco.controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
     <StackPanel Margin="10">
         <StackPanel Orientation="Horizontal" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave">
-            <Label x:Name="NameLabel" FontSize="30" MouseLeftButtonDown="OnGoalClick" FontFamily="Century Gothic" VerticalAlignment="Top">Ziel</Label>
-            <Button x:Name="EditButton" Width="40" Height="40" Click="OnEditClicked" Style="{StaticResource IconButtonStyle}">
-                <Image Height="30" Source="/icons/icons8-edit-file-80.png" Stretch="Fill" Width="30"/>
-            </Button>
+            
+            <controls:EditableLabel x:Name="NameLabel" FontSize="32" FontFamily="Century Gothic" VerticalAlignment="Top" Text="Ziel" EditedCallbackFunction="OnLabelEdited"></controls:EditableLabel>
+            
             <Button x:Name="DeleteButton" Width="40" Height="40" Click="OnDeleteClicked" Style="{StaticResource IconButtonStyle}">
-                <Image Height="30" Source="/icons/icons8-delete-bin-96.png" Stretch="Fill" Width="30"/>
+                <Image Height="40" Source="/icons/icons8-delete-bin-96.png" Stretch="Fill" Width="40"/>
             </Button>
+            
         </StackPanel>
         <WrapPanel Name="ProjectWrap" Orientation="Horizontal"></WrapPanel>
     </StackPanel>

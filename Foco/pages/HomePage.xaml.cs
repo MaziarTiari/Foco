@@ -1,6 +1,7 @@
 ﻿using Foco.models;
 using Foco.ui;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Foco.pages
@@ -31,8 +32,22 @@ namespace Foco.pages
                 GoalControl goalControl = new GoalControl(this, goal);
                 HomeStackpanel.Children.Add(goalControl);
             }
-            HomeStackpanel.Children.Add(new GoalControl(this));
         }
+
+        private void OnAddGoalClicked(object sender, RoutedEventArgs e)
+        {
+            string title = "Neues Ziel";
+            int i = 1;
+            while (Goals.Exists(x => x.Title == title))
+                title = title.Split(' ')[0] + " " + title.Split(' ')[1] + " " + (++i);
+            Goal goal = new Goal(title);
+            GoalControl goalControl = new GoalControl(this, goal);
+            HomeStackpanel.Children.Add(goalControl);
+            Goals.Add(goal);
+            goalControl.NameLabel.BeginEditing();
+            HomeScrollViewer.ScrollToBottom();
+        }
+
     }
  }
 
