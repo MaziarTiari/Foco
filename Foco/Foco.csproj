@@ -37,7 +37,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Foco.ico</ApplicationIcon>
+    <ApplicationIcon>icons\Foco.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Data.Sqlite, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
@@ -203,40 +203,46 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="icons\Foco.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\icons8-delete-bin-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\icons8-edit-file-80.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\icons8-home-page-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\icons8-planner-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\icons8-prototype-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\icons8-todo-list-96.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Foco.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Home_16x.png" />
+    <Resource Include="icons8-delete-bin-96.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="TestCoveredPassing_16x.png" />
+    <Resource Include="icons8-edit-file-80.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="TestCoveredFailing_16x.png" />
+    <Resource Include="icons8-home-page-100.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ListView_16x_32.bmp" />
+    <Resource Include="icons8-planner-96.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Calendar_16x.png" />
+    <Resource Include="icons8-prototype-96.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="DataCollection_16x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="TrueFalse_16x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="OnTaskDeleted_16x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Edit_16x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="TaskComplete_16x_24.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Task_16x.png" />
+    <Resource Include="icons8-todo-list-96.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.2.0.0\build\net461\SQLitePCLRaw.lib.e_sqlite3.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.2.0.0\build\net461\SQLitePCLRaw.lib.e_sqlite3.targets')" />

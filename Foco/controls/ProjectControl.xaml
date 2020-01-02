@@ -11,11 +11,11 @@
             <Label DockPanel.Dock="Top" Height="32" FontSize="16" FontWeight="Bold" Name="NameLabel" FontFamily="Century Gothic">Musterprojekt</Label>
             <Label DockPanel.Dock="Top" Height="30" FontSize="14" Name="TasksLabel" FontFamily="Century Gothic">0 / 3 Aufgaben</Label>
             <StackPanel DockPanel.Dock="Bottom" Height="38" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="EditButton" Width="39" Click="OnEditClicked" Margin="0,1,0,4">
-                    <Image x:Name="___Foco_component_Edit_16x_png" Height="10" Source="/Foco;component/Edit_16x.png" Stretch="Fill" Width="10"/>
+                <Button x:Name="EditButton" Width="39" Click="OnEditClicked" Margin="0,1,0,4" Background="Transparent" BorderThickness="0" BorderBrush="Transparent">
+                    <Image Height="23" Source="/Foco;component/icons8-edit-file-80.png" Stretch="Fill" Width="22"/>
                 </Button>
-                <Button x:Name="DeleteButton" Width="39" Click="OnDeleteClicked" Margin="0,1,0,4">
-                    <Image x:Name="___Foco_component_OnTaskDeleted_16x_png" Height="10" Source="/Foco;component/OnTaskDeleted_16x.png" Stretch="Fill" Width="10"/>
+                <Button x:Name="DeleteButton" Width="39" Click="OnDeleteClicked" Margin="0,1,0,4" Background="Transparent" BorderThickness="0" BorderBrush="Transparent">
+                    <Image Height="23" Source="/Foco;component/icons8-delete-bin-96.png" Stretch="Fill" Width="23"/>
                 </Button>
             </StackPanel>
         </DockPanel>

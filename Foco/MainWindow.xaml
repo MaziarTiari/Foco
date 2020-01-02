@@ -9,24 +9,29 @@
     <DockPanel>
 
         <!-- Menüleiste -->
-        <Border DockPanel.Dock="Top" Height="75" Background="Black">
+        <Border DockPanel.Dock="Top" Height="75" Background="Black" >
+            <Border.Resources>
+                <Style TargetType="Image">
+                    <Setter Property="Height" Value="45"/>
+                </Style>
+            </Border.Resources>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="133*"/>
                     <ColumnDefinition Width="79*"/>
                     <ColumnDefinition Width="580*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="___Home_" Tag="Home" Width="60" Height="55" Margin="10,10,63,10" Click="OnMenuButtonClick" FontFamily="Century Gothic" FontSize="15">
-                    <Image x:Name="Home_16x_png" Height="30" Source="Home_16x.png" Stretch="Fill" Width="30"/>
+                <Button x:Name="___Home_" Tag="Home" Width="60" Height="55" Margin="10,10,63,10" Background="Transparent" BorderThickness="0" BorderBrush="Transparent" Click="OnMenuButtonClick" FontFamily="Century Gothic" FontSize="15">
+                    <Image Height="45" Source="icons8-home-page-100.png" Stretch="Fill" Width="50"/>
                 </Button>
                 <Button x:Name="Boards" Tag="Board" Height="55"  Margin="61,10,429,10" Click="OnMenuButtonClick" Grid.Column="2" FontFamily="Century Gothic" FontSize="15">
-                    <Image x:Name="DataCollection_16x_png" Height="30" Source="DataCollection_16x.png" Stretch="Fill" Width="30"/>
+                    <Image Height="45" Source="icons8-prototype-96.png" Stretch="Fill" Width="52"/>
                 </Button>
                 <Button x:Name="Calendar" Tag="Calendar" Height="55"  Margin="154,10,337,10" Click="OnMenuButtonClick" Grid.Column="2" FontFamily="Century Gothic" FontSize="15" Width="90">
-                    <Image x:Name="Calendar_16x_png" Height="30" Source="Calendar_16x.png" Stretch="Fill" Width="30"/>
+                    <Image Height="45" Source="icons8-planner-96.png" Stretch="Fill" Width="56"/>
                 </Button>
                 <Button x:Name="List" Tag="List" Width="90" Height="55"  Margin="248,10,242,10" Click="OnMenuButtonClick" Grid.Column="2" FontFamily="Century Gothic" FontSize="15">
-                    <Image x:Name="ListView_16x_32_bmp" Height="30" Source="ListView_16x_32.bmp" Stretch="Fill" Width="30"/>
+                    <Image Height="45" Source="icons8-todo-list-96.png" Stretch="Fill" Width="53"/>
                 </Button>
             </Grid>
         </Border>

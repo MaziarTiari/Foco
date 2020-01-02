@@ -10,11 +10,11 @@
     <StackPanel Margin="10">
         <StackPanel Orientation="Horizontal" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave">
             <Label x:Name="NameLabel" FontSize="30" MouseLeftButtonDown="OnGoalClick" FontFamily="Century Gothic" VerticalAlignment="Top" Width="60" Height="40">Ziel</Label>
-            <Button x:Name="EditButton" Width="40" Height="40" Click="OnEditClicked" FontFamily="Century Gothic">
-                <Image x:Name="___Foco_component_Edit_16x_png" Height="15" Source="/Foco;component/Edit_16x.png" Stretch="Fill" Width="15"/>
+            <Button x:Name="EditButton" Width="40" Height="40" Click="OnEditClicked" Background="Transparent" BorderThickness="0" BorderBrush="Transparent" FontFamily="Century Gothic">
+                <Image Height="30" Source="/Foco;component/icons8-edit-file-80.png" Stretch="Fill" Width="30"/>
             </Button>
-            <Button x:Name="DeleteButton" Width="40" Height="40" Click="OnDeleteClicked" FontFamily="Century Gothic">
-                <Image x:Name="___Foco_component_OnTaskDeleted_16x_png" Height="15" Source="/Foco;component/OnTaskDeleted_16x.png" Stretch="Fill" Width="15"/>
+            <Button x:Name="DeleteButton" Width="40" Height="40" Click="OnDeleteClicked" Background="Transparent" BorderThickness="0" BorderBrush="Transparent" FontFamily="Century Gothic">
+                <Image Height="30" Source="/Foco;component/icons8-delete-bin-96.png" Stretch="Fill" Width="30"/>
             </Button>
         </StackPanel>
         <WrapPanel Name="ProjectWrap" Orientation="Horizontal"></WrapPanel>

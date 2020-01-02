@@ -8,9 +8,7 @@
         Title="Confirm Title" ResizeMode="NoResize" ShowInTaskbar="False" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow" >
 
     <DockPanel Width="300">
-        <TextBlock DockPanel.Dock="Top" x:Name="Message" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="280" FontFamily="Century Gothic"><Run Text="Confirm Message"/><InlineUIContainer>
-                <Image x:Name="___Foco_component_TrueFalse_16x_png" Height="10" Source="/Foco;component/TrueFalse_16x.png" Stretch="Fill" Width="10" RenderTransformOrigin="2.253,0.767"/>
-            </InlineUIContainer></TextBlock>
+        <TextBlock DockPanel.Dock="Top" x:Name="Message" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="280" FontFamily="Century Gothic"><Run Text="Confirm Message"/></TextBlock>
         <Button DockPanel.Dock="Right" Content="Ja" Tag="Yes" HorizontalAlignment="Right" Margin="5" Width="70" Height="26" Click="OnButtonClicked" FontFamily="Century Gothic"/>
         <Button DockPanel.Dock="Right" Content="Nein" Tag="No" HorizontalAlignment="Right" Width="70" Height="26" Click="OnButtonClicked" FontFamily="Century Gothic"/>
     </DockPanel>
