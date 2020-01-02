@@ -10,10 +10,10 @@
     <StackPanel Margin="10">
         <StackPanel Orientation="Horizontal" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave">
             <Label x:Name="NameLabel" FontSize="30" MouseLeftButtonDown="OnGoalClick" FontFamily="Century Gothic" VerticalAlignment="Top">Ziel</Label>
-            <Button x:Name="EditButton" Width="40" Height="40" Click="OnEditClicked" Background="Transparent" BorderThickness="0" BorderBrush="Transparent" FontFamily="Century Gothic">
+            <Button x:Name="EditButton" Width="40" Height="40" Click="OnEditClicked" Style="{StaticResource IconButtonStyle}">
                 <Image Height="30" Source="/icons/icons8-edit-file-80.png" Stretch="Fill" Width="30"/>
             </Button>
-            <Button x:Name="DeleteButton" Width="40" Height="40" Click="OnDeleteClicked" Background="Transparent" BorderThickness="0" BorderBrush="Transparent" FontFamily="Century Gothic">
+            <Button x:Name="DeleteButton" Width="40" Height="40" Click="OnDeleteClicked" Style="{StaticResource IconButtonStyle}">
                 <Image Height="30" Source="/icons/icons8-delete-bin-96.png" Stretch="Fill" Width="30"/>
             </Button>
         </StackPanel>
