@@ -43,6 +43,7 @@ namespace Foco
             boardPage.Project = project;
             ListPage.Project = project;
             PageFrame.Content = BoardPage; // default Ansicht
+            DrawButtonBorder(BoardBorder);
             MenuGrid.Visibility = Visibility.Visible;
         }
 
@@ -66,15 +67,27 @@ namespace Foco
                 case "Board":
                     BoardPage.Update();
                     PageFrame.Content = BoardPage;
+                    DrawButtonBorder(BoardBorder);
                     break;
                 case "List":
                     ListPage.Update();
                     PageFrame.Content = ListPage;
+                    DrawButtonBorder(ListBorder);
                     break;
                 case "Calendar":
                     PageFrame.Content = CalendarPage;
+                    DrawButtonBorder(CalendarBorder);
                     break;
             }
+        }
+
+        // zeichnet den Border um den Button der aktiven Sicht
+        private void DrawButtonBorder(Border border)
+        {
+            BoardBorder.BorderThickness = new Thickness(0);
+            ListBorder.BorderThickness = new Thickness(0);
+            CalendarBorder.BorderThickness = new Thickness(0);
+            border.BorderThickness = new Thickness(2);
         }
 
     }
