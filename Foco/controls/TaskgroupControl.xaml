@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="Foco.ui.TaskgroupControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Foco.ui"
+             xmlns:controls="clr-namespace:Foco.controls"
+             mc:Ignorable="d" Width="425" Height="480" VerticalAlignment="Top" HorizontalAlignment="Center">
+
+    <Border Margin="10" CornerRadius="5" BorderThickness="3" Background="#F9F9F9" BorderBrush="Black">
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.Resources>
+                <Style TargetType="ComboBox">
+                    <Setter Property="FontSize" Value="12"></Setter>
+                </Style>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="FontSize" Value="12"></Setter>
+                </Style>
+            </Grid.Resources>
+
+            <!-- Reihe 0: Titel -->
+            <!--<Label Name="TaskgroupHeader" Width="Auto" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0" FontWeight="Bold" FontSize="16" MouseLeftButtonDown="OnTaskgroupClicked">Titel</Label>-->
+            <controls:EditableLabel Grid.Row="0" x:Name="TaskgroupHeader" Width="Auto" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0" FontWeight="Bold" FontSize="16" Text="Titel" EditedCallbackFunction="OnLabelEdited" AllowNewLine="False" MaxLength="50"></controls:EditableLabel>
+
+            <!-- Reihe 1: Combo, Combo, Date, Button -->
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <ComboBox Height="25" Width="105" Margin="5,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="OnStatusComboChanged" Name="StateCombo">
+                    <ComboBoxItem>Warteschlange</ComboBoxItem>
+                    <ComboBoxItem>In Bearbeitung</ComboBoxItem>
+                    <ComboBoxItem>Abgeschlossen</ComboBoxItem>
+                </ComboBox>
+                <ComboBox Height="25" Width="105" Margin="5,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="OnPrioComboChanged" Name="PrioCombo">
+                    <ComboBoxItem>Niedrig</ComboBoxItem>
+                    <ComboBoxItem>Normal</ComboBoxItem>
+                    <ComboBoxItem>Hoch</ComboBoxItem>
+                </ComboBox>
+                <DatePicker Height="25" Margin="5,0,0,0" Width="105" Name="DeadlinePicker" SelectedDateChanged="OnDeadlinePickerChanged"></DatePicker>
+                <Button Margin="5,0,0,0" Height="25" Width="25" Click="OnInfoClicked">I</Button>
+                <Button Margin="5,0,0,0" Height="25" Width="25" Click="OnDeleteClicked">D</Button>
+            </StackPanel>
+
+            <!-- Reihe 2: Tasks -->
+            <ScrollViewer Grid.Row="2" Name="TaskContainerScroll" Margin="10" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
+                <StackPanel Name="TaskContainer" Width="360">
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Reihe 3: Neuer Task -->
+            <Grid Grid.Row="3" Width="Auto">
+                <TextBox x:Name="TaskCreateEditor" Margin="0, 0, 0, 10" TextWrapping="Wrap" HorizontalAlignment="Center" Width="380" MinHeight="20" AcceptsReturn="True" PreviewKeyDown="TaskEditorPreviewKeyDown"/>
+                <TextBlock IsHitTestVisible="False" Text="Neue Aufgabe" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,0,0,10" Foreground="DarkGray">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=TaskCreateEditor}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+
+        </Grid>
+    </Border>
+</UserControl>

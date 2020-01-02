@@ -14,14 +14,13 @@ namespace Foco.sqlite
         private const string INSERT_PROJECT = "INSERT INTO Project(title, color, goal_id) VALUES ('{0}', '{1}', {2})";
         private const string INSERT_TASKGROUP = "INSERT INTO Taskgroup(title, project_id, state_id, priority_id, deadline) VALUES ('{0}', {1}, {2}, {3}, {4})";
         private const string INSERT_TASK = "INSERT INTO Task(title, description, done, taskgroup_id) VALUES ('{0}', '{1}', {2}, {3})";
-        private const string INSERT_ATTACHMENT = "INSERT INTO Attachment(title, content, type_id, task_id, taskgroup_id, date) VALUES ('{0}', '{1}', {2}, {3}, {4}, {5})";
+        private const string INSERT_ATTACHMENT = "INSERT INTO Attachment(title, link, task_id) VALUES ('{0}', '{1}', {2})";
         private const string SELECT_LAST_ID = "SELECT LAST_INSERT_ROWID()";
         private const string SELECT_GOAL = "SELECT id, title FROM Goal";
         private const string SELECT_PROJECT = "SELECT id, title, color FROM Project WHERE goal_id = {0}";
         private const string SELECT_TASKGROUP = "SELECT id, title, deadline, state_id, priority_id FROM Taskgroup WHERE project_id = {0}";
         private const string SELECT_TASK = "SELECT id, title, description, done FROM Task WHERE taskgroup_id = {0}";
-        private const string SELECT_TASK_ATTACHMENT = "SELECT id, title, content, type_id, date FROM Attachment WHERE task_id = {0}";
-        private const string SELECT_TASKGROUP_ATTACHMENT = "SELECT id, title, content, type_id, date FROM Attachment WHERE taskgroup_id = {0}";
+        private const string SELECT_ATTACHMENT = "SELECT id, title, link FROM Attachment WHERE task_id = {0}";
         private const string FIRST_SETUP = @"
             CREATE TABLE IF NOT EXISTS State(
                 id INTEGER NOT NULL,
@@ -31,11 +30,6 @@ namespace Foco.sqlite
             CREATE TABLE IF NOT EXISTS Priority(
         	    id INTEGER NOT NULL,
         	    bez TEXT NOT NULL,
-        	    PRIMARY KEY(id)
-            );
-            CREATE TABLE IF NOT EXISTS AttachmentType(
-        	    id INTEGER NOT NULL,
-        	    type TEXT NOT NULL,
         	    PRIMARY KEY(id)
             );
             CREATE TABLE IF NOT EXISTS Goal(
@@ -74,19 +68,12 @@ namespace Foco.sqlite
             );
             CREATE TABLE IF NOT EXISTS Attachment(
 	            id INTEGER NOT NULL,
-	            taskgroup_id INTEGER,
-	            task_id INTEGER,
+	            task_id INTEGER NOT NULL,
                 title TEXT,
-                date DATETIME,
-	            content TEXT NOT NULL,
-	            type_id INTEGER NOT NULL,
+	            link TEXT NOT NULL,
 	            PRIMARY KEY(id),
-	            FOREIGN KEY(taskgroup_id) REFERENCES TaskGroup(id) ON DELETE CASCADE,
-	            FOREIGN KEY(task_id) REFERENCES Task(id) ON DELETE CASCADE,
-                FOREIGN KEY(type_id) REFERENCES AttachmentType(id) ON DELETE CASCADE	
+	            FOREIGN KEY(task_id) REFERENCES Task(id) ON DELETE CASCADE
             );
-            INSERT INTO AttachmentType(id, type) SELECT 0, 'Link'    WHERE NOT EXISTS (SELECT * FROM AttachmentType WHERE id = 0);
-            INSERT INTO AttachmentType(id, type) SELECT 1, 'Comment' WHERE NOT EXISTS (SELECT * FROM AttachmentType WHERE id = 1);
             INSERT INTO Priority(id, bez) SELECT 0, 'Low'  WHERE NOT EXISTS (SELECT * FROM Priority WHERE id = 0);
             INSERT INTO Priority(id, bez) SELECT 1, 'Mid'  WHERE NOT EXISTS (SELECT * FROM Priority WHERE id = 1);
             INSERT INTO Priority(id, bez) SELECT 2, 'High' WHERE NOT EXISTS (SELECT * FROM Priority WHERE id = 2);
@@ -213,51 +200,21 @@ namespace Foco.sqlite
                                 task.Done = taskReader.GetBoolean(3);
                                 taskgroup.Tasks.Add(task);
 
-                                SqliteCommand taskAttachmentCommand = new SqliteCommand(string.Format(SELECT_TASK_ATTACHMENT, taskId), sqliteConnection);
-                                SqliteDataReader taskAttachmentReader = taskAttachmentCommand.ExecuteReader();
+                                SqliteCommand attachmentCommand = new SqliteCommand(string.Format(SELECT_ATTACHMENT, taskId), sqliteConnection);
+                                SqliteDataReader attachmentReader = attachmentCommand.ExecuteReader();
 
-                                while (taskAttachmentReader.Read())
+                                while (attachmentReader.Read())
                                 {
-                                    long taskAttachmentId = taskAttachmentReader.GetInt64(0);
-                                    Attachment attachment = null;
-                                    switch ((AttachmentType)taskAttachmentReader.GetInt32(3))
-                                    {
-                                        case AttachmentType.Comment:
-                                            attachment = new CommentAttachment(taskAttachmentReader.GetString(2), DateTime.Parse(taskAttachmentReader.GetString(4)));
-                                            break;
-                                        case AttachmentType.Link:
-                                            attachment = new LinkAttachment(taskAttachmentReader.GetString(1), taskAttachmentReader.GetString(2));
-                                            break;
-                                    }
+                                    long taskAttachmentId = attachmentReader.GetInt64(0);
+                                    Attachment attachment = new Attachment(attachmentReader.GetString(1), attachmentReader.GetString(2));
                                     task.Attachments.Add(attachment);
                                 }
 
-                                taskAttachmentReader.Close();
+                                attachmentReader.Close();
 
                             }
 
                             taskReader.Close();
-
-                            SqliteCommand taskgroupAttachmentCommand = new SqliteCommand(string.Format(SELECT_TASKGROUP_ATTACHMENT, taskgroupId), sqliteConnection);
-                            SqliteDataReader taskgroupAttachmentReader = taskgroupAttachmentCommand.ExecuteReader();
-
-                            while (taskgroupAttachmentReader.Read())
-                            {
-                                long taskgroupAttachmentId = taskgroupAttachmentReader.GetInt64(0);
-                                Attachment attachment = null;
-                                switch ((AttachmentType)taskgroupAttachmentReader.GetInt32(3))
-                                {
-                                    case AttachmentType.Comment:
-                                        attachment = new CommentAttachment(taskgroupAttachmentReader.GetString(2), DateTime.Parse(taskgroupAttachmentReader.GetString(4)));
-                                        break;
-                                    case AttachmentType.Link:
-                                        attachment = new LinkAttachment(taskgroupAttachmentReader.GetString(1), taskgroupAttachmentReader.GetString(2));
-                                        break;
-                                }
-                                taskgroup.Attachments.Add(attachment);
-                            }
-
-                            taskgroupAttachmentReader.Close();
 
                         }
 
@@ -291,73 +248,74 @@ namespace Foco.sqlite
         public bool SaveAll(List<Goal> goals)
         {
 
-            SqliteCommand sqliteCommand = new SqliteCommand();
-            sqliteCommand.Connection = sqliteConnection;
-            sqliteCommand.Transaction = sqliteConnection.BeginTransaction();
-
             try
             {
 
-                sqliteCommand.CommandText = DELETE_ALL;
-                sqliteCommand.ExecuteNonQuery();
+                SqliteCommand sqliteCommand = new SqliteCommand();
+                sqliteCommand.Connection = sqliteConnection;
+                sqliteCommand.Transaction = sqliteConnection.BeginTransaction();
 
-                foreach (Goal goal in goals)
+                try
                 {
 
-                    sqliteCommand.CommandText = string.Format(INSERT_GOAL, goal.Title);
+                    sqliteCommand.CommandText = DELETE_ALL;
                     sqliteCommand.ExecuteNonQuery();
-                    sqliteCommand.CommandText = SELECT_LAST_ID;
-                    long goalId = (long)sqliteCommand.ExecuteScalar();
 
-                    foreach (Project project in goal.Projects)
+                    foreach (Goal goal in goals)
                     {
 
-                        sqliteCommand.CommandText = string.Format(INSERT_PROJECT, project.Name, project.Color, goalId);
+                        sqliteCommand.CommandText = string.Format(INSERT_GOAL, goal.Title);
                         sqliteCommand.ExecuteNonQuery();
                         sqliteCommand.CommandText = SELECT_LAST_ID;
-                        long projectId = (long)sqliteCommand.ExecuteScalar();
+                        long goalId = (long)sqliteCommand.ExecuteScalar();
 
-                        foreach (Taskgroup taskgroup in project.Taskgroups)
+                        foreach (Project project in goal.Projects)
                         {
-                            string deadline = taskgroup.Deadline == DateTime.MinValue ? "NULL" : "'" + taskgroup.Deadline.ToString() + "'";
-                            sqliteCommand.CommandText = string.Format(INSERT_TASKGROUP, taskgroup.Title, projectId, (int)taskgroup.State, (int)taskgroup.Prio, deadline);
+
+                            sqliteCommand.CommandText = string.Format(INSERT_PROJECT, project.Name, project.Color, goalId);
                             sqliteCommand.ExecuteNonQuery();
                             sqliteCommand.CommandText = SELECT_LAST_ID;
-                            long taskgroupId = (long)sqliteCommand.ExecuteScalar();
+                            long projectId = (long)sqliteCommand.ExecuteScalar();
 
-                            foreach (Task task in taskgroup.Tasks)
+                            foreach (Taskgroup taskgroup in project.Taskgroups)
                             {
-
-                                sqliteCommand.CommandText = string.Format(INSERT_TASK, task.Title, task.Description, task.Done, taskgroupId);
+                                string deadline = taskgroup.Deadline == DateTime.MinValue ? "NULL" : "'" + taskgroup.Deadline.ToString() + "'";
+                                sqliteCommand.CommandText = string.Format(INSERT_TASKGROUP, taskgroup.Title, projectId, (int)taskgroup.State, (int)taskgroup.Prio, deadline);
                                 sqliteCommand.ExecuteNonQuery();
                                 sqliteCommand.CommandText = SELECT_LAST_ID;
-                                long taskId = (long)sqliteCommand.ExecuteScalar();
+                                long taskgroupId = (long)sqliteCommand.ExecuteScalar();
 
-                                foreach (Attachment attachment in task.Attachments)
+                                foreach (Task task in taskgroup.Tasks)
                                 {
-                                    string date = (attachment.Type == AttachmentType.Comment) ? "'" + ((CommentAttachment)attachment).Date.ToString() + "'" : "NULL";
-                                    sqliteCommand.CommandText = string.Format(INSERT_ATTACHMENT, attachment.Title, attachment.Content, (int)attachment.Type, taskId, "NULL", date);
+
+                                    sqliteCommand.CommandText = string.Format(INSERT_TASK, task.Title, task.Description, task.Done, taskgroupId);
                                     sqliteCommand.ExecuteNonQuery();
+                                    sqliteCommand.CommandText = SELECT_LAST_ID;
+                                    long taskId = (long)sqliteCommand.ExecuteScalar();
+
+                                    foreach (Attachment attachment in task.Attachments)
+                                    {
+                                        sqliteCommand.CommandText = string.Format(INSERT_ATTACHMENT, attachment.Title, attachment.Link, taskId);
+                                        sqliteCommand.ExecuteNonQuery();
+                                    }
+
                                 }
 
                             }
-
-                            foreach (Attachment attachment in taskgroup.Attachments)
-                            {
-                                string date = (attachment.Type == AttachmentType.Comment) ? "'" + ((CommentAttachment)attachment).Date.ToString() + "'" : "NULL";
-                                sqliteCommand.CommandText = string.Format(INSERT_ATTACHMENT, attachment.Title, attachment.Content, (int)attachment.Type, "NULL", taskgroupId, date);
-                                sqliteCommand.ExecuteNonQuery();
-                            }
-
                         }
                     }
+                    sqliteCommand.Transaction.Commit();
+                    return true;
                 }
-                sqliteCommand.Transaction.Commit();
-                return true;
+                catch
+                {
+                    sqliteCommand.Transaction.Rollback();
+                    return false;
+                }
+
             }
             catch
             {
-                sqliteCommand.Transaction.Rollback();
                 return false;
             }
 

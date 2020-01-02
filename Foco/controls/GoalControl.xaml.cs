@@ -16,6 +16,7 @@ namespace Foco.ui
         private readonly Goal goal;
         private readonly HomePage homePage;
         public Goal Goal => goal;
+        public HomePage HomePage => homePage;
 
         public GoalControl(HomePage homePage)
         {

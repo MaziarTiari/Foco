@@ -1,6 +1,5 @@
 ﻿using Foco.models;
 using Foco.windows;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,6 +15,8 @@ namespace Foco.ui
 
         private readonly Project project;
         private readonly GoalControl goalControl;
+
+        public Project Project => project;
 
         public ProjectControl(GoalControl goalControl)
         {
@@ -101,7 +102,7 @@ namespace Foco.ui
             }
             else
             {
-                // TODO Projekt in View zeigen
+                goalControl.HomePage.MainWindow.ShowProject(project);
             }
         }
 
@@ -129,6 +130,5 @@ namespace Foco.ui
             DeleteButton.Visibility = Visibility.Hidden;
             EditButton.Visibility = Visibility.Hidden;
         }
-
     }
 }

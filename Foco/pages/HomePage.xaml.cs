@@ -13,12 +13,14 @@ namespace Foco.pages
     {
 
         private readonly MainWindow mainWindow;
-        public List<Goal> Goals { get => mainWindow.Goals; }
+        public MainWindow MainWindow => mainWindow;
+        public List<Goal> Goals => mainWindow.Goals;
 
         public HomePage(MainWindow mainWindow)
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
+            Update();
         }
 
         public void Update()
@@ -31,6 +33,6 @@ namespace Foco.pages
             }
             HomeStackpanel.Children.Add(new GoalControl(this));
         }
-
     }
-}
+ }
+
