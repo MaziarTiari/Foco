@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Foco.controls"
-             mc:Ignorable="d">
+             mc:Ignorable="d" FontFamily="Century Gothic">
 
     <Border BorderBrush="Black" Background="White" BorderThickness="2" CornerRadius="5" Height="Auto" Width="200" Margin="5" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave">
         <DockPanel>
@@ -20,9 +20,11 @@
             </DockPanel>
             <Label DockPanel.Dock="Top" Height="30" FontSize="14" Name="TasksLabel">0 / 3 Aufgaben</Label>
             <StackPanel DockPanel.Dock="Bottom" Height="38" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Name="InfoButton" Click="OnInfoClicked" Width="36" Height="36">I</Button>
-                <Button Name="DeleteButton" Click="OnDeleteClicked" Width="36" Height="36">
-                    <Image Height="23" Source="/icons/icons8-delete-bin-96.png" Stretch="Fill" Width="23"/>
+                <Button Name="InfoButton" Click="OnInfoClicked" Width="36" Height="36" Style="{StaticResource IconButtonStyle}" ToolTip="Detailansicht">
+                    <Image Height="30" Source="/icons/icons8-info-144.png" Stretch="Fill" Width="30"/>
+                </Button>
+                <Button Name="DeleteButton" Click="OnDeleteClicked" Width="30" Height="36" Style="{StaticResource IconButtonStyle}" ToolTip="Aufgabengruppe löschen">
+                    <Image Height="30" Source="/icons/icons8-delete-bin-96.png" Stretch="Fill" Width="30"/>
                 </Button>
             </StackPanel>
         </DockPanel>

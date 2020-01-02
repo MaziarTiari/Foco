@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Foco.controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450">
+             d:DesignHeight="450" FontFamily="Century Gothic">
 
     <Border BorderBrush="Black" BorderThickness="2" Margin="10" Width="250">
         <Grid>
@@ -41,7 +41,7 @@
             
             <!-- Fußbereich -->
             <Border Grid.Row="2" Background="Black" MouseLeftButtonDown="OnAddGroupClicked">
-                <Label Foreground="White" FontSize="16">+ Aufgabengruppe hinzufügen</Label>
+                <Label Foreground="White" FontSize="15">+ Aufgabengruppe hinzufügen</Label>
             </Border>
 
         </Grid>
