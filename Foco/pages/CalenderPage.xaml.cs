@@ -14,7 +14,6 @@ namespace Foco.pages
     public partial class CalenderPage : Page
     {
         private readonly MainWindow mainWindow;
-        private List<Deadline> deadlines = new List<Deadline>();
         private readonly CalenderMonth calenderMonth;
         private Project project;
         private readonly DateTime today = DateTime.Today;
@@ -28,21 +27,14 @@ namespace Foco.pages
         
         public MainWindow MainWindow => mainWindow;
         public Project Project { get => project; set { project = value; Update();} }
-        public List<Deadline> Deadlines { get => deadlines; set => deadlines = value; }
         public CalenderMonth CalenderMonth => calenderMonth;
         public DateTime Today  => today;
 
         private void UpdateDeadlines()
         {
-            //Project project = mainWindow.Goals.Find();
             if (this.Project.Taskgroups.Count < 1)
                 return;
-            CalenderMonth.Deadlines = new List<Deadline>();
-            foreach(Taskgroup taskgroup in this.Project.Taskgroups)
-            {
-                if (taskgroup.Deadline != null)
-                    CalenderMonth.AddOrRaplaceDeadline(new Deadline(taskgroup.Title, taskgroup.Deadline));
-            }
+            CalenderMonth.Taskgroups = this.Project.Taskgroups;
         }
 
         public void Update()
@@ -56,20 +48,14 @@ namespace Foco.pages
             {
                 for (int c = 0; c < 7; c++)
                 {
-                    CalenderDayControl dayControl = new CalenderDayControl(days[i].Date.Day, this);
-                    foreach(string appointment in days[i].Appointments)
-                    {
-                        TextBlock tb = new TextBlock();
-                        tb.Text = appointment;
-                        dayControl.AppointmentContainer.Children.Add(tb) ;
-                    }
+                    CalenderDayControl dayControl = new CalenderDayControl(days[i], this);
                     if( DateTime.Compare(days[i].Date, Today) < 0 )
                     {
                         SetViewForPastDays(dayControl);
                     }
                     if (!days[i].FromSelectedMonth) {
-                        dayControl.Date.Foreground = Brushes.DarkGray;
-                        dayControl.Date.Text += (" " + CalenderMonth.Months[days[i].Date.Month - 1]);
+                        dayControl.DayOfDate.Foreground = Brushes.DarkGray;
+                        dayControl.DayOfDate.Text += (" " + CalenderMonth.Months[days[i].Date.Month - 1]);
                     }
                     if (IsToday(days[i].Date))
                         dayControl.DayInfoContainer.Background = Brushes.LightSkyBlue;
@@ -100,7 +86,7 @@ namespace Foco.pages
         {
             dayControl.DayInfoContainer.Background = Brushes.WhiteSmoke;
             dayControl.DayInfoContainer.BorderBrush = Brushes.White;
-            dayControl.Date.Foreground = Brushes.DarkSlateGray;
+            dayControl.DayOfDate.Foreground = Brushes.DarkSlateGray;
         }
 
         private bool IsToday(DateTime day)

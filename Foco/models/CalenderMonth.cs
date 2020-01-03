@@ -6,15 +6,14 @@ using System.Windows;
 
 namespace Foco.models
 {
-    public enum Months { Jan, Feb, März, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez };
 
     public class CalenderMonth
     {
         private int month;
         private int year;
         private CalenderDay[] days = new CalenderDay[42];
-        private List<Deadline> deadlines = new List<Deadline>();
-        private Months[] months = { models.Months.Jan, models.Months.Feb, models.Months.März, models.Months.Apr, models.Months.Mai, models.Months.Jun, models.Months.Jul, models.Months.Aug, models.Months.Sep, models.Months.Okt, models.Months.Nov, models.Months.Dez };
+        private List<Taskgroup> taskgroups = new List<Taskgroup>();
+        private readonly string[] months = { "Jan", "Feb", "März", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez" };
         public CalenderMonth(int year, int month)
         {
             this.month = month;
@@ -22,30 +21,20 @@ namespace Foco.models
             Update();
         }
 
+        public CalenderDay[] Days { get => days; set => days = value; }
+        public List<Taskgroup> Taskgroups { get => taskgroups; set { taskgroups = value; Update(); } }
+        public string[] Months => months;
+
         public int LastMonth()
         {
-            if (Month == 1)
-                return 12;
-            else
-                return Month - 1;
+            if (Month == 1) return 12;
+            else return Month - 1;
         }
 
         public int NextMonth()
         {
-            if (Month == 12)
-                return 1;
-            else
-                return Month + 1;
-        }
-
-        public void AddOrRaplaceDeadline(Deadline deadline)
-        {
-            int index = Deadlines.FindIndex(d => d.Title == deadline.Title);
-            if (index <= -1)
-                Deadlines.Add(deadline);
-            else
-                Deadlines[index] = deadline;
-            Update();
+            if (Month == 12) return 1;
+            else return Month + 1;
         }
 
         private void Update()
@@ -58,9 +47,9 @@ namespace Foco.models
 
             for (int i = 0; i < Days.Length; i++) // Calender has 7 columns and 6 rows which means 42 days to show
             {
-                if (i == 0 && firstDayOfMonthIndex > i) // if first day of the month is not a sunday
+                if (i == 0 && firstDayOfMonthIndex > i) // if first day of the month is not the first day of the weak
                     daysShowingFromMonthBefore = daysInLastMonth - firstDayOfMonthIndex; // check how many days to show from last month
-                if (daysShowingFromMonthBefore < daysInLastMonth) // continue with days from last month till we reach end of the last month
+                if (daysShowingFromMonthBefore < daysInLastMonth) // continue with days from last month til we reach end of the last month
                 {
                     daysShowingFromMonthBefore++;
                     if(Month == 1)
@@ -76,7 +65,7 @@ namespace Foco.models
                     else // set days for the month after
                     {
                         if(Month == 12)
-                            SetDay( i, new DateTime(Year + 1, NextMonth(), ((i + 1 - firstDayOfMonthIndex) % daysInMonth) ) );
+                            SetDay( i, new DateTime(Year + 1, NextMonth(), ((i + 1 - firstDayOfMonthIndex) % daysInMonth)) );
                         else
                             SetDay(i, new DateTime(Year, NextMonth(), ((i + 1 - firstDayOfMonthIndex) % daysInMonth)));
                         Days[i].FromSelectedMonth = false;
@@ -88,29 +77,27 @@ namespace Foco.models
         private void SetDay(int index, DateTime date)
         {
             Days[index] = new CalenderDay(date);
-            if (Deadlines.Count < 1)
+            if (Taskgroups.Count < 1)
                 return;
-            foreach(Deadline deadline in Deadlines)
+            foreach(Taskgroup taskgroup in Taskgroups)
             {
-                if ( deadline.Date == Days[index].Date && !(Days[index].Appointments.Contains(deadline.Title)) )
+                if ( taskgroup.Deadline.Date == Days[index].Date )
                 {
-                    Days[index].Appointments.Add(deadline.Title);
+                    Days[index].Taskgroups.Add(taskgroup);
                 }
             }
         }
 
         public void setNextMonth()
         {
-            if (Month == 12)
-                Year += 1;
+            if (Month == 12) Year++;
             Month = NextMonth();
             Update();
         }
 
         public void setLastMonth()
         {
-            if (Month == 1)
-                Year -= 1;
+            if (Month == 1) Year --;
             Month = LastMonth();
             Update();
         }
@@ -132,9 +119,5 @@ namespace Foco.models
                 Update();
             }
         }
-        internal CalenderDay[] Days { get => days; set => days = value; }
-        public List<Deadline> Deadlines { get => deadlines; set { deadlines = value; Update(); } }
-
-        public Months[] Months { get => months; set => months = value; }
     }
 }

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Foco.models
 {
-    class CalenderDay
+    public class CalenderDay
     {
         private DateTime date;
-        private List<string> appointments = new List<string>();
+        private List<Taskgroup> taskgroups = new List<Taskgroup>();
         private bool fromSelectedMonth = true;
         public CalenderDay(DateTime date)
         {
@@ -17,7 +17,7 @@ namespace Foco.models
         }
 
         public DateTime Date { get => date; set => date = value; }
-        public List<string> Appointments { get => appointments; set => appointments = value; }
+        public List<Taskgroup> Taskgroups { get => taskgroups; set => taskgroups = value; }
         public bool FromSelectedMonth { get => fromSelectedMonth; set => fromSelectedMonth = value; }
     }
 }

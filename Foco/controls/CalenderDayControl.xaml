@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Foco.controls"
-             mc:Ignorable="d" MouseDoubleClick="CreateNewTaskgroup"
+             mc:Ignorable="d" MouseDoubleClick="CreateNewTaskByDoubleClick"
              d:DesignHeight="450" d:DesignWidth="800">
     <Border BorderBrush="DarkSlateGray" BorderThickness="1" Background="White"  Name="DayInfoContainer">
         <StackPanel Margin="2">
@@ -17,7 +17,7 @@
                 </Style>
             </StackPanel.Resources>
             <DockPanel>
-                <TextBlock Margin="1 1 1 1" Name="Date" Text="" VerticalAlignment="Top"/>
+                <TextBlock Margin="1 1 1 1" Name="DayOfDate" Text="" VerticalAlignment="Top"/>
                 <TextBlock Margin="10 0 0 0" Name="Month"/>
             </DockPanel>
             <StackPanel Background="Red" VerticalAlignment="Top" Name="AppointmentContainer">
