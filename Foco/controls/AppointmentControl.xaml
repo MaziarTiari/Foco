@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="Foco.controls.AppointmentControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Foco.controls"
+             mc:Ignorable="d"
+             d:DesignHeight="40" d:DesignWidth="800">
+    <DockPanel VerticalAlignment="Top" HorizontalAlignment="Stretch">
+        <Menu Margin="0 0 5 0" Height="Auto" Background="Transparent" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+            <MenuItem Name="EditMenu" Background="Transparent" Foreground="Black" BorderThickness="0"
+                      Height="15" Header="▼">
+                <MenuItem FontSize="12" Foreground="Black" Click="OnOptionClickHandler" Tag="move" Header="Verschieben"></MenuItem>
+                <MenuItem FontSize="12" Foreground="Black" Click="OnOptionClickHandler" Tag="edit" Header="Bearbeiten"></MenuItem>
+                <MenuItem FontSize="12" Foreground="Black" Click="OnOptionClickHandler" Tag="delete" Header="Löschen"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <TextBlock Name="TitleLabel" FontSize="12" Foreground="White" VerticalAlignment="Top" Text="Name" TextWrapping="Wrap"/>
+    </DockPanel>
+</UserControl>
