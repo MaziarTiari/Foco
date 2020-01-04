@@ -22,7 +22,7 @@
         
         <DockPanel>
             <Label DockPanel.Dock="Top" Height="32" Background="#404040" Foreground="White" FontSize="16" FontWeight="Bold" Name="NameLabel" FontFamily="Century Gothic">Musterprojekt</Label>
-            <Label DockPanel.Dock="Top" Height="30" FontSize="14" Name="TasksLabel" FontFamily="Century Gothic">0 / 3 Aufgaben</Label>
+            <Label DockPanel.Dock="Top" Height="48" FontSize="14" Name="TasksLabel" FontFamily="Century Gothic">0 / 3 Aufgaben</Label>
             <StackPanel DockPanel.Dock="Bottom" Height="38" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="EditButton" Width="30" Height="38" Click="OnEditClicked" Style="{StaticResource IconButtonStyle}" ToolTip="Projekt bearbeiten">
                     <Image Height="26" Source="/icons/icons8-edit-file-80.png" Stretch="Fill" Width="26"/>
