@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Foco"
         mc:Ignorable="d"
-        Title="MainWindow" MinWidth="980" MinHeight="690" Width="980" Height="690" Icon="/icons/Foco.ico">
+        Title="MainWindow" MinWidth="1400" MinHeight="800" Width="1400" Height="800" Icon="/icons/Foco.ico">
 
     <DockPanel>
 

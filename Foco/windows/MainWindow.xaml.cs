@@ -51,6 +51,7 @@ namespace Foco
         {
             taskgroupPage.Taskgroup = taskgroup;
             PageFrame.Content = taskgroupPage;
+            DrawButtonBorder(null);
         }
 
         // wird aufgerufen, wenn ein Button in der Menüleiste gedrückt wird
@@ -87,7 +88,8 @@ namespace Foco
             BoardBorder.BorderThickness = new Thickness(0);
             ListBorder.BorderThickness = new Thickness(0);
             CalendarBorder.BorderThickness = new Thickness(0);
-            border.BorderThickness = new Thickness(2);
+            if(border != null)
+                border.BorderThickness = new Thickness(2);
         }
 
     }

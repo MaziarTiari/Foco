@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Foco.ui"
              xmlns:controls="clr-namespace:Foco.controls"
-             mc:Ignorable="d" Width="425" Height="480" VerticalAlignment="Top" HorizontalAlignment="Center">
+             mc:Ignorable="d" Width="425" Height="480" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Century Gothic">
 
-    <Border Margin="10" CornerRadius="5" BorderThickness="3" Background="#F9F9F9" BorderBrush="Black">
+    <Border Margin="10" BorderThickness="3" Background="White" BorderBrush="#404040">
         <Grid>
 
             <Grid.RowDefinitions>
@@ -28,10 +28,10 @@
 
             <!-- Reihe 0: Titel -->
             <!--<Label Name="TaskgroupHeader" Width="Auto" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0" FontWeight="Bold" FontSize="16" MouseLeftButtonDown="OnTaskgroupClicked">Titel</Label>-->
-            <controls:EditableLabel Grid.Row="0" x:Name="TaskgroupHeader" Width="Auto" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0" FontWeight="Bold" FontSize="16" Margin="0,5,0,5" Text="Titel" EditedCallbackFunction="OnLabelEdited" AllowNewLine="False" MaxLength="50"></controls:EditableLabel>
+            <controls:EditableLabel Grid.Row="0" x:Name="TaskgroupHeader" Width="400" Foreground="White" Background="#404040" Padding="4" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0" FontWeight="Bold" FontSize="18" Text="Titel" EditedCallbackFunction="OnLabelEdited" AllowNewLine="False" MaxLength="50"></controls:EditableLabel>
 
             <!-- Reihe 1: Combo, Combo, Date, Button -->
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -39,7 +39,7 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <ComboBox Grid.Column="0" Height="25" Margin="5,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="OnStatusComboChanged" Name="StateCombo">
+                <ComboBox Grid.Column="0" Height="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="OnStatusComboChanged" Name="StateCombo">
                     <ComboBoxItem>Warteschlange</ComboBoxItem>
                     <ComboBoxItem>In Bearbeitung</ComboBoxItem>
                     <ComboBoxItem>Abgeschlossen</ComboBoxItem>
@@ -51,7 +51,7 @@
                 </ComboBox>
                 <DatePicker Grid.Column="2" Height="25" Margin="5,0,5,0" Name="DeadlinePicker" SelectedDateChanged="OnDeadlinePickerChanged"></DatePicker>
                 <Button Grid.Column="3" Name="InfoButton" Margin="0,0,0,0" Height="25" Width="25" Click="OnInfoClicked">I</Button>
-                <Button Grid.Column="4" Name="DeleteButton" Margin="5,0,5,0" Height="25" Width="25" Click="OnDeleteClicked">D</Button>
+                <Button Grid.Column="4" Name="DeleteButton" Margin="5,0,0,0" Height="25" Width="25" Click="OnDeleteClicked">D</Button>
             </Grid>
 
             <!-- Reihe 2: Tasks -->

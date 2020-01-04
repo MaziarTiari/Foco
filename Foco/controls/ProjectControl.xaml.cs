@@ -38,6 +38,7 @@ namespace Foco.ui
             if (project != null)
             {
                 NameLabel.Content = project.Name;
+                NameLabel.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#404040"));
                 ProjectBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(project.Color));
                 int countAll = 0, countDone = 0;
                 foreach (Taskgroup taskgroup in project.Taskgroups)
@@ -52,9 +53,10 @@ namespace Foco.ui
             }
             else
             {
-                NameLabel.Content = "Hinzufügen";
+                NameLabel.Content = "";
+                NameLabel.Background = new SolidColorBrush(Colors.White);
                 ProjectBorder.Background = new SolidColorBrush(Colors.White);
-                TasksLabel.Content = "";
+                TasksLabel.Content = "+ Projekt hinzufügen";
             }
         }
 

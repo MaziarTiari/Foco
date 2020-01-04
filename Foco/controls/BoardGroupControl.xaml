@@ -6,11 +6,11 @@
              xmlns:local="clr-namespace:Foco.controls"
              mc:Ignorable="d" FontFamily="Century Gothic">
 
-    <Border BorderBrush="Black" Background="White" BorderThickness="2" CornerRadius="5" Height="Auto" Width="200" Margin="5" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave">
+    <Border BorderBrush="#404040" Background="White" BorderThickness="2" Height="Auto" Width="200" Margin="5" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave">
         <DockPanel>
             <!-- <Label DockPanel.Dock="Top" Height="32" FontSize="16" FontWeight="Bold" Name="NameLabel">Gruppenbezeichnung</Label> -->
-            <local:EditableLabel DockPanel.Dock="Top" Margin="5" FontSize="16" FontWeight="Bold" x:Name="NameLabel" Text="Gruppenbezeichnung" EditedCallbackFunction="OnLabelEdited" AllowNewLine="False" MaxLength="50"></local:EditableLabel>
-            <DockPanel DockPanel.Dock="Top" Height="30" Margin="5,0,5,0">
+            <local:EditableLabel Background="#404040" Foreground="White" DockPanel.Dock="Top" Padding="4" FontSize="16" FontWeight="Bold" x:Name="NameLabel" Text="Gruppenbezeichnung" EditedCallbackFunction="OnLabelEdited" AllowNewLine="False" MaxLength="50"></local:EditableLabel>
+            <DockPanel DockPanel.Dock="Top" Height="30" Margin="5,5,5,0">
                 <Border Name="PriorityBorder" DockPanel.Dock="Left" CornerRadius="5" Background="Orange" Height="25">
                     <Label FontSize="10" Name="PriorityLabel" Foreground="White">Normal</Label>
                 </Border>
