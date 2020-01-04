@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
 using System.Windows.Media;
 
 namespace Foco.windows
@@ -11,7 +10,7 @@ namespace Foco.windows
     public partial class ProjectEditWindow : Window
     {
 
-        private static string[] colorStrings = new string[] { "#986526", "#946871", "#313131", "#694851", "#157578", "#DAEDAE", "#EEAEEA" }; // TODO Auf Farben von Nikolay warten
+        private static string[] colorStrings = new string[] { "#606060", "#EB2524", "#F47B10", "#F8E40A", "#436A0C", "#86E004", "#1BDBE9", "#144EE1", "#C70EE3", "#E90FD4" };
 
         public delegate void ProjectSaveCallack(string projectName, string projectColor);
         private ProjectSaveCallack projectSaveCallback;
