@@ -10,7 +10,7 @@ namespace Foco.windows
     public partial class ProjectEditWindow : Window
     {
 
-        private static string[] colorStrings = new string[] { "#606060", "#EB2524", "#F47B10", "#F8E40A", "#436A0C", "#86E004", "#1BDBE9", "#144EE1", "#C70EE3", "#E90FD4" };
+        private static string[] colorStrings = new string[] { "#A0A0A0", "#EB2524", "#F47B10", "#F8E40A", "#436A0C", "#86E004", "#1BDBE9", "#144EE1", "#C70EE3", "#E90FD4" };
 
         public delegate void ProjectSaveCallack(string projectName, string projectColor);
         private ProjectSaveCallack projectSaveCallback;
