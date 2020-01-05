@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Foco.models
 {
-    public class CalenderDay
+    public class CalendarDay
     {
         private DateTime date;
         private List<Taskgroup> taskgroups = new List<Taskgroup>();
         private bool fromSelectedMonth = true;
-        public CalenderDay(DateTime date)
+        public CalendarDay(DateTime date)
         {
             this.Date = date;
         }

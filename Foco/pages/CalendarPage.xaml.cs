@@ -11,55 +11,55 @@ namespace Foco.pages
     /// <summary>
     /// Interaktionslogik für CalendarPage.xaml
     /// </summary>
-    public partial class CalenderPage : Page
+    public partial class CalendarPage : Page
     {
         private readonly MainWindow mainWindow;
-        private readonly CalenderMonth calenderMonth;
+        private readonly CalendarMonth calendarMonth;
         private Project project;
         private readonly DateTime today = DateTime.Today;
 
-        public CalenderPage(MainWindow mainWindow)
+        public CalendarPage(MainWindow mainWindow)
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
-            this.calenderMonth = new CalenderMonth(Today.Year, Today.Month);
+            this.calendarMonth = new CalendarMonth(Today.Year, Today.Month);
         }
         
         public MainWindow MainWindow => mainWindow;
         public Project Project { get => project; set { project = value; Update();} }
-        public CalenderMonth CalenderMonth => calenderMonth;
+        public CalendarMonth CalendarMonth => calendarMonth;
         public DateTime Today  => today;
 
         private void UpdateDeadlines()
         {
             if (this.Project.Taskgroups.Count < 1)
                 return;
-            CalenderMonth.Taskgroups = this.Project.Taskgroups;
+            CalendarMonth.Taskgroups = this.Project.Taskgroups;
         }
 
         public void Update()
         {
             DayControlContainer.Children.Clear();
             UpdateDeadlines();
-            InitialCalender();
-            CalenderDay[] days = CalenderMonth.Days;
+            InitialCalendar();
+            CalendarDay[] days = CalendarMonth.Days;
             int i = 0;
             for(int r = 1; r < 7; r++)
             {
                 for (int c = 0; c < 7; c++)
                 {
-                    CalenderDayControl dayControl = new CalenderDayControl(days[i], this);
+                    CalendarDayControl dayControl = new CalendarDayControl(days[i], this);
                     if( DateTime.Compare(days[i].Date, Today) < 0 )
                     {
                         SetViewForPastDays(dayControl);
                     }
                     if (!days[i].FromSelectedMonth) {
                         dayControl.DayOfDate.Foreground = Brushes.DarkGray;
-                        dayControl.DayOfDate.Text += (" " + CalenderMonth.Months[days[i].Date.Month - 1]);
+                        dayControl.DayOfDate.Text += (" " + CalendarMonth.Months[days[i].Date.Month - 1]);
                     }
                     if (IsToday(days[i].Date))
                         dayControl.DayInfoContainer.Background = Brushes.LightSkyBlue;
-                    // Add dayControl to the CalenderPage
+                    // Add dayControl to the CalendarPage
                     dayControl.SetValue(Grid.RowProperty, r);
                     dayControl.SetValue(Grid.ColumnProperty, c);
                     DayControlContainer.Children.Add(dayControl);
@@ -70,19 +70,19 @@ namespace Foco.pages
 
         public void setCurrentDate()
         {
-            CalenderMonth.Year = Today.Year;
-            CalenderMonth.Month = Today.Month;
+            CalendarMonth.Year = Today.Year;
+            CalendarMonth.Month = Today.Month;
         }
 
-        // Show the month and year the Calender is showing
-        private void InitialCalender()
+        // Show the month and year the Calendar is showing
+        private void InitialCalendar()
         {
-            MonthTag.Text = Convert.ToString(CalenderMonth.Month);
-            YearTag.Text = Convert.ToString(CalenderMonth.Year);
+            MonthTag.Text = Convert.ToString(CalendarMonth.Month);
+            YearTag.Text = Convert.ToString(CalendarMonth.Year);
         }
 
         // Set diffrent style for days in the past
-        private void SetViewForPastDays(CalenderDayControl dayControl)
+        private void SetViewForPastDays(CalendarDayControl dayControl)
         {
             dayControl.DayInfoContainer.Background = Brushes.WhiteSmoke;
             dayControl.DayInfoContainer.BorderBrush = Brushes.White;
@@ -99,25 +99,25 @@ namespace Foco.pages
 
         private void LastYearHandler(object sender, RoutedEventArgs e)
         {
-            CalenderMonth.Year = CalenderMonth.Year - 1;
+            CalendarMonth.Year = CalendarMonth.Year - 1;
             Update();
         }
 
         private void NextYearHandler(object sender, RoutedEventArgs e)
         {
-            CalenderMonth.Year = CalenderMonth.Year + 1;
+            CalendarMonth.Year = CalendarMonth.Year + 1;
             Update();
         }
 
         private void LastMonthHandler(object sender, RoutedEventArgs e)
         {
-            CalenderMonth.setLastMonth();
+            CalendarMonth.setLastMonth();
             Update();
         }
 
         private void NextMonthHandler(object sender, RoutedEventArgs e)
         {
-            CalenderMonth.setNextMonth();
+            CalendarMonth.setNextMonth();
             Update();
         }
     }

@@ -22,20 +22,20 @@ namespace Foco.controls
     /// </summary>
     public partial class AppointmentControl : UserControl
     {
-        private readonly CalenderDayControl calenderDayControl;
+        private readonly CalendarDayControl calendarDayControl;
         private readonly Taskgroup taskgroup;
 
-        public AppointmentControl(CalenderDayControl calenderDayControl, Taskgroup taskgroup)
+        public AppointmentControl(CalendarDayControl calendarDayControl, Taskgroup taskgroup)
         {
             InitializeComponent();
-            this.calenderDayControl = calenderDayControl;
+            this.calendarDayControl = calendarDayControl;
             this.taskgroup = taskgroup;
             this.TitleLabel.Text = taskgroup.Title;
             
         }
 
         public Taskgroup Taskgroup  => taskgroup;
-        public CalenderDayControl CalenderDayControl => calenderDayControl;
+        public CalendarDayControl CalendarDayControl => calendarDayControl;
 
         private void OnOptionClickHandler(object sender, RoutedEventArgs e)
         {
@@ -44,7 +44,7 @@ namespace Foco.controls
 
             if (itemTag  == "edit" )
             {
-                CalenderDayControl.CalenderPage.MainWindow.ShowTaskgroup(taskgroup);
+                CalendarDayControl.CalendarPage.MainWindow.ShowTaskgroup(taskgroup);
             }
             if (itemTag == "move")
             {
@@ -63,8 +63,8 @@ namespace Foco.controls
         {
             if (confirmState == ConfirmState.YES)
             {
-                CalenderDayControl.CalenderPage.Project.Taskgroups.Remove(Taskgroup);
-                this.CalenderDayControl.CalenderPage.Update();
+                CalendarDayControl.CalendarPage.Project.Taskgroups.Remove(Taskgroup);
+                this.CalendarDayControl.CalendarPage.Update();
             }
         }
 
@@ -73,7 +73,7 @@ namespace Foco.controls
             if (inputState == InputState.Save)
             {
                 Taskgroup.Deadline = selectedDate;
-                this.CalenderDayControl.CalenderPage.Update();
+                this.CalendarDayControl.CalendarPage.Update();
             }
             else
                 return;
