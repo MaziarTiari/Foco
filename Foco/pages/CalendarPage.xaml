@@ -8,18 +8,19 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CalendarPage">
 
+
     <Grid Margin="10">
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <!-- Grid fuer Navigation -->
         <Grid Grid.Row="0" Margin="10">
             <Grid>
-                
+
                 <Grid.Resources>
                     <Style TargetType="Button">
                         <Setter Property="Margin" Value="10 0 10 0"/>
@@ -29,12 +30,12 @@
                         <Setter Property="FontWeight" Value="Bold"/>
                     </Style>
                 </Grid.Resources>
-                
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                
+
                 <!-- Auswahl Jahr -->
                 <Grid Grid.Column="0" HorizontalAlignment="Right">
                     <Grid.ColumnDefinitions>
@@ -50,7 +51,7 @@
                         <Image Height="30" Source="/icons/icons8-chevron-right-96.png" Stretch="Fill" Width="30"/>
                     </Button>
                 </Grid>
-                
+
                 <!-- Auswahl Monat-->
                 <Grid Grid.Column="1">
                     <Grid.ColumnDefinitions>
@@ -66,14 +67,14 @@
                         <Image Height="30" Source="/icons/icons8-chevron-right-96.png" Stretch="Fill" Width="30"/>
                     </Button>
                 </Grid>
-                
+
             </Grid>
         </Grid>
-        
+
         <!-- Grid fuer Wochentage -->
-        <Grid Background="GhostWhite" Grid.Row="1" Margin="0,10,0,0">
+        <Grid Background="#404040" Grid.Row="1" Margin="0,10,0,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="20"/>    
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -84,35 +85,47 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Text="Sonntag"/>
-            <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Text="Montag"/>
-            <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Text="Dienstag"/>
-            <TextBlock Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" Text="Mittwoch"/>
-            <TextBlock Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" Text="Donnerstag"/>
-            <TextBlock Grid.Row="0" Grid.Column="5" HorizontalAlignment="Center" Text="Freitag"/>
-            <TextBlock Grid.Row="0" Grid.Column="6" HorizontalAlignment="Center" Text="Samstag"/>
+            <Grid.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontSize" Value="18"/>
+                    <Setter Property="Padding" Value="4"/>
+                </Style>
+            </Grid.Resources>
+            <Label Grid.Row="0" Grid.Column="0" Content="Sonntag"/>
+            <Label Grid.Row="0" Grid.Column="1" Content="Montag"/>
+            <Label Grid.Row="0" Grid.Column="2" Content="Dienstag"/>
+            <Label Grid.Row="0" Grid.Column="3" Content="Mittwoch"/>
+            <Label Grid.Row="0" Grid.Column="4" Content="Donnerstag"/>
+            <Label Grid.Row="0" Grid.Column="5" Content="Freitag"/>
+            <Label Grid.Row="0" Grid.Column="6" Content="Samstag"/>
         </Grid>
-        
+
         <!-- Grid fuer DayControls -->
-        <Grid Background="GhostWhite" Name="DayControlContainer" Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            
-        </Grid>
+        <Border BorderBrush="#404040" BorderThickness="2,0,2,2" Grid.Row="2">
+            <Grid Background="GhostWhite" Name="DayControlContainer">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+            </Grid>
+        </Border>
     </Grid>
+
 </Page>

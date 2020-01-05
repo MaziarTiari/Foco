@@ -2,7 +2,6 @@
 using System.Windows.Controls;
 using Foco.models;
 using Foco.controls;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 
@@ -16,19 +15,17 @@ namespace Foco.pages
         private readonly MainWindow mainWindow;
         private readonly CalendarMonth calendarMonth;
         private Project project;
-        private readonly DateTime today = DateTime.Today;
 
         public CalendarPage(MainWindow mainWindow)
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
-            this.calendarMonth = new CalendarMonth(Today.Year, Today.Month);
+            this.calendarMonth = new CalendarMonth(DateTime.Today.Year, DateTime.Today.Month);
         }
         
         public MainWindow MainWindow => mainWindow;
         public Project Project { get => project; set { project = value; Update();} }
         public CalendarMonth CalendarMonth => calendarMonth;
-        public DateTime Today  => today;
 
         private void UpdateDeadlines()
         {
@@ -49,15 +46,16 @@ namespace Foco.pages
                 for (int c = 0; c < 7; c++)
                 {
                     CalendarDayControl dayControl = new CalendarDayControl(days[i], this);
-                    if( DateTime.Compare(days[i].Date, Today) < 0 )
+                    if( DateTime.Compare(days[i].Date, DateTime.Today) < 0 )
                     {
-                        SetViewForPastDays(dayControl);
+                        dayControl.DayInfoContainer.Background = Brushes.WhiteSmoke;
+                        dayControl.DayOfDate.Foreground = Brushes.Black;
                     }
                     if (!days[i].FromSelectedMonth) {
                         dayControl.DayOfDate.Foreground = Brushes.DarkGray;
                         dayControl.DayOfDate.Text += (" " + CalendarMonth.MonthNames[days[i].Date.Month - 1]);
                     }
-                    if (IsToday(days[i].Date))
+                    if (days[i].Date == DateTime.Today)
                         dayControl.DayInfoContainer.Background = Brushes.LightSkyBlue;
                     // Add dayControl to the CalendarPage
                     dayControl.SetValue(Grid.RowProperty, r);
@@ -70,8 +68,8 @@ namespace Foco.pages
 
         public void setCurrentDate()
         {
-            CalendarMonth.Year = Today.Year;
-            CalendarMonth.Month = Today.Month;
+            CalendarMonth.Year = DateTime.Today.Year;
+            CalendarMonth.Month = DateTime.Today.Month;
         }
 
         // Show the month and year the Calendar is showing
@@ -79,22 +77,6 @@ namespace Foco.pages
         {
             MonthTag.Text = CalendarMonth.MonthNames[calendarMonth.Month - 1];
             YearTag.Text = Convert.ToString(CalendarMonth.Year);
-        }
-
-        // Set diffrent style for days in the past
-        private void SetViewForPastDays(CalendarDayControl dayControl)
-        {
-            dayControl.DayInfoContainer.Background = Brushes.WhiteSmoke;
-            dayControl.DayInfoContainer.BorderBrush = Brushes.White;
-            dayControl.DayOfDate.Foreground = Brushes.DarkSlateGray;
-        }
-
-        private bool IsToday(DateTime day)
-        {
-            if (day == Today)
-                return true;
-            else
-                return false;
         }
 
         private void LastYearHandler(object sender, RoutedEventArgs e)
