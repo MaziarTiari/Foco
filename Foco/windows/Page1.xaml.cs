@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Foco.pages
+namespace Foco.windows
 {
     /// <summary>
-    /// Interaktionslogik für CalendarPage.xaml
+    /// Interaktionslogik für Page1.xaml
     /// </summary>
-    public partial class CalendarPage : Page
+    public partial class Page1 : Page
     {
-        public CalendarPage()
+        public Page1()
         {
             InitializeComponent();
         }

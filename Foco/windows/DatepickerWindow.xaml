@@ -1,0 +1,20 @@
+﻿<Window x:Class="Foco.windows.DatepickerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Foco.windows"
+        mc:Ignorable="d"
+        Title="Aufgabengruppe" WindowStyle="ToolWindow" ResizeMode="NoResize" ShowInTaskbar="False" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" Closing="OnWindowClosing">
+    <StackPanel Margin="20">
+        <DockPanel Margin="0 0 0 30">
+            <Label DockPanel.Dock="Left" Name="InputLabel" Content="Label:" Margin="0 0 10 0" VerticalAlignment="Center"/>
+            <DatePicker Name="DateTimePicker" VerticalAlignment="Center" DockPanel.Dock="Right"/>
+        </DockPanel>
+        <DockPanel HorizontalAlignment="Right">
+            <Button Content="Speichern" Tag="save" DockPanel.Dock="Right" VerticalAlignment="Top" Padding="4" Width="68" Margin="5 0 0 0" Click="OnButtonClicked"/>
+            <Button Content="Abbrechen" Tag="cancel" DockPanel.Dock="Right" VerticalAlignment="Top" Padding="4" Width="68" Click="OnButtonClicked"/>
+        </DockPanel>
+
+    </StackPanel>
+</Window>
