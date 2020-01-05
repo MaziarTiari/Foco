@@ -55,7 +55,7 @@ namespace Foco.pages
                     }
                     if (!days[i].FromSelectedMonth) {
                         dayControl.DayOfDate.Foreground = Brushes.DarkGray;
-                        dayControl.DayOfDate.Text += (" " + CalendarMonth.Months[days[i].Date.Month - 1]);
+                        dayControl.DayOfDate.Text += (" " + CalendarMonth.MonthNames[days[i].Date.Month - 1]);
                     }
                     if (IsToday(days[i].Date))
                         dayControl.DayInfoContainer.Background = Brushes.LightSkyBlue;
@@ -77,7 +77,7 @@ namespace Foco.pages
         // Show the month and year the Calendar is showing
         private void InitialCalendar()
         {
-            MonthTag.Text = Convert.ToString(CalendarMonth.Month);
+            MonthTag.Text = CalendarMonth.MonthNames[calendarMonth.Month - 1];
             YearTag.Text = Convert.ToString(CalendarMonth.Year);
         }
 

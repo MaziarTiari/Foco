@@ -9,11 +9,13 @@ namespace Foco.models
 
     public class CalendarMonth
     {
+
+        public static readonly string[] MonthNames = new string[] { "Jan", "Feb", "März", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez" };
+
         private int month;
         private int year;
         private CalendarDay[] days = new CalendarDay[42];
         private List<Taskgroup> taskgroups = new List<Taskgroup>();
-        private readonly string[] months = { "Jan", "Feb", "März", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez" };
         public CalendarMonth(int year, int month)
         {
             this.month = month;
@@ -23,7 +25,6 @@ namespace Foco.models
 
         public CalendarDay[] Days { get => days; set => days = value; }
         public List<Taskgroup> Taskgroups { get => taskgroups; set { taskgroups = value; Update(); } }
-        public string[] Months => months;
 
         public int LastMonth()
         {
