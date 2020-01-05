@@ -8,11 +8,15 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CalendarPage">
 
-    <Grid>
+    <Grid Margin="10">
+        
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
+        <!-- Grid fuer Navigation -->
         <Grid Grid.Row="0">
             <Grid>
                 <Grid.Resources>
@@ -40,12 +44,32 @@
                 </DockPanel>
             </Grid>
         </Grid>
-        <Grid Background="GhostWhite" Name="DayControlContainer" Grid.Row="1" Margin="0 10 0 5">
-            <Grid.Resources>
-                <Style TargetType="TextBlock">
-                    <Setter Property="TextAlignment" Value="Center"/>
-                </Style>
-            </Grid.Resources>
+        
+        <!-- Grid fuer Wochentage -->
+        <Grid Background="GhostWhite" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>    
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Text="Sonntag"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Text="Montag"/>
+            <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Text="Dienstag"/>
+            <TextBlock Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" Text="Mittwoch"/>
+            <TextBlock Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" Text="Donnerstag"/>
+            <TextBlock Grid.Row="0" Grid.Column="5" HorizontalAlignment="Center" Text="Freitag"/>
+            <TextBlock Grid.Row="0" Grid.Column="6" HorizontalAlignment="Center" Text="Samstag"/>
+        </Grid>
+        
+        <!-- Grid fuer DayControls -->
+        <Grid Background="GhostWhite" Name="DayControlContainer" Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -56,8 +80,6 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="20"/>
-                <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -65,13 +87,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="Sonntag"/>
-            <TextBlock Grid.Row="0" Grid.Column="1" Text="Montag"/>
-            <TextBlock Grid.Row="0" Grid.Column="2" Text="Dienstag"/>
-            <TextBlock Grid.Row="0" Grid.Column="3" Text="Mittwoch"/>
-            <TextBlock Grid.Row="0" Grid.Column="4" Text="Donnerstag"/>
-            <TextBlock Grid.Row="0" Grid.Column="5" Text="Freitag"/>
-            <TextBlock Grid.Row="0" Grid.Column="6" Text="Samstag"/>
+            
         </Grid>
     </Grid>
 </Page>

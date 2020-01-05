@@ -44,7 +44,7 @@ namespace Foco.pages
             InitialCalendar();
             CalendarDay[] days = CalendarMonth.Days;
             int i = 0;
-            for(int r = 1; r < 7; r++)
+            for(int r = 0; r < 6; r++)
             {
                 for (int c = 0; c < 7; c++)
                 {
