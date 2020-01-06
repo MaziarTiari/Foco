@@ -1,4 +1,5 @@
-﻿using Foco.models;
+﻿using Foco.calendar;
+using Foco.models;
 using Foco.pages;
 using System;
 using System.Windows;

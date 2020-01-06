@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Foco.models;
+using System;
 using System.Collections.Generic;
-using System.Windows;
 
-
-
-namespace Foco.models
+namespace Foco.calendar
 {
 
     public class CalendarMonth

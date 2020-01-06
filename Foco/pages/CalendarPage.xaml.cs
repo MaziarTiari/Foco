@@ -4,6 +4,7 @@ using Foco.models;
 using Foco.controls;
 using System.Windows;
 using System.Windows.Media;
+using Foco.calendar;
 
 namespace Foco.pages
 {

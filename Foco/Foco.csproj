@@ -117,8 +117,8 @@
     <Compile Include="controls\BoardGroupControl.xaml.cs">
       <DependentUpon>BoardGroupControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="models\CalendarDay.cs" />
-    <Compile Include="models\CalendarMonth.cs" />
+    <Compile Include="calendar-helpers\CalendarDay.cs" />
+    <Compile Include="calendar-helpers\CalendarMonth.cs" />
     <Compile Include="models\Goal.cs" />
     <Compile Include="models\Attachment.cs" />
     <Compile Include="models\Project.cs" />
