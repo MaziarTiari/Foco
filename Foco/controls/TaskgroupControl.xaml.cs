@@ -54,6 +54,7 @@ namespace Foco.controls
             DeleteButton.Visibility = Visibility.Collapsed;
         }
 
+        #pragma warning disable IDE0051 // wird eigentlich durch XAML aufgerufen
         private void OnLabelEdited(string text)
         {
             if (!string.IsNullOrWhiteSpace(text))
@@ -61,6 +62,7 @@ namespace Foco.controls
             else
                 TaskgroupHeader.Text = taskgroup.Title;
         }
+        #pragma warning restore IDE0051
 
         /**
          * Alle verfügbare Tasks sollen in die TaskgroupControl geladen werden

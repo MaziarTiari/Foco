@@ -42,7 +42,9 @@ namespace Foco.controls
             DeleteTask();
         }
 
+
         // Benutzer schließt Editieren ab
+        #pragma warning disable IDE0051 // wird eigentlich durch XAML aufgerufen
         private void OnLabelEdited(string text)
         {
             if (!string.IsNullOrWhiteSpace(text))
@@ -50,6 +52,7 @@ namespace Foco.controls
             else
                 DeleteTask();
         }
+        #pragma warning restore IDE0051
 
         private void DeleteTask()
         {

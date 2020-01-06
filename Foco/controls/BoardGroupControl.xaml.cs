@@ -105,6 +105,7 @@ namespace Foco.controls
         }
 
         // Benutzer hat Label bearbeitet
+        #pragma warning disable IDE0051 // wird eigentlich durch XAML aufgerufen
         private void OnLabelEdited(string text)
         {
             if (!string.IsNullOrWhiteSpace(text))
@@ -112,6 +113,7 @@ namespace Foco.controls
             else
                 NameLabel.Text = taskgroup.Title;
         }
+        #pragma warning restore IDE0051 
 
     }
 }

@@ -44,6 +44,7 @@ namespace Foco.controls
         }
 
         // Benutzer hat Label editiert
+        #pragma warning disable IDE0051 // wird eigentlich durch XAML aufgerufen
         private void OnLabelEdited(string text)
         {
             if (!string.IsNullOrWhiteSpace(text))
@@ -51,6 +52,7 @@ namespace Foco.controls
             else
                 NameLabel.Text = goal.Title;
         }
+        #pragma warning restore IDE0051
 
         // Benutzer hat auf Löschen geklickt
         private void OnDeleteClicked(object sender, RoutedEventArgs e)

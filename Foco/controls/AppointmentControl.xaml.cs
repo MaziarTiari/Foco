@@ -25,6 +25,7 @@ namespace Foco.controls
         public Taskgroup Taskgroup  => taskgroup;
         public CalendarDayControl CalendarDayControl => calendarDayControl;
 
+        #pragma warning disable IDE0051 // wird eigentlich durch XAML aufgerufen
         private void OnEdited(string text)
         {
             if (!string.IsNullOrWhiteSpace(text))
@@ -32,6 +33,7 @@ namespace Foco.controls
             else
                 TitleLabel.Text = taskgroup.Title;
         }
+        #pragma warning restore IDE0051
 
         private void OnOptionClickHandler(object sender, RoutedEventArgs e)
         {
