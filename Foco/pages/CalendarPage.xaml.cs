@@ -27,17 +27,10 @@ namespace Foco.pages
         public Project Project { get => project; set { project = value; Update();} }
         public CalendarMonth CalendarMonth => calendarMonth;
 
-        private void UpdateDeadlines()
-        {
-            if (this.Project.Taskgroups.Count < 1)
-                return;
-            CalendarMonth.Taskgroups = this.Project.Taskgroups;
-        }
-
         public void Update()
         {
             DayControlContainer.Children.Clear();
-            UpdateDeadlines();
+            CalendarMonth.Taskgroups = this.Project.Taskgroups;
             InitialCalendar();
             CalendarDay[] days = CalendarMonth.Days;
             int i = 0;
