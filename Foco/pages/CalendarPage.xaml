@@ -92,6 +92,7 @@
                     <Setter Property="Foreground" Value="White"/>
                     <Setter Property="FontSize" Value="18"/>
                     <Setter Property="Padding" Value="4"/>
+                    <Setter Property="FontFamily" Value="Century Gothic"/>
                 </Style>
             </Grid.Resources>
             <Label Grid.Row="0" Grid.Column="0" Content="Sonntag"/>

@@ -20,7 +20,7 @@
             <!-- Kopfbereich -->
             <Border Grid.Row="0" Width="250" Background="#404040">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Label Name="TitleLabel" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="20" Foreground="White">Name</Label>
+                    <Label Name="TitleLabel" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="20" Foreground="White" FontWeight="Bold">Name</Label>
                     <Menu Height="20" Width="20">
                         <MenuItem Name="SortMenuItem" Background="#404040" Foreground="White" BorderThickness="0" Header="▼" Width="20" Height="20" ToolTip="Aufgabengruppen sortieren">
                             <MenuItem Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="AA" Header="Alphabetisch aufsteigend"></MenuItem>

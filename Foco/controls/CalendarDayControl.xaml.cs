@@ -1,6 +1,5 @@
 ﻿using Foco.models;
 using Foco.pages;
-using Foco.windows;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,7 +14,7 @@ namespace Foco.controls
     {
         private readonly CalendarPage calendarPage;
         private readonly CalendarDay day;
-        private int indexOfAlreadyDefinedTaskgroup;
+        //private int indexOfAlreadyDefinedTaskgroup;
 
         public CalendarDayControl(CalendarDay day, CalendarPage calendarPage)
         {
@@ -23,11 +22,12 @@ namespace Foco.controls
             this.day = day;
             this.calendarPage = calendarPage;
             DayOfDate.Text = Convert.ToString(day.Date.Day);
+            AddButton.Visibility = Visibility.Hidden;
             Update();
         }
 
         public CalendarPage CalendarPage => calendarPage;
-        public int IndexOfTaskgroupInProject { get => indexOfAlreadyDefinedTaskgroup; set => indexOfAlreadyDefinedTaskgroup = value; }
+        //public int IndexOfTaskgroupInProject { get => indexOfAlreadyDefinedTaskgroup; set => indexOfAlreadyDefinedTaskgroup = value; }
         public CalendarDay Day => day;
 
         private void Update()
@@ -41,38 +41,21 @@ namespace Foco.controls
             }
         }
 
-        private void TaskgroupCreateInputWindow()
+        private void OnAddButtonClicked(object sender, RoutedEventArgs e)
         {
-            InputWindow inputWindow = new InputWindow("Neue Aufgabengruppe", "Name:", "", CreatedCallback, false);
-            inputWindow.ShowDialog();
+            string title = "Neue Gruppe";
+            int i = 1;
+            while (CalendarPage.Project.Taskgroups.Exists(x => x.Title == title))
+                title = title.Split(' ')[0] + " " + title.Split(' ')[1] + " " + (++i);
+            Taskgroup taskgroup = new Taskgroup(title);
+            taskgroup.Deadline = this.Day.Date;
+            this.CalendarPage.Project.Taskgroups.Add(taskgroup);
+            AppointmentControl appointmentControl = new AppointmentControl(this, taskgroup);
+            AppointmentContainer.Children.Add(appointmentControl);
+            appointmentControl.TitleLabel.BeginEditing();
         }
 
-        private void CreateNewTaskByDoubleClick(object sender, RoutedEventArgs e)
-        {
-            TaskgroupCreateInputWindow();
-        }
-
-        private void CreatedCallback(InputState inputState, string inputText)
-        {
-            if (inputState == InputState.Save)
-            {
-                this.IndexOfTaskgroupInProject = this.CalendarPage.Project.Taskgroups.FindIndex(t => t.Title == inputText);
-                if(IndexOfTaskgroupInProject < 0) // there is no Taskgroup with the given title
-                {
-                    Taskgroup taskgroup = new Taskgroup(inputText);
-                    taskgroup.Deadline = this.Day.Date;
-                    this.CalendarPage.Project.Taskgroups.Add(taskgroup);
-                    this.CalendarPage.Update();
-                }
-                else // there is already a taskgroup with the given title
-                {
-                    ConfirmWindow confirmWindow = new ConfirmWindow("Aufgabengruppe existiert bereits", "möchtest du dafür eine neue Deadline setzen?", SetDeadlineForExistingTaskgroup);
-                    confirmWindow.ShowDialog();
-                }
-            }
-        }
-
-        private void SetDeadlineForExistingTaskgroup(ConfirmState confirmState)
+        /*private void SetDeadlineForExistingTaskgroup(ConfirmState confirmState)
         {
             if(confirmState == ConfirmState.YES)
             {
@@ -83,6 +66,11 @@ namespace Foco.controls
             {
                 TaskgroupCreateInputWindow();
             }
+        }*/
+
+        private void OnMouseOverChange(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            AddButton.Visibility = (Day.Date >= DateTime.Today && IsMouseOver) ? Visibility.Visible : Visibility.Hidden;
         }
     }
 }

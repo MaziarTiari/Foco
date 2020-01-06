@@ -31,11 +31,18 @@ namespace Foco.controls
             this.calendarDayControl = calendarDayControl;
             this.taskgroup = taskgroup;
             this.TitleLabel.Text = taskgroup.Title;
-            
         }
 
         public Taskgroup Taskgroup  => taskgroup;
         public CalendarDayControl CalendarDayControl => calendarDayControl;
+
+        private void OnEdited(string text)
+        {
+            if (!string.IsNullOrWhiteSpace(text))
+                taskgroup.Title = text;
+            else
+                TitleLabel.Text = taskgroup.Title;
+        }
 
         private void OnOptionClickHandler(object sender, RoutedEventArgs e)
         {
