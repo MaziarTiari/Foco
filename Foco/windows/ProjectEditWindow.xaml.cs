@@ -30,7 +30,7 @@ namespace Foco.windows
                 Border colorBorder = new Border();
                 colorBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorString));
                 colorBorder.Height = 20;
-                colorBorder.Width = 200;
+                colorBorder.Width = 130;
                 comboBoxItem.Content = colorBorder;
                 comboBoxItem.Tag = colorString;
                 ColorCombo.Items.Add(comboBoxItem);

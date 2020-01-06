@@ -1,19 +1,8 @@
 ﻿using Foco.models;
 using Foco.windows;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Foco.controls
 {
@@ -55,13 +44,13 @@ namespace Foco.controls
             }
             if (itemTag == "move")
             {
-                DatepickerWindow datepicker = new DatepickerWindow(Taskgroup.Title, "Verschieben:", RescheduleDeadline);
+                DatepickerWindow datepicker = new DatepickerWindow("Deadline verschieben", "Neue Deadline:", RescheduleDeadline);
                 datepicker.DateTimePicker.SelectedDate = Taskgroup.Deadline;
                 datepicker.ShowDialog();
             }
             if (itemTag == "delete")
             {
-                ConfirmWindow confirmDeleteWindow = new ConfirmWindow(Taskgroup.Title, "möchtest diese Aufgabengruppe endgültig löschen?", ConfirmDeleteHandler);
+                ConfirmWindow confirmDeleteWindow = new ConfirmWindow("Aufgabengruppe löschen", "Sind Sie sicher, dass Sie die Aufgabengruppe \"" + taskgroup.Title + "\" inkl. aller Aufgaben löschen möchten?", ConfirmDeleteHandler);
                 confirmDeleteWindow.ShowDialog();
             }
         }

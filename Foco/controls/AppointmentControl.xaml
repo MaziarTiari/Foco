@@ -11,11 +11,11 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <local:EditableLabel Grid.Column="0" x:Name="TitleLabel" EditedCallbackFunction="OnEdited" FontSize="12" Foreground="White" Text="Name" AllowNewLine="False" MaxLength="50" />
-        <Menu Grid.Column="1" Margin="0 0 0 0" Height="Auto" Background="Transparent" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+        <Menu Grid.Column="1" Background="Transparent" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" FontFamily="Century Gothic">
             <MenuItem Name="EditMenu" Background="Transparent" Foreground="White" BorderThickness="0" Height="15" Header="▼">
-                <MenuItem FontSize="12" Foreground="Black" Click="OnOptionClickHandler" Tag="move" Header="Verschieben"></MenuItem>
-                <MenuItem FontSize="12" Foreground="Black" Click="OnOptionClickHandler" Tag="edit" Header="Bearbeiten"></MenuItem>
-                <MenuItem FontSize="12" Foreground="Black" Click="OnOptionClickHandler" Tag="delete" Header="Löschen"></MenuItem>
+                <MenuItem FontSize="12" Foreground="Black" Click="OnOptionClickHandler" Tag="move" Header="Deadline verschieben"></MenuItem>
+                <MenuItem FontSize="12" Foreground="Black" Click="OnOptionClickHandler" Tag="edit" Header="Detailansicht öffnen"></MenuItem>
+                <MenuItem FontSize="12" Foreground="Black" Click="OnOptionClickHandler" Tag="delete" Header="Aufgabengruppe löschen"></MenuItem>
             </MenuItem>
         </Menu>
     </Grid>

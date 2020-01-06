@@ -5,16 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Foco.windows"
         mc:Ignorable="d"
-        Title="Aufgabengruppe" WindowStyle="ToolWindow" ResizeMode="NoResize" ShowInTaskbar="False" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" Closing="OnWindowClosing">
-    <StackPanel Margin="20">
-        <DockPanel Margin="0 0 0 30">
+        Title="Titel" WindowStyle="ToolWindow" ResizeMode="NoResize" ShowInTaskbar="False" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" Closing="OnWindowClosing" FontFamily="Century Gothic">
+    <StackPanel Margin="10">
+        <DockPanel Margin="0 0 0 20">
             <Label DockPanel.Dock="Left" Name="InputLabel" Content="Label:" Margin="0 0 10 0" VerticalAlignment="Center"/>
-            <DatePicker Name="DateTimePicker" VerticalAlignment="Center" DockPanel.Dock="Right"/>
+            <DatePicker Name="DateTimePicker" VerticalAlignment="Center" DockPanel.Dock="Right" Width="160"/>
         </DockPanel>
         <DockPanel HorizontalAlignment="Right">
-            <Button Content="Speichern" Tag="save" DockPanel.Dock="Right" VerticalAlignment="Top" Padding="4" Width="68" Margin="5 0 0 0" Click="OnButtonClicked"/>
-            <Button Content="Abbrechen" Tag="cancel" DockPanel.Dock="Right" VerticalAlignment="Top" Padding="4" Width="68" Click="OnButtonClicked"/>
+            <Button Content="Speichern" Tag="save" DockPanel.Dock="Right" Padding="4" Width="80" Margin="5 0 0 0" Click="OnButtonClicked"/>
+            <Button Content="Abbrechen" Tag="cancel" DockPanel.Dock="Right" Padding="4" Width="80" Click="OnButtonClicked"/>
         </DockPanel>
-
     </StackPanel>
 </Window>

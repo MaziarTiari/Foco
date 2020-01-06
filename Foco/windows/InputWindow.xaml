@@ -5,13 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Foco.windows"
         mc:Ignorable="d"
-        Title="InputTitle" WindowStyle="ToolWindow" ResizeMode="NoResize" ShowInTaskbar="False" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" Closing="OnWindowClosing">
+        Title="InputTitle" WindowStyle="ToolWindow" ResizeMode="NoResize" ShowInTaskbar="False" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" Closing="OnWindowClosing" FontFamily="Century Gothic">
 
-    <Grid Height="92" Width="300">
-        <Label Name="InputLabel" Content="Label:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="50"/>
-        <TextBox Name="InputBox" KeyDown="OnKeyDown" MaxLines="1" HorizontalAlignment="Left" Height="23" Margin="65,13,0,0" TextWrapping="NoWrap" Text="DefaultText" VerticalAlignment="Top" Width="225" MaxLength="30"/>
-        <Button Content="Speichern" Tag="Save" Name="SaveButton" HorizontalAlignment="Left" Margin="221,56,0,0" VerticalAlignment="Top" Width="69" Height="26" Click="OnButtonClicked"/>
-        <Button Content="Abbrechen" Tag="Cancel" HorizontalAlignment="Left" Margin="144,56,0,0" VerticalAlignment="Top" Width="72" Height="26" Click="OnButtonClicked"/>
-    </Grid>
+    <StackPanel Margin="10">
+        <DockPanel>
+            <Label Name="InputLabel" Content="Label:" Width="50"/>
+            <TextBox Name="InputBox" KeyDown="OnKeyDown" MaxLines="1" Height="23" TextWrapping="NoWrap" Text="DefaultText" Width="160" MaxLength="30"/>
+        </DockPanel>
+        <DockPanel Margin="0 20 0 0">
+            <Button DockPanel.Dock="Right" Padding="4" Content="Speichern" Tag="Save" Name="SaveButton" Width="80" Click="OnButtonClicked"/>
+            <Button DockPanel.Dock="Right" Padding="4" Content="Abbrechen" Tag="Cancel" HorizontalAlignment="Right" Margin="0 0 5 0" Width="80" Click="OnButtonClicked"/>
+        </DockPanel>
+    </StackPanel>
 
 </Window>
