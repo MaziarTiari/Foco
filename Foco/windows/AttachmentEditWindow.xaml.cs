@@ -80,12 +80,12 @@ namespace Foco.windows
         // Benutzer klickt auf [...] Button
         private void OnFileButtonClicked(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Title = "Datei zum Anhängen auswählen";
+            OpenFileDialog openFileDialog = new OpenFileDialog { Title = "Datei zum Anhängen auswählen" };
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 LinkBox.Text = openFileDialog.FileName;
             }
+            openFileDialog.Dispose();
         }
     }
 }

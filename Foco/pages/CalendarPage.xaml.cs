@@ -59,7 +59,7 @@ namespace Foco.pages
             }
         }
 
-        public void setCurrentDate()
+        public void SetCurrentDate()
         {
             CalendarMonth.Year = DateTime.Today.Year;
             CalendarMonth.Month = DateTime.Today.Month;
@@ -86,13 +86,13 @@ namespace Foco.pages
 
         private void LastMonthHandler(object sender, RoutedEventArgs e)
         {
-            CalendarMonth.setLastMonth();
+            CalendarMonth.SetLastMonth();
             Update();
         }
 
         private void NextMonthHandler(object sender, RoutedEventArgs e)
         {
-            CalendarMonth.setNextMonth();
+            CalendarMonth.SetNextMonth();
             Update();
         }
     }

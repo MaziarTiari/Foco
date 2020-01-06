@@ -10,10 +10,10 @@ namespace Foco.windows
     public partial class ProjectEditWindow : Window
     {
 
-        private static string[] colorStrings = new string[] { "#A0A0A0", "#EB2524", "#F47B10", "#F8E40A", "#436A0C", "#86E004", "#1BDBE9", "#144EE1", "#C70EE3", "#E90FD4" };
+        private static readonly string[] colorStrings = new string[] { "#A0A0A0", "#EB2524", "#F47B10", "#F8E40A", "#436A0C", "#86E004", "#1BDBE9", "#144EE1", "#C70EE3", "#E90FD4" };
 
         public delegate void ProjectSaveCallack(string projectName, string projectColor);
-        private ProjectSaveCallack projectSaveCallback;
+        private readonly ProjectSaveCallack projectSaveCallback;
 
         public ProjectEditWindow(string windowTitle, string projectName, string projectColor, ProjectSaveCallack projectSaveCallback)
         {
@@ -27,10 +27,12 @@ namespace Foco.windows
             foreach (string colorString in colorStrings)
             {
                 ComboBoxItem comboBoxItem = new ComboBoxItem();
-                Border colorBorder = new Border();
-                colorBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorString));
-                colorBorder.Height = 20;
-                colorBorder.Width = 130;
+                Border colorBorder = new Border
+                {
+                    Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorString)),
+                    Height = 20,
+                    Width = 130
+                };
                 comboBoxItem.Content = colorBorder;
                 comboBoxItem.Tag = colorString;
                 ColorCombo.Items.Add(comboBoxItem);

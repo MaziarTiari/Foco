@@ -57,6 +57,7 @@ namespace Foco.controls
                     bitmapImage.StreamSource = memoryStream;
                     bitmapImage.EndInit();
                     FileImg.Source = bitmapImage;
+                    webClient.Dispose();
                 }
                 catch
                 {

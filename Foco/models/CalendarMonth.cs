@@ -89,14 +89,14 @@ namespace Foco.models
             }
         }
 
-        public void setNextMonth()
+        public void SetNextMonth()
         {
             if (Month == 12) Year++;
             Month = NextMonth();
             Update();
         }
 
-        public void setLastMonth()
+        public void SetLastMonth()
         {
             if (Month == 1) Year --;
             Month = LastMonth();

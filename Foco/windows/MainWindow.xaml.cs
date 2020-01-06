@@ -77,7 +77,7 @@ namespace Foco
                     DrawButtonBorder(ListBorder);
                     break;
                 case "Calendar":
-                    CalendarPage.setCurrentDate();
+                    CalendarPage.SetCurrentDate();
                     CalendarPage.Update();
                     PageFrame.Content = CalendarPage;
                     DrawButtonBorder(CalendarBorder);

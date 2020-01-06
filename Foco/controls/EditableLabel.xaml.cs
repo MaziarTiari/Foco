@@ -63,8 +63,7 @@ namespace Foco.controls
                 LabelRow.Height = new GridLength(1, GridUnitType.Star);
                 EditLabel.Text = EditTextBox.Text;
                 isEditing = false;
-                if (editedCallback != null)
-                    editedCallback(EditLabel.Text);
+                editedCallback?.Invoke(EditLabel.Text);
             }
         }
 

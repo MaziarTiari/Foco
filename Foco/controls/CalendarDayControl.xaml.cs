@@ -47,8 +47,7 @@ namespace Foco.controls
             int i = 1;
             while (CalendarPage.Project.Taskgroups.Exists(x => x.Title == title))
                 title = title.Split(' ')[0] + " " + title.Split(' ')[1] + " " + (++i);
-            Taskgroup taskgroup = new Taskgroup(title);
-            taskgroup.Deadline = this.Day.Date;
+            Taskgroup taskgroup = new Taskgroup(title) { Deadline = this.Day.Date };
             this.CalendarPage.Project.Taskgroups.Add(taskgroup);
             AppointmentControl appointmentControl = new AppointmentControl(this, taskgroup);
             AppointmentContainer.Children.Add(appointmentControl);
