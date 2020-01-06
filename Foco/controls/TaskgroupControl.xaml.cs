@@ -7,7 +7,7 @@ using Foco.pages;
 using Foco.windows;
 using Task = Foco.models.Task;
 
-namespace Foco.ui
+namespace Foco.controls
 {
     /// <summary>
     /// Interaktionslogik für TaskgroupControl.xaml

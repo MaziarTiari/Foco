@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Foco.ui
+namespace Foco.controls
 {
     /// <summary>
     /// Interaktionslogik für GoalControl.xaml

@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Foco.ui
+namespace Foco.controls
 {
     /// <summary>
     /// Interaktionslogik für ProjectControl.xaml

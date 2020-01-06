@@ -4,7 +4,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using Foco.models;
 
-namespace Foco.ui
+namespace Foco.controls
 {
     /// <summary>
     /// Interaktionslogik für TaskControl.xaml

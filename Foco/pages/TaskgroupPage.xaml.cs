@@ -1,6 +1,6 @@
 ﻿using Foco.controls;
 using Foco.models;
-using Foco.ui;
+using Foco.controls;
 using System.Windows;
 using System.Windows.Controls;
 
