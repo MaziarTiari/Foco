@@ -1,0 +1,132 @@
+﻿<Page x:Class="Foco.pages.CalendarPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Foco.pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CalendarPage">
+
+
+    <Grid Margin="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Grid fuer Navigation -->
+        <Grid Grid.Row="0" Margin="10">
+            <Grid>
+
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="10 0 10 0"/>
+                        <Setter Property="Width" Value="50"/>
+                    </Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontWeight" Value="Bold"/>
+                    </Style>
+                </Grid.Resources>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Auswahl Jahr -->
+                <Grid Grid.Column="0" HorizontalAlignment="Right">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" HorizontalAlignment="Left" Click="LastYearHandler" Style="{StaticResource IconButtonStyle}">
+                        <Image Height="30" Source="/icons/icons8-chevron-left-96.png" Stretch="Fill" Width="30"/>
+                    </Button>
+                    <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Name="YearTag"  Text="2020" FontFamily="CenturyGothic" FontSize="22"/>
+                    <Button Grid.Column="2" HorizontalAlignment="Left" Click="NextYearHandler" Style="{StaticResource IconButtonStyle}">
+                        <Image Height="30" Source="/icons/icons8-chevron-right-96.png" Stretch="Fill" Width="30"/>
+                    </Button>
+                </Grid>
+
+                <!-- Auswahl Monat-->
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" HorizontalAlignment="Left" Click="LastMonthHandler" Style="{StaticResource IconButtonStyle}">
+                        <Image Height="30" Source="/icons/icons8-chevron-left-96.png" Stretch="Fill" Width="30"/>
+                    </Button>
+                    <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Name="MonthTag"  Text="Jan" FontFamily="CenturyGothic" FontSize="22"/>
+                    <Button Grid.Column="2" HorizontalAlignment="Left" Click="NextMonthHandler" Style="{StaticResource IconButtonStyle}">
+                        <Image Height="30" Source="/icons/icons8-chevron-right-96.png" Stretch="Fill" Width="30"/>
+                    </Button>
+                </Grid>
+
+            </Grid>
+        </Grid>
+
+        <!-- Grid fuer Wochentage -->
+        <Grid Background="#404040" Grid.Row="1" Margin="0,10,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontSize" Value="18"/>
+                    <Setter Property="Padding" Value="4"/>
+                    <Setter Property="FontFamily" Value="Century Gothic"/>
+                </Style>
+            </Grid.Resources>
+            <Label Grid.Row="0" Grid.Column="0" Content="Sonntag"/>
+            <Label Grid.Row="0" Grid.Column="1" Content="Montag"/>
+            <Label Grid.Row="0" Grid.Column="2" Content="Dienstag"/>
+            <Label Grid.Row="0" Grid.Column="3" Content="Mittwoch"/>
+            <Label Grid.Row="0" Grid.Column="4" Content="Donnerstag"/>
+            <Label Grid.Row="0" Grid.Column="5" Content="Freitag"/>
+            <Label Grid.Row="0" Grid.Column="6" Content="Samstag"/>
+        </Grid>
+
+        <!-- Grid fuer DayControls -->
+        <Border BorderBrush="#404040" BorderThickness="2,0,2,2" Grid.Row="2">
+            <Grid Background="GhostWhite" Name="DayControlContainer">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+            </Grid>
+        </Border>
+    </Grid>
+
+</Page>

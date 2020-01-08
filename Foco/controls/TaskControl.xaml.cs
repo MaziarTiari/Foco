@@ -4,7 +4,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using Foco.models;
 
-namespace Foco.ui
+namespace Foco.controls
 {
     /// <summary>
     /// Interaktionslogik für TaskControl.xaml
@@ -42,7 +42,9 @@ namespace Foco.ui
             DeleteTask();
         }
 
+
         // Benutzer schließt Editieren ab
+        #pragma warning disable IDE0051 // wird eigentlich durch XAML aufgerufen
         private void OnLabelEdited(string text)
         {
             if (!string.IsNullOrWhiteSpace(text))
@@ -50,6 +52,7 @@ namespace Foco.ui
             else
                 DeleteTask();
         }
+        #pragma warning restore IDE0051
 
         private void DeleteTask()
         {

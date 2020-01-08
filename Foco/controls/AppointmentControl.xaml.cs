@@ -1,19 +1,8 @@
 ﻿using Foco.models;
 using Foco.windows;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Foco.controls
 {
@@ -22,20 +11,29 @@ namespace Foco.controls
     /// </summary>
     public partial class AppointmentControl : UserControl
     {
-        private readonly CalenderDayControl calenderDayControl;
+        private readonly CalendarDayControl calendarDayControl;
         private readonly Taskgroup taskgroup;
 
-        public AppointmentControl(CalenderDayControl calenderDayControl, Taskgroup taskgroup)
+        public AppointmentControl(CalendarDayControl calendarDayControl, Taskgroup taskgroup)
         {
             InitializeComponent();
-            this.calenderDayControl = calenderDayControl;
+            this.calendarDayControl = calendarDayControl;
             this.taskgroup = taskgroup;
             this.TitleLabel.Text = taskgroup.Title;
-            
         }
 
         public Taskgroup Taskgroup  => taskgroup;
-        public CalenderDayControl CalenderDayControl => calenderDayControl;
+        public CalendarDayControl CalendarDayControl => calendarDayControl;
+
+        #pragma warning disable IDE0051 // wird eigentlich durch XAML aufgerufen
+        private void OnEdited(string text)
+        {
+            if (!string.IsNullOrWhiteSpace(text))
+                taskgroup.Title = text;
+            else
+                TitleLabel.Text = taskgroup.Title;
+        }
+        #pragma warning restore IDE0051
 
         private void OnOptionClickHandler(object sender, RoutedEventArgs e)
         {
@@ -44,17 +42,17 @@ namespace Foco.controls
 
             if (itemTag  == "edit" )
             {
-                CalenderDayControl.CalenderPage.MainWindow.ShowTaskgroup(taskgroup);
+                CalendarDayControl.CalendarPage.MainWindow.ShowTaskgroup(taskgroup);
             }
             if (itemTag == "move")
             {
-                DatepickerWindow datepicker = new DatepickerWindow(Taskgroup.Title, "Verschieben:", RescheduleDeadline);
+                DatepickerWindow datepicker = new DatepickerWindow("Deadline verschieben", "Neue Deadline:", RescheduleDeadline);
                 datepicker.DateTimePicker.SelectedDate = Taskgroup.Deadline;
                 datepicker.ShowDialog();
             }
             if (itemTag == "delete")
             {
-                ConfirmWindow confirmDeleteWindow = new ConfirmWindow(Taskgroup.Title, "möchtest diese Aufgabengruppe endgültig löschen?", ConfirmDeleteHandler);
+                ConfirmWindow confirmDeleteWindow = new ConfirmWindow("Aufgabengruppe löschen", "Sind Sie sicher, dass Sie die Aufgabengruppe \"" + taskgroup.Title + "\" inkl. aller Aufgaben löschen möchten?", ConfirmDeleteHandler);
                 confirmDeleteWindow.ShowDialog();
             }
         }
@@ -63,8 +61,8 @@ namespace Foco.controls
         {
             if (confirmState == ConfirmState.YES)
             {
-                CalenderDayControl.CalenderPage.Project.Taskgroups.Remove(Taskgroup);
-                this.CalenderDayControl.CalenderPage.Update();
+                CalendarDayControl.CalendarPage.Project.Taskgroups.Remove(Taskgroup);
+                this.CalendarDayControl.CalendarPage.Update();
             }
         }
 
@@ -73,7 +71,7 @@ namespace Foco.controls
             if (inputState == InputState.Save)
             {
                 Taskgroup.Deadline = selectedDate;
-                this.CalenderDayControl.CalenderPage.Update();
+                this.CalendarDayControl.CalendarPage.Update();
             }
             else
                 return;

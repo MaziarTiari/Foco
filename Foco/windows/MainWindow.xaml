@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Foco"
         mc:Ignorable="d"
-        Title="MainWindow" MinWidth="980" MinHeight="690" Width="980" Height="690" Icon="/icons/Foco.ico">
+        Title="MainWindow" MinWidth="1400" MinHeight="800" Width="1400" Height="800" Icon="/icons/Foco.ico">
+
     <DockPanel>
 
         <!-- Menüleiste -->
@@ -26,21 +27,27 @@
                     <RowDefinition Height="55"/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Column="0" Grid.Row="0" Tag="Home" Click="OnMenuButtonClick">
-                    <Image Height="45" Source="/icons/icons8-home-page-100.png" Stretch="Fill" Width="50"/>
+                <Button Grid.Column="0" Grid.Row="0" Tag="Home" Click="OnMenuButtonClick" ToolTip="Startseite" Style="{StaticResource IconButtonStyle}">
+                    <Image Height="51" Source="/icons/icons8-home-page-100.png" Stretch="Fill" Width="51"/>
                 </Button>
 
-                <Button Grid.Column="2" Grid.Row="0" Tag="Board" Click="OnMenuButtonClick">
-                    <Image Height="45" Source="/icons/icons8-prototype-96.png" Stretch="Fill" Width="52"/>
-                </Button>
+                <Border Grid.Column="2" Grid.Row="0" Name="BoardBorder" BorderBrush="White" BorderThickness="0">
+                    <Button Tag="Board" Click="OnMenuButtonClick" ToolTip="Board" Style="{StaticResource IconButtonStyle}">
+                        <Image Height="51" Source="/icons/icons8-prototype-96.png" Stretch="Fill" Width="51"/>
+                    </Button>
+                </Border>
 
-                <Button Grid.Column="3" Grid.Row="0" Tag="Calendar" Click="OnMenuButtonClick">
-                    <Image Height="45" Source="/icons/icons8-planner-96.png" Stretch="Fill" Width="56"/>
-                </Button>
+                <Border Grid.Column="3" Grid.Row="0" Name="CalendarBorder" BorderBrush="White" BorderThickness="0">
+                    <Button Tag="Calendar" Click="OnMenuButtonClick" ToolTip="Kalender" Style="{StaticResource IconButtonStyle}">
+                        <Image Height="51" Source="/icons/icons8-planner-96.png" Stretch="Fill" Width="51"/>
+                    </Button>
+                </Border>
 
-                <Button Grid.Column="4" Grid.Row="0" Tag="List" Click="OnMenuButtonClick">
-                    <Image Height="45" Source="/icons/icons8-todo-list-96.png" Stretch="Fill" Width="53"/>
-                </Button>
+                <Border Grid.Column="4" Grid.Row="0" Name="ListBorder" BorderBrush="White" BorderThickness="0">
+                    <Button Tag="List" Click="OnMenuButtonClick" ToolTip="Listen" Style="{StaticResource IconButtonStyle}">
+                        <Image Height="51" Source="/icons/icons8-todo-list-96.png" Stretch="Fill" Width="51"/>
+                    </Button>
+                </Border>
 
             </Grid>
         </Border>

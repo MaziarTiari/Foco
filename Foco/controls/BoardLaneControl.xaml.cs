@@ -76,9 +76,8 @@ namespace Foco.controls
         // Benutzer startet Drag eines BoardGroupControls
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.Source is BoardGroupControl)
+            if (e.Source is BoardGroupControl boardGroupControl)
             {
-                BoardGroupControl boardGroupControl = (BoardGroupControl)e.Source;
                 boardGroupControl.Opacity = 0.3;
                 DataObject dataObject = new DataObject(DataFormats.Xaml, boardGroupControl);
                 DragDrop.DoDragDrop((DependencyObject)e.Source, dataObject, DragDropEffects.Move);
@@ -88,9 +87,8 @@ namespace Foco.controls
         // Benutzer droppt ein BoardGroupControl
         private void OnDrop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetData(DataFormats.Xaml) is BoardGroupControl)
+            if (e.Data.GetData(DataFormats.Xaml) is BoardGroupControl draggingBoardGroupControl)
             {
-                BoardGroupControl draggingBoardGroupControl = (BoardGroupControl)e.Data.GetData(DataFormats.Xaml);
                 draggingBoardGroupControl.Opacity = 1.0;
                 draggingBoardGroupControl.Taskgroup.State = state;
                 sort = Sort.None; // Durch den Drop geht die Sortierung kaputt
@@ -102,10 +100,9 @@ namespace Foco.controls
         // Benutzer verschiebt einen Drag über das BoardLaneControl
         private void OnDragOver(object sender, DragEventArgs e)
         {
-            if (e.Data.GetData(DataFormats.Xaml) is BoardGroupControl)
+            if (e.Data.GetData(DataFormats.Xaml) is BoardGroupControl draggingBoardGroupControl)
             {
 
-                BoardGroupControl draggingBoardGroupControl = (BoardGroupControl)e.Data.GetData(DataFormats.Xaml);
                 int insertIndex = 0;
                 StackPanel stackPanel = null;
 
@@ -132,9 +129,8 @@ namespace Foco.controls
                 }
 
                 // DropEnter auf BoardGroupControl => Der Index entspricht dem des gehoverten Elements, Insert in das Parent des gehoverten Elements
-                else if (e.Source is BoardGroupControl)
+                else if (e.Source is BoardGroupControl hoveringBoardGroupControl)
                 {
-                    BoardGroupControl hoveringBoardGroupControl = (BoardGroupControl)e.Source;
                     stackPanel = (StackPanel)hoveringBoardGroupControl.Parent;
                     insertIndex = stackPanel.Children.IndexOf(hoveringBoardGroupControl);
                 }
@@ -186,8 +182,7 @@ namespace Foco.controls
             int i = 1;
             while (Project.Taskgroups.Exists(x => x.Title == title))
                 title = title.Split(' ')[0] + " " + title.Split(' ')[1] + " " + (++i);
-            Taskgroup taskgroup = new Taskgroup(title);
-            taskgroup.State = state;
+            Taskgroup taskgroup = new Taskgroup(title) { State = state };
             project.Taskgroups.Add(taskgroup);
             BoardGroupControl boardGroupControl = new BoardGroupControl(boardPage, taskgroup);
             TaskgroupStack.Children.Add(boardGroupControl);

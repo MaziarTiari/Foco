@@ -15,7 +15,7 @@ namespace Foco
         private readonly HomePage homePage;
         private readonly BoardPage boardPage;
         private readonly ListPage listPage;
-        private readonly CalenderPage calendarPage;
+        private readonly CalendarPage calendarPage;
         private readonly TaskgroupPage taskgroupPage;
         private readonly List<Goal> goals;
 
@@ -23,7 +23,7 @@ namespace Foco
         public HomePage HomePage => homePage;
         public BoardPage BoardPage => boardPage;
         public ListPage ListPage => listPage;
-        public CalenderPage CalenderPage => calendarPage;
+        public CalendarPage CalendarPage => calendarPage;
 
         public MainWindow(List<Goal> goals)
         {
@@ -32,7 +32,7 @@ namespace Foco
             homePage = new HomePage(this);
             boardPage = new BoardPage(this);
             listPage = new ListPage(this);
-            calendarPage = new CalenderPage(this);
+            calendarPage = new CalendarPage(this);
             taskgroupPage = new TaskgroupPage(null);
             PageFrame.Content = HomePage;
             MenuGrid.Visibility = Visibility.Hidden;
@@ -42,8 +42,9 @@ namespace Foco
         {
             BoardPage.Project = project;
             ListPage.Project = project;
-            CalenderPage.Project = project;
+            CalendarPage.Project = project;
             PageFrame.Content = BoardPage; // default Ansicht
+            DrawButtonBorder(BoardBorder);
             MenuGrid.Visibility = Visibility.Visible;
         }
 
@@ -51,6 +52,7 @@ namespace Foco
         {
             taskgroupPage.Taskgroup = taskgroup;
             PageFrame.Content = taskgroupPage;
+            DrawButtonBorder(null);
         }
 
         // wird aufgerufen, wenn ein Button in der Menüleiste gedrückt wird
@@ -67,17 +69,30 @@ namespace Foco
                 case "Board":
                     BoardPage.Update();
                     PageFrame.Content = BoardPage;
+                    DrawButtonBorder(BoardBorder);
                     break;
                 case "List":
                     ListPage.Update();
                     PageFrame.Content = ListPage;
+                    DrawButtonBorder(ListBorder);
                     break;
-                case "Calender":
-                    CalenderPage.setCurrentDate();
-                    CalenderPage.Update();
-                    PageFrame.Content = CalenderPage;
+                case "Calendar":
+                    CalendarPage.SetCurrentDate();
+                    CalendarPage.Update();
+                    PageFrame.Content = CalendarPage;
+                    DrawButtonBorder(CalendarBorder);
                     break;
             }
+        }
+
+        // zeichnet den Border um den Button der aktiven Sicht
+        private void DrawButtonBorder(Border border)
+        {
+            BoardBorder.BorderThickness = new Thickness(0);
+            ListBorder.BorderThickness = new Thickness(0);
+            CalendarBorder.BorderThickness = new Thickness(0);
+            if(border != null)
+                border.BorderThickness = new Thickness(2);
         }
 
     }

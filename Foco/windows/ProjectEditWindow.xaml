@@ -5,16 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Foco.windows"
         mc:Ignorable="d"
-        Title="" WindowStyle="ToolWindow" ResizeMode="NoResize" ShowInTaskbar="False" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner">
+        Title="" WindowStyle="ToolWindow" ResizeMode="NoResize" ShowInTaskbar="False" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" FontFamily="Century Gothic">
 
-    <Grid Height="130" Width="300">
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="50"/>
-        <TextBox MaxLines="1" TextWrapping="NoWrap" Name="NameBox" HorizontalAlignment="Left" Height="23" Margin="65,13,0,0" Text="" VerticalAlignment="Top" Width="225" MaxLength="30"/>
-        <Label Content="Farbe:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-        <Border Name="ColorBox" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="26" Margin="65,41,0,0" VerticalAlignment="Top" Width="130"/>
-        <Button Content="Wählen" HorizontalAlignment="Left" Margin="200,41,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.258,-0.067" Height="26" Click="OnChooseColorClicked"/>
-        <Button Content="Speichern" HorizontalAlignment="Left" Margin="221,94,0,0" VerticalAlignment="Top" Width="69" Height="26" Click="OnSaveClicked"/>
-        <Button Content="Abbrechen" HorizontalAlignment="Left" Margin="144,94,0,0" VerticalAlignment="Top" Width="72" Height="26" Click="OnCancelClicked"/>
-    </Grid>
+    <StackPanel Margin="10">
+        <DockPanel>
+            <Label Content="Name:" Width="50" DockPanel.Dock="Left"/>
+            <TextBox MaxLines="1" TextWrapping="NoWrap" Name="NameBox" Height="23" Text="" Width="160" MaxLength="25"/>
+        </DockPanel>
+        <DockPanel>
+            <Label Content="Farbe:" Width="50" DockPanel.Dock="Left"/>
+            <ComboBox Name="ColorCombo" Height="23" Width="160"/>
+        </DockPanel>
+        <DockPanel Margin="0 20 0 0">
+            <Button Content="Speichern" DockPanel.Dock="Right" Width="80" Padding="4" Click="OnSaveClicked"/>
+            <Button Content="Abbrechen" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 5 0" Width="80" Padding="4" Click="OnCancelClicked"/>
+        </DockPanel>
+        
+    </StackPanel>
 
 </Window>

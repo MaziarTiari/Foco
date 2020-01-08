@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using System.Windows.Forms;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace Foco.windows
@@ -10,33 +10,37 @@ namespace Foco.windows
     public partial class ProjectEditWindow : Window
     {
 
-        public delegate void ProjectSaveCallack(string projectName, string projectColor);
+        private static readonly string[] colorStrings = new string[] { "#A0A0A0", "#EB2524", "#F47B10", "#F8E40A", "#436A0C", "#86E004", "#1BDBE9", "#144EE1", "#C70EE3", "#E90FD4" };
 
-        private Color color;
-        private ProjectSaveCallack projectSaveCallback;
+        public delegate void ProjectSaveCallack(string projectName, string projectColor);
+        private readonly ProjectSaveCallack projectSaveCallback;
 
         public ProjectEditWindow(string windowTitle, string projectName, string projectColor, ProjectSaveCallack projectSaveCallback)
         {
             InitializeComponent();
             this.projectSaveCallback = projectSaveCallback;
             Title = windowTitle;
-            color = (Color)ColorConverter.ConvertFromString(projectColor);
             Owner = System.Windows.Application.Current.MainWindow;
-            ColorBox.Background = new SolidColorBrush(color);
             NameBox.Text = projectName;
             NameBox.Focus();
             NameBox.CaretIndex = NameBox.Text.Length;
-        }
-
-        // Benutzer hat auf "Wählen" geklickt
-        private void OnChooseColorClicked(object sender, RoutedEventArgs e)
-        {
-            ColorDialog colorDialog = new ColorDialog();
-            if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            foreach (string colorString in colorStrings)
             {
-                color = Color.FromRgb(colorDialog.Color.R, colorDialog.Color.G, colorDialog.Color.B);
-                ColorBox.Background = new SolidColorBrush(color);
+                ComboBoxItem comboBoxItem = new ComboBoxItem();
+                Border colorBorder = new Border
+                {
+                    Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorString)),
+                    Height = 20,
+                    Width = 130
+                };
+                comboBoxItem.Content = colorBorder;
+                comboBoxItem.Tag = colorString;
+                ColorCombo.Items.Add(comboBoxItem);
+                if (projectColor == colorString)
+                    ColorCombo.SelectedItem = comboBoxItem; // vorhandene Farbe vorselektieren
             }
+            if (ColorCombo.SelectedIndex == -1)
+                ColorCombo.SelectedIndex = 0; // nicht gefunden, dann erstes Element vorselektieren
         }
 
         // Benutzer hat auf Speichern geklickt
@@ -49,7 +53,7 @@ namespace Foco.windows
             else
             {
                 Close();
-                projectSaveCallback(NameBox.Text, new ColorConverter().ConvertToString(color));
+                projectSaveCallback(NameBox.Text, ((ComboBoxItem)ColorCombo.SelectedItem).Tag.ToString());
             }
 
         }

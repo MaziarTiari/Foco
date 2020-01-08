@@ -1,17 +1,15 @@
-﻿using System;
+﻿using Foco.models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Foco.models
+namespace Foco.calendar
 {
-    public class CalenderDay
+    public class CalendarDay
     {
         private DateTime date;
         private List<Taskgroup> taskgroups = new List<Taskgroup>();
         private bool fromSelectedMonth = true;
-        public CalenderDay(DateTime date)
+        public CalendarDay(DateTime date)
         {
             this.Date = date;
         }

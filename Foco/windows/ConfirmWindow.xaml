@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Foco.windows"
         mc:Ignorable="d"
-        Title="Confirm Title" ResizeMode="NoResize" ShowInTaskbar="False" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow" >
+        Title="Confirm Title" ResizeMode="NoResize" ShowInTaskbar="False" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow" FontFamily="Century Gothic">
 
-    <DockPanel Margin="20">
-        <TextBlock DockPanel.Dock="Top" Name="Message" TextWrapping="Wrap" Text="Confirm Message" HorizontalAlignment="Left" Margin="0 0 0 30" VerticalAlignment="Top" Width="280"/>
-        <Button DockPanel.Dock="Right" Content="Ja" Tag="Yes" HorizontalAlignment="Right" Margin="5 0 0 0" Width="70" Height="26" Click="OnButtonClicked"/>
-        <Button DockPanel.Dock="Right" Content="Nein" Tag="No" HorizontalAlignment="Right" Width="70" Height="26" Click="OnButtonClicked"/>
+    <DockPanel Margin="10">
+        <TextBlock DockPanel.Dock="Top" Name="Message" TextWrapping="Wrap" Text="Confirm Message" HorizontalAlignment="Left" Margin="0 0 0 20" VerticalAlignment="Top" Width="210"/>
+        <Button DockPanel.Dock="Right" Content="Ja" Tag="Yes" HorizontalAlignment="Right" Margin="5 0 0 0" Width="50" Padding="4" Click="OnButtonClicked"/>
+        <Button DockPanel.Dock="Right" Content="Nein" Tag="No" HorizontalAlignment="Right" Width="50" Padding="4" Click="OnButtonClicked"/>
     </DockPanel>
 
 </Window>

@@ -4,43 +4,42 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Foco.controls"
-             mc:Ignorable="d" Width="500" Height="Auto" Margin="10">
+             mc:Ignorable="d" Width="Auto" Height="Auto" FontFamily="Century Gothic">
 
-    <Border BorderBrush="Black" BorderThickness="3" CornerRadius="5">
         <Grid Name="ContentGrid">
 
-            <!-- Row Definitions -->
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
+            <!-- Column Definitions -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
 
-            <!-- Row 0: Editor -->
-            <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1" Margin="10">
+            <!-- Column 0: Editor -->
+            <Border Grid.Column="0" BorderBrush="#404040" BorderThickness="3" Margin="10">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Background="Black" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="20" Foreground="White">Beschreibung</Label>
+                    <Label Grid.Row="0" Background="#404040" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White">Beschreibung</Label>
                     <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-                        <TextBox AcceptsReturn="true" Name="TaskDescriptionEditor" AcceptsTab="true">Aufgabenbeschreibung</TextBox>
+                        <TextBox AcceptsReturn="true" Name="TaskDescriptionEditor" AcceptsTab="true" FontSize="16">Aufgabenbeschreibung</TextBox>
                     </ScrollViewer>
                 </Grid>
             </Border>
 
-            <!-- Row 1: Anhänge -->
-            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1" Margin="10">
+            <!-- Column 1: Anhänge -->
+            <Border Grid.Column="1" BorderBrush="#404040" BorderThickness="3" Margin="10" Width="400">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Border Grid.Row="0" Background="Black">
+                    <Border Grid.Row="0" Background="#404040">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Label HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="20" Foreground="White">Anhänge</Label>
+                            <Label HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White">Anhänge</Label>
                             <Menu Height="20" Width="20">
-                                <MenuItem Name="AddMenuItem" Background="Black" Foreground="White" BorderThickness="0" Header="▼" Width="20" Height="20">
+                                <MenuItem Name="AddMenuItem" Background="#404040" Foreground="White" BorderThickness="0" Header="▼" FontSize="16" Width="20" Height="20" FontFamily="Century Gothic">
                                     <MenuItem Foreground="Black" Click="OnAddAttachmentMenuItemClick" Tag="URL" Header="Webadresse anhängen"></MenuItem>
                                     <MenuItem Foreground="Black" Click="OnAddAttachmentMenuItemClick" Tag="FILE" Header="Lokale Datei anhängen"></MenuItem>
                                 </MenuItem>
@@ -54,6 +53,5 @@
             </Border>
 
         </Grid>
-    </Border>
 
 </UserControl>

@@ -1,29 +1,28 @@
-﻿using System;
+﻿using Foco.models;
+using System;
 using System.Collections.Generic;
-using System.Windows;
 
-
-
-namespace Foco.models
+namespace Foco.calendar
 {
 
-    public class CalenderMonth
+    public class CalendarMonth
     {
+
+        public static readonly string[] MonthNames = new string[] { "Jan", "Feb", "März", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez" };
+
         private int month;
         private int year;
-        private CalenderDay[] days = new CalenderDay[42];
+        private CalendarDay[] days = new CalendarDay[42];
         private List<Taskgroup> taskgroups = new List<Taskgroup>();
-        private readonly string[] months = { "Jan", "Feb", "März", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez" };
-        public CalenderMonth(int year, int month)
+        public CalendarMonth(int year, int month)
         {
             this.month = month;
             this.year = year;
             Update();
         }
 
-        public CalenderDay[] Days { get => days; set => days = value; }
+        public CalendarDay[] Days { get => days; set => days = value; }
         public List<Taskgroup> Taskgroups { get => taskgroups; set { taskgroups = value; Update(); } }
-        public string[] Months => months;
 
         public int LastMonth()
         {
@@ -76,7 +75,7 @@ namespace Foco.models
 
         private void SetDay(int index, DateTime date)
         {
-            Days[index] = new CalenderDay(date);
+            Days[index] = new CalendarDay(date);
             if (Taskgroups.Count < 1)
                 return;
             foreach(Taskgroup taskgroup in Taskgroups)
@@ -88,14 +87,14 @@ namespace Foco.models
             }
         }
 
-        public void setNextMonth()
+        public void SetNextMonth()
         {
             if (Month == 12) Year++;
             Month = NextMonth();
             Update();
         }
 
-        public void setLastMonth()
+        public void SetLastMonth()
         {
             if (Month == 1) Year --;
             Month = LastMonth();
