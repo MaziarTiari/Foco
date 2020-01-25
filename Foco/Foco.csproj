@@ -319,6 +319,9 @@
     <Resource Include="icons\icons8-chevron-left-96.png" />
     <Resource Include="icons\icons8-chevron-right-96.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\icons8-hilfe-80.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

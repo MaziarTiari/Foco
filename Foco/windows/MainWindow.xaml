@@ -11,7 +11,7 @@
 
         <!-- Menüleiste -->
         <Border DockPanel.Dock="Top" Height="75" Background="#404040">
-            <Grid Margin="10" Name="MenuGrid">
+            <Grid Margin="10">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="55"/>
@@ -48,6 +48,10 @@
                         <Image Height="51" Source="/icons/icons8-todo-list-96.png" Stretch="Fill" Width="51"/>
                     </Button>
                 </Border>
+
+                <Button Grid.Column="6" Tag="Help" Click="OnMenuButtonClick" ToolTip="Hilfe anzeigen" Style="{StaticResource IconButtonStyle}">
+                    <Image Height="51" Source="/icons/icons8-hilfe-80.png" Stretch="Fill" Width="51"/>
+                </Button>
 
             </Grid>
         </Border>
