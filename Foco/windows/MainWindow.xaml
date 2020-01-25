@@ -53,6 +53,8 @@
                     <Image Height="51" Source="/icons/icons8-hilfe-80.png" Stretch="Fill" Width="51"/>
                 </Button>
 
+                <TextBlock Name="WelcomeMessage" Grid.Column="1" Grid.ColumnSpan="5" Text="Willkommen bei foco!" FontSize="42" FontFamily="Century Gothic" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Visibility="Hidden"/>
+
             </Grid>
         </Border>
 

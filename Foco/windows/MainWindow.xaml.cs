@@ -101,11 +101,13 @@ namespace Foco
         }
 
         // versteckt oder zeigt die Buttons fuer die Sichten
+        // und zeigt entsprechend stattdessen die Welcome-Message
         private void SetViewButtonsVisibilities(Visibility visibility)
         {
             BoardBorder.Visibility = visibility;
             ListBorder.Visibility = visibility;
             CalendarBorder.Visibility = visibility;
+            WelcomeMessage.Visibility = visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
         }
 
     }
