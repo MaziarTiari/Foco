@@ -5,12 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Foco.windows"
         mc:Ignorable="d"
-        Title="Confirm Title" ResizeMode="NoResize" ShowInTaskbar="False" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow" FontFamily="Century Gothic">
+        Title="Confirm Title" WindowStartupLocation="CenterOwner" Style="{StaticResource InputWindowStyle}">
 
-    <DockPanel Margin="10">
-        <TextBlock DockPanel.Dock="Top" Name="Message" TextWrapping="Wrap" Text="Confirm Message" HorizontalAlignment="Left" Margin="0 0 0 20" VerticalAlignment="Top" Width="210"/>
-        <Button DockPanel.Dock="Right" Content="Ja" Tag="Yes" HorizontalAlignment="Right" Margin="5 0 0 0" Width="50" Padding="4" Click="OnButtonClicked"/>
-        <Button DockPanel.Dock="Right" Content="Nein" Tag="No" HorizontalAlignment="Right" Width="50" Padding="4" Click="OnButtonClicked"/>
-    </DockPanel>
+    <Window.Resources>
+        <ResourceDictionary Source="../ResourceDictionaries/InputWindowDictionary.xaml"/>
+    </Window.Resources>
+    
+    <StackPanel Style="{StaticResource InputWindowMainStackPanel}">
+        <TextBlock Name="Message" TextWrapping="Wrap" Text="Confirm Message" MinWidth="210" MaxWidth="400"/>
+        <DockPanel Style="{StaticResource ConfirmButtonPanel}">
+            <Button Content="Nein" Tag="No" Click="OnButtonClicked" Width="50" Style="{StaticResource ConfirmButton}"/>
+            <Button Content="Ja" Tag="Yes" Click="OnButtonClicked" Width="50" Style="{StaticResource ConfirmButton}"/>
+        </DockPanel>
+    </StackPanel>
 
 </Window>

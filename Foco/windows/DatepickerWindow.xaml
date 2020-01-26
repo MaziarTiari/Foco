@@ -6,14 +6,17 @@
         xmlns:local="clr-namespace:Foco.windows"
         mc:Ignorable="d"
         Title="Titel" WindowStyle="ToolWindow" ResizeMode="NoResize" ShowInTaskbar="False" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" Closing="OnWindowClosing" FontFamily="Century Gothic">
-    <StackPanel Margin="10">
-        <DockPanel Margin="0 0 0 20">
-            <Label DockPanel.Dock="Left" Name="InputLabel" Content="Label:" Margin="0 0 10 0" VerticalAlignment="Center"/>
-            <DatePicker Name="DateTimePicker" VerticalAlignment="Center" DockPanel.Dock="Right" Width="160"/>
+    <Window.Resources>
+        <ResourceDictionary Source="../ResourceDictionaries/InputWindowDictionary.xaml"/>
+    </Window.Resources>
+    <StackPanel Style="{StaticResource InputWindowMainStackPanel}">
+        <DockPanel>
+            <Label Name="InputLabel" Content="Label:"/>
+            <DatePicker Name="DateTimePicker" VerticalAlignment="Center" SelectedDate="" Width="160"/>
         </DockPanel>
-        <DockPanel HorizontalAlignment="Right">
-            <Button Content="Speichern" Tag="save" DockPanel.Dock="Right" Padding="4" Width="80" Margin="5 0 0 0" Click="OnButtonClicked"/>
-            <Button Content="Abbrechen" Tag="cancel" DockPanel.Dock="Right" Padding="4" Width="80" Click="OnButtonClicked"/>
+        <DockPanel Style="{StaticResource ConfirmButtonPanel}">
+            <Button Content="Speichern" Tag="save" Click="OnButtonClicked" Style="{StaticResource ConfirmButton}"/>
+            <Button Content="Abbrechen" Tag="cancel" Click="OnButtonClicked" Style="{StaticResource ConfirmButton}"/>
         </DockPanel>
     </StackPanel>
 </Window>

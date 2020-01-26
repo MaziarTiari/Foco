@@ -5,16 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Foco.windows"
         mc:Ignorable="d"
-        Title="WindowTitle" WindowStyle="ToolWindow" ResizeMode="NoResize" ShowInTaskbar="False" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" Closing="OnWindowClosing">
+        Title="WindowTitle" WindowStartupLocation="CenterOwner" Closing="OnWindowClosing" Style="{StaticResource InputWindowStyle}">
 
-    <Grid Height="122" Width="300">
-        <Label Content="Titel:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="50"/>
-        <TextBox Name="TitleBox" MaxLines="1" HorizontalAlignment="Left" Height="23" Margin="65,13,0,0" TextWrapping="NoWrap" Text="DefaultText" VerticalAlignment="Top" Width="225" MaxLength="40"/>
-        <Label Name="LinkLabel" Content="Label:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="50"/>
-        <TextBox Name="LinkBox" MaxLines="1" HorizontalAlignment="Left" Height="23" Margin="65,43,0,0" TextWrapping="NoWrap" Text="DefaultText" VerticalAlignment="Top" Width="190"/>
-        <Button Content="Speichern" Tag="Save" HorizontalAlignment="Left" Margin="221,86,0,0" VerticalAlignment="Top" Width="69" Height="26" Click="OnButtonClicked"/>
-        <Button Content="Abbrechen" Tag="Cancel" HorizontalAlignment="Left" Margin="144,86,0,0" VerticalAlignment="Top" Width="72" Height="26" Click="OnButtonClicked"/>
-        <Button Name="FileButton" Content="..." HorizontalAlignment="Left" Margin="260,43,0,0" VerticalAlignment="Top" Width="30" Height="23" Click="OnFileButtonClicked"/>
-    </Grid>
+    <Window.Resources>
+        <ResourceDictionary Source="../ResourceDictionaries/InputWindowDictionary.xaml"/>
+    </Window.Resources>
+    <StackPanel Style="{StaticResource InputWindowMainStackPanel}">
+        <StackPanel.Resources>
+            <Style  TargetType="Grid">
+                <Setter Property="Margin" Value="0 5 0 5"/>
+            </Style>
+        </StackPanel.Resources>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="Titel:"/>
+            <TextBox Grid.Column="1" Name="TitleBox" MaxLines="1" Text="DefaultText"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Name="LinkLabel" Content="Label:"/>
+            <TextBox Grid.Column="1" Name="LinkBox" MaxLines="1" Text="DefaultText"/>
+            <Button Grid.Column="2" Name="FileButton" Content="..." Click="OnFileButtonClicked" Width="30" Margin="0"/>
+        </Grid>
+        <DockPanel Style="{StaticResource ConfirmButtonPanel}">
+            <Button Content="Speichern" Tag="Save" Click="OnButtonClicked" Style="{StaticResource ConfirmButton}"/>
+            <Button Content="Abbrechen" Tag="Cancel" Click="OnButtonClicked" Style="{StaticResource ConfirmButton}"/>
+        </DockPanel>
+    </StackPanel>
 
 </Window>
