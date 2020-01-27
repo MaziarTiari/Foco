@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Foco"
         mc:Ignorable="d"
-        Title="MainWindow" MinWidth="1400" MinHeight="800" Width="1400" Height="800" Icon="/icons/Foco.ico">
+        MinWidth="1280" MinHeight="800" Icon="/icons/Foco.ico" WindowStartupLocation="CenterScreen" WindowState="Maximized">
 
     <DockPanel>
 
         <!-- Menüleiste -->
         <Border DockPanel.Dock="Top" Height="75" Background="#404040">
-            <Grid Margin="10" Name="MenuGrid">
+            <Grid Margin="10">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="55"/>
@@ -48,6 +48,12 @@
                         <Image Height="51" Source="/icons/icons8-todo-list-96.png" Stretch="Fill" Width="51"/>
                     </Button>
                 </Border>
+
+                <Button Grid.Column="6" Tag="Help" Click="OnMenuButtonClick" ToolTip="Hilfe anzeigen" Style="{StaticResource IconButtonStyle}">
+                    <Image Height="51" Source="/icons/icons8-hilfe-80.png" Stretch="Fill" Width="51"/>
+                </Button>
+
+                <TextBlock Name="WelcomeMessage" Grid.Column="1" Grid.ColumnSpan="5" Text="Willkommen bei foco!" FontSize="42" FontFamily="Century Gothic" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Visibility="Hidden"/>
 
             </Grid>
         </Border>

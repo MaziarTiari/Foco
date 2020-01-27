@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Foco.controls" FontFamily="Century Gothic">
+             xmlns:local="clr-namespace:Foco.controls" FontFamily="Century Gothic" Cursor="Hand">
 
-    <Border Background="White" Width="Auto" Height="45" BorderBrush="Black" BorderThickness="1" MouseLeftButtonDown="OnControlClicked" Margin="5" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave" >
+    <Border Background="White" Width="Auto" Height="45" BorderBrush="Black" BorderThickness="1" MouseLeftButtonDown="OnControlClicked" Margin="5" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave" ToolTip="Klicken zum Öffnen">
         <Grid>
 
             <Grid.ColumnDefinitions>

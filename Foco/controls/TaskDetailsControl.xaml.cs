@@ -72,5 +72,10 @@ namespace Foco.controls
             Update();
         }
 
+        private void OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(task != null)
+                task.Description = TaskDescriptionEditor.Text;
+        }
     }
 }
