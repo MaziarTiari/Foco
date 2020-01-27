@@ -38,6 +38,7 @@ namespace Foco
             taskgroupPage = new TaskgroupPage(null);
             PageFrame.Content = HomePage;
             SetViewButtonsVisibilities(Visibility.Hidden);
+            Title = "foco | Startseite";
         }
 
         public void ShowProject(Project project)
@@ -48,6 +49,7 @@ namespace Foco
             PageFrame.Content = BoardPage; // default Ansicht
             SetViewButtonsVisibilities(Visibility.Visible);
             DrawButtonBorder(BoardBorder);
+            Title = "foco | " + project.Name;
         }
 
         public void ShowTaskgroup(Taskgroup taskgroup)
@@ -67,6 +69,7 @@ namespace Foco
                     PageFrame.Content = HomePage;
                     HomePage.Update();
                     SetViewButtonsVisibilities(Visibility.Hidden);
+                    Title = "foco | Startseite";
                     break;
                 case "Board":
                     BoardPage.Update();
