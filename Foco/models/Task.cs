@@ -19,7 +19,7 @@ namespace Foco.models
             Attachments = new List<Attachment>();
         }
 
-        public string Description { get => description; set { if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(); description = value; } }
+        public string Description { get => description; set => description = value; }
         public bool Done { get => done; set => done = value; }
         public string Title { get => title; set { if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(); title = value; } }
         public List<Attachment> Attachments { get => attachments; set { if (value == null) throw new ArgumentNullException(); attachments = value; } }

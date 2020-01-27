@@ -12,6 +12,8 @@ namespace Foco
     public partial class MainWindow : Window
     {
 
+        private const string helpUrl = "https://github.com/MaziarTiari/Foco/blob/develop/README.md#foco"; // TODO: Später URL vom Master Branch
+
         private readonly HomePage homePage;
         private readonly BoardPage boardPage;
         private readonly ListPage listPage;
@@ -35,7 +37,8 @@ namespace Foco
             calendarPage = new CalendarPage(this);
             taskgroupPage = new TaskgroupPage(null);
             PageFrame.Content = HomePage;
-            MenuGrid.Visibility = Visibility.Hidden;
+            SetViewButtonsVisibilities(Visibility.Hidden);
+            Title = "foco | Startseite";
         }
 
         public void ShowProject(Project project)
@@ -44,8 +47,9 @@ namespace Foco
             ListPage.Project = project;
             CalendarPage.Project = project;
             PageFrame.Content = BoardPage; // default Ansicht
+            SetViewButtonsVisibilities(Visibility.Visible);
             DrawButtonBorder(BoardBorder);
-            MenuGrid.Visibility = Visibility.Visible;
+            Title = "foco | " + project.Name;
         }
 
         public void ShowTaskgroup(Taskgroup taskgroup)
@@ -62,9 +66,10 @@ namespace Foco
             switch (menuButton.Tag)
             {
                 case "Home":
-                    MenuGrid.Visibility = Visibility.Hidden;
                     PageFrame.Content = HomePage;
                     HomePage.Update();
+                    SetViewButtonsVisibilities(Visibility.Hidden);
+                    Title = "foco | Startseite";
                     break;
                 case "Board":
                     BoardPage.Update();
@@ -82,6 +87,9 @@ namespace Foco
                     PageFrame.Content = CalendarPage;
                     DrawButtonBorder(CalendarBorder);
                     break;
+                case "Help":
+                    System.Diagnostics.Process.Start(helpUrl);
+                    break;
             }
         }
 
@@ -91,8 +99,18 @@ namespace Foco
             BoardBorder.BorderThickness = new Thickness(0);
             ListBorder.BorderThickness = new Thickness(0);
             CalendarBorder.BorderThickness = new Thickness(0);
-            if(border != null)
+            if (border != null)
                 border.BorderThickness = new Thickness(2);
+        }
+
+        // versteckt oder zeigt die Buttons fuer die Sichten
+        // und zeigt entsprechend stattdessen die Welcome-Message
+        private void SetViewButtonsVisibilities(Visibility visibility)
+        {
+            BoardBorder.Visibility = visibility;
+            ListBorder.Visibility = visibility;
+            CalendarBorder.Visibility = visibility;
+            WelcomeMessage.Visibility = visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
         }
 
     }
