@@ -14,7 +14,7 @@
                 <Border Name="PriorityBorder" DockPanel.Dock="Left" CornerRadius="5" Background="Orange" Height="25">
                     <Label FontSize="10" Name="PriorityLabel" Foreground="White" VerticalAlignment="Center">Normal</Label>
                 </Border>
-                <Border Name="DeadlineBorder" DockPanel.Dock="Right" CornerRadius="5" Background="#FE9766" Height="25" HorizontalAlignment="Right">
+                <Border Name="DeadlineBorder" DockPanel.Dock="Right" CornerRadius="5" Background="{StaticResource RelevantDate}" Height="25" HorizontalAlignment="Right">
                     <Label FontSize="10" Name="DeadlineLabel" Foreground="White" VerticalAlignment="Center">28.11.2019</Label>
                 </Border>
             </DockPanel>

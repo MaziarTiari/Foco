@@ -7,7 +7,7 @@
              xmlns:controls="clr-namespace:Foco.controls"
              mc:Ignorable="d" Width="425" Height="480" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Century Gothic">
 
-    <Border Margin="10" BorderThickness="3" Background="White" BorderBrush="#404040">
+    <Border Margin="10" BorderThickness="3" Background="White" BorderBrush="{StaticResource ParentItemBorderBackground}" CornerRadius="3">
         <Grid>
 
             <Grid.RowDefinitions>

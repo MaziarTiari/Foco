@@ -50,7 +50,7 @@ namespace Foco.pages
                         dayControl.DayOfDate.Text += (" " + CalendarMonth.MonthNames[days[i].Date.Month - 1]);
                     }
                     if (days[i].Date == DateTime.Today)
-                        dayControl.DayInfoContainer.Background = Brushes.LightSkyBlue;
+                        dayControl.DayInfoContainer.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FE9766"));
                     // Add dayControl to the CalendarPage
                     dayControl.SetValue(Grid.RowProperty, r);
                     dayControl.SetValue(Grid.ColumnProperty, c);

@@ -5,14 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Foco.controls"
              mc:Ignorable="d" FontFamily="Century Gothic">
-    <Grid Background="{StaticResource ChildItemBorderBackground}" Margin="2">
+    <Grid Background="{StaticResource ChildItemBorderBackground}" Margin="2" VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <local:EditableLabel Grid.Column="0" x:Name="TitleLabel" EditedCallbackFunction="OnEdited" FontSize="12" Foreground="White" Text="Name" AllowNewLine="False" MaxLength="50" />
-        <Menu Grid.Column="1" Background="Transparent" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" FontFamily="Century Gothic">
-            <MenuItem Name="EditMenu" Background="Transparent" Foreground="White" BorderThickness="0" Height="15" Header="▼">
+        <Menu Grid.Column="1" Background="Transparent" VerticalAlignment="Center" FontFamily="Century Gothic">
+            <MenuItem Name="EditMenu" Background="Transparent" Foreground="White" BorderThickness="0" Header="▼">
                 <MenuItem FontSize="14" Foreground="Black" Click="OnOptionClickHandler" Tag="move" Header="Deadline verschieben"></MenuItem>
                 <MenuItem FontSize="14" Foreground="Black" Click="OnOptionClickHandler" Tag="edit" Header="Detailansicht öffnen"></MenuItem>
                 <MenuItem FontSize="14" Foreground="Black" Click="OnOptionClickHandler" Tag="delete" Header="Aufgabengruppe löschen"></MenuItem>

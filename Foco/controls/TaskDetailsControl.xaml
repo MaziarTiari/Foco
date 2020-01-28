@@ -15,13 +15,13 @@
             </Grid.ColumnDefinitions>
 
             <!-- Column 0: Editor -->
-            <Border Grid.Column="0" BorderBrush="#404040" BorderThickness="3" Margin="10">
+            <Border Grid.Column="0" BorderBrush="{StaticResource ParentItemBorderBackground}" BorderThickness="3" Margin="10" CornerRadius="3">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Background="#404040" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White">Beschreibung</Label>
+                    <Label Grid.Row="0" Background="{StaticResource ParentItemBorderBackground}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White">Beschreibung</Label>
                     <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
                     <Grid>
                         <TextBox AcceptsReturn="true" Name="TaskDescriptionEditor" AcceptsTab="true" FontSize="16" TextChanged="OnTextChanged"></TextBox>
@@ -43,17 +43,17 @@
             </Border>
 
             <!-- Column 1: Anhänge -->
-            <Border Grid.Column="1" BorderBrush="#404040" BorderThickness="3" Margin="10" Width="400">
+            <Border Grid.Column="1" BorderBrush="{StaticResource ParentItemBorderBackground}" BorderThickness="3" Margin="10" Width="400" CornerRadius="3">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Border Grid.Row="0" Background="#404040">
+                    <Border Grid.Row="0" Background="{StaticResource ParentItemBorderBackground}">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <Label HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White">Anhänge</Label>
-                            <Menu Height="20" Width="20" ToolTip="Anhang hinzufügen">
-                                <MenuItem Name="AddMenuItem" Background="#404040" Foreground="White" BorderThickness="0" Header="▼" FontSize="16" Width="20" Height="20" FontFamily="Century Gothic">
+                        <Menu ToolTip="Anhang hinzufügen" Background="{StaticResource ParentItemBorderBackground}" VerticalAlignment="Center">
+                                <MenuItem Name="AddMenuItem"  Foreground="White" BorderThickness="0" Header="▼" FontSize="16" FontFamily="Century Gothic">
                                     <MenuItem FontSize="14" Foreground="Black" Click="OnAddAttachmentMenuItemClick" Tag="URL" Header="Webadresse anhängen"></MenuItem>
                                     <MenuItem FontSize="14" Foreground="Black" Click="OnAddAttachmentMenuItemClick" Tag="FILE" Header="Lokale Datei anhängen"></MenuItem>
                                 </MenuItem>

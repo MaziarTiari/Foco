@@ -18,6 +18,8 @@
 
     <SolidColorBrush x:Key="ChildItemBorderBackground" Color="#534D41"/>
 
+    <SolidColorBrush x:Key="RelevantDate" Color="#FE9766"/>
+
     <Style TargetType="Button">
         <Setter Property="Margin" Value="5 0 0 0"/>
         <Setter Property="Padding" Value="6"/>

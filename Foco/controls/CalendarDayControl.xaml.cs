@@ -55,19 +55,6 @@ namespace Foco.controls
             appointmentControl.TitleLabel.BeginEditing();
         }
 
-        /*private void SetDeadlineForExistingTaskgroup(ConfirmState confirmState)
-        {
-            if(confirmState == ConfirmState.YES)
-            {
-                this.CalendarPage.Project.Taskgroups[indexOfAlreadyDefinedTaskgroup].Deadline = this.Day.Date;
-                this.CalendarPage.Update();
-            }
-            else
-            {
-                TaskgroupCreateInputWindow();
-            }
-        }*/
-
         private void OnMouseOverChange(object sender, System.Windows.Input.MouseEventArgs e)
         {
             AddButton.Visibility = (Day.Date >= DateTime.Today && IsMouseOver) ? Visibility.Visible : Visibility.Hidden;
