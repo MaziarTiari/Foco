@@ -13,8 +13,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
             <Grid.Resources>
@@ -60,16 +60,10 @@
                 </Button>
             </Grid>
 
-            <!-- Reihe 2: Tasks -->
-            <ScrollViewer Grid.Row="2" Name="TaskContainerScroll" Margin="10" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
-                <StackPanel Name="TaskContainer" Width="360">
-                </StackPanel>
-            </ScrollViewer>
-
-            <!-- Reihe 3: Neuer Task -->
-            <Grid Grid.Row="3" Width="Auto">
-                <TextBox x:Name="TaskCreateEditor" Margin="0, 0, 0, 10" TextWrapping="Wrap" HorizontalAlignment="Center" Width="380" MinHeight="20" AcceptsReturn="True" PreviewKeyDown="TaskEditorPreviewKeyDown"/>
-                <TextBlock IsHitTestVisible="False" Text="Neue Aufgabe" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,0,0,10" Foreground="DarkGray">
+            <!-- Reihe 2: Neuer Task -->
+            <Grid Grid.Row="2" Width="Auto">
+                <TextBox x:Name="TaskCreateEditor" TextWrapping="Wrap" HorizontalAlignment="Center" Width="380" FontSize="16" MinHeight="25" AcceptsReturn="True" PreviewKeyDown="TaskEditorPreviewKeyDown"/>
+                <TextBlock IsHitTestVisible="False" Text="Neue Aufgabe" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="12 0 0 0" Foreground="DarkGray" FontSize="16">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Visibility" Value="Collapsed"/>
@@ -82,6 +76,12 @@
                     </TextBlock.Style>
                 </TextBlock>
             </Grid>
+
+            <!-- Reihe 3: Tasks -->
+            <ScrollViewer Grid.Row="3" Name="TaskContainerScroll" Margin="10" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
+                <StackPanel Name="TaskContainer" Width="360">
+                </StackPanel>
+            </ScrollViewer>
 
         </Grid>
     </Border>
