@@ -1,5 +1,6 @@
 ﻿using Foco.models;
 using Foco.windows;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -38,7 +39,7 @@ namespace Foco.controls
             if (project != null)
             {
                 NameLabel.Content = project.Name;
-                NameLabel.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#404040"));
+                NameLabel.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#30232A"));
                 ProjectBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(project.Color));
                 int countAll = 0, countDone = 0;
                 foreach (Taskgroup taskgroup in project.Taskgroups)
@@ -99,13 +100,28 @@ namespace Foco.controls
         {
             if (project == null)
             {
-                ProjectEditWindow projectEditWindow = new ProjectEditWindow("Projekt erstellen", "", "white", CreatedCallback);
+                string lastProjectColor = goalControl.Goal.Projects[goalControl.Goal.Projects.Count - 1].Color;
+                ProjectEditWindow projectEditWindow = new ProjectEditWindow("Projekt erstellen", "", FindNextUnusedColor(lastProjectColor), CreatedCallback);
                 projectEditWindow.ShowDialog();
+                
             }
             else
             {
                 goalControl.HomePage.MainWindow.ShowProject(project);
             }
+        }
+
+        private string FindNextUnusedColor(string lastProjectColor)
+        {
+            string[] colors = ProjectEditWindow.colorStrings;
+            for (int i = 0; i < colors.Length; i++)
+            {
+                if(ProjectEditWindow.colorStrings[i] == lastProjectColor)
+                {
+                    return colors[++i % colors.Length];
+                } 
+            }
+            return colors[0];
         }
 
         // Benutzer hat beim Erstellen gespeichert

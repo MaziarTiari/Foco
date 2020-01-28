@@ -18,7 +18,7 @@
             </Grid.RowDefinitions>
 
             <!-- Kopfbereich -->
-            <Border Grid.Row="0" Width="250" Background="#404040">
+            <Border Grid.Row="0" Width="250" Background="{StaticResource ParentItemBorderBackground}">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Label Name="TitleLabel" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="20" Foreground="White" FontWeight="Bold">Name</Label>
                     <Menu Height="20" Width="20">
@@ -36,7 +36,7 @@
 
             <!-- Inhalt -->
             <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden" Name="TaskgroupStackScroll">
-                <StackPanel Name="TaskgroupStack" Background="#D0D0D0" MouseLeftButtonDown="OnMouseLeftButtonDown" DragOver="OnDragOver" Drop="OnDrop" AllowDrop="True"/>
+                <StackPanel Name="TaskgroupStack" Background="{StaticResource ItemBackground}" MouseLeftButtonDown="OnMouseLeftButtonDown" DragOver="OnDragOver" Drop="OnDrop" AllowDrop="True"/>
             </ScrollViewer>
             
             <!-- Fußbereich -->

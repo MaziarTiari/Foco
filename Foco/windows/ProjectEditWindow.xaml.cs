@@ -10,8 +10,8 @@ namespace Foco.windows
     /// </summary>
     public partial class ProjectEditWindow : Window
     {
-
-        private static readonly string[] colorStrings = new string[] { "#C7C7C7", "#FF5655", "#F47B10", "#F8E40A", "#98BA67", "#04E08B", "#1BDBE9", "#758DFE", "#D477E1", "#E90FD4" };
+        static int colorIndex = 0;
+        public static readonly string[] colorStrings = new string[] { "#C7C7C7", "#FF5655", "#F47B10", "#F8E40A", "#98BA67", "#04E08B", "#1BDBE9", "#758DFE", "#D477E1", "#E90FD4" };
 
         public delegate void ProjectSaveCallack(string projectName, string projectColor);
         private readonly ProjectSaveCallack projectSaveCallback;
@@ -40,9 +40,8 @@ namespace Foco.windows
                 if (projectColor == colorString)
                     ColorCombo.SelectedItem = comboBoxItem; // vorhandene Farbe vorselektieren
             }
-            Random rnd = new Random();
             if (ColorCombo.SelectedIndex == -1)
-                ColorCombo.SelectedIndex = rnd.Next(colorStrings.Length); // nicht gefunden, ein zufaeliger Farbe waehlen
+                ColorCombo.SelectedIndex = (colorIndex++ % colorStrings.Length); // nicht gefunden -> die naechste farbe waehlen
         }
 
         // Benutzer hat auf Speichern geklickt

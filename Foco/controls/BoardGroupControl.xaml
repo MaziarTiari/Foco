@@ -9,13 +9,13 @@
     <Border BorderBrush="#404040" Background="White" BorderThickness="2" Height="Auto" Width="200" Margin="5" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave" ToolTip="Linke Maustaste gedrückt halten, um die Aufgabengruppe in eine andere Spalte zu verschieben" CornerRadius="3">
         <DockPanel>
             <!-- <Label DockPanel.Dock="Top" Height="32" FontSize="16" FontWeight="Bold" Name="NameLabel">Gruppenbezeichnung</Label> -->
-            <local:EditableLabel DockPanel.Dock="Top" Background="#404040" Foreground="White"  Padding="4" FontSize="16" FontWeight="Bold" x:Name="NameLabel" Text="Gruppenbezeichnung" EditedCallbackFunction="OnLabelEdited" AllowNewLine="False" MaxLength="50"></local:EditableLabel>
+            <local:EditableLabel DockPanel.Dock="Top" Background="{StaticResource ChildItemBorderBackground}" Foreground="White"  Padding="4" FontSize="16" FontWeight="Bold" x:Name="NameLabel" Text="Gruppenbezeichnung" EditedCallbackFunction="OnLabelEdited" AllowNewLine="False" MaxLength="50"></local:EditableLabel>
             <DockPanel DockPanel.Dock="Top" Height="30" Margin="5,5,5,0">
                 <Border Name="PriorityBorder" DockPanel.Dock="Left" CornerRadius="5" Background="Orange" Height="25">
-                    <Label FontSize="10" Name="PriorityLabel" Foreground="White">Normal</Label>
+                    <Label FontSize="10" Name="PriorityLabel" Foreground="White" VerticalAlignment="Center">Normal</Label>
                 </Border>
-                <Border Name="DeadlineBorder" DockPanel.Dock="Right" CornerRadius="5" Background="DarkGray" Height="25" HorizontalAlignment="Right">
-                    <Label FontSize="10" Name="DeadlineLabel" Foreground="White">28.11.2019</Label>
+                <Border Name="DeadlineBorder" DockPanel.Dock="Right" CornerRadius="5" Background="#FE9766" Height="25" HorizontalAlignment="Right">
+                    <Label FontSize="10" Name="DeadlineLabel" Foreground="White" VerticalAlignment="Center">28.11.2019</Label>
                 </Border>
             </DockPanel>
             <Label DockPanel.Dock="Top" Height="30" FontSize="14" Name="TasksLabel">0 / 3 Aufgaben</Label>

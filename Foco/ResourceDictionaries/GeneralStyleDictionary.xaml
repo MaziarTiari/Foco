@@ -10,7 +10,13 @@
         <Setter Property="SizeToContent" Value="WidthAndHeight"/>
     </Style>
 
-    <SolidColorBrush x:Key="MainBackgroundColor" Color="#3C4C5D"/>
+    <SolidColorBrush x:Key="MainBackgroundColor" Color="#221228"/>
+
+    <SolidColorBrush x:Key="ItemBackground" Color="#F8F5EF"/>
+
+    <SolidColorBrush x:Key="ParentItemBorderBackground" Color="#30232A"/>
+
+    <SolidColorBrush x:Key="ChildItemBorderBackground" Color="#534D41"/>
 
     <Style TargetType="Button">
         <Setter Property="Margin" Value="5 0 0 0"/>

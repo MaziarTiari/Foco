@@ -37,7 +37,7 @@ namespace Foco.controls
             switch (taskgroup.Prio)
             {
                 case Priority.High:
-                    PriorityBorder.Background = new SolidColorBrush(Colors.Red);
+                    PriorityBorder.Background = new SolidColorBrush(Color.FromRgb(210,93,93));
                     PriorityLabel.Content = "Hoch";
                     break;
                 case Priority.Mid:
@@ -45,7 +45,7 @@ namespace Foco.controls
                     PriorityLabel.Content = "Normal";
                     break;
                 case Priority.Low:
-                    PriorityBorder.Background = new SolidColorBrush(Colors.Green);
+                    PriorityBorder.Background = new SolidColorBrush(Color.FromRgb(96, 212, 134));
                     PriorityLabel.Content = "Niedrig";
                     break;
             }

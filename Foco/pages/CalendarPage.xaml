@@ -72,7 +72,7 @@
         </Grid>
 
         <!-- Grid fuer Wochentage -->
-        <Grid Background="#404040" Grid.Row="1" Margin="0,10,0,0">
+        <Grid Background="{StaticResource ParentItemBorderBackground}" Grid.Row="1" Margin="0,10,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>

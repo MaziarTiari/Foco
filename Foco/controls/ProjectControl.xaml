@@ -21,7 +21,7 @@
         </Border.Style>
         
         <DockPanel>
-            <Border DockPanel.Dock="Top" CornerRadius="2" Background="{StaticResource MainBackgroundColor}">
+            <Border DockPanel.Dock="Top" CornerRadius="2" Background="{StaticResource ParentItemBorderBackground}">
                 <Label  Height="32"  Foreground="White" FontSize="16" FontWeight="Bold" Name="NameLabel" FontFamily="Century Gothic">Musterprojekt</Label>
             </Border>
             <Label DockPanel.Dock="Top" Height="48" FontSize="14" Name="TasksLabel" FontFamily="Century Gothic">0 / 3 Aufgaben</Label>
