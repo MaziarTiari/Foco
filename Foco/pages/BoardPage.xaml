@@ -9,7 +9,7 @@
       Title="BoardPage">
 
     <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
-        <StackPanel Name="BoardStack" Orientation="Horizontal" />
+        <StackPanel Name="BoardStack" Orientation="Horizontal" HorizontalAlignment="Center" />
     </ScrollViewer>
 
 </Page>
