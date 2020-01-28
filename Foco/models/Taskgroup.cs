@@ -5,7 +5,7 @@ namespace Foco.models
 {
 
     public enum Priority { Low, Mid, High } // Reihenfolge bitte nicht ändern!
-    public enum State { Todo, InProgress, Done } // Reihenfolge bitte nicht ändern!
+    public enum State { Todo, InProgress, Blocked, Validation, Done } // Reihenfolge bitte nicht ändern!
 
     public class Taskgroup
     {
