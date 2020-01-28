@@ -23,12 +23,12 @@
                     <Label Name="TitleLabel" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="20" Foreground="White" FontWeight="Bold">Name</Label>
                     <Menu Height="20" Width="20">
                         <MenuItem Name="SortMenuItem" Background="#404040" Foreground="White" BorderThickness="0" Header="▼" FontSize="16" Width="20" Height="20" ToolTip="Aufgabengruppen sortieren" FontFamily="Century Gothic">
-                            <MenuItem Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="AA" Header="Alphabetisch aufsteigend"></MenuItem>
-                            <MenuItem Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="AD" Header="Alphabetisch absteigend"></MenuItem>
-                            <MenuItem Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="PA" Header="Priorität aufsteigend"></MenuItem>
-                            <MenuItem Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="PD" Header="Priorität absteigend"></MenuItem>
-                            <MenuItem Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="DA" Header="Deadline aufsteigend"></MenuItem>
-                            <MenuItem Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="DD" Header="Deadline absteigend"></MenuItem>
+                            <MenuItem FontSize="14" Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="AA" Header="Alphabetisch aufsteigend"></MenuItem>
+                            <MenuItem FontSize="14" Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="AD" Header="Alphabetisch absteigend"></MenuItem>
+                            <MenuItem FontSize="14" Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="PA" Header="Priorität aufsteigend"></MenuItem>
+                            <MenuItem FontSize="14" Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="PD" Header="Priorität absteigend"></MenuItem>
+                            <MenuItem FontSize="14" Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="DA" Header="Deadline aufsteigend"></MenuItem>
+                            <MenuItem FontSize="14" Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="DD" Header="Deadline absteigend"></MenuItem>
                         </MenuItem>
                     </Menu>
                 </StackPanel>

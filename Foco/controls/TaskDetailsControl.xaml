@@ -54,8 +54,8 @@
                             <Label HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White">Anhänge</Label>
                             <Menu Height="20" Width="20" ToolTip="Anhang hinzufügen">
                                 <MenuItem Name="AddMenuItem" Background="#404040" Foreground="White" BorderThickness="0" Header="▼" FontSize="16" Width="20" Height="20" FontFamily="Century Gothic">
-                                    <MenuItem Foreground="Black" Click="OnAddAttachmentMenuItemClick" Tag="URL" Header="Webadresse anhängen"></MenuItem>
-                                    <MenuItem Foreground="Black" Click="OnAddAttachmentMenuItemClick" Tag="FILE" Header="Lokale Datei anhängen"></MenuItem>
+                                    <MenuItem FontSize="14" Foreground="Black" Click="OnAddAttachmentMenuItemClick" Tag="URL" Header="Webadresse anhängen"></MenuItem>
+                                    <MenuItem FontSize="14" Foreground="Black" Click="OnAddAttachmentMenuItemClick" Tag="FILE" Header="Lokale Datei anhängen"></MenuItem>
                                 </MenuItem>
                             </Menu>
                         </StackPanel>

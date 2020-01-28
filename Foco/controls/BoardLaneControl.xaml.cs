@@ -39,6 +39,8 @@ namespace Foco.controls
             {
                 case State.Todo: TitleLabel.Content = "Warteschlange"; break;
                 case State.InProgress: TitleLabel.Content = "In Bearbeitung"; break;
+                case State.Blocked: TitleLabel.Content = "Blockiert"; break;
+                case State.Validation: TitleLabel.Content = "Überprüfung"; break;
                 case State.Done: TitleLabel.Content = "Abgeschlossen"; break;
             }
             if (project != null)

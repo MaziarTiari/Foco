@@ -8,6 +8,8 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="BoardPage">
 
-    <StackPanel Name="BoardStack" Orientation="Horizontal" />
+    <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+        <StackPanel Name="BoardStack" Orientation="Horizontal" HorizontalAlignment="Center" />
+    </ScrollViewer>
 
 </Page>
