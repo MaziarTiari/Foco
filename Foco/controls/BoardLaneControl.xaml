@@ -41,7 +41,7 @@
             
             <!-- Fußbereich -->
             <Border Grid.Row="2" Background="#404040" MouseLeftButtonDown="OnAddGroupClicked">
-                <Label Foreground="White" FontSize="15">+ Aufgabengruppe hinzufügen</Label>
+                <Label Height="35" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" FontSize="15">+ Aufgabengruppe hinzufügen</Label>
             </Border>
 
         </Grid>

@@ -17,25 +17,6 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
-    
-    <Style TargetType="Button">
-        <Setter Property="Margin" Value="5 0 0 0"/>
-        <Setter Property="Padding" Value="6"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Background" Value="#8F8F8F"/>
-        <Setter Property="BorderBrush" Value="#8F8F8F"/>
-        <Setter Property="Foreground" Value="White"/>
-    </Style>
-
-    <Style x:Key="ConfirmButton" TargetType="Button">
-        <Setter Property="Margin" Value="5 0 0 0"/>
-        <Setter Property="Padding" Value="6"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="Background" Value="#37A6FF"/>
-        <Setter Property="BorderBrush" Value="#37A6FF"/>
-    </Style>
-
     <Style x:Key="InputWindowMainStackPanel" TargetType="StackPanel">
         <Setter Property="Margin" Value="40 40 40 25"/>
     </Style>

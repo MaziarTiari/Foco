@@ -7,7 +7,7 @@
              mc:Ignorable="d" Height="120" Width="200" Margin="5" MouseLeftButtonDown="OnClicked">
 
 
-    <Border Name="ProjectBorder" BorderBrush="#404040" BorderThickness="2" Height="120" Width="200" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave">
+    <Border Name="ProjectBorder" BorderBrush="#404040" BorderThickness="2" Height="120" Width="200" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave" CornerRadius="3">
 
         <Border.Style>
             <Style TargetType="Border">
@@ -21,7 +21,9 @@
         </Border.Style>
         
         <DockPanel>
-            <Label DockPanel.Dock="Top" Height="32" Background="#404040" Foreground="White" FontSize="16" FontWeight="Bold" Name="NameLabel" FontFamily="Century Gothic">Musterprojekt</Label>
+            <Border DockPanel.Dock="Top" CornerRadius="2" Background="{StaticResource MainBackgroundColor}">
+                <Label  Height="32"  Foreground="White" FontSize="16" FontWeight="Bold" Name="NameLabel" FontFamily="Century Gothic">Musterprojekt</Label>
+            </Border>
             <Label DockPanel.Dock="Top" Height="48" FontSize="14" Name="TasksLabel" FontFamily="Century Gothic">0 / 3 Aufgaben</Label>
             <StackPanel DockPanel.Dock="Bottom" Height="38" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="EditButton" Width="30" Height="38" Click="OnEditClicked" Style="{StaticResource IconButtonStyle}" ToolTip="Projekt bearbeiten">

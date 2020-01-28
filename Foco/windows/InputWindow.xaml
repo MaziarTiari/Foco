@@ -17,7 +17,7 @@
         </DockPanel>
         <DockPanel Style="{StaticResource ConfirmButtonPanel}">
             <Button Content="Speichern" Tag="Save" Name="SaveButton" Click="OnButtonClicked" Style="{StaticResource ConfirmButton}"/>
-            <Button Content="Abbrechen" Tag="Cancel" Click="OnButtonClicked" Style="{StaticResource ConfirmButton}"/>
+            <Button Content="Abbrechen" Tag="Cancel" Click="OnButtonClicked"/>
         </DockPanel>
     </StackPanel>
 

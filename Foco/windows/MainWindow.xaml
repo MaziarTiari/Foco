@@ -10,15 +10,15 @@
     <DockPanel>
 
         <!-- Menüleiste -->
-        <Border DockPanel.Dock="Top" Height="75" Background="#404040">
+        <Border DockPanel.Dock="Top" Height="75" Background="{StaticResource MainBackgroundColor}">
             <Grid Margin="10">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="55"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="55"/>
-                    <ColumnDefinition Width="55"/>
-                    <ColumnDefinition Width="55"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="65"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="55"/>
                 </Grid.ColumnDefinitions>
@@ -28,29 +28,30 @@
                 </Grid.RowDefinitions>
 
                 <Button Grid.Column="0" Grid.Row="0" Tag="Home" Click="OnMenuButtonClick" ToolTip="Startseite" Style="{StaticResource IconButtonStyle}">
-                    <Image Height="51" Source="/icons/icons8-home-page-100.png" Stretch="Fill" Width="51"/>
+                    <Image Height="45" Source="/icons/main.png" Stretch="Fill" Width="45"/>
                 </Button>
 
                 <Border Grid.Column="2" Grid.Row="0" Name="BoardBorder" BorderBrush="White" BorderThickness="0">
                     <Button Tag="Board" Click="OnMenuButtonClick" ToolTip="Board" Style="{StaticResource IconButtonStyle}">
-                        <Image Height="51" Source="/icons/icons8-prototype-96.png" Stretch="Fill" Width="51"/>
+                        <Image Height="45" Source="/icons/board.png" Stretch="Fill" Width="45"/>
                     </Button>
                 </Border>
 
-                <Border Grid.Column="3" Grid.Row="0" Name="CalendarBorder" BorderBrush="White" BorderThickness="0">
-                    <Button Tag="Calendar" Click="OnMenuButtonClick" ToolTip="Kalender" Style="{StaticResource IconButtonStyle}">
-                        <Image Height="51" Source="/icons/icons8-planner-96.png" Stretch="Fill" Width="51"/>
-                    </Button>
-                </Border>
-
-                <Border Grid.Column="4" Grid.Row="0" Name="ListBorder" BorderBrush="White" BorderThickness="0">
+                <Border Grid.Column="3" Grid.Row="0" Name="ListBorder" BorderBrush="White" BorderThickness="0">
                     <Button Tag="List" Click="OnMenuButtonClick" ToolTip="Listen" Style="{StaticResource IconButtonStyle}">
-                        <Image Height="51" Source="/icons/icons8-todo-list-96.png" Stretch="Fill" Width="51"/>
+                        <!-- icon color: rgba(24, 49, 73, 1) -->
+                        <Image Source="/icons/list.png" Stretch="Fill" Width="45" Height="45"/>
+                    </Button>
+                </Border>
+
+                <Border Grid.Column="4" Grid.Row="0" Name="CalendarBorder" BorderBrush="White" BorderThickness="0">
+                    <Button Tag="Calendar" Click="OnMenuButtonClick" ToolTip="Kalender" Style="{StaticResource IconButtonStyle}">
+                        <Image Height="45" Source="/icons/deadline.png" Stretch="Fill" Width="45"/>
                     </Button>
                 </Border>
 
                 <Button Grid.Column="6" Tag="Help" Click="OnMenuButtonClick" ToolTip="Hilfe anzeigen" Style="{StaticResource IconButtonStyle}">
-                    <Image Height="51" Source="/icons/icons8-hilfe-80.png" Stretch="Fill" Width="51"/>
+                    <Image Height="45" Source="/icons/icons8-hilfe-80.png" Stretch="Fill" Width="45"/>
                 </Button>
 
                 <TextBlock Name="WelcomeMessage" Grid.Column="1" Grid.ColumnSpan="5" Text="Willkommen bei foco!" FontSize="42" FontFamily="Century Gothic" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Visibility="Hidden"/>

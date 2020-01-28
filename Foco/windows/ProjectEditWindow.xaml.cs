@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -10,7 +11,7 @@ namespace Foco.windows
     public partial class ProjectEditWindow : Window
     {
 
-        private static readonly string[] colorStrings = new string[] { "#A0A0A0", "#EB2524", "#F47B10", "#F8E40A", "#436A0C", "#86E004", "#1BDBE9", "#144EE1", "#C70EE3", "#E90FD4" };
+        private static readonly string[] colorStrings = new string[] { "#C7C7C7", "#FF5655", "#F47B10", "#F8E40A", "#98BA67", "#04E08B", "#1BDBE9", "#758DFE", "#D477E1", "#E90FD4" };
 
         public delegate void ProjectSaveCallack(string projectName, string projectColor);
         private readonly ProjectSaveCallack projectSaveCallback;
@@ -39,8 +40,9 @@ namespace Foco.windows
                 if (projectColor == colorString)
                     ColorCombo.SelectedItem = comboBoxItem; // vorhandene Farbe vorselektieren
             }
+            Random rnd = new Random();
             if (ColorCombo.SelectedIndex == -1)
-                ColorCombo.SelectedIndex = 0; // nicht gefunden, dann erstes Element vorselektieren
+                ColorCombo.SelectedIndex = rnd.Next(colorStrings.Length); // nicht gefunden, ein zufaeliger Farbe waehlen
         }
 
         // Benutzer hat auf Speichern geklickt

@@ -334,6 +334,14 @@
   <ItemGroup>
     <Resource Include="icons\icons8-hilfe-80.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\board.png" />
+    <Resource Include="icons\deadline.png" />
+    <Resource Include="icons\list.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\main.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

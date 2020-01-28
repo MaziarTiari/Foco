@@ -9,22 +9,20 @@
       Title="HomePage">
 
     <Grid>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
-        <Button Grid.Column="0" FontSize="20" Width="160" Height="35" Content="Ziel hinzufügen" Margin="0,0,10,0" FontFamily="Century Gothic" Click="OnAddGoalClicked">
+        
+        <Button Grid.Column="0" Margin="0" FontSize="20" Width="200" Padding="7" Content="+ Ziel hinzufügen" FontFamily="Century Gothic" Click="OnAddGoalClicked" Style="{StaticResource ConfirmButton}">
             <Button.LayoutTransform>
                 <RotateTransform Angle="90"/>
             </Button.LayoutTransform>
         </Button>
-        
+
         <ScrollViewer Name="HomeScrollViewer" Grid.Column="1" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="HomeStackpanel" Orientation="Vertical"/>
         </ScrollViewer>
-
     </Grid>
 
 </Page>

@@ -9,5 +9,34 @@
         <Setter Property="ShowInTaskbar" Value="False"/>
         <Setter Property="SizeToContent" Value="WidthAndHeight"/>
     </Style>
-    
+
+    <SolidColorBrush x:Key="MainBackgroundColor" Color="#3C4C5D"/>
+
+    <Style TargetType="Button">
+        <Setter Property="Margin" Value="5 0 0 0"/>
+        <Setter Property="Padding" Value="6"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Background" Value="#B8B8B8"/>
+        <Setter Property="BorderBrush" Value="#B8B8B8"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <Style x:Key="ConfirmButton" TargetType="Button">
+        <Setter Property="Margin" Value="5 0 0 0"/>
+        <Setter Property="Padding" Value="6"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="#37A6FF"/>
+        <Setter Property="BorderBrush" Value="#37A6FF"/>
+    </Style>
+
+    <Style x:Key="DangerButton" TargetType="Button">
+        <Setter Property="Margin" Value="5 0 0 0"/>
+        <Setter Property="Padding" Value="6"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="#EB2A2A"/>
+        <Setter Property="BorderBrush" Value="#EB2A2A"/>
+    </Style>
+
 </ResourceDictionary>
