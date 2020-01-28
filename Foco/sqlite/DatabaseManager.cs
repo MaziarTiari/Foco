@@ -79,7 +79,9 @@ namespace Foco.sqlite
             INSERT INTO Priority(id, bez) SELECT 2, 'High' WHERE NOT EXISTS (SELECT * FROM Priority WHERE id = 2);
             INSERT INTO State(id, bez) SELECT 0, 'Todo'       WHERE NOT EXISTS (SELECT * FROM State WHERE id = 0);
             INSERT INTO State(id, bez) SELECT 1, 'InProgress' WHERE NOT EXISTS (SELECT * FROM State WHERE id = 1);
-            INSERT INTO State(id, bez) SELECT 2, 'Done'       WHERE NOT EXISTS (SELECT * FROM State WHERE id = 2);
+            INSERT INTO State(id, bez) SELECT 2, 'Blocked'    WHERE NOT EXISTS (SELECT * FROM State WHERE id = 2);
+            INSERT INTO State(id, bez) SELECT 3, 'Validation' WHERE NOT EXISTS (SELECT * FROM State WHERE id = 3);
+            INSERT INTO State(id, bez) SELECT 4, 'Done'       WHERE NOT EXISTS (SELECT * FROM State WHERE id = 4);
         ";
 
         private readonly SqliteConnection sqliteConnection;

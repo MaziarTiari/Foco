@@ -42,6 +42,8 @@
                 <ComboBox Grid.Column="0" Height="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="OnStatusComboChanged" Name="StateCombo">
                     <ComboBoxItem>Warteschlange</ComboBoxItem>
                     <ComboBoxItem>In Bearbeitung</ComboBoxItem>
+                    <ComboBoxItem>Blockiert</ComboBoxItem>
+                    <ComboBoxItem>Überprüfung</ComboBoxItem>
                     <ComboBoxItem>Abgeschlossen</ComboBoxItem>
                 </ComboBox>
                 <ComboBox Grid.Column="1" Height="25" Margin="5,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="OnPrioComboChanged" Name="PrioCombo">
