@@ -7,7 +7,7 @@
              mc:Ignorable="d" Height="120" Width="200" Margin="5" MouseLeftButtonDown="OnClicked">
 
 
-    <Border Name="ProjectBorder" BorderBrush="#404040" BorderThickness="2" Height="120" Width="200" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave" CornerRadius="3">
+    <Border Name="ProjectBorder" BorderBrush="{StaticResource ParentItemBorderBackground}" BorderThickness="2" Height="120" Width="200" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave" CornerRadius="3">
 
         <Border.Style>
             <Style TargetType="Border">

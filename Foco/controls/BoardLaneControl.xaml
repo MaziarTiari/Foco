@@ -40,7 +40,7 @@
             </ScrollViewer>
             
             <!-- Fußbereich -->
-            <Border Grid.Row="2" Background="#404040" MouseLeftButtonDown="OnAddGroupClicked">
+            <Border Grid.Row="2" Background="{StaticResource ParentItemBorderBackground}" MouseLeftButtonDown="OnAddGroupClicked">
                 <Label Height="35" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" FontSize="15">+ Aufgabengruppe hinzufügen</Label>
             </Border>
 
