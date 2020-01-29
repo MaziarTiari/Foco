@@ -7,8 +7,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/ResourceDictionaries/GeneralStyleDictionary.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/ResourceDictionaries/IconButtonDictionary.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/resource-dictionaries/GeneralStyleDictionary.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/resource-dictionaries/IconButtonDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

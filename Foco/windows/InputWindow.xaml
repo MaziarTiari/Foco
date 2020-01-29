@@ -8,7 +8,7 @@
         Title="InputTitle" WindowStartupLocation="CenterOwner" Closing="OnWindowClosing" Style="{StaticResource InputWindowStyle}">
 
     <Window.Resources>
-        <ResourceDictionary Source="../ResourceDictionaries/InputWindowDictionary.xaml"/>
+        <ResourceDictionary Source="../resource-dictionaries/InputWindowDictionary.xaml"/>
     </Window.Resources>
     <StackPanel Style="{StaticResource InputWindowMainStackPanel}">
         <DockPanel>

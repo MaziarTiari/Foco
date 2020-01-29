@@ -6,8 +6,14 @@
              xmlns:local="clr-namespace:Foco.controls"
              mc:Ignorable="d" Height="120" Width="200" Margin="5" MouseLeftButtonDown="OnClicked">
 
-
-    <Border Name="ProjectBorder" BorderBrush="#404040" BorderThickness="2" Height="120" Width="200" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave" CornerRadius="3">
+    <UserControl.Resources>
+        <Style TargetType="Button" BasedOn="{StaticResource IconButtonStyle}">
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+    </UserControl.Resources>
+    
+    <Border Name="ProjectBorder" BorderBrush="#404040" BorderThickness="2" Height="120" Width="200" MouseEnter="OnMouseEnter" 
+            MouseLeave="OnMouseLeave" CornerRadius="3">
 
         <Border.Style>
             <Style TargetType="Border">
@@ -22,15 +28,15 @@
         
         <DockPanel>
             <Border DockPanel.Dock="Top" CornerRadius="2" Background="{StaticResource ParentItemBorderBackground}">
-                <Label  Height="32"  Foreground="White" FontSize="16" FontWeight="Bold" Name="NameLabel" FontFamily="Century Gothic">Musterprojekt</Label>
+                <Label Height="32" Foreground="White" FontSize="16" FontWeight="Bold" Name="NameLabel" Content="Musterprojekt"/>
             </Border>
-            <Label DockPanel.Dock="Top" Height="48" FontSize="14" Name="TasksLabel" FontFamily="Century Gothic">0 / 3 Aufgaben</Label>
+            <Label DockPanel.Dock="Top" Height="48" FontSize="14" Name="TasksLabel" Content="0 / 3 Aufgaben"/>
             <StackPanel DockPanel.Dock="Bottom" Height="38" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="EditButton" Width="30" Height="38" Click="OnEditClicked" Style="{StaticResource IconButtonStyle}" ToolTip="Projekt bearbeiten">
+                <Button x:Name="EditButton" Click="OnEditClicked" ToolTip="Projekt bearbeiten">
                     <Image Height="26" Source="/icons/icons8-edit-file-80.png" Stretch="Fill" Width="26"/>
                 </Button>
-                <Button x:Name="DeleteButton" Width="30" Height="38" Click="OnDeleteClicked" Style="{StaticResource IconButtonStyle}" ToolTip="Projekt löschen">
-                    <Image Height="30" Source="/icons/icons8-delete-bin-96.png" Width="30"/>
+                <Button x:Name="DeleteButton" Click="OnDeleteClicked" ToolTip="Projekt löschen">
+                    <Image Height="29" Source="/icons/icons8-delete-bin-96.png" Width="29"/>
                 </Button>
             </StackPanel>
         </DockPanel>
