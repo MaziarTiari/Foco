@@ -20,8 +20,8 @@
             <ComboBox Name="ColorCombo" Padding="6.2"/>
         </DockPanel>
         <DockPanel Style="{StaticResource ConfirmButtonPanel}">
-            <Button Content="Speichern" Click="OnSaveClicked" Style="{StaticResource ConfirmButton}"/>
             <Button Content="Abbrechen" Click="OnCancelClicked"/>
+            <Button Content="Speichern" Click="OnSaveClicked" Style="{StaticResource ConfirmButton}"/>
         </DockPanel>
         
     </StackPanel>

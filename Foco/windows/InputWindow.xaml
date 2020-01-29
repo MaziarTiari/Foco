@@ -16,8 +16,8 @@
             <TextBox Name="InputBox" KeyDown="OnKeyDown" MaxLines="1" MaxLength="30"/>
         </DockPanel>
         <DockPanel Style="{StaticResource ConfirmButtonPanel}">
-            <Button Content="Speichern" Tag="Save" Name="SaveButton" Click="OnButtonClicked" Style="{StaticResource ConfirmButton}"/>
             <Button Content="Abbrechen" Tag="Cancel" Click="OnButtonClicked"/>
+            <Button Content="Speichern" Tag="Save" Name="SaveButton" Click="OnButtonClicked" Style="{StaticResource ConfirmButton}"/>
         </DockPanel>
     </StackPanel>
 
