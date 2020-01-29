@@ -41,9 +41,15 @@ namespace Foco.controls
         // Benutzer drückt auf Löschen
         public void DeleteTaskMouseEvent(object sender, RoutedEventArgs e)
         {
-            ConfirmWindow confirmWindow = new ConfirmWindow("Alle Anhänge löschen", "Sind Sie sich sicher, dass Sie diese Aufgabe, inkl. aller Anhänge endgültig löschen wollen?",
-                DeleteTaskCallback);
-            confirmWindow.ShowDialog();
+            if( String.IsNullOrEmpty(Task.Description) && Task.Attachments.Count == 0)
+                DeleteTask();
+            else
+            {
+                ConfirmWindow confirmWindow = new ConfirmWindow(
+                    "Alle Anhänge löschen", "Sind Sie sich sicher, dass Sie diese Aufgabe inkl. aller Anhänge endgültig löschen wollen?", 
+                    DeleteTaskCallback);
+                confirmWindow.ShowDialog();
+            }
         }
 
         private void DeleteTaskCallback(ConfirmState confirmState)
