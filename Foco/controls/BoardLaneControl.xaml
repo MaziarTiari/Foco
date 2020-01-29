@@ -50,9 +50,9 @@
             </ScrollViewer>
             
             <!-- Footer -->
-            <Border Grid.Row="2" Background="{StaticResource ParentItemBorderBackground}" MouseLeftButtonDown="OnAddGroupClicked">
-                <Label Height="35" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="14" Content="+ Aufgabengruppe hinzufügen"/>
-            </Border>
+            <Button Height="45" Margin="0" Grid.Row="2" Background="{StaticResource ParentItemBorderBackground}" BorderBrush="{StaticResource ParentItemBorderBackground}" Click="OnAddGroupClicked" 
+                    Content="+ Aufgabengruppe hinzufügen" FontSize="14" FontWeight="Bold">
+            </Button>
             
         </Grid>
     </Border>
