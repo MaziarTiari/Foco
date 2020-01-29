@@ -4,27 +4,45 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Foco.controls"
-             mc:Ignorable="d" Width="Auto" Height="Auto" FontFamily="Century Gothic">
+             mc:Ignorable="d">
 
-        <Grid Name="ContentGrid">
+    <UserControl.Resources>
+        <Style TargetType="Label" BasedOn="{StaticResource Header}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+        <Style x:Key="TaskDetailsChildMenuItem" TargetType="MenuItem" BasedOn="{StaticResource ChildMenuItemStyle}">
+            <EventSetter Event="Click" Handler="OnAddAttachmentMenuItemClick"/>
+        </Style>
+        <Style x:Key="MainBorder" TargetType="Border">
+            <Setter Property="BorderBrush" Value="{StaticResource ParentItemBorderBackground}"/>
+            <Setter Property="Background" Value="{StaticResource ParentItemBorderBackground}"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="CornerRadius" Value="3"/>
+        </Style>
+    </UserControl.Resources>
 
-            <!-- Column Definitions -->
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+    <Grid Name="ContentGrid">
+        <!-- Column Definitions -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
-            <!-- Column 0: Editor -->
-            <Border Grid.Column="0" BorderBrush="{StaticResource ParentItemBorderBackground}" BorderThickness="3" Margin="10" CornerRadius="3">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Background="{StaticResource ParentItemBorderBackground}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White">Beschreibung</Label>
-                    <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
+        <!-- Column 0: Editor -->
+        <Border Grid.Column="0" Style="{StaticResource MainBorder}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Content="Beschreibung"/>
+
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
                     <Grid>
-                        <TextBox AcceptsReturn="true" Name="TaskDescriptionEditor" AcceptsTab="true" FontSize="16" TextChanged="OnTextChanged"></TextBox>
+                        <TextBox AcceptsReturn="true" Name="TaskDescriptionEditor" AcceptsTab="true" FontSize="16" TextChanged="OnTextChanged"/>
                         <TextBlock IsHitTestVisible="False" Text="Aufgabeschreibung" VerticalAlignment="Top" FontSize="16" Margin="3 1 3 1" HorizontalAlignment="Left" Foreground="DarkGray">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
@@ -39,33 +57,31 @@
                         </TextBlock>
                     </Grid>
                 </ScrollViewer>
-                </Grid>
-            </Border>
+            </Grid>
+        </Border>
 
-            <!-- Column 1: Anhänge -->
-            <Border Grid.Column="1" BorderBrush="{StaticResource ParentItemBorderBackground}" BorderThickness="3" Margin="10" Width="400" CornerRadius="3">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Border Grid.Row="0" Background="{StaticResource ParentItemBorderBackground}">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Label HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White">Anhänge</Label>
+        <!-- Column 1: Anhänge -->
+        <Border Grid.Column="1" Width="400" Style="{StaticResource MainBorder}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Content="Anhänge"/>
                         <Menu ToolTip="Anhang hinzufügen" Background="{StaticResource ParentItemBorderBackground}" VerticalAlignment="Center">
-                                <MenuItem Name="AddMenuItem"  Foreground="White" BorderThickness="0" Header="▼" FontSize="16" FontFamily="Century Gothic">
-                                    <MenuItem FontSize="14" Foreground="Black" Click="OnAddAttachmentMenuItemClick" Tag="URL" Header="Webadresse anhängen"></MenuItem>
-                                    <MenuItem FontSize="14" Foreground="Black" Click="OnAddAttachmentMenuItemClick" Tag="FILE" Header="Lokale Datei anhängen"></MenuItem>
-                                </MenuItem>
-                            </Menu>
-                        </StackPanel>
-                    </Border>
-                    <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-                        <StackPanel Name="AttachmentStack" Background="White"/>
-                    </ScrollViewer>
-                </Grid>
-            </Border>
-
-        </Grid>
-
+                            <MenuItem Name="AddMenuItem" Header="▼" FontSize="16" Style="{StaticResource MainMenuItemStyle}">
+                                <MenuItem Style="{StaticResource TaskDetailsChildMenuItem}" Tag="URL" Header="Webadresse anhängen"/>
+                                <MenuItem Style="{StaticResource TaskDetailsChildMenuItem}" Tag="FILE" Header="Lokale Datei anhängen"/>
+                            </MenuItem>
+                        </Menu>
+                    </StackPanel>
+                </Border>
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
+                    <StackPanel Name="AttachmentStack" Background="White"/>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+    </Grid>
 </UserControl>

@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Foco.windows"
         mc:Ignorable="d"
-        Title="Titel" WindowStyle="ToolWindow" ResizeMode="NoResize" ShowInTaskbar="False" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" Closing="OnWindowClosing" FontFamily="Century Gothic">
+        Title="Titel" WindowStartupLocation="CenterOwner" Closing="OnWindowClosing" Style="{StaticResource InputWindowStyle}">
     <Window.Resources>
-        <ResourceDictionary Source="../ResourceDictionaries/InputWindowDictionary.xaml"/>
+        <ResourceDictionary Source="../resource-dictionaries/InputWindowDictionary.xaml"/>
     </Window.Resources>
     <StackPanel Style="{StaticResource InputWindowMainStackPanel}">
         <DockPanel>
             <Label Name="InputLabel" Content="Label:"/>
-            <DatePicker Name="DateTimePicker" VerticalAlignment="Center" SelectedDate="" Width="160"/>
+            <DatePicker Name="DateTimePicker" SelectedDate="" Width="160"/>
         </DockPanel>
         <DockPanel Style="{StaticResource ConfirmButtonPanel}">
             <Button Content="Speichern" Tag="save" Click="OnButtonClicked" Style="{StaticResource ConfirmButton}"/>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -40,6 +41,25 @@ namespace Foco.controls
                 DeadlinePicker.SelectedDate = taskgroup.Deadline;
             TaskContainer.Children.Clear();
             LoadTaskControls();
+            if (Taskgroup.Tasks.Count == 1)
+                OnTaskClicked(Taskgroup.Tasks[0]);
+        }
+
+        #pragma warning restore IDE0051
+
+        /**
+         * Alle verfügbare Tasks sollen in die TaskgroupControl geladen werden
+         */
+        private void LoadTaskControls()
+        {
+            if (Taskgroup.Tasks.Count > 0)
+            {
+                foreach (Task task in Taskgroup.Tasks)
+                {
+                    TaskControl taskControl = new TaskControl(task, this);
+                    TaskContainer.Children.Add(taskControl);
+                }
+            }
         }
 
         public TaskgroupControl(Taskgroup taskgroup, ListPage listPage) : this(taskgroup)
@@ -62,22 +82,6 @@ namespace Foco.controls
             else
                 TaskgroupHeader.Text = taskgroup.Title;
         }
-        #pragma warning restore IDE0051
-
-        /**
-         * Alle verfügbare Tasks sollen in die TaskgroupControl geladen werden
-         */
-        private void LoadTaskControls()
-        {
-            if (Taskgroup.Tasks.Count > 0)
-            {
-                foreach (Task task in Taskgroup.Tasks)
-                {
-                    TaskControl taskControl = new TaskControl(task, this);
-                    TaskContainer.Children.Add(taskControl);
-                }
-            }
-        }
 
         /**
          * Bie Tätigung der Enter-Taste mit gedrückter Schift-Taste wird eine neue Zeile erstellt,
@@ -94,7 +98,10 @@ namespace Foco.controls
                         TaskControl taskControl = new TaskControl(task, this);
                         TaskContainer.Children.Add(taskControl);
                         TaskContainerScroll.ScrollToBottom();
-                        Taskgroup.Tasks.Add(task);
+                        var tasks = Taskgroup.Tasks as List<Task>;
+                        tasks.Add(task);
+                        if (tasks.Count == 1)
+                            OnTaskClicked(task);
                         TaskCreateEditor.Text = null;
                         e.Handled = true;
                     }

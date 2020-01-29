@@ -1,0 +1,71 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Foco.resource_dictionaries"
+                    xmlns:system="clr-namespace:Foco.resource_dictionaries">
+
+    <!-- Colors -->
+    <SolidColorBrush x:Key="MainBackgroundColor" Color="#221228"/>
+    <SolidColorBrush x:Key="ItemBackground" Color="#F8F5EF"/>
+    <SolidColorBrush x:Key="ParentItemBorderBackground" Color="#30232A"/>
+    <SolidColorBrush x:Key="ChildItemBorderBackground" Color="#534D41"/>
+    <SolidColorBrush x:Key="RelevantDate" Color="#FE9766"/>
+
+    <!-- General style for modal windows -->
+    <Style TargetType="Window" x:Key="InputWindowStyle">
+        <Setter Property="FontFamily" Value="Century Gothic"/>
+        <Setter Property="WindowStyle" Value="ToolWindow"/>
+        <Setter Property="ResizeMode" Value="NoResize"/>
+        <Setter Property="ShowInTaskbar" Value="False"/>
+        <Setter Property="SizeToContent" Value="WidthAndHeight"/>
+    </Style>
+
+    <Style TargetType="UserControl">
+        <Setter Property="FontFamily" Value="Century Gothic"/>
+    </Style>
+
+    <Style x:Key="ConfirmButton" TargetType="Button">
+        <Setter Property="Margin" Value="5 0 0 0"/>
+        <Setter Property="Padding" Value="6"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="#37A6FF"/>
+        <Setter Property="BorderBrush" Value="#37A6FF"/>
+    </Style>
+
+    <Style x:Key="DangerButton" TargetType="Button" BasedOn="{StaticResource ConfirmButton}">
+        <Setter Property="Background" Value="#EB2A2A"/>
+        <Setter Property="BorderBrush" Value="#EB2A2A"/>
+    </Style>
+
+    <Style TargetType="Button" BasedOn="{StaticResource ConfirmButton}">
+        <Setter Property="Background" Value="#B8B8B8"/>
+        <Setter Property="BorderBrush" Value="#B8B8B8"/>
+    </Style>
+
+    <Style x:Key="MenuButtonGeneralStyle" TargetType="Menu">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontFamily" Value="Century Gothic"/>
+    </Style>
+
+    <Style x:Key="MainMenuItemStyle" TargetType="MenuItem">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <Style x:Key="ChildMenuItemStyle" TargetType="MenuItem">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="Black"/>
+    </Style>
+
+    <Style x:Key="Header" TargetType="Label">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <Style TargetType="DatePicker">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+</ResourceDictionary>

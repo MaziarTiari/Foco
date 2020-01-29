@@ -5,11 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Foco.controls"
              xmlns:controls="clr-namespace:Foco.controls"
-             mc:Ignorable="d" Width="425" Height="480" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Century Gothic">
+             mc:Ignorable="d" Width="425" Height="480" VerticalAlignment="Top" HorizontalAlignment="Center">
 
     <Border Margin="10" BorderThickness="3" Background="White" BorderBrush="{StaticResource ParentItemBorderBackground}" CornerRadius="3">
         <Grid>
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -20,14 +19,25 @@
             <Grid.Resources>
                 <Style TargetType="ComboBox">
                     <Setter Property="FontSize" Value="12"></Setter>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="Height" Value="25"/>
                 </Style>
                 <Style TargetType="ComboBoxItem">
                     <Setter Property="FontSize" Value="12"></Setter>
                 </Style>
+                <Style TargetType="Button" BasedOn="{StaticResource IconButtonStyle}">
+                    <Setter Property="Margin" Value="0 0 5 0"/>
+                    <Style.Resources>
+                        <Style TargetType="Image">
+                            <Setter Property="Width" Value="25"/>
+                            <Setter Property="Height" Value="25"/>
+                        </Style>
+                    </Style.Resources>
+                </Style>
             </Grid.Resources>
 
             <!-- Reihe 0: Titel -->
-            <!--<Label Name="TaskgroupHeader" Width="Auto" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0" FontWeight="Bold" FontSize="16" MouseLeftButtonDown="OnTaskgroupClicked">Titel</Label>-->
             <controls:EditableLabel Grid.Row="0" x:Name="TaskgroupHeader" Width="400" Foreground="White" Background="{StaticResource ParentItemBorderBackground}" Padding="4" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0" FontWeight="Bold" FontSize="18" Text="Titel" EditedCallbackFunction="OnLabelEdited" AllowNewLine="False" MaxLength="50"></controls:EditableLabel>
 
             <!-- Reihe 1: Combo, Combo, Date, Button -->
@@ -39,24 +49,24 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <ComboBox Grid.Column="0" Height="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="OnStatusComboChanged" Name="StateCombo">
-                    <ComboBoxItem>Warteschlange</ComboBoxItem>
-                    <ComboBoxItem>In Bearbeitung</ComboBoxItem>
-                    <ComboBoxItem>Blockiert</ComboBoxItem>
-                    <ComboBoxItem>Überprüfung</ComboBoxItem>
-                    <ComboBoxItem>Abgeschlossen</ComboBoxItem>
+                <ComboBox Grid.Column="0" SelectionChanged="OnStatusComboChanged" Name="StateCombo">
+                    <ComboBoxItem Content="Warteschlange"/>
+                    <ComboBoxItem Content="In Bearbeitung"/>
+                    <ComboBoxItem Content="Blockiert"/>
+                    <ComboBoxItem Content="Überprüfung"/>
+                    <ComboBoxItem Content="Abgeschlossen"/>
                 </ComboBox>
-                <ComboBox Grid.Column="1" Height="25" Margin="5,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="OnPrioComboChanged" Name="PrioCombo">
-                    <ComboBoxItem>Niedrig</ComboBoxItem>
-                    <ComboBoxItem>Normal</ComboBoxItem>
-                    <ComboBoxItem>Hoch</ComboBoxItem>
+                <ComboBox Grid.Column="1" Margin="5,0,0,0" SelectionChanged="OnPrioComboChanged" Name="PrioCombo">
+                    <ComboBoxItem Content="Niedrig"/>
+                    <ComboBoxItem Content="Normal"/>
+                    <ComboBoxItem Content="Hoch"/>
                 </ComboBox>
-                <DatePicker Grid.Column="2" Height="25" Margin="5,0,5,0" Name="DeadlinePicker" SelectedDateChanged="OnDeadlinePickerChanged"></DatePicker>
-                <Button Grid.Column="3" Name="InfoButton" Margin="0,0,0,0" Height="25" Width="25" Click="OnInfoClicked" Style="{StaticResource IconButtonStyle}" ToolTip="Detailansicht">
-                    <Image Height="25" Source="/icons/icons8-info-144.png" Stretch="Fill" Width="25"/>
+                <DatePicker Grid.Column="2" Height="25" Margin="5,0,5,0" Name="DeadlinePicker" SelectedDateChanged="OnDeadlinePickerChanged"/>
+                <Button Grid.Column="3" Name="InfoButton" Click="OnInfoClicked" ToolTip="Detailansicht">
+                    <Image Source="/icons/icons8-info-144.png"/>
                 </Button>
-                <Button Grid.Column="4" Name="DeleteButton" Margin="5,0,5,0" Height="25" Width="25" Click="OnDeleteClicked" Style="{StaticResource IconButtonStyle}" ToolTip="Aufgabengruppe löschen">
-                    <Image Height="25" Source="/icons/icons8-delete-bin-96.png" Stretch="Fill" Width="25"/>
+                <Button Grid.Column="4" Name="DeleteButton" Click="OnDeleteClicked" ToolTip="Aufgabengruppe löschen">
+                    <Image Source="/icons/icons8-delete-bin-96.png"/>
                 </Button>
             </Grid>
 
@@ -82,7 +92,6 @@
                 <StackPanel Name="TaskContainer" Width="360">
                 </StackPanel>
             </ScrollViewer>
-
         </Grid>
     </Border>
 </UserControl>

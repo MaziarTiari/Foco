@@ -8,6 +8,24 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CalendarPage">
 
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="10 0 10 0"/>
+            <Setter Property="Width" Value="50"/>
+            <Style.Resources>
+                <Style TargetType="Image">
+                    <Setter Property="Width" Value="30"/>
+                    <Setter Property="Height" Value="30"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="22"/>
+        </Style>
+    </Page.Resources>
 
     <Grid Margin="10">
 
@@ -19,18 +37,8 @@
 
         <!-- Grid fuer Navigation -->
         <Grid Grid.Row="0" Margin="10">
+            
             <Grid>
-
-                <Grid.Resources>
-                    <Style TargetType="Button">
-                        <Setter Property="Margin" Value="10 0 10 0"/>
-                        <Setter Property="Width" Value="50"/>
-                    </Style>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="FontWeight" Value="Bold"/>
-                    </Style>
-                </Grid.Resources>
-
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -44,11 +52,11 @@
                         <ColumnDefinition Width="30"/>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0" HorizontalAlignment="Left" Click="LastYearHandler" Style="{StaticResource IconButtonStyle}">
-                        <Image Height="30" Source="/icons/icons8-chevron-left-96.png" Stretch="Fill" Width="30"/>
+                        <Image Source="/icons/icons8-chevron-left-96.png"/>
                     </Button>
-                    <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Name="YearTag"  Text="2020" FontFamily="CenturyGothic" FontSize="22"/>
+                    <TextBlock Grid.Column="1" Name="YearTag"  Text="2020"/>
                     <Button Grid.Column="2" HorizontalAlignment="Left" Click="NextYearHandler" Style="{StaticResource IconButtonStyle}">
-                        <Image Height="30" Source="/icons/icons8-chevron-right-96.png" Stretch="Fill" Width="30"/>
+                        <Image Source="/icons/icons8-chevron-right-96.png"/>
                     </Button>
                 </Grid>
 
@@ -60,11 +68,11 @@
                         <ColumnDefinition Width="30"/>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0" HorizontalAlignment="Left" Click="LastMonthHandler" Style="{StaticResource IconButtonStyle}">
-                        <Image Height="30" Source="/icons/icons8-chevron-left-96.png" Stretch="Fill" Width="30"/>
+                        <Image Source="/icons/icons8-chevron-left-96.png"/>
                     </Button>
-                    <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Name="MonthTag"  Text="Jan" FontFamily="CenturyGothic" FontSize="22"/>
+                    <TextBlock Grid.Column="1" Name="MonthTag"  Text="Jan"/>
                     <Button Grid.Column="2" HorizontalAlignment="Left" Click="NextMonthHandler" Style="{StaticResource IconButtonStyle}">
-                        <Image Height="30" Source="/icons/icons8-chevron-right-96.png" Stretch="Fill" Width="30"/>
+                        <Image Source="/icons/icons8-chevron-right-96.png"/>
                     </Button>
                 </Grid>
 

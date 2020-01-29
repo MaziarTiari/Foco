@@ -3,11 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Foco.controls" FontFamily="Century Gothic" Cursor="Hand">
+             xmlns:local="clr-namespace:Foco.controls" Cursor="Hand">
 
-    <Border Background="White" Width="Auto" Height="45" BorderBrush="Black" BorderThickness="1" MouseLeftButtonDown="OnControlClicked" Margin="5" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave" ToolTip="Klicken zum Öffnen">
+    <UserControl.Resources>
+        <Style BasedOn="{StaticResource IconButtonStyle}" TargetType="Button" x:Key="AttachmentIconButton">
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Border Background="White" Height="45" BorderThickness="1" 
+            MouseLeftButtonDown="OnControlClicked" Margin="5" MouseEnter="OnMouseEnter" 
+            MouseLeave="OnMouseLeave" ToolTip="Klicken zum Öffnen">
         <Grid>
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -16,15 +25,13 @@
             </Grid.ColumnDefinitions>
 
             <Image Grid.Column="0" Name="FileImg" Width="35" Height="35" Margin="5,0,0,0"></Image>
-            <Label Grid.Column="1" Name="TitleText" Margin="5" FontSize="15">Titel des Attachments</Label>
-            <Button Grid.Column="2" Name="EditButton" Width="30" Margin="2" Height="30" Click="OnEditClicked" Style="{StaticResource IconButtonStyle}" ToolTip="Anhang bearbeiten">
-                <Image Height="25" Source="/icons/icons8-edit-file-80.png" Stretch="Fill" Width="25"/>
+            <Label Grid.Column="1" Name="TitleText" Margin="5" FontSize="15" Content="Titel des Attachments"/>
+            <Button Grid.Column="2" Name="EditButton" Click="OnEditClicked" Style="{StaticResource AttachmentIconButton}" ToolTip="Anhang bearbeiten">
+                <Image Height="25" Source="/icons/icons8-edit-file-80.png" Width="25"/>
             </Button>
-            <Button Grid.Column="3" Name="DeleteButton" Width="30" Margin="2" Height="30" Click="OnDeleteClicked" Style="{StaticResource IconButtonStyle}" ToolTip="Anhang löschen">
-                <Image Height="30" Source="/icons/icons8-delete-bin-96.png" Stretch="Fill" Width="30"/>
+            <Button Grid.Column="3" Name="DeleteButton" Click="OnDeleteClicked" Style="{StaticResource AttachmentIconButton}" ToolTip="Anhang löschen">
+                <Image Height="29" Source="/icons/icons8-delete-bin-96.png" Width="29"/>
             </Button>
-
-
         </Grid>
     </Border>
 

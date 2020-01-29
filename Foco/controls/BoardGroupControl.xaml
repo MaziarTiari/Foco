@@ -4,27 +4,58 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Foco.controls"
-             mc:Ignorable="d" FontFamily="Century Gothic">
+             mc:Ignorable="d">
 
-    <Border BorderBrush="#404040" Background="White" BorderThickness="2" Height="Auto" Width="200" Margin="5" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave" ToolTip="Linke Maustaste gedrückt halten, um die Aufgabengruppe in eine andere Spalte zu verschieben" CornerRadius="3">
+    <UserControl.Resources>
+        <Style TargetType="Label">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="TaskgroupInfoBorder" TargetType="Border">
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="Height" Value="25"/>
+        </Style>
+        
+        <Style x:Key="TaskgroupInfoLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        
+        <Style TargetType="Button" BasedOn="{StaticResource IconButtonStyle}">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="30"/>
+            <Style.Resources>
+                <Style TargetType="Image">
+                    <Setter Property="Width" Value="30"/>
+                    <Setter Property="Height" Value="30"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+    </UserControl.Resources>
+
+    <Border BorderBrush="{StaticResource ChildItemBorderBackground}" Background="White" 
+            BorderThickness="2" Width="200" Margin="5" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave" 
+            ToolTip="Linke Maustaste gedrückt halten, um die Aufgabengruppe in eine andere Spalte zu verschieben" CornerRadius="3">
         <DockPanel>
-            <!-- <Label DockPanel.Dock="Top" Height="32" FontSize="16" FontWeight="Bold" Name="NameLabel">Gruppenbezeichnung</Label> -->
-            <local:EditableLabel DockPanel.Dock="Top" Background="{StaticResource ChildItemBorderBackground}" Foreground="White"  Padding="4" FontSize="16" FontWeight="Bold" x:Name="NameLabel" Text="Gruppenbezeichnung" EditedCallbackFunction="OnLabelEdited" AllowNewLine="False" MaxLength="50"></local:EditableLabel>
-            <DockPanel DockPanel.Dock="Top" Height="30" Margin="5,5,5,0">
-                <Border Name="PriorityBorder" DockPanel.Dock="Left" CornerRadius="5" Background="Orange" Height="25">
-                    <Label FontSize="10" Name="PriorityLabel" Foreground="White" VerticalAlignment="Center">Normal</Label>
+            <local:EditableLabel DockPanel.Dock="Top" Background="{StaticResource ChildItemBorderBackground}" Foreground="White"  Padding="4" 
+                                 FontSize="16" FontWeight="Bold" x:Name="NameLabel" Text="Gruppenbezeichnung" EditedCallbackFunction="OnLabelEdited" 
+                                 AllowNewLine="False" MaxLength="50"/>
+            <DockPanel DockPanel.Dock="Top" Margin="5,8,5,5">
+                <Border Name="PriorityBorder" Background="Orange" Style="{StaticResource TaskgroupInfoBorder}">
+                    <Label Name="PriorityLabel" Style="{StaticResource TaskgroupInfoLabel}" Content="Normal"/>
                 </Border>
-                <Border Name="DeadlineBorder" DockPanel.Dock="Right" CornerRadius="5" Background="{StaticResource RelevantDate}" Height="25" HorizontalAlignment="Right">
-                    <Label FontSize="10" Name="DeadlineLabel" Foreground="White" VerticalAlignment="Center">28.11.2019</Label>
+                <Border Name="DeadlineBorder" HorizontalAlignment="Right" Background="{StaticResource RelevantDate}" Style="{StaticResource TaskgroupInfoBorder}">
+                    <Label Name="DeadlineLabel" Style="{StaticResource TaskgroupInfoLabel}" Content="28.11.2019"/>
                 </Border>
             </DockPanel>
-            <Label DockPanel.Dock="Top" Height="30" FontSize="14" Name="TasksLabel">0 / 3 Aufgaben</Label>
-            <StackPanel DockPanel.Dock="Bottom" Height="38" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Name="InfoButton" Click="OnInfoClicked" Width="36" Height="36" Style="{StaticResource IconButtonStyle}" ToolTip="Detailansicht">
-                    <Image Height="30" Source="/icons/icons8-info-144.png" Stretch="Fill" Width="30"/>
+            <Label DockPanel.Dock="Top" FontSize="14" Name="TasksLabel" Content="0 / 3 Aufgaben"/>
+            <StackPanel DockPanel.Dock="Bottom" Margin="0 8 0 3" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="InfoButton" Click="OnInfoClicked" ToolTip="Detailansicht">
+                    <Image Source="/icons/icons8-info-144.png"/>
                 </Button>
-                <Button Name="DeleteButton" Click="OnDeleteClicked" Width="30" Height="36" Style="{StaticResource IconButtonStyle}" ToolTip="Aufgabengruppe löschen">
-                    <Image Height="30" Source="/icons/icons8-delete-bin-96.png" Stretch="Fill" Width="30"/>
+                <Button Name="DeleteButton" Click="OnDeleteClicked" ToolTip="Aufgabengruppe löschen">
+                    <Image Source="/icons/icons8-delete-bin-96.png"/>
                 </Button>
             </StackPanel>
         </DockPanel>
