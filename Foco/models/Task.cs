@@ -15,7 +15,7 @@ namespace Foco.models
         {
             Title = title;
             Done = false;
-            Description = "Beschreibung " + title;
+            Description = "";
             Attachments = new List<Attachment>();
         }
 

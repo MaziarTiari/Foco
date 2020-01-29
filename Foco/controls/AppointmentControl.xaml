@@ -4,18 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Foco.controls"
-             mc:Ignorable="d" FontFamily="Century Gothic">
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Style x:Key="AppointmentChildMenuItem" TargetType="MenuItem" BasedOn="{StaticResource ChildMenuItemStyle}">
+            <EventSetter Event="Click" Handler="OnOptionClickHandler"/>
+        </Style>
+    </UserControl.Resources>
+
     <Grid Background="{StaticResource ChildItemBorderBackground}" Margin="2" VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <local:EditableLabel Grid.Column="0" x:Name="TitleLabel" EditedCallbackFunction="OnEdited" FontSize="12" Foreground="White" Text="Name" AllowNewLine="False" MaxLength="50" />
-        <Menu Grid.Column="1" Background="Transparent" VerticalAlignment="Center" FontFamily="Century Gothic">
-            <MenuItem Name="EditMenu" Background="Transparent" Foreground="White" BorderThickness="0" Header="▼">
-                <MenuItem FontSize="14" Foreground="Black" Click="OnOptionClickHandler" Tag="move" Header="Deadline verschieben"></MenuItem>
-                <MenuItem FontSize="14" Foreground="Black" Click="OnOptionClickHandler" Tag="edit" Header="Detailansicht öffnen"></MenuItem>
-                <MenuItem FontSize="14" Foreground="Black" Click="OnOptionClickHandler" Tag="delete" Header="Aufgabengruppe löschen"></MenuItem>
+        <Menu Grid.Column="1" Style="{StaticResource MenuButtonGeneralStyle}">
+            <MenuItem Name="EditMenu" Header="▼" Style="{StaticResource MainMenuItemStyle}">
+                <MenuItem Style="{StaticResource AppointmentChildMenuItem}" Tag="move" Header="Deadline verschieben"/>
+                <MenuItem Style="{StaticResource AppointmentChildMenuItem}" Tag="edit" Header="Detailansicht öffnen"/>
+                <MenuItem Style="{StaticResource AppointmentChildMenuItem}" Tag="delete" Header="Aufgabengruppe löschen"/>
             </MenuItem>
         </Menu>
     </Grid>

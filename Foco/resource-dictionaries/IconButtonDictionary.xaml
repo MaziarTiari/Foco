@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Foco"
-                    xmlns:system="clr-namespace:Foco.ResourceDictionaries">
+                    xmlns:local="clr-namespace:Foco.resource_dictionaries"
+                    xmlns:system="clr-namespace:Foco.resource_dictionaries">
 
     <!-- Style fuer Buttons, bei denen nur das Icon sichtbar sein soll -->
     <Style x:Key="IconButtonStyle" TargetType="Button">

@@ -1,8 +1,10 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using Foco.models;
+using Foco.windows;
 
 namespace Foco.controls
 {
@@ -32,19 +34,33 @@ namespace Foco.controls
         {
             TaskCheckBox.IsChecked = task.Done;
             EditableTaskLabel.Text = task.Title;
-            AttachmentInfoText.Text = task.Attachments.Count > 0 ? task.Attachments.Count + "📎 " : null;
+            AttachmentInfoText.Content = task.Attachments.Count > 0 ? task.Attachments.Count + "📎 " : null;
             ControlContainer.Background = isHighlighted ? new SolidColorBrush(Color.FromArgb(50, 0, 0, 0)) : null;
         }
 
         // Benutzer drückt auf Löschen
         public void DeleteTaskMouseEvent(object sender, RoutedEventArgs e)
         {
-            DeleteTask();
+            if( String.IsNullOrEmpty(Task.Description) && Task.Attachments.Count == 0)
+                DeleteTask();
+            else
+            {
+                ConfirmWindow confirmWindow = new ConfirmWindow(
+                    "Alle Anhänge löschen", "Sind Sie sich sicher, dass Sie diese Aufgabe inkl. aller Anhänge endgültig löschen wollen?", 
+                    DeleteTaskCallback);
+                confirmWindow.ShowDialog();
+            }
+        }
+
+        private void DeleteTaskCallback(ConfirmState confirmState)
+        {
+            if(confirmState == ConfirmState.YES)
+                DeleteTask();
         }
 
 
         // Benutzer schließt Editieren ab
-        #pragma warning disable IDE0051 // wird eigentlich durch XAML aufgerufen
+#pragma warning disable IDE0051 // wird eigentlich durch XAML aufgerufen
         private void OnLabelEdited(string text)
         {
             if (!string.IsNullOrWhiteSpace(text))

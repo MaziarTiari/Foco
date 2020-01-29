@@ -8,7 +8,7 @@
         Title="WindowTitle" WindowStartupLocation="CenterOwner" Closing="OnWindowClosing" Style="{StaticResource InputWindowStyle}">
 
     <Window.Resources>
-        <ResourceDictionary Source="../ResourceDictionaries/InputWindowDictionary.xaml"/>
+        <ResourceDictionary Source="../resource-dictionaries/InputWindowDictionary.xaml"/>
     </Window.Resources>
     <StackPanel Style="{StaticResource InputWindowMainStackPanel}">
         <StackPanel.Resources>
@@ -35,8 +35,8 @@
             <Button Grid.Column="2" Name="FileButton" Content="..." Click="OnFileButtonClicked" Width="30" Margin="0"/>
         </Grid>
         <DockPanel Style="{StaticResource ConfirmButtonPanel}">
-            <Button Content="Speichern" Tag="Save" Click="OnButtonClicked" Style="{StaticResource ConfirmButton}"/>
             <Button Content="Abbrechen" Tag="Cancel" Click="OnButtonClicked"/>
+            <Button Content="Speichern" Tag="Save" Click="OnButtonClicked" Style="{StaticResource ConfirmButton}"/>
         </DockPanel>
     </StackPanel>
 

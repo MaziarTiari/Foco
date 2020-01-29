@@ -5,11 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Foco.controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" FontFamily="Century Gothic">
+             d:DesignHeight="450">
 
+    <UserControl.Resources>
+        <Style x:Key="BorLaneChildMenuItem" TargetType="MenuItem" BasedOn="{StaticResource ChildMenuItemStyle}">
+            <Setter Property="IsCheckable" Value="True"/>
+            <EventSetter Event="Click" Handler="OnSortMenuItemClick"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </UserControl.Resources>
+    
     <Border BorderBrush="{StaticResource ParentItemBorderBackground}" BorderThickness="3" Margin="10" Width="250">
         <Grid>
-
             <!-- Row Definitions -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -17,33 +27,33 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <!-- Kopfbereich -->
+            <!-- Header -->
             <Border Grid.Row="0" Width="250" Background="{StaticResource ParentItemBorderBackground}">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Label Name="TitleLabel" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="20" Foreground="White" FontWeight="Bold">Name</Label>
-                    <Menu Background="{StaticResource ParentItemBorderBackground}" VerticalAlignment="Center">
-                        <MenuItem Name="SortMenuItem" Foreground="White" BorderThickness="0" Header="▼" FontSize="16" ToolTip="Aufgabengruppen sortieren" FontFamily="Century Gothic">
-                            <MenuItem FontSize="14" Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="AA" Header="Alphabetisch aufsteigend"></MenuItem>
-                            <MenuItem FontSize="14" Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="AD" Header="Alphabetisch absteigend"></MenuItem>
-                            <MenuItem FontSize="14" Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="PA" Header="Priorität aufsteigend"></MenuItem>
-                            <MenuItem FontSize="14" Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="PD" Header="Priorität absteigend"></MenuItem>
-                            <MenuItem FontSize="14" Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="DA" Header="Deadline aufsteigend"></MenuItem>
-                            <MenuItem FontSize="14" Foreground="Black" IsCheckable="True" Click="OnSortMenuItemClick" Tag="DD" Header="Deadline absteigend"></MenuItem>
+                    <Label Name="TitleLabel" FontSize="20" Content="Name"/>
+                    <Menu Style="{StaticResource MenuButtonGeneralStyle}">
+                        <MenuItem Name="SortMenuItem" Style="{StaticResource MainMenuItemStyle}" Header="▼" FontSize="16" ToolTip="Aufgabengruppen sortieren">
+                            <MenuItem Style="{StaticResource BorLaneChildMenuItem}" Tag="AA" Header="Alphabetisch aufsteigend"/>
+                            <MenuItem Style="{StaticResource BorLaneChildMenuItem}" Tag="AD" Header="Alphabetisch absteigend"/>
+                            <MenuItem Style="{StaticResource BorLaneChildMenuItem}" Tag="PA" Header="Priorität aufsteigend"/>
+                            <MenuItem Style="{StaticResource BorLaneChildMenuItem}" Tag="PD" Header="Priorität absteigend"/>
+                            <MenuItem Style="{StaticResource BorLaneChildMenuItem}" Tag="DA" Header="Deadline aufsteigend"/>
+                            <MenuItem Style="{StaticResource BorLaneChildMenuItem}" Tag="DD" Header="Deadline absteigend"/>
                         </MenuItem>
                     </Menu>
                 </StackPanel>
             </Border>
 
-            <!-- Inhalt -->
+            <!-- Body -->
             <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden" Name="TaskgroupStackScroll">
                 <StackPanel Name="TaskgroupStack" Background="{StaticResource ItemBackground}" MouseLeftButtonDown="OnMouseLeftButtonDown" DragOver="OnDragOver" Drop="OnDrop" AllowDrop="True"/>
             </ScrollViewer>
             
-            <!-- Fußbereich -->
+            <!-- Footer -->
             <Border Grid.Row="2" Background="{StaticResource ParentItemBorderBackground}" MouseLeftButtonDown="OnAddGroupClicked">
-                <Label Height="35" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" FontSize="15">+ Aufgabengruppe hinzufügen</Label>
+                <Label Height="35" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="14" Content="+ Aufgabengruppe hinzufügen"/>
             </Border>
-
+            
         </Grid>
     </Border>
 
