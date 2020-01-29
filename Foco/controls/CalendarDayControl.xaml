@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Foco.controls"
              mc:Ignorable="d" d:DesignHeight="100" d:DesignWidth="150" MouseEnter="OnMouseOverChange" MouseLeave="OnMouseOverChange">
     
-    <Border BorderBrush="#404040" BorderThickness="1" Background="White" Name="DayInfoContainer">
+    <Border BorderBrush="{StaticResource ParentItemBorderBackground}" BorderThickness="1" Background="White" Name="DayInfoContainer">
         <Grid Margin="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

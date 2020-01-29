@@ -113,7 +113,7 @@
         </Grid>
 
         <!-- Grid fuer DayControls -->
-        <Border BorderBrush="#404040" BorderThickness="2,0,2,2" Grid.Row="2">
+        <Border BorderBrush="{StaticResource ParentItemBorderBackground}" BorderThickness="2,0,2,2" Grid.Row="2">
             <Grid Background="GhostWhite" Name="DayControlContainer">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

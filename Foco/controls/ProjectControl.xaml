@@ -12,7 +12,7 @@
         </Style>
     </UserControl.Resources>
     
-    <Border Name="ProjectBorder" BorderBrush="#404040" BorderThickness="2" Height="120" Width="200" MouseEnter="OnMouseEnter" 
+    <Border Name="ProjectBorder" BorderBrush="{StaticResource ParentItemBorderBackground}" BorderThickness="2" Height="120" Width="200" MouseEnter="OnMouseEnter" 
             MouseLeave="OnMouseLeave" CornerRadius="3">
 
         <Border.Style>
