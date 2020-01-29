@@ -15,7 +15,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Button Grid.Column="0" FontSize="20" Width="300" Height="40" Content="+ Aufgabengruppe hinzufügen" Margin="0,0,10,0" Click="OnAddTaskgroupClicked" FontFamily="Century Gothic" Style="{StaticResource ConfirmButton}">
+        <Button Grid.Column="0" FontSize="20" Width="330" Height="40" Content="+ Aufgabengruppe hinzufügen" Margin="0,0,10,0" Click="OnAddTaskgroupClicked" FontFamily="Century Gothic" Style="{StaticResource ConfirmButton}">
             <Button.LayoutTransform>
                 <RotateTransform Angle="90"/>
             </Button.LayoutTransform>
