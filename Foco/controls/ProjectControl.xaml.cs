@@ -100,10 +100,20 @@ namespace Foco.controls
         {
             if (project == null)
             {
-                string lastProjectColor = goalControl.Goal.Projects[goalControl.Goal.Projects.Count - 1].Color;
-                ProjectEditWindow projectEditWindow = new ProjectEditWindow("Projekt erstellen", "", FindNextUnusedColor(lastProjectColor), CreatedCallback);
+                string color;
+                if (goalControl.Goal.Projects.Count > 0)
+                {
+                    int index = goalControl.Goal.Projects.Count - 1;
+                    string lastProjectColor = goalControl.Goal.Projects[index].Color;
+                    color = FindNextUnusedColor(lastProjectColor);
+                }
+                else
+                {
+                    color = ProjectEditWindow.colorStrings[0];
+                }
+                ProjectEditWindow projectEditWindow = new ProjectEditWindow("Projekt erstellen", "", color, CreatedCallback);
                 projectEditWindow.ShowDialog();
-                
+
             }
             else
             {
@@ -116,10 +126,10 @@ namespace Foco.controls
             string[] colors = ProjectEditWindow.colorStrings;
             for (int i = 0; i < colors.Length; i++)
             {
-                if(ProjectEditWindow.colorStrings[i] == lastProjectColor)
+                if (ProjectEditWindow.colorStrings[i] == lastProjectColor)
                 {
                     return colors[++i % colors.Length];
-                } 
+                }
             }
             return colors[0];
         }
