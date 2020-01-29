@@ -178,7 +178,7 @@ namespace Foco.controls
         }
 
         // Benutzer hat auf Hinzufügen geklickt
-        private void OnAddGroupClicked(object sender, MouseButtonEventArgs e)
+        private void OnAddGroupClicked(object sender, RoutedEventArgs e)
         {
             string title = "Neue Gruppe";
             int i = 1;
