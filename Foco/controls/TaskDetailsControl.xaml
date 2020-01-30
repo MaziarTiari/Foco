@@ -7,7 +7,7 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
-        <Style TargetType="Label" BasedOn="{StaticResource Header}">
+        <Style x:Key="TaskDetailsHeader" TargetType="Label" BasedOn="{StaticResource Header}">
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="18"/>
         </Style>
@@ -38,7 +38,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" Content="Beschreibung"/>
+                <Label Grid.Row="0" Style="{StaticResource TaskDetailsHeader}" Content="Beschreibung"/>
 
                 <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
                     <Grid>
@@ -69,7 +69,7 @@
                 </Grid.RowDefinitions>
                 <Border Grid.Row="0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Label Content="Anhänge"/>
+                        <Label Content="Anhänge" Style="{StaticResource TaskDetailsHeader}"/>
                         <Menu ToolTip="Anhang hinzufügen" Background="{StaticResource ParentItemBorderBackground}" VerticalAlignment="Center">
                             <MenuItem Name="AddMenuItem" Header="▼" FontSize="16" Style="{StaticResource MainMenuItemStyle}">
                                 <MenuItem Style="{StaticResource TaskDetailsChildMenuItem}" Tag="URL" Header="Webadresse anhängen"/>
