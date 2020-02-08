@@ -75,11 +75,6 @@ namespace Foco.pages
             Update();
         }
 
-        private void setState(CheckBox checkBox)
-        {
-
-        }
-
         public void Update()
         {
             TaskgroupContainer.Children.Clear();
