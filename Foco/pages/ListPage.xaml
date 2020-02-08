@@ -9,22 +9,53 @@
       Title="ListPage">
 
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" VerticalAlignment="Center" BorderThickness="0 0 0 2" BorderBrush="{StaticResource ParentItemBorderBackground}" Height="50">
+            <DockPanel HorizontalAlignment="Center">
+                <DockPanel.Resources>
+                    <Style TargetType="CheckBox">
+                        <Setter Property="IsChecked" Value="True"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="Margin" Value="10 0 10 0"/>
+                        <EventSetter Event="Click" Handler="StateCheckboxKeyDown"/>
+                    </Style>
+                </DockPanel.Resources>
+                <Label Content="Filter:" FontWeight="Bold" VerticalAlignment="Center"/>
+                <CheckBox Name="Todo" Content="Warteschlange"/>
+                <CheckBox Name="InProgress" Content="In Bearbeitung"/>
+                <CheckBox Name="Blocked" Content="Blockiert"/>
+                <CheckBox Name="Validation" Content="Überprüfung"/>
+                <CheckBox Name="Done" IsChecked="False" Content="Fertig"/>
+            </DockPanel>
+        </Border>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-        <Button Grid.Column="0" FontSize="20" Width="330" Height="40" Content="+ Aufgabengruppe hinzufügen" Margin="0,0,10,0" Click="OnAddTaskgroupClicked" FontFamily="Century Gothic" Style="{StaticResource ConfirmButton}">
-            <Button.LayoutTransform>
-                <RotateTransform Angle="90"/>
-            </Button.LayoutTransform>
-        </Button>
+                <Button Grid.Column="0" Grid.Row="1" FontSize="20" Width="330" Height="40" Content="+ Aufgabengruppe hinzufügen" Margin="0,0,10,0" Click="OnAddTaskgroupClicked" FontFamily="Century Gothic" Style="{StaticResource ConfirmButton}">
+                <Button.LayoutTransform>
+                    <RotateTransform Angle="90"/>
+                </Button.LayoutTransform>
+            </Button>
 
-        <ScrollViewer Grid.Column="1" Name="TaskgroupScroll">
-            <WrapPanel Margin="20" Name="TaskgroupContainer" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
-            </WrapPanel>
-        </ScrollViewer>
+            <ScrollViewer Grid.Column="1" Grid.Row="1" Name="TaskgroupScroll">
+                <WrapPanel Margin="20" Name="TaskgroupContainer" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
+                </WrapPanel>
+            </ScrollViewer>
+
+        </Grid>
 
     </Grid>
 
