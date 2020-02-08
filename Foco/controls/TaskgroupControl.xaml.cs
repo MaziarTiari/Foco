@@ -133,6 +133,8 @@ namespace Foco.controls
         private void OnStatusComboChanged(object sender, SelectionChangedEventArgs e)
         {
             taskgroup.State = (State)StateCombo.SelectedIndex;
+            if(ListPage != null)
+                ListPage.Update();
         }
 
         // Benutzer ändert Priorität
