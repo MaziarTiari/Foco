@@ -4,6 +4,8 @@ using Foco.windows;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Collections.Generic;
+using System;
 
 namespace Foco.pages
 {
@@ -12,7 +14,9 @@ namespace Foco.pages
     /// </summary>
     public partial class ListPage : Page
     {
-
+        
+        public readonly State[] stateEnums = (State[])Enum.GetValues(typeof(State));
+        private List<State> displayedStates = new List<State>();
         private readonly MainWindow mainWindow;
         private Project project;
 
@@ -20,11 +24,21 @@ namespace Foco.pages
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
+            setDefaultStates();
             Update();
         }
 
         public Project Project { get => project; set { project = value; Update(); } }
         public MainWindow MainWindow => mainWindow;
+
+        private void setDefaultStates()
+        {
+            foreach(State state in stateEnums)
+            {
+                if (state != State.Done)
+                    displayedStates.Add(state);
+            }
+        }
 
         // Benutzer klickte auf Hinzufügen
         private void OnAddTaskgroupClicked(object sender, RoutedEventArgs e)
@@ -41,6 +55,30 @@ namespace Foco.pages
             TaskgroupScroll.ScrollToBottom();
         }
 
+        private void StateCheckboxKeyDown(object sender, RoutedEventArgs e)
+        {
+            var checkbox = sender as CheckBox;
+            string checkboxName = checkbox.Name;
+
+            foreach(State state in stateEnums)
+            {
+                if (checkboxName == state.ToString())
+                {
+                    if (checkbox.IsChecked == true)
+                    {
+                        if (! displayedStates.Contains(state))
+                            displayedStates.Add(state);
+                    }
+                    else
+                    {
+                        if (displayedStates.Contains(state))
+                            displayedStates.Remove(state);
+                    }
+                }
+            }
+            Update();
+        }
+
         public void Update()
         {
             TaskgroupContainer.Children.Clear();
@@ -48,8 +86,11 @@ namespace Foco.pages
             {
                 foreach (Taskgroup taskgroup in project.Taskgroups)
                 {
-                    TaskgroupControl taskgroupControl = new TaskgroupControl(taskgroup, this);
-                    TaskgroupContainer.Children.Add(taskgroupControl);
+                    if(displayedStates.Contains(taskgroup.State))
+                    {
+                        TaskgroupControl taskgroupControl = new TaskgroupControl(taskgroup, this);
+                        TaskgroupContainer.Children.Add(taskgroupControl);
+                    }
                 }
             }
         }

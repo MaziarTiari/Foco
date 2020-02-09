@@ -5,7 +5,6 @@ namespace Foco.models
 {
     public class Task
     {
-
         private string title;
         private string description;
         private bool done;

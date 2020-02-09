@@ -23,6 +23,10 @@
         <Setter Property="FontFamily" Value="Century Gothic"/>
     </Style>
 
+    <Style TargetType="Page">
+        <Setter Property="FontFamily" Value="Century Gothic"/>
+    </Style>
+
     <Style x:Key="ConfirmButton" TargetType="Button">
         <Setter Property="Margin" Value="5 0 0 0"/>
         <Setter Property="Padding" Value="6"/>

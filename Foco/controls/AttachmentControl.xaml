@@ -13,8 +13,8 @@
         </Style>
     </UserControl.Resources>
 
-    <Border Background="White" Height="45" BorderThickness="1" 
-            MouseLeftButtonDown="OnControlClicked" Margin="5" MouseEnter="OnMouseEnter" 
+    <Border Background="White" Height="45" BorderThickness="2" BorderBrush="{StaticResource ChildItemBorderBackground}"
+           CornerRadius="3" MouseLeftButtonDown="OnControlClicked" Margin="5" MouseEnter="OnMouseEnter" 
             MouseLeave="OnMouseLeave" ToolTip="Klicken zum Öffnen">
         <Grid>
             <Grid.ColumnDefinitions>

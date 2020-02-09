@@ -38,7 +38,7 @@ namespace Foco.calendar
 
         private void Update()
         {
-            DateTime date = new DateTime(year, month, 1);
+            DateTime date = new DateTime(this.year, this.month, 1);
             int firstDayOfMonthIndex = date.DayOfWeek.GetHashCode(); // Check with which day of the Week selected month starts
             int daysInMonth = DateTime.DaysInMonth(year, month);
             int daysInLastMonth = DateTime.DaysInMonth( year, LastMonth() );
