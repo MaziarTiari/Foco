@@ -16,7 +16,7 @@ namespace Foco.pages
     {
         
         public readonly State[] stateEnums = (State[])Enum.GetValues(typeof(State));
-        private List<State> states = new List<State>();
+        private List<State> displayedStates = new List<State>();
         private readonly MainWindow mainWindow;
         private Project project;
 
@@ -24,17 +24,21 @@ namespace Foco.pages
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
-            states.Add(State.Todo);
-            states.Add(State.InProgress);
-            states.Add(State.Validation);
-            states.Add(State.Blocked);
+            setDefaultStates();
             Update();
         }
 
         public Project Project { get => project; set { project = value; Update(); } }
         public MainWindow MainWindow => mainWindow;
 
-        public List<State> States { get => states; set => states = value; }
+        private void setDefaultStates()
+        {
+            foreach(State state in stateEnums)
+            {
+                if (state != State.Done)
+                    displayedStates.Add(state);
+            }
+        }
 
         // Benutzer klickte auf Hinzufügen
         private void OnAddTaskgroupClicked(object sender, RoutedEventArgs e)
@@ -62,13 +66,13 @@ namespace Foco.pages
                 {
                     if (checkbox.IsChecked == true)
                     {
-                        if (!States.Contains(state))
-                            States.Add(state);
+                        if (! displayedStates.Contains(state))
+                            displayedStates.Add(state);
                     }
                     else
                     {
-                        if (States.Contains(state))
-                            States.Remove(state);
+                        if (displayedStates.Contains(state))
+                            displayedStates.Remove(state);
                     }
                 }
             }
@@ -82,7 +86,7 @@ namespace Foco.pages
             {
                 foreach (Taskgroup taskgroup in project.Taskgroups)
                 {
-                    if(states.Contains(taskgroup.State))
+                    if(displayedStates.Contains(taskgroup.State))
                     {
                         TaskgroupControl taskgroupControl = new TaskgroupControl(taskgroup, this);
                         TaskgroupContainer.Children.Add(taskgroupControl);

@@ -32,7 +32,7 @@
                 <CheckBox Name="InProgress" Content="In Bearbeitung"/>
                 <CheckBox Name="Blocked" Content="Blockiert"/>
                 <CheckBox Name="Validation" Content="Überprüfung"/>
-                <CheckBox Name="Done" IsChecked="False" Content="Fertig"/>
+                <CheckBox Name="Done" IsChecked="False" Content="Abgeschlossen"/>
             </DockPanel>
         </Border>
         <Grid Grid.Row="1">
