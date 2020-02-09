@@ -34,7 +34,7 @@ namespace Foco.windows
             else
             {
                 LinkLabel.Content = "URL:";
-                FileButton.Visibility = Visibility.Hidden;
+                FileButton.Visibility = Visibility.Collapsed;
                 LinkBox.Width = TitleBox.Width;
             }
             TitleBox.Text = defaultTitle;

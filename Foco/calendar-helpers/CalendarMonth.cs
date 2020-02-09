@@ -4,16 +4,22 @@ using System.Collections.Generic;
 
 namespace Foco.calendar
 {
-
     public class CalendarMonth
     {
+        private const string PREVIOUS_MONTH = "previousMonth";
+        private const string SELECTED_MONTH = "selectedMonth";
 
-        public static readonly string[] MonthNames = new string[] { "Jan", "Feb", "März", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez" };
+        public static readonly string[] MonthNames = new string[] {
+            "Jan", "Feb", "März", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"
+        };
 
         private int month;
         private int year;
+
+        private int weekdayIndexAtMonthBegins;
         private CalendarDay[] days = new CalendarDay[42];
         private List<Taskgroup> taskgroups = new List<Taskgroup>();
+        Dictionary<string, int> numberOfDays = new Dictionary<string, int>();
         public CalendarMonth(int year, int month)
         {
             this.month = month;
@@ -21,10 +27,30 @@ namespace Foco.calendar
             Update();
         }
 
-        public CalendarDay[] Days { get => days; set => days = value; }
+        public int Month
+        {
+            get => month;
+            set
+            {
+                month = value;
+                Update();
+            }
+        }
+        public int Year
+        {
+            get => year;
+            set
+            {
+                year = value;
+                Update();
+            }
+        }
+
         public List<Taskgroup> Taskgroups { get => taskgroups; set { taskgroups = value; Update(); } }
 
-        public int LastMonth()
+        public CalendarDay[] Days { get => days; set => days = value; }
+
+        public int PreviousMonth()
         {
             if (Month == 1) return 12;
             else return Month - 1;
@@ -38,42 +64,60 @@ namespace Foco.calendar
 
         private void Update()
         {
-            DateTime date = new DateTime(this.year, this.month, 1);
-            int firstDayOfMonthIndex = date.DayOfWeek.GetHashCode(); // Check with which day of the Week selected month starts
-            int daysInMonth = DateTime.DaysInMonth(year, month);
-            int daysInLastMonth = DateTime.DaysInMonth( year, LastMonth() );
-            int daysShowingFromMonthBefore = daysInLastMonth;
+            DateTime date = new DateTime(this.year, this.Month, 1);
+            weekdayIndexAtMonthBegins = date.DayOfWeek.GetHashCode();
+            numberOfDays[SELECTED_MONTH] = DateTime.DaysInMonth(this.year, this.Month);
+            numberOfDays[PREVIOUS_MONTH] = DateTime.DaysInMonth(YearOfPreviousMonth(), PreviousMonth());
+            AddDaysOfPreviousMonth();
+            AddDaysOfSelectedMonth();
+            AddDaysOfNextMonth();
+        }
 
-            for (int i = 0; i < Days.Length; i++) // Calender has 7 columns and 6 rows which means 42 days to show
+        private void AddDaysOfPreviousMonth()
+        {
+            int d = numberOfDays[PREVIOUS_MONTH] - weekdayIndexAtMonthBegins + 1;
+            AddDaysOfMonth(0, weekdayIndexAtMonthBegins, YearOfPreviousMonth(), PreviousMonth(), d, false);
+        }
+
+        private void AddDaysOfSelectedMonth()
+        {
+            int max = numberOfDays[SELECTED_MONTH] + weekdayIndexAtMonthBegins;
+            AddDaysOfMonth(weekdayIndexAtMonthBegins, max, Year, Month, 1, true);
+        }
+
+        private void AddDaysOfNextMonth()
+        {
+            int index = numberOfDays[SELECTED_MONTH] + weekdayIndexAtMonthBegins;
+            AddDaysOfMonth(index, Days.Length, YearOfNextMonth(), NextMonth(), 1, false);
+        }
+
+        private void AddDaysOfMonth(int index, int max , int y, int m, int startingDay, bool daysAreFromSelectedMonth)
+        {
+            for (int i = index; i < max; i++)
             {
-                if (i == 0 && firstDayOfMonthIndex > i) // if first day of the month is not the first day of the weak
-                    daysShowingFromMonthBefore = daysInLastMonth - firstDayOfMonthIndex; // check how many days to show from last month
-                if (daysShowingFromMonthBefore < daysInLastMonth) // continue with days from last month til we reach end of the last month
-                {
-                    daysShowingFromMonthBefore++;
-                    if(Month == 1)
-                        SetDay(i, new DateTime(Year -1, LastMonth() ,daysShowingFromMonthBefore));
-                    else
-                        SetDay(i, new DateTime(Year, LastMonth(), daysShowingFromMonthBefore));
-                    Days[i].FromSelectedMonth = false;
-                }
-                else
-                {
-                    if (i < daysInMonth + firstDayOfMonthIndex) // set days for selected month
-                        SetDay( i, new DateTime(Year, Month, (i + 1 - firstDayOfMonthIndex)) );
-                    else // set days for the month after
-                    {
-                        if(Month == 12)
-                            SetDay( i, new DateTime(Year + 1, NextMonth(), ((i + 1 - firstDayOfMonthIndex) % daysInMonth)) );
-                        else
-                            SetDay(i, new DateTime(Year, NextMonth(), ((i + 1 - firstDayOfMonthIndex) % daysInMonth)));
-                        Days[i].FromSelectedMonth = false;
-                    }
-                }
+                AddDay(i, new DateTime(y, m, startingDay));
+                startingDay++;
+                Days[i].FromSelectedMonth = daysAreFromSelectedMonth;
             }
         }
 
-        private void SetDay(int index, DateTime date)
+        private int YearOfPreviousMonth()
+        {
+            if (Month == 1)
+                return year - 1;
+            else
+                return year;
+        }
+
+        private int YearOfNextMonth()
+        {
+            if (Month == 12)
+                return year + 1;
+            else
+                return year;
+        }
+
+        private void AddDay(int index, DateTime date)
         {
             Days[index] = new CalendarDay(date);
             if (Taskgroups.Count < 1)
@@ -97,26 +141,8 @@ namespace Foco.calendar
         public void SetLastMonth()
         {
             if (Month == 1) Year --;
-            Month = LastMonth();
+            Month = PreviousMonth();
             Update();
-        }
-
-        public int Month
-        {
-            get => month; set
-            {
-                month = value;
-                Update();
-            }
-        }
-        public int Year
-        {
-            get => year;
-            set
-            {
-                year = value;
-                Update();
-            }
         }
     }
 }
