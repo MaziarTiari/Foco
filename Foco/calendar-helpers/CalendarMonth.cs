@@ -6,20 +6,15 @@ namespace Foco.calendar
 {
     public class CalendarMonth
     {
-        private const string PREVIOUS_MONTH = "previousMonth";
-        private const string SELECTED_MONTH = "selectedMonth";
-
         public static readonly string[] MonthNames = new string[] {
             "Jan", "Feb", "März", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"
         };
 
         private int month;
         private int year;
-
-        private int weekdayIndexAtMonthBegins;
+        private int weekdayIndexOfMonthsFirstDay;
         private CalendarDay[] days = new CalendarDay[42];
         private List<Taskgroup> taskgroups = new List<Taskgroup>();
-        Dictionary<string, int> numberOfDays = new Dictionary<string, int>();
         public CalendarMonth(int year, int month)
         {
             this.month = month;
@@ -27,30 +22,12 @@ namespace Foco.calendar
             Update();
         }
 
-        public int Month
-        {
-            get => month;
-            set
-            {
-                month = value;
-                Update();
-            }
-        }
-        public int Year
-        {
-            get => year;
-            set
-            {
-                year = value;
-                Update();
-            }
-        }
-
+        public int Month { get => month; set { month = value; Update(); } }
+        public int Year { get => year; set { year = value; Update(); } }
         public List<Taskgroup> Taskgroups { get => taskgroups; set { taskgroups = value; Update(); } }
-
         public CalendarDay[] Days { get => days; set => days = value; }
 
-        public int PreviousMonth()
+        public int PreviousMonth() 
         {
             if (Month == 1) return 12;
             else return Month - 1;
@@ -64,83 +41,77 @@ namespace Foco.calendar
 
         private void Update()
         {
-            DateTime date = new DateTime(this.year, this.Month, 1);
-            weekdayIndexAtMonthBegins = date.DayOfWeek.GetHashCode();
-            numberOfDays[SELECTED_MONTH] = DateTime.DaysInMonth(this.year, this.Month);
-            numberOfDays[PREVIOUS_MONTH] = DateTime.DaysInMonth(YearOfPreviousMonth(), PreviousMonth());
-            AddDaysOfPreviousMonth();
-            AddDaysOfSelectedMonth();
-            AddDaysOfNextMonth();
+            DateTime startDateOfMonth = new DateTime(Year, Month, 1);
+            weekdayIndexOfMonthsFirstDay = startDateOfMonth.DayOfWeek.GetHashCode();
+            int numberOfDaysInSelectedMonth = DateTime.DaysInMonth(Year, Month);
+            int numberOfDaysInPreviousMonth = DateTime.DaysInMonth(YearOfPreviousMonth(), PreviousMonth());
+
+            int startingIndex, endingIndex, startingDay;
+            // Add days from previous month
+            startingIndex = 0;
+            endingIndex = weekdayIndexOfMonthsFirstDay;
+            startingDay = numberOfDaysInPreviousMonth - weekdayIndexOfMonthsFirstDay + 1;
+            AddDaysOfMonth(
+                startingIndex, endingIndex, YearOfPreviousMonth(), PreviousMonth(), startingDay, false
+                );
+            // Add days from selected month
+            startingIndex = endingIndex;
+            endingIndex = numberOfDaysInSelectedMonth + endingIndex;
+            AddDaysOfMonth(startingIndex, endingIndex, Year, Month, 1, true);
+
+            // Add days from next month
+            startingIndex = endingIndex;
+            endingIndex = Days.Length;
+            AddDaysOfMonth(startingIndex, endingIndex, YearOfNextMonth(), NextMonth(), 1, false);
         }
 
-        private void AddDaysOfPreviousMonth()
-        {
-            int d = numberOfDays[PREVIOUS_MONTH] - weekdayIndexAtMonthBegins + 1;
-            AddDaysOfMonth(0, weekdayIndexAtMonthBegins, YearOfPreviousMonth(), PreviousMonth(), d, false);
-        }
 
-        private void AddDaysOfSelectedMonth()
-        {
-            int max = numberOfDays[SELECTED_MONTH] + weekdayIndexAtMonthBegins;
-            AddDaysOfMonth(weekdayIndexAtMonthBegins, max, Year, Month, 1, true);
-        }
-
-        private void AddDaysOfNextMonth()
-        {
-            int index = numberOfDays[SELECTED_MONTH] + weekdayIndexAtMonthBegins;
-            AddDaysOfMonth(index, Days.Length, YearOfNextMonth(), NextMonth(), 1, false);
-        }
-
-        private void AddDaysOfMonth(int index, int max , int y, int m, int startingDay, bool daysAreFromSelectedMonth)
+        private void AddDaysOfMonth(int index, int max , int y, int m, int startingDay, bool areFromSelectedMonth)
         {
             for (int i = index; i < max; i++)
             {
                 AddDay(i, new DateTime(y, m, startingDay));
                 startingDay++;
-                Days[i].FromSelectedMonth = daysAreFromSelectedMonth;
+                Days[i].FromSelectedMonth = areFromSelectedMonth;
             }
         }
 
         private int YearOfPreviousMonth()
         {
             if (Month == 1)
-                return year - 1;
+                return Year - 1;
             else
-                return year;
+                return Year;
         }
 
         private int YearOfNextMonth()
         {
             if (Month == 12)
-                return year + 1;
+                return Year + 1;
             else
-                return year;
+                return Year;
         }
 
         private void AddDay(int index, DateTime date)
         {
             Days[index] = new CalendarDay(date);
-            if (Taskgroups.Count < 1)
-                return;
-            foreach(Taskgroup taskgroup in Taskgroups)
-            {
-                if ( taskgroup.Deadline.Date == Days[index].Date )
-                {
+            var taskgroups = Taskgroups.FindAll(t => t.Deadline.Date == date);
+
+            if (taskgroups.Count > 0)
+                foreach (Taskgroup taskgroup in taskgroups)
                     Days[index].Taskgroups.Add(taskgroup);
-                }
-            }
         }
 
-        public void SetNextMonth()
+        public void ChangeToNextMonth()
         {
-            if (Month == 12) Year++;
+            Year = YearOfNextMonth();
             Month = NextMonth();
             Update();
         }
 
-        public void SetLastMonth()
+        public void ChangeToPreviousMonth()
         {
-            if (Month == 1) Year --;
+            Year = YearOfPreviousMonth();
             Month = PreviousMonth();
             Update();
         }

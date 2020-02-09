@@ -87,13 +87,13 @@ namespace Foco.pages
 
         private void LastMonthHandler(object sender, RoutedEventArgs e)
         {
-            CalendarMonth.SetLastMonth();
+            CalendarMonth.ChangeToPreviousMonth();
             Update();
         }
 
         private void NextMonthHandler(object sender, RoutedEventArgs e)
         {
-            CalendarMonth.SetNextMonth();
+            CalendarMonth.ChangeToNextMonth();
             Update();
         }
     }
