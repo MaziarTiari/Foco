@@ -34,7 +34,7 @@ namespace Foco.controls
         {
             TaskCheckBox.IsChecked = task.Done;
             EditableTaskLabel.Text = task.Title;
-            AttachmentInfoText.Content = task.Attachments.Count > 0 ? task.Attachments.Count + "📎 " : null;
+            AttachmentInfoText.Text = task.Attachments.Count > 0 ? task.Attachments.Count + "📎 " : null;
             ControlContainer.Background = isHighlighted ? new SolidColorBrush(Color.FromArgb(50, 0, 0, 0)) : null;
         }
 
@@ -45,17 +45,37 @@ namespace Foco.controls
                 DeleteTask();
             else
             {
-                ConfirmWindow confirmWindow = new ConfirmWindow(
-                    "Alle Anhänge löschen", "Sind Sie sich sicher, dass Sie diese Aufgabe inkl. aller Anhänge endgültig löschen wollen?", 
-                    DeleteTaskCallback);
-                confirmWindow.ShowDialog();
+                ShowDeleteConfirmWindow();
             }
+        }
+
+        private void ShowDeleteConfirmWindow()
+        {
+            ConfirmWindow confirmWindow = new ConfirmWindow(
+            "Alle Anhänge löschen", "Sind Sie sich sicher, dass Sie diese Aufgabe inkl. aller Anhänge endgültig löschen wollen?",
+            DeleteTaskCallback);
+            confirmWindow.ShowDialog();
         }
 
         private void DeleteTaskCallback(ConfirmState confirmState)
         {
             if(confirmState == ConfirmState.YES)
                 DeleteTask();
+            else
+            {
+                if(string.IsNullOrWhiteSpace(EditableTaskLabel.Text))
+                {
+                    if(Task.Attachments.Count > 0)
+                    {
+                        Task.Title = Task.Attachments[0].Title;
+                    }
+                    else
+                    {
+                        Task.Title = "Ohne Titel";
+                    }
+                    Update();
+                }
+            }
         }
 
 
@@ -66,7 +86,14 @@ namespace Foco.controls
             if (!string.IsNullOrWhiteSpace(text))
                 task.Title = text;
             else
-                DeleteTask();
+            {
+                if (Task.Attachments.Count > 0 || Task.Description != "")
+                {
+                    ShowDeleteConfirmWindow();
+                }
+                else
+                    DeleteTask();
+            }
         }
         #pragma warning restore IDE0051
 

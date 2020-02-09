@@ -19,16 +19,48 @@ namespace Foco.controls
         private readonly TaskgroupPage taskgroupPage;
         private Taskgroup taskgroup;
 
-        public Taskgroup Taskgroup { get => taskgroup; set { if (value == null) value = new Taskgroup("Dummy"); taskgroup = value; Update(); } }
-        public TaskControl HighlightedTask { get { foreach (TaskControl taskControl in TaskContainer.Children) { if (taskControl.Highlighted) return taskControl; } return null; } }
-        public ListPage ListPage => listPage;
-        public TaskgroupPage TaskgroupPage => taskgroupPage;
-
         private TaskgroupControl(Taskgroup taskgroup)
         {
             InitializeComponent();
             Taskgroup = taskgroup;
         }
+
+        public TaskgroupControl(Taskgroup taskgroup, ListPage listPage) : this(taskgroup)
+        {
+            this.listPage = listPage;
+        }
+
+        public TaskgroupControl(Taskgroup taskgroup, TaskgroupPage taskgroupPage) : this(taskgroup)
+        {
+            this.taskgroupPage = taskgroupPage;
+            InfoButton.Visibility = Visibility.Collapsed;
+            DeleteButton.Visibility = Visibility.Collapsed;
+        }
+
+        public Taskgroup Taskgroup
+        {
+            get => taskgroup;
+            set
+            {
+                if (value == null)
+                    value = new Taskgroup("Dummy");
+                taskgroup = value;
+                Update();
+            }
+        }
+        public TaskControl HighlightedTask
+        {
+            get
+            {
+                foreach (TaskControl taskControl in TaskContainer.Children)
+                {
+                    if (taskControl.Highlighted) return taskControl;
+                }
+                return null;
+            }
+        }
+        public ListPage ListPage => listPage;
+        public TaskgroupPage TaskgroupPage => taskgroupPage;
 
         private void Update()
         {
@@ -60,18 +92,6 @@ namespace Foco.controls
                     TaskContainer.Children.Add(taskControl);
                 }
             }
-        }
-
-        public TaskgroupControl(Taskgroup taskgroup, ListPage listPage) : this(taskgroup)
-        {
-            this.listPage = listPage;
-        }
-
-        public TaskgroupControl(Taskgroup taskgroup, TaskgroupPage taskgroupPage) : this(taskgroup)
-        {
-            this.taskgroupPage = taskgroupPage;
-            InfoButton.Visibility = Visibility.Collapsed;
-            DeleteButton.Visibility = Visibility.Collapsed;
         }
 
         #pragma warning disable IDE0051 // wird eigentlich durch XAML aufgerufen
