@@ -7,58 +7,48 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
-        <Style TargetType="Label">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-
-        <Style x:Key="TaskgroupInfoBorder" TargetType="Border">
-            <Setter Property="CornerRadius" Value="5"/>
-            <Setter Property="Height" Value="25"/>
-        </Style>
-        
-        <Style x:Key="TaskgroupInfoLabel" TargetType="Label">
-            <Setter Property="FontSize" Value="10"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-        </Style>
-        
-        <Style TargetType="Button" BasedOn="{StaticResource IconButtonStyle}">
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="Width" Value="30"/>
-            <Style.Resources>
-                <Style TargetType="Image">
-                    <Setter Property="Width" Value="30"/>
-                    <Setter Property="Height" Value="30"/>
-                </Style>
-            </Style.Resources>
-        </Style>
+        <ResourceDictionary 
+            Source="../resource-dictionaries/BoardGroupControlDictionary.xaml"/>
     </UserControl.Resources>
 
-    <Border BorderBrush="{StaticResource ChildItemBorderBackground}" Background="White" 
-            BorderThickness="2" Width="200" Margin="5" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave" 
-            ToolTip="Linke Maustaste gedrückt halten, um die Aufgabengruppe in eine andere Spalte zu verschieben" CornerRadius="3">
+    <Border Style="{StaticResource MainBorder}" 
+            MouseEnter="MouseEnteredBoard" MouseLeave="MouseLeavedBoard"
+            ToolTip="Mit linker Maustaste zwischen Spalten veschieben">
         <DockPanel>
-            <local:EditableLabel DockPanel.Dock="Top" Background="{StaticResource ChildItemBorderBackground}" Foreground="White"  Padding="4" 
-                                 FontSize="16" FontWeight="Bold" x:Name="NameLabel" Text="Gruppenbezeichnung" EditedCallbackFunction="OnLabelEdited" 
-                                 AllowNewLine="False" MaxLength="50"/>
+            <local:EditableLabel x:Name="NameLabel" Style="{StaticResource Heading}"
+                                 Text="Gruppenbezeichnung" AllowNewLine="False"
+                                 EditedCallbackFunction="EditedTitleHandler" 
+                                 MaxLength="50"
+                                 />
             <DockPanel DockPanel.Dock="Top" Margin="5,8,5,5">
-                <Border Name="PriorityBorder" Background="Orange" Style="{StaticResource TaskgroupInfoBorder}">
-                    <Label Name="PriorityLabel" Style="{StaticResource TaskgroupInfoLabel}" Content="Normal"/>
+                <Border Name="PriorityBorder" Background="Orange" 
+                        Style="{StaticResource TaskgroupInfoBorder}">
+                    <Label Name="PriorityLabel"  Content="Normal"
+                           Style="{StaticResource TaskgroupInfoLabel}"/>
                 </Border>
-                <Border Name="DeadlineBorder" HorizontalAlignment="Right" Background="{StaticResource RelevantDate}" Style="{StaticResource TaskgroupInfoBorder}">
-                    <Label Name="DeadlineLabel" Style="{StaticResource TaskgroupInfoLabel}" Content="28.11.2019"/>
+                <Border Name="DeadlineBorder" HorizontalAlignment="Right" 
+                        Background="{StaticResource RelevantDate}" 
+                        Style="{StaticResource TaskgroupInfoBorder}">
+                    <Label Name="DeadlineLabel" Content="28.11.2019"
+                           Style="{StaticResource TaskgroupInfoLabel}"/>
                 </Border>
             </DockPanel>
-            <Label DockPanel.Dock="Top" FontSize="14" Name="TasksLabel" Content="0 / 3 Aufgaben"/>
-            <StackPanel DockPanel.Dock="Bottom" Margin="0 8 0 3" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Name="InfoButton" Click="OnInfoClicked" ToolTip="Detailansicht">
+            <Label Name="TasksLabel" Content="0 / 3 Aufgaben" 
+                   Style="{StaticResource TaskNumber}"/>
+            <StackPanel DockPanel.Dock="Bottom" Margin="0 8 0 3" 
+                        Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Style="{StaticResource BoardGroupButton}" 
+                        Name="InfoButton" Click="OnInfoClicked" ToolTip="Detailansicht">
                     <Image Source="/icons/icons8-info-144.png"/>
                 </Button>
-                <Button Name="DeleteButton" Click="OnDeleteClicked" ToolTip="Aufgabengruppe löschen">
+                <Button Name="DeleteButton" Click="OnDeleteClicked" 
+                        ToolTip="Aufgabengruppe löschen" 
+                        Style="{StaticResource BoardGroupButton}"
+                        >
                     <Image Source="/icons/icons8-delete-bin-96.png"/>
                 </Button>
             </StackPanel>
         </DockPanel>
     </Border>
-    
+
 </UserControl>

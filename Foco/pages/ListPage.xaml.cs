@@ -1,17 +1,13 @@
 ﻿using Foco.models;
 using Foco.controls;
-using Foco.windows;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Collections.Generic;
 using System;
 
 namespace Foco.pages
 {
-    /// <summary>
-    /// Interaktionslogik für ListPage.xaml
-    /// </summary>
+    /// interaction lofigc for ListPage.xaml
     public partial class ListPage : Page
     {
         
@@ -24,14 +20,18 @@ namespace Foco.pages
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
-            setDefaultStates();
+            setDefaultStatestoDisplay();
             Update();
         }
 
-        public Project Project { get => project; set { project = value; Update(); } }
+        public Project Project 
+        {
+            get => project; 
+            set { project = value; Update(); } 
+        }
         public MainWindow MainWindow => mainWindow;
 
-        private void setDefaultStates()
+        private void setDefaultStatestoDisplay()
         {
             foreach(State state in stateEnums)
             {
@@ -40,7 +40,6 @@ namespace Foco.pages
             }
         }
 
-        // Benutzer klickte auf Hinzufügen
         private void OnAddTaskgroupClicked(object sender, RoutedEventArgs e)
         {
             string title = "Neue Gruppe";
@@ -55,7 +54,7 @@ namespace Foco.pages
             TaskgroupScroll.ScrollToBottom();
         }
 
-        private void StateCheckboxKeyDown(object sender, RoutedEventArgs e)
+        private void OnStateCheckboxKeyDown(object sender, RoutedEventArgs e)
         {
             var checkbox = sender as CheckBox;
             string checkboxName = checkbox.Name;
@@ -88,7 +87,9 @@ namespace Foco.pages
                 {
                     if(displayedStates.Contains(taskgroup.State))
                     {
-                        TaskgroupControl taskgroupControl = new TaskgroupControl(taskgroup, this);
+                        TaskgroupControl taskgroupControl = new TaskgroupControl(
+                                taskgroup, this
+                            );
                         TaskgroupContainer.Children.Add(taskgroupControl);
                     }
                 }

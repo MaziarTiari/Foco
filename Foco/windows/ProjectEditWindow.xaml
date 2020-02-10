@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Foco.windows"
         mc:Ignorable="d"
-        Title="" WindowStartupLocation="CenterOwner" Style="{StaticResource InputWindowStyle}">
+        Title="" WindowStartupLocation="CenterOwner"
+        Style="{StaticResource InputWindowStyle}">
 
     <Window.Resources>
-        <ResourceDictionary Source="../resource-dictionaries/InputWindowDictionary.xaml"/>
+        <ResourceDictionary
+            Source="../resource-dictionaries/InputWindowDictionary.xaml"/>
     </Window.Resources>
     <StackPanel Style="{StaticResource InputWindowMainStackPanel}">
         <DockPanel Style="{StaticResource InputDockPanle}">
@@ -21,7 +23,8 @@
         </DockPanel>
         <DockPanel Style="{StaticResource ConfirmButtonPanel}">
             <Button Content="Abbrechen" Click="OnCancelClicked"/>
-            <Button Content="Speichern" Click="OnSaveClicked" Style="{StaticResource ConfirmButton}"/>
+            <Button Content="Speichern" Click="OnSaveClicked"
+                    Style="{StaticResource ConfirmButton}"/>
         </DockPanel>
         
     </StackPanel>

@@ -12,20 +12,24 @@ using System.Windows.Media.Imaging;
 
 namespace Foco.controls
 {
-    /// <summary>
-    /// Interaktionslogik für AttachmentControl.xaml
-    /// </summary>
+    // Interaktionslogik for AttachmentControl.xaml
     public partial class AttachmentControl : UserControl
     {
 
-        private const string GOOGLE_API_LINK = "http://www.google.com/s2/favicons?domain=";
+        private const string GOOGLE_API_LINK =
+            "http://www.google.com/s2/favicons?domain=";
 
         private Attachment attachment;
         private readonly TaskDetailsControl taskDetailsControl;
 
-        public Attachment Attachment { get => attachment; set { attachment = value; Update(); } }
+        public Attachment Attachment 
+        { 
+            get => attachment; 
+            set { attachment = value; Update(); }
+        }
 
-        public AttachmentControl(TaskDetailsControl taskdetailsControl, Attachment attachment)
+        public AttachmentControl( TaskDetailsControl taskdetailsControl,
+                                  Attachment attachment )
         {
             InitializeComponent();
             this.taskDetailsControl = taskdetailsControl;
@@ -39,7 +43,7 @@ namespace Foco.controls
             TitleText.Content = attachment.Title;
             if (!attachment.IsWebUrl())
             {
-                // Anhang ist normale Datei: einfach das Thumbnail auslesen
+                // load file icon
                 ShellFile shellFile = ShellFile.FromFilePath(attachment.Link);
                 FileImg.Source = shellFile.Thumbnail.SmallBitmapSource;
             }
@@ -47,9 +51,10 @@ namespace Foco.controls
             {
                 try
                 {
-                    // Optimal: Favicon der Website mithilfe von Googles API auslesen
+                    // load url favicon via Googles API
                     WebClient webClient = new WebClient();
-                    byte[] faviconData = webClient.DownloadData(GOOGLE_API_LINK + attachment.Link);
+                    byte[] faviconData = webClient.DownloadData(
+                        GOOGLE_API_LINK + attachment.Link);
                     MemoryStream memoryStream = new MemoryStream(faviconData);
                     BitmapImage bitmapImage = new BitmapImage();
                     memoryStream.Position = 0;
@@ -61,7 +66,7 @@ namespace Foco.controls
                 }
                 catch
                 {
-                    // Geht nicht? Dann temporäre foco_dummy.html anlegen und davon das File Icon
+                    // create temporary html file and load its file icon
                     string dummyPath = Path.GetTempPath() + "foco_dummy.html";
                     File.WriteAllText(dummyPath, ""); // erstellt und schließt
                     ShellFile shellFile = ShellFile.FromFilePath(dummyPath);
@@ -93,13 +98,23 @@ namespace Foco.controls
         {
             AttachmentEditWindow attachmentEditWindow;
             if (attachment.IsWebUrl())
-                attachmentEditWindow = new AttachmentEditWindow("Webadresse editieren", attachment.Title, attachment.Link, OnAttachmentEditedCallback, AttachmentEditWindowType.WebUrl);
+            {
+                attachmentEditWindow = new AttachmentEditWindow(
+                    "Webadresse editieren", attachment.Title, attachment.Link,
+                    OnAttachmentEditedCallback, AttachmentEditWindowType.WebUrl);
+            }
+
             else
-                attachmentEditWindow = new AttachmentEditWindow("Dateipfad editieren", attachment.Title, attachment.Link, OnAttachmentEditedCallback, AttachmentEditWindowType.File);
+            {
+                attachmentEditWindow = new AttachmentEditWindow(
+                    "Dateipfad editieren", attachment.Title, attachment.Link,
+                    OnAttachmentEditedCallback, AttachmentEditWindowType.File);
+            }
             attachmentEditWindow.ShowDialog();
         }
 
-        private void OnAttachmentEditedCallback(InputState inputState, string title, string link)
+        private void OnAttachmentEditedCallback( InputState inputState, 
+                                                 string title, string link )
         {
             if (inputState == InputState.Save)
             {
@@ -111,7 +126,9 @@ namespace Foco.controls
 
         private void OnDeleteClicked(object sender, RoutedEventArgs e)
         {
-            ConfirmWindow confirmWindow = new ConfirmWindow("Anhang löschen", "Sind Sie sicher, dass Sie den Anhang \"" + attachment.Title + "\" löschen möchten?", OnAttachmentDeletedCallback);
+            ConfirmWindow confirmWindow = new ConfirmWindow(
+                "Anhang löschen", "Sind Sie sicher, dass Sie den Anhang \"" + 
+                attachment.Title + "\" löschen möchten?", OnAttachmentDeletedCallback);
             confirmWindow.ShowDialog();
         }
 

@@ -16,7 +16,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Border Grid.Row="0" VerticalAlignment="Center" BorderThickness="0 0 0 2" BorderBrush="{StaticResource ParentItemBorderBackground}" Height="50">
+        <Border Grid.Row="0" VerticalAlignment="Center" BorderThickness="0 0 0 2"
+                BorderBrush="{StaticResource ParentItemBorderBackground}" Height="50">
             <DockPanel HorizontalAlignment="Center">
                 <DockPanel.Resources>
                     <Style TargetType="CheckBox">
@@ -24,7 +25,7 @@
                         <Setter Property="VerticalAlignment" Value="Center"/>
                         <Setter Property="VerticalContentAlignment" Value="Center"/>
                         <Setter Property="Margin" Value="10 0 10 0"/>
-                        <EventSetter Event="Click" Handler="StateCheckboxKeyDown"/>
+                        <EventSetter Event="Click" Handler="OnStateCheckboxKeyDown"/>
                     </Style>
                 </DockPanel.Resources>
                 <Label Content="Filter:" FontWeight="Bold" VerticalAlignment="Center"/>
@@ -44,14 +45,18 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Column="0" Grid.Row="1" FontSize="20" Width="330" Height="40" Content="+ Aufgabengruppe hinzufügen" Margin="0,0,10,0" Click="OnAddTaskgroupClicked" FontFamily="Century Gothic" Style="{StaticResource ConfirmButton}">
+                <Button Grid.Column="0" Grid.Row="1" FontSize="20" Width="330" Height="40"
+                        Content="+ Aufgabengruppe hinzufügen" Margin="0,0,10,0"
+                        Click="OnAddTaskgroupClicked" FontFamily="Century Gothic"
+                        Style="{StaticResource ConfirmButton}">
                 <Button.LayoutTransform>
                     <RotateTransform Angle="90"/>
                 </Button.LayoutTransform>
             </Button>
 
             <ScrollViewer Grid.Column="1" Grid.Row="1" Name="TaskgroupScroll">
-                <WrapPanel Margin="20" Name="TaskgroupContainer" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
+                <WrapPanel Name="TaskgroupContainer" HorizontalAlignment="Center"
+                           VerticalAlignment="Top" Orientation="Horizontal" Margin="20">
                 </WrapPanel>
             </ScrollViewer>
 

@@ -9,11 +9,15 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <StackPanel Margin="50 50 50 10">
-        <StackPanel Orientation="Horizontal" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave">
+        <StackPanel Orientation="Horizontal" 
+                    MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave">
 
-            <controls:EditableLabel x:Name="NameLabel" FontSize="32" FontFamily="Century Gothic" VerticalAlignment="Top" Text="Ziel" EditedCallbackFunction="OnLabelEdited"/>
+            <controls:EditableLabel x:Name="NameLabel" FontSize="32"
+                                    VerticalAlignment="Top" Text="Ziel"
+                                    EditedCallbackFunction="OnLabelEdited"/>
 
-            <Button x:Name="DeleteButton" Click="OnDeleteClicked" Style="{StaticResource IconButtonStyle}" ToolTip="Ziel löschen">
+            <Button x:Name="DeleteButton" Click="OnDeleteClicked" 
+                    Style="{StaticResource IconButtonStyle}" ToolTip="Ziel löschen">
                 <Image Source="/icons/icons8-delete-bin-96.png" Width="40" Height="40"/>
             </Button>
            

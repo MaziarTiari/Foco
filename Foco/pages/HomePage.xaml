@@ -14,13 +14,16 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         
-        <Button Grid.Column="0" Margin="0" FontSize="20" Width="200" Padding="7" Content="+ Ziel hinzufügen" FontFamily="Century Gothic" Click="OnAddGoalClicked" Style="{StaticResource ConfirmButton}">
+        <Button Grid.Column="0" Margin="0" FontSize="20" Width="200" Padding="7"
+                Content="+ Ziel hinzufügen" FontFamily="Century Gothic"
+                Click="OnAddGoalClicked" Style="{StaticResource ConfirmButton}">
             <Button.LayoutTransform>
                 <RotateTransform Angle="90"/>
             </Button.LayoutTransform>
         </Button>
 
-        <ScrollViewer Name="HomeScrollViewer" Grid.Column="1" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Name="HomeScrollViewer" Grid.Column="1"
+                      VerticalScrollBarVisibility="Auto">
             <StackPanel Name="HomeStackpanel" Orientation="Vertical"/>
         </ScrollViewer>
     </Grid>

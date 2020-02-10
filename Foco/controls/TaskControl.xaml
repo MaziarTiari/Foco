@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:Foco.controls"
              xmlns:controls="clr-namespace:Foco.controls"
              mc:Ignorable="d"
-             d:DesignHeight="50" d:DesignWidth="400" Name="ControlContainer" MouseLeftButtonDown="OnControlClicked">
+             d:DesignHeight="50" d:DesignWidth="400" 
+             Name="ControlContainer" MouseLeftButtonDown="OnControlClicked">
 
     <UserControl.Resources>
         <Style TargetType="Button" BasedOn="{StaticResource IconButtonStyle}">
@@ -14,7 +15,8 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid Name="ControlGrid" Margin="5,5,10,5" Background="Transparent" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave" VerticalAlignment="Top">
+    <Grid Name="ControlGrid" Margin="5,5,10,5" Background="Transparent"
+          MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave" VerticalAlignment="Top">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -23,13 +25,18 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <CheckBox Name="TaskCheckBox" Grid.Column="0" Checked="OnCheckBoxChanged" Unchecked="OnCheckBoxChanged" VerticalAlignment="Top"/>
-        <controls:EditableLabel Text="Beispielaufgabe" Margin="10,0,10,0" VerticalAlignment="Top"
-                                EditedCallbackFunction="OnLabelEdited" Grid.Column="1" x:Name="EditableTaskLabel" FontSize="14" />
+        <CheckBox Name="TaskCheckBox" Grid.Column="0" Checked="OnCheckBoxChanged"
+                  Unchecked="OnCheckBoxChanged" VerticalAlignment="Top"/>
+        <controls:EditableLabel Grid.Column="1" x:Name="EditableTaskLabel" 
+                                FontSize="14" Text="Beispielaufgabe"
+                                VerticalAlignment="Top" Margin="10,0,10,0"
+                                EditedCallbackFunction="OnLabelEdited"/>
 
-        <TextBlock Grid.Column="2" Name="AttachmentInfoText" Text="3📎" FontSize="14" VerticalAlignment="Top"/>
+        <TextBlock Grid.Column="2" Name="AttachmentInfoText"
+                   Text="3📎" FontSize="14" VerticalAlignment="Top"/>
 
-        <Button Name="DeleteButton" Grid.Column="3" Click="DeleteTaskMouseEvent" ToolTip="Aufgabe löschen" VerticalAlignment="Top">
+        <Button Name="DeleteButton" Grid.Column="3" Click="OnDeleteTask"
+                ToolTip="Aufgabe löschen" VerticalAlignment="Top">
             <Image Height="20" Source="/icons/icons8-delete-bin-96.png" Width="20"/>
         </Button>
 

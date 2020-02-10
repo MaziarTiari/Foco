@@ -5,12 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Foco"
         mc:Ignorable="d"
-        MinWidth="1280" MinHeight="800" Icon="/icons/Foco.ico" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        MinWidth="1280" MinHeight="800" Icon="/icons/Foco.ico"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized">
 
     <DockPanel>
 
-        <!-- Menüleiste -->
-        <Border DockPanel.Dock="Top" Height="80" Background="{StaticResource MainBackgroundColor}">
+        <!-- menubar -->
+        <Border DockPanel.Dock="Top" Height="80"
+                Background="{StaticResource MainBackgroundColor}">
             <Grid Margin="10" VerticalAlignment="Center">
 
                 <Grid.Resources>
@@ -33,39 +35,51 @@
                     <RowDefinition Height="55"/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Column="0" Grid.Row="0" Tag="Home" Click="OnMenuButtonClick" ToolTip="Startseite" Style="{StaticResource IconButtonStyle}">
+                <Button Grid.Column="0" Grid.Row="0" Tag="Home" Click="OnMenuButtonClick"
+                        ToolTip="Startseite" Style="{StaticResource IconButtonStyle}">
                     <Image Source="/icons/main.png"/>
                 </Button>
 
-                <Border Grid.Column="2" Grid.Row="0" Name="BoardBorder" BorderBrush="White" BorderThickness="0">
-                    <Button Tag="Board" Click="OnMenuButtonClick" ToolTip="Board" Style="{StaticResource IconButtonStyle}">
+                <Border Grid.Column="2" Grid.Row="0" Name="BoardBorder"
+                        BorderBrush="White" BorderThickness="0">
+                    <Button Tag="Board" Click="OnMenuButtonClick" ToolTip="Board"
+                            Style="{StaticResource IconButtonStyle}">
                         <Image Source="/icons/board.png"/>
                     </Button>
                 </Border>
 
-                <Border Grid.Column="3" Grid.Row="0" Name="ListBorder" BorderBrush="White" BorderThickness="0">
-                    <Button Tag="List" Click="OnMenuButtonClick" ToolTip="Listen" Style="{StaticResource IconButtonStyle}">
+                <Border Grid.Column="3" Grid.Row="0" Name="ListBorder"
+                        BorderBrush="White" BorderThickness="0">
+                    <Button Tag="List" Click="OnMenuButtonClick" ToolTip="Listen"
+                            Style="{StaticResource IconButtonStyle}">
                         <!-- icon color: #FFB434 -->
                         <Image Source="/icons/list.png"/>
                     </Button>
                 </Border>
 
-                <Border Grid.Column="4" Grid.Row="0" Name="CalendarBorder" BorderBrush="White" BorderThickness="0">
-                    <Button Tag="Calendar" Click="OnMenuButtonClick" ToolTip="Kalender" Style="{StaticResource IconButtonStyle}">
+                <Border Grid.Column="4" Grid.Row="0" Name="CalendarBorder"
+                        BorderBrush="White" BorderThickness="0">
+                    <Button Tag="Calendar" Click="OnMenuButtonClick" ToolTip="Kalender"
+                            Style="{StaticResource IconButtonStyle}">
                         <Image Height="40" Source="/icons/deadline.png"/>
                     </Button>
                 </Border>
 
-                <Button Grid.Column="6" Tag="Help" Click="OnMenuButtonClick" ToolTip="Hilfe anzeigen" Style="{StaticResource IconButtonStyle}">
+                <Button Grid.Column="6" Click="OnMenuButtonClick" 
+                        ToolTip="Hilfe anzeigen" Tag="Help"
+                        Style="{StaticResource IconButtonStyle}">
                     <Image Source="/icons/question.png"/>
                 </Button>
 
-                <TextBlock Name="WelcomeMessage" Grid.Column="1" Grid.ColumnSpan="5" Text="Willkommen bei foco!" FontSize="42" FontFamily="Century Gothic" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Visibility="Hidden"/>
-
+                <TextBlock Name="WelcomeMessage" Grid.Column="1" Grid.ColumnSpan="5"
+                           Text="Willkommen bei foco!" FontSize="42" FontWeight="Bold"
+                           FontFamily="Century Gothic" Visibility="Hidden"
+                           Foreground="White" HorizontalAlignment="Center"
+                           />
             </Grid>
         </Border>
 
-        <!-- Bereich für Page -->
+        <!-- page section -->
         <Frame Name="PageFrame" DockPanel.Dock="Bottom" NavigationUIVisibility="Hidden">
         </Frame>
 

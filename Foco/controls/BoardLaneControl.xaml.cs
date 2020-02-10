@@ -6,22 +6,18 @@ using System.Windows.Input;
 
 namespace Foco.controls
 {
-
-    /// <summary>
-    /// Interaktionslogik für BoardLaneControl.xaml
-    /// </summary>
+    // Interaktionslogik for BoardLaneControl.xaml
     public partial class BoardLaneControl : UserControl
     {
-
-        private enum Sort { None, AlphanumericAscending, AlphanumericDescending, PriorityAscending, PriorityDescending, DeadlineAscending, DeadlineDescending }
+        private enum Sort { 
+            None, AlphanumericAscending, AlphanumericDescending, PriorityAscending,
+            PriorityDescending, DeadlineAscending, DeadlineDescending 
+        }
 
         private Project project;
         private State state;
         private Sort sort;
         private readonly BoardPage boardPage;
-
-        public Project Project { get => project; set { project = value; Update(); } }
-        public State State { get => state; set { state = value; Update(); } }
 
         public BoardLaneControl(BoardPage boardPage, State state)
         {
@@ -30,6 +26,17 @@ namespace Foco.controls
             this.boardPage = boardPage;
             this.sort = Sort.None;
             Update();
+        }
+
+        public Project Project 
+        { 
+            get => project; 
+            set { project = value; Update(); } 
+        }
+        public State State 
+        { 
+            get => state; 
+            set { state = value; Update(); } 
         }
 
         private void Update()
@@ -48,7 +55,10 @@ namespace Foco.controls
                 foreach (Taskgroup taskgroup in project.Taskgroups)
                 {
                     if (taskgroup.State == state)
-                        TaskgroupStack.Children.Add(new BoardGroupControl(boardPage, taskgroup));
+                    {
+                        TaskgroupStack.Children
+                            .Add(new BoardGroupControl(boardPage, taskgroup));
+                    }
                 }
                 SortElements();
             }
@@ -57,104 +67,148 @@ namespace Foco.controls
         private void SortElements()
         {
             if (sort == Sort.None) return;
+
             List<BoardGroupControl> boardGroupControls = new List<BoardGroupControl>();
+
             foreach (BoardGroupControl boardGroupControl in TaskgroupStack.Children)
                 boardGroupControls.Add(boardGroupControl);
-            switch (sort)
-            {
-                case Sort.PriorityAscending: boardGroupControls.Sort((x, y) => x.Taskgroup.Prio.CompareTo(y.Taskgroup.Prio)); break;
-                case Sort.PriorityDescending: boardGroupControls.Sort((x, y) => y.Taskgroup.Prio.CompareTo(x.Taskgroup.Prio)); break;
-                case Sort.AlphanumericAscending: boardGroupControls.Sort((x, y) => x.Taskgroup.Title.CompareTo(y.Taskgroup.Title)); break;
-                case Sort.AlphanumericDescending: boardGroupControls.Sort((x, y) => y.Taskgroup.Title.CompareTo(x.Taskgroup.Title)); break;
-                case Sort.DeadlineAscending: boardGroupControls.Sort((x, y) => x.Taskgroup.Deadline.CompareTo(y.Taskgroup.Deadline)); break;
-                case Sort.DeadlineDescending: boardGroupControls.Sort((x, y) => y.Taskgroup.Deadline.CompareTo(x.Taskgroup.Deadline)); break;
-                default: break;
-            }
+
+            SortAsWished(boardGroupControls);
+            
             TaskgroupStack.Children.Clear();
             foreach (BoardGroupControl boardGroupControl in boardGroupControls)
                 TaskgroupStack.Children.Add(boardGroupControl);
         }
 
-        // Benutzer startet Drag eines BoardGroupControls
+        private void SortAsWished(List<BoardGroupControl> boardGroupControls)
+        {
+            switch (sort)
+            {
+                case Sort.PriorityAscending:
+                    boardGroupControls.Sort(
+                        (x, y) => x.Taskgroup.Prio.CompareTo(y.Taskgroup.Prio));
+                    break;
+                case Sort.PriorityDescending:
+                    boardGroupControls.Sort(
+                        (x, y) => y.Taskgroup.Prio.CompareTo(x.Taskgroup.Prio));
+                    break;
+                case Sort.AlphanumericAscending:
+                    boardGroupControls.Sort(
+                        (x, y) => x.Taskgroup.Title.CompareTo(y.Taskgroup.Title));
+                    break;
+                case Sort.AlphanumericDescending:
+                    boardGroupControls.Sort(
+                        (x, y) => y.Taskgroup.Title.CompareTo(x.Taskgroup.Title));
+                    break;
+                case Sort.DeadlineAscending:
+                    boardGroupControls.Sort(
+                        (x, y) => x.Taskgroup.Deadline.CompareTo(y.Taskgroup.Deadline));
+                    break;
+                case Sort.DeadlineDescending:
+                    boardGroupControls.Sort(
+                        (x, y) => y.Taskgroup.Deadline.CompareTo(x.Taskgroup.Deadline));
+                    break;
+                default: break;
+            }
+        }
+
+        // prepare BoardgroupControl for drag and drop
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.Source is BoardGroupControl boardGroupControl)
             {
                 boardGroupControl.Opacity = 0.3;
-                DataObject dataObject = new DataObject(DataFormats.Xaml, boardGroupControl);
-                DragDrop.DoDragDrop((DependencyObject)e.Source, dataObject, DragDropEffects.Move);
+                DataObject dataObject = new DataObject(
+                        DataFormats.Xaml, boardGroupControl
+                    );
+                DragDrop.DoDragDrop(
+                    (DependencyObject)e.Source, dataObject, DragDropEffects.Move);
             }
         }
 
-        // Benutzer droppt ein BoardGroupControl
         private void OnDrop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetData(DataFormats.Xaml) is BoardGroupControl draggingBoardGroupControl)
+            if (e.Data.GetData(DataFormats.Xaml)
+                    is BoardGroupControl draggingBoardGroupControl)
             {
                 draggingBoardGroupControl.Opacity = 1.0;
                 draggingBoardGroupControl.Taskgroup.State = state;
-                sort = Sort.None; // Durch den Drop geht die Sortierung kaputt
+                sort = Sort.None; // by droping the sort ends
                 foreach (MenuItem menuItem in SortMenuItem.Items)
                     menuItem.IsChecked = false;
             }
         }
 
-        // Benutzer verschiebt einen Drag über das BoardLaneControl
+        // handling drag between BordLaneControls
         private void OnDragOver(object sender, DragEventArgs e)
         {
-            if (e.Data.GetData(DataFormats.Xaml) is BoardGroupControl draggingBoardGroupControl)
+            if (e.Data.GetData(DataFormats.Xaml) 
+                    is BoardGroupControl draggingBoardGroupControl)
             {
-
                 int insertIndex = 0;
                 StackPanel stackPanel = null;
 
-                // DropEnter auf das StackPanel => Anhand von Mausposition den Index berechnen, Insert in das gehoverte Stackpanel
+                /* DropEnter on stackPanel: 
+                 * calculate index by mausposition, insert in hovered Stackpanel
+                 */
                 if (e.Source is StackPanel)
                 {
-                    stackPanel = (StackPanel)e.Source;
+                    stackPanel = (StackPanel) e.Source;
                     double heightSum = 0;
-                    Point absoluteMousePosition = new Point(System.Windows.Forms.Control.MousePosition.X, System.Windows.Forms.Control.MousePosition.Y);
-                    Point mousePosition = stackPanel.PointFromScreen(absoluteMousePosition);
+                    Point absoluteMousePosition = new Point(
+                        System.Windows.Forms.Control.MousePosition.X, 
+                        System.Windows.Forms.Control.MousePosition.Y
+                        );
+                    Point mousePosition = stackPanel.PointFromScreen(
+                            absoluteMousePosition
+                        );
                     if (stackPanel.Children.Count == 0)
                         insertIndex = -1;
                     else
                     {
-                        foreach (BoardGroupControl boardGroupControl in stackPanel.Children)
+                        foreach (BoardGroupControl boardGroupControl in
+                                 stackPanel.Children)
                         {
                             double height = boardGroupControl.ActualHeight;
-                            if (mousePosition.Y >= heightSum && mousePosition.Y <= heightSum + height)
-                                break; // Mauszeiger liegt innerhalb dieses Elements, Abbruch weil Index gefunden
+                            if (mousePosition.Y >= heightSum 
+                                    && mousePosition.Y <= heightSum + height)
+                            {
+                                // mouspointer is above this element,
+                                // leave loop becouse index was found
+                                break;
+                            }
                             heightSum += height;
                             insertIndex++;
                         }
                     }
                 }
 
-                // DropEnter auf BoardGroupControl => Der Index entspricht dem des gehoverten Elements, Insert in das Parent des gehoverten Elements
+                /* 
+                 * DropEnter in BoardGroupControl:
+                 * index equals hovered element, insert elements parent  
+                 */
                 else if (e.Source is BoardGroupControl hoveringBoardGroupControl)
                 {
                     stackPanel = (StackPanel)hoveringBoardGroupControl.Parent;
                     insertIndex = stackPanel.Children.IndexOf(hoveringBoardGroupControl);
                 }
 
-                // aus dem alten Panel entfernen
+                // remove from previous Panel
                 if (draggingBoardGroupControl.Parent != null)
                 {
                     StackPanel oldPanel = (StackPanel)draggingBoardGroupControl.Parent;
-                    oldPanel.Children.Remove(draggingBoardGroupControl); // aus dem alten Panel entfernen
+                    oldPanel.Children.Remove(draggingBoardGroupControl);
                 }
 
                 try
                 {
-                    // versuche Insert an der Stelle vom berechneten Index
+                    // insert in calculated index
                     stackPanel.Children.Insert(insertIndex, draggingBoardGroupControl);
                 }
-                catch
+                catch // panel is emtpy
                 {
-                    // wenn Index -1 (oder ungültig) ist das Panel leer, also Add statt Insert
                     stackPanel.Children.Add(draggingBoardGroupControl);
                 }
-
             }
         }
 
@@ -177,7 +231,6 @@ namespace Foco.controls
             SortElements();
         }
 
-        // Benutzer hat auf Hinzufügen geklickt
         private void OnAddGroupClicked(object sender, RoutedEventArgs e)
         {
             string title = "Neue Gruppe";
@@ -186,11 +239,12 @@ namespace Foco.controls
                 title = title.Split(' ')[0] + " " + title.Split(' ')[1] + " " + (++i);
             Taskgroup taskgroup = new Taskgroup(title) { State = state };
             project.Taskgroups.Add(taskgroup);
-            BoardGroupControl boardGroupControl = new BoardGroupControl(boardPage, taskgroup);
+            BoardGroupControl boardGroupControl = new BoardGroupControl(
+                    boardPage, taskgroup
+                );
             TaskgroupStack.Children.Add(boardGroupControl);
             boardGroupControl.NameLabel.BeginEditing();
             TaskgroupStackScroll.ScrollToBottom();
         }
-
     }
 }

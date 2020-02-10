@@ -8,9 +8,7 @@ using System.Windows.Media;
 
 namespace Foco.controls
 {
-    /// <summary>
-    /// Interaktionslogik für ProjectControl.xaml
-    /// </summary>
+    /// interaction logic for ProjectControl.xaml
     public partial class ProjectControl : UserControl
     {
 
@@ -26,7 +24,8 @@ namespace Foco.controls
             Update();
         }
 
-        public ProjectControl(GoalControl goalControl, Project project) : this(goalControl)
+        public ProjectControl( GoalControl goalControl,
+                               Project project ) : this(goalControl)
         {
             this.project = project;
             Update();
@@ -39,8 +38,12 @@ namespace Foco.controls
             if (project != null)
             {
                 NameLabel.Content = project.Name;
-                NameLabel.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#30232A"));
-                ProjectBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(project.Color));
+                NameLabel.Background = new SolidColorBrush(
+                        (Color) ColorConverter.ConvertFromString("#30232A")
+                    );
+                ProjectBorder.Background = new SolidColorBrush(
+                        (Color) ColorConverter.ConvertFromString(project.Color)
+                    );
                 int countAll = 0, countDone = 0;
                 foreach (Taskgroup taskgroup in project.Taskgroups)
                 {
@@ -61,31 +64,33 @@ namespace Foco.controls
             }
         }
 
-        // Benutzer hat auf Editieren geklickt
         private void OnEditClicked(object sender, RoutedEventArgs e)
         {
-            ProjectEditWindow projectEditWindow = new ProjectEditWindow("Projekt bearbeiten", project.Name, project.Color, EditedCallback);
+            ProjectEditWindow projectEditWindow = new ProjectEditWindow(
+                    "Projekt bearbeiten", project.Name, project.Color, ConfirmEditedCallback
+                );
             projectEditWindow.ShowDialog();
         }
 
 
-        // Benutzer hat beim Editieren gespeichert
-        public void EditedCallback(string projectName, string projectColor)
+        public void ConfirmEditedCallback(string projectName, string projectColor)
         {
             project.Name = projectName;
             project.Color = projectColor;
             Update();
         }
 
-        // Benutzer hat auf Löschen geklickt
         private void OnDeleteClicked(object sender, RoutedEventArgs e)
         {
-            ConfirmWindow confirmWindow = new ConfirmWindow("Projekt löschen", "Sind sie sicher, dass sie das Projekt \"" + project.Name + "\" inkl. aller Aufgaben löschen möchten?", ConfirmDeleteCallback);
+            ConfirmWindow confirmWindow = new ConfirmWindow(
+                    "Projekt löschen", "Sind sie sicher, dass sie das Projekt \"" +
+                    project.Name + "\" inkl. aller Aufgaben löschen möchten?",
+                    ConfirmDeleteCallback
+                );
             confirmWindow.ShowDialog();
         }
 
 
-        // Benutzer hat Löschen bestätigt oder abgebrochen
         private void ConfirmDeleteCallback(ConfirmState confirmState)
         {
             if (confirmState == ConfirmState.YES)
@@ -95,8 +100,7 @@ namespace Foco.controls
             }
         }
 
-        // Benutzer hat auf Control geklickt
-        private void OnClicked(object sender, MouseButtonEventArgs e)
+        private void OnControlClicked(object sender, MouseButtonEventArgs e)
         {
             if (project == null)
             {
@@ -111,7 +115,9 @@ namespace Foco.controls
                 {
                     color = ProjectEditWindow.colorStrings[0];
                 }
-                ProjectEditWindow projectEditWindow = new ProjectEditWindow("Projekt erstellen", "", color, CreatedCallback);
+                ProjectEditWindow projectEditWindow = new ProjectEditWindow(
+                        "Projekt erstellen", "", color, ConfirmedCreateCallback
+                    );
                 projectEditWindow.ShowDialog();
 
             }
@@ -134,16 +140,14 @@ namespace Foco.controls
             return colors[0];
         }
 
-        // Benutzer hat beim Erstellen gespeichert
-        public void CreatedCallback(string projectName, string projectColor)
+        public void ConfirmedCreateCallback(string projectName, string projectColor)
         {
             Project project = new Project(projectName, projectColor);
             goalControl.Goal.Projects.Add(project);
             goalControl.Update();
         }
 
-        // Benutzer beginnt Hover
-        private void OnMouseEnter(object sender, MouseEventArgs e)
+        private void MouseEnteredControl(object sender, MouseEventArgs e)
         {
             if (project != null)
             {
@@ -152,8 +156,7 @@ namespace Foco.controls
             }
         }
 
-        // Benutzer endet Hover
-        private void OnMouseLeave(object sender, MouseEventArgs e)
+        private void MouesLeavedControl(object sender, MouseEventArgs e)
         {
             DeleteButton.Visibility = Visibility.Hidden;
             EditButton.Visibility = Visibility.Hidden;

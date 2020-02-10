@@ -5,17 +5,12 @@ using System.Windows.Controls;
 
 namespace Foco
 {
-    /// <summary>
-    /// Interaktionslogik für BoardPage.xaml
-    /// </summary>
+    /// interaction logic for BoardPage.xaml
     public partial class BoardPage : Page
     {
 
         private readonly MainWindow mainWindow;
         private Project project;
-
-        public Project Project { get => project; set { project = value; Update(); } }
-        public MainWindow MainWindow => mainWindow;
 
         public BoardPage(MainWindow mainWindow)
         {
@@ -28,6 +23,13 @@ namespace Foco
             }
         }
 
+        public Project Project 
+        {
+            get => project;
+            set { project = value; Update(); }
+        }
+        public MainWindow MainWindow => mainWindow;
+
         public void Update()
         {
             foreach (BoardLaneControl boardLaneControl in BoardStack.Children)
@@ -35,8 +37,5 @@ namespace Foco
                 boardLaneControl.Project = project;
             }
         }
-
-
-
     }
 }

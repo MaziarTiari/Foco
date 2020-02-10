@@ -6,15 +6,14 @@ using System.Windows.Controls;
 
 namespace Foco.windows
 {
-    /// <summary>
-    /// Interaktionslogik für DatepickerWindow.xaml
-    /// </summary>
+    /// interaction logic for DatepickerWindow.xaml
     public partial class DatepickerWindow : Window
     {
         public delegate void InputCallback(InputState inputState, DateTime selectedDate);
 
         private readonly InputCallback inputCallback;
-        public DatepickerWindow(string windowTitle, string labelText, InputCallback inputCallback)
+        public DatepickerWindow( string windowTitle, string labelText,
+                                 InputCallback inputCallback )
         {
             InitializeComponent();
             this.inputCallback = inputCallback;

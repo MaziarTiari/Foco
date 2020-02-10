@@ -7,7 +7,8 @@
              xmlns:controls="clr-namespace:Foco.controls"
              mc:Ignorable="d" Width="425" Height="480" VerticalAlignment="Top" HorizontalAlignment="Center">
 
-    <Border Margin="10" BorderThickness="3" Background="White" BorderBrush="{StaticResource ParentItemBorderBackground}" CornerRadius="3">
+    <Border Margin="10" BorderThickness="3" Background="White" 
+            BorderBrush="{StaticResource ParentItemBorderBackground}" CornerRadius="3">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -37,10 +38,18 @@
                 </Style>
             </Grid.Resources>
 
-            <!-- Reihe 0: Titel -->
-            <controls:EditableLabel Grid.Row="0" x:Name="TaskgroupHeader" Width="400" Foreground="White" Background="{StaticResource ParentItemBorderBackground}" Padding="4" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0" FontWeight="Bold" FontSize="18" Text="Titel" EditedCallbackFunction="OnLabelEdited" AllowNewLine="False" MaxLength="50"></controls:EditableLabel>
+            <!-- row 0: title -->
+            <controls:EditableLabel Grid.Row="0" x:Name="TaskgroupHeader" Width="400"
+                                    Foreground="White" FontSize="18" FontWeight="Bold"
+                                    HorizontalAlignment="Center" Text="Titel" 
+                                    Background="{StaticResource 
+                                                 ParentItemBorderBackground}"
+                                    HorizontalContentAlignment="Center" MaxLength="50"
+                                    BorderThickness="0"  AllowNewLine="False" Padding="4"
+                                    EditedCallbackFunction="OnLabelEdited"
+                                    />
 
-            <!-- Reihe 1: Combo, Combo, Date, Button -->
+            <!-- row 1: Combo, Combo, Date, Button -->
             <Grid Grid.Row="1" Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -49,36 +58,47 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <ComboBox Grid.Column="0" SelectionChanged="OnStatusComboChanged" Name="StateCombo">
+                <ComboBox Grid.Column="0" Name="StateCombo"
+                          SelectionChanged="StateComboChanged">
                     <ComboBoxItem Content="Warteschlange"/>
                     <ComboBoxItem Content="In Bearbeitung"/>
                     <ComboBoxItem Content="Blockiert"/>
                     <ComboBoxItem Content="Überprüfung"/>
                     <ComboBoxItem Content="Abgeschlossen"/>
                 </ComboBox>
-                <ComboBox Grid.Column="1" Margin="5,0,0,0" SelectionChanged="OnPrioComboChanged" Name="PrioCombo">
+                <ComboBox Grid.Column="1" Margin="5,0,0,0" 
+                          SelectionChanged="PriorityChanged" Name="PrioCombo">
                     <ComboBoxItem Content="Niedrig"/>
                     <ComboBoxItem Content="Normal"/>
                     <ComboBoxItem Content="Hoch"/>
                 </ComboBox>
-                <DatePicker Grid.Column="2" Height="25" Margin="5,0,5,0" Name="DeadlinePicker" SelectedDateChanged="OnDeadlinePickerChanged"/>
-                <Button Grid.Column="3" Name="InfoButton" Click="OnInfoClicked" ToolTip="Detailansicht">
+                <DatePicker Grid.Column="2" Name="DeadlinePicker" Margin="5,0,5,0"
+                            SelectedDateChanged="DeadlinePickerChanged"  Height="25"/>
+                <Button Grid.Column="3" Name="InfoButton"
+                        Click="OnInfoClicked" ToolTip="Detailansicht">
                     <Image Source="/icons/icons8-info-144.png"/>
                 </Button>
-                <Button Grid.Column="4" Name="DeleteButton" Click="OnDeleteClicked" ToolTip="Aufgabengruppe löschen">
+                <Button Grid.Column="4" Name="DeleteButton" 
+                        Click="OnDeleteClicked" ToolTip="Aufgabengruppe löschen">
                     <Image Source="/icons/icons8-delete-bin-96.png"/>
                 </Button>
             </Grid>
 
-            <!-- Reihe 2: Neuer Task -->
+            <!-- row 2: new task -->
             <Grid Grid.Row="2" Width="Auto">
-                <TextBox x:Name="TaskCreateEditor" TextWrapping="Wrap" HorizontalAlignment="Center" Width="380" FontSize="16" MinHeight="25" AcceptsReturn="True" PreviewKeyDown="TaskEditorPreviewKeyDown"/>
-                <TextBlock IsHitTestVisible="False" Text="Neue Aufgabe" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="12 0 0 0" Foreground="DarkGray" FontSize="16">
+                <TextBox x:Name="TaskCreateEditor" TextWrapping="Wrap" FontSize="16"
+                         HorizontalAlignment="Center" Width="380" AcceptsReturn="True"
+                         MinHeight="25" PreviewKeyDown="OnTaskCreateEditorKeyDown"/>
+                <TextBlock IsHitTestVisible="False" Text="Neue Aufgabe"
+                           VerticalAlignment="Center" HorizontalAlignment="Left"
+                           Margin="12 0 0 0" Foreground="DarkGray" FontSize="16">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Visibility" Value="Collapsed"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Text, ElementName=TaskCreateEditor}" Value="">
+                                <DataTrigger Binding="{Binding Text,
+                                                       ElementName=TaskCreateEditor}"
+                                             Value="">
                                     <Setter Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
                             </Style.Triggers>
@@ -87,8 +107,10 @@
                 </TextBlock>
             </Grid>
 
-            <!-- Reihe 3: Tasks -->
-            <ScrollViewer Grid.Row="3" Name="TaskContainerScroll" Margin="10" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
+            <!-- row 3: tasks -->
+            <ScrollViewer Grid.Row="3" Name="TaskContainerScroll" Margin="10"
+                          VerticalScrollBarVisibility="Visible"
+                          HorizontalScrollBarVisibility="Hidden">
                 <StackPanel Name="TaskContainer" Width="360">
                 </StackPanel>
             </ScrollViewer>

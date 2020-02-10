@@ -5,17 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Foco.windows"
         mc:Ignorable="d"
-        Title="Confirm Title" WindowStartupLocation="CenterOwner" Style="{StaticResource InputWindowStyle}">
+        Title="Confirm Title" WindowStartupLocation="CenterOwner"
+        Style="{StaticResource InputWindowStyle}">
 
     <Window.Resources>
-        <ResourceDictionary Source="../resource-dictionaries/InputWindowDictionary.xaml"/>
+        <ResourceDictionary 
+            Source="../resource-dictionaries/InputWindowDictionary.xaml"/>
     </Window.Resources>
     
     <StackPanel Style="{StaticResource InputWindowMainStackPanel}">
-        <TextBlock Name="Message" TextWrapping="Wrap" Text="Confirm Message" MinWidth="210" MaxWidth="400"/>
+        <TextBlock Name="Message" TextWrapping="Wrap" Text="Confirm Message"
+                   MinWidth="210" MaxWidth="400"/>
         <DockPanel Style="{StaticResource ConfirmButtonPanel}">
             <Button Content="Nein" Tag="No" Click="OnButtonClicked" Width="50"/>
-            <Button Content="Ja" Tag="Yes" Click="OnButtonClicked" Width="50" Style="{StaticResource DangerButton}"/>
+            <Button Content="Ja" Tag="Yes" Click="OnButtonClicked" Width="50"
+                    Style="{StaticResource DangerButton}"/>
         </DockPanel>
     </StackPanel>
 

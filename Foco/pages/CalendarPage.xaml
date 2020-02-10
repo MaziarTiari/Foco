@@ -5,8 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Foco.pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="CalendarPage">
+      d:DesignHeight="450" d:DesignWidth="800" Title="CalendarPage">
 
     <Page.Resources>
         <Style TargetType="Button">
@@ -35,7 +34,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Grid fuer Navigation -->
+        <!-- Navigation -->
         <Grid Grid.Row="0" Margin="10">
             
             <Grid>
@@ -44,34 +43,42 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Auswahl Jahr -->
+                <!-- choose year -->
                 <Grid Grid.Column="0" HorizontalAlignment="Right">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30"/>
                         <ColumnDefinition Width="50"/>
                         <ColumnDefinition Width="30"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" HorizontalAlignment="Left" Click="LastYearHandler" Style="{StaticResource IconButtonStyle}">
+                    <Button Grid.Column="0" Style="{StaticResource IconButtonStyle}"
+                            HorizontalAlignment="Left" Click="YearChangedHandler"
+                            Name="PreviousYear">
                         <Image Source="/icons/icons8-chevron-left-96.png"/>
                     </Button>
                     <TextBlock Grid.Column="1" Name="YearTag"  Text="2020"/>
-                    <Button Grid.Column="2" HorizontalAlignment="Left" Click="NextYearHandler" Style="{StaticResource IconButtonStyle}">
+                    <Button Grid.Column="2" Style="{StaticResource IconButtonStyle}"
+                            HorizontalAlignment="Left" Name="NextYear"
+                            Click="YearChangedHandler">
                         <Image Source="/icons/icons8-chevron-right-96.png"/>
                     </Button>
                 </Grid>
 
-                <!-- Auswahl Monat-->
+                <!-- choose month-->
                 <Grid Grid.Column="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30"/>
                         <ColumnDefinition Width="50"/>
                         <ColumnDefinition Width="30"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" HorizontalAlignment="Left" Click="LastMonthHandler" Style="{StaticResource IconButtonStyle}">
+                    <Button Grid.Column="0" Style="{StaticResource IconButtonStyle}"
+                            HorizontalAlignment="Left" Click="ChangedMonthHandler"
+                            Name="PreviousMonth">
                         <Image Source="/icons/icons8-chevron-left-96.png"/>
                     </Button>
                     <TextBlock Grid.Column="1" Name="MonthTag"  Text="Jan"/>
-                    <Button Grid.Column="2" HorizontalAlignment="Left" Click="NextMonthHandler" Style="{StaticResource IconButtonStyle}">
+                    <Button Grid.Column="2" Style="{StaticResource IconButtonStyle}"
+                            HorizontalAlignment="Left" Click="ChangedMonthHandler"
+                            Name="NextMonth">
                         <Image Source="/icons/icons8-chevron-right-96.png"/>
                     </Button>
                 </Grid>
@@ -79,8 +86,9 @@
             </Grid>
         </Grid>
 
-        <!-- Grid fuer Wochentage -->
-        <Grid Background="{StaticResource ParentItemBorderBackground}" Grid.Row="1" Margin="0,10,0,0">
+        <!-- weekdays -->
+        <Grid Grid.Row="1" Margin="0,10,0,0"
+              Background="{StaticResource ParentItemBorderBackground}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
@@ -112,8 +120,9 @@
             <Label Grid.Row="0" Grid.Column="6" Content="Samstag"/>
         </Grid>
 
-        <!-- Grid fuer DayControls -->
-        <Border BorderBrush="{StaticResource ParentItemBorderBackground}" BorderThickness="2,0,2,2" Grid.Row="2">
+        <!-- Grid for DayControls -->
+        <Border BorderBrush="{StaticResource ParentItemBorderBackground}"
+                BorderThickness="2,0,2,2" Grid.Row="2">
             <Grid Background="GhostWhite" Name="DayControlContainer">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

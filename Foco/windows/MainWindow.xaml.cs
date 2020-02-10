@@ -12,7 +12,8 @@ namespace Foco
     public partial class MainWindow : Window
     {
 
-        private const string helpUrl = "https://github.com/MaziarTiari/Foco/blob/develop/README.md#foco"; // TODO: Später URL vom Master Branch
+        private const string helpUrl
+            = "https://github.com/MaziarTiari/Foco";
 
         private readonly HomePage homePage;
         private readonly BoardPage boardPage;
@@ -20,12 +21,6 @@ namespace Foco
         private readonly CalendarPage calendarPage;
         private readonly TaskgroupPage taskgroupPage;
         private readonly List<Goal> goals;
-
-        public List<Goal> Goals => goals;
-        public HomePage HomePage => homePage;
-        public BoardPage BoardPage => boardPage;
-        public ListPage ListPage => listPage;
-        public CalendarPage CalendarPage => calendarPage;
 
         public MainWindow(List<Goal> goals)
         {
@@ -41,12 +36,18 @@ namespace Foco
             Title = "foco | Startseite";
         }
 
+        public List<Goal> Goals => goals;
+        public HomePage HomePage => homePage;
+        public BoardPage BoardPage => boardPage;
+        public ListPage ListPage => listPage;
+        public CalendarPage CalendarPage => calendarPage;
+
         public void ShowProject(Project project)
         {
             BoardPage.Project = project;
             ListPage.Project = project;
             CalendarPage.Project = project;
-            PageFrame.Content = BoardPage; // default Ansicht
+            PageFrame.Content = BoardPage; // default view
             SetViewButtonsVisibilities(Visibility.Visible);
             DrawButtonBorder(BoardBorder);
             Title = "foco | " + project.Name;
@@ -59,7 +60,6 @@ namespace Foco
             DrawButtonBorder(null);
         }
 
-        // wird aufgerufen, wenn ein Button in der Menüleiste gedrückt wird
         private void OnMenuButtonClick(object sender, RoutedEventArgs e)
         {
             Button menuButton = (Button)sender;
@@ -93,7 +93,7 @@ namespace Foco
             }
         }
 
-        // zeichnet den Border um den Button der aktiven Sicht
+        // draw border around active navbar button
         private void DrawButtonBorder(Border border)
         {
             BoardBorder.BorderThickness = new Thickness(0);
@@ -103,14 +103,15 @@ namespace Foco
                 border.BorderThickness = new Thickness(2);
         }
 
-        // versteckt oder zeigt die Buttons fuer die Sichten
-        // und zeigt entsprechend stattdessen die Welcome-Message
+        // in home view project-view-buttons in nav bar hides
         private void SetViewButtonsVisibilities(Visibility visibility)
         {
             BoardBorder.Visibility = visibility;
             ListBorder.Visibility = visibility;
             CalendarBorder.Visibility = visibility;
-            WelcomeMessage.Visibility = visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
+            WelcomeMessage.Visibility = visibility == Visibility.Hidden 
+                                        ? Visibility.Visible 
+                                        : Visibility.Hidden;
         }
 
     }
