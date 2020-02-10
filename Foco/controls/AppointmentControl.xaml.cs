@@ -6,15 +6,14 @@ using System.Windows.Controls;
 
 namespace Foco.controls
 {
-    /// <summary>
-    /// Interaktionslogik für AppointmentControl.xaml
-    /// </summary>
+    // Interaktionslogik for AppointmentControl.xaml
     public partial class AppointmentControl : UserControl
     {
         private readonly CalendarDayControl calendarDayControl;
         private readonly Taskgroup taskgroup;
 
-        public AppointmentControl(CalendarDayControl calendarDayControl, Taskgroup taskgroup)
+        public AppointmentControl( CalendarDayControl calendarDayControl,
+                                   Taskgroup taskgroup )
         {
             InitializeComponent();
             this.calendarDayControl = calendarDayControl;
@@ -25,7 +24,7 @@ namespace Foco.controls
         public Taskgroup Taskgroup  => taskgroup;
         public CalendarDayControl CalendarDayControl => calendarDayControl;
 
-        #pragma warning disable IDE0051 // wird eigentlich durch XAML aufgerufen
+        #pragma warning disable IDE0051 // called by XAML
         private void OnEdited(string text)
         {
             if (!string.IsNullOrWhiteSpace(text))
@@ -46,13 +45,18 @@ namespace Foco.controls
             }
             if (itemTag == "move")
             {
-                DatepickerWindow datepicker = new DatepickerWindow("Deadline verschieben", "Neue Deadline:", RescheduleDeadline);
+                DatepickerWindow datepicker = new DatepickerWindow(
+                    "Deadline verschieben", "Neue Deadline:", RescheduleDeadline);
                 datepicker.DateTimePicker.SelectedDate = Taskgroup.Deadline;
                 datepicker.ShowDialog();
             }
             if (itemTag == "delete")
             {
-                ConfirmWindow confirmDeleteWindow = new ConfirmWindow("Aufgabengruppe löschen", "Sind Sie sicher, dass Sie die Aufgabengruppe \"" + taskgroup.Title + "\" inkl. aller Aufgaben löschen möchten?", ConfirmDeleteHandler);
+                ConfirmWindow confirmDeleteWindow = new ConfirmWindow(
+                    "Aufgabengruppe löschen", 
+                    "Sind Sie sicher, dass Sie die Aufgabengruppe \"" + 
+                    taskgroup.Title + "\" inkl. aller Aufgaben löschen möchten?", 
+                    ConfirmDeleteHandler );
                 confirmDeleteWindow.ShowDialog();
             }
         }
@@ -73,8 +77,6 @@ namespace Foco.controls
                 Taskgroup.Deadline = selectedDate;
                 this.CalendarDayControl.CalendarPage.Update();
             }
-            else
-                return;
         }
     }
 }

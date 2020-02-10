@@ -6,9 +6,7 @@ namespace Foco.windows
 
     public enum ConfirmState { YES, NO };
 
-    /// <summary>
-    /// Interaktionslogik für ConfirmWindow.xaml
-    /// </summary>
+    /// interaction logic for ConfirmWindow.xaml
     public partial class ConfirmWindow : Window
     {
 
@@ -16,7 +14,8 @@ namespace Foco.windows
 
         private readonly ConfirmCallback confirmCallback;
 
-        public ConfirmWindow(string title, string message, ConfirmCallback confirmCallback)
+        public ConfirmWindow( string title, string message, 
+                              ConfirmCallback confirmCallback )
         {
             InitializeComponent();
             this.confirmCallback = confirmCallback;
@@ -25,7 +24,6 @@ namespace Foco.windows
             Message.Text = message;
         }
 
-        // Benutzer drück "Ja" oder "Nein"
         private void OnButtonClicked(object sender, RoutedEventArgs e)
         {
             Close();

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Foco.controls"
-             mc:Ignorable="d" MouseDoubleClick="OnDoubleClick" FontFamily="Century Gothic">
+             mc:Ignorable="d" MouseDoubleClick="OnDoubleClick">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -13,7 +13,9 @@
             <RowDefinition Name="LabelRow" Height="*"></RowDefinition>
             <RowDefinition Name="EditRow" Height="0"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Name="EditLabel" TextWrapping="Wrap" ToolTip="Doppelklick zum Bearbeiten des Titels"></TextBlock>
-        <TextBox Grid.Row="1" Grid.Column="0" Name="EditTextBox" TextWrapping="Wrap" PreviewKeyDown="OnKeyDown" LostFocus="OnLostFocus" AcceptsReturn="True"></TextBox>
+        <TextBlock Grid.Row="0" Grid.Column="0" Name="EditLabel"
+                   TextWrapping="Wrap" ToolTip="Doppelklick zum Bearbeiten des Titels"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Name="EditTextBox" AcceptsReturn="True"
+                 TextWrapping="Wrap" PreviewKeyDown="OnKeyDown" LostFocus="OnLostFocus"/>
     </Grid>
 </UserControl>

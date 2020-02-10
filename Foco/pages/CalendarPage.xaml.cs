@@ -8,9 +8,7 @@ using Foco.calendar;
 
 namespace Foco.pages
 {
-    /// <summary>
-    /// Interaktionslogik für CalendarPage.xaml
-    /// </summary>
+    // interaction logic for CalendarPage.xaml
     public partial class CalendarPage : Page
     {
         private readonly MainWindow mainWindow;
@@ -21,25 +19,32 @@ namespace Foco.pages
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
-            this.calendarMonth = new CalendarMonth(DateTime.Today.Year, DateTime.Today.Month);
+            this.calendarMonth = new CalendarMonth( DateTime.Today.Year,
+                                                    DateTime.Today.Month );
         }
         
         public MainWindow MainWindow => mainWindow;
-        public Project Project { get => project; set { project = value; Update();} }
+        public Project Project
+        {
+            get => project;
+            set { project = value; Update();}
+        }
         public CalendarMonth CalendarMonth => calendarMonth;
 
         public void Update()
         {
             DayControlContainer.Children.Clear();
             CalendarMonth.Taskgroups = this.Project.Taskgroups;
-            InitialCalendar();
+            SetCalendarInfo();
             CalendarDay[] days = CalendarMonth.Days;
             int i = 0;
-            for(int r = 0; r < 6; r++)
+            for (int r = 0; r < 6; r++)
             {
                 for (int c = 0; c < 7; c++)
                 {
-                    CalendarDayControl dayControl = new CalendarDayControl(days[i], this);
+                    CalendarDayControl dayControl = new CalendarDayControl(
+                            days[i], this
+                        );
                     if( DateTime.Compare(days[i].Date, DateTime.Today) < 0 )
                     {
                         dayControl.DayInfoContainer.Background = Brushes.WhiteSmoke;
@@ -47,10 +52,16 @@ namespace Foco.pages
                     }
                     if (!days[i].FromSelectedMonth) {
                         dayControl.DayOfDate.Foreground = Brushes.DarkGray;
-                        dayControl.DayOfDate.Text += (" " + CalendarMonth.MonthNames[days[i].Date.Month - 1]);
+                        // set its monthname after days number
+                        dayControl.DayOfDate
+                            .Text += (
+                                    " " + CalendarMonth.MonthNames[days[i].Date.Month - 1]
+                                );
                     }
                     if (days[i].Date == DateTime.Today)
-                        dayControl.DayInfoContainer.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FE9766"));
+                        dayControl.DayInfoContainer.Background = new SolidColorBrush(
+                                (Color) ColorConverter.ConvertFromString("#FE9766")
+                            );
                     // Add dayControl to the CalendarPage
                     dayControl.SetValue(Grid.RowProperty, r);
                     dayControl.SetValue(Grid.ColumnProperty, c);
@@ -66,34 +77,34 @@ namespace Foco.pages
             CalendarMonth.Month = DateTime.Today.Month;
         }
 
-        // Show the month and year the Calendar is showing
-        private void InitialCalendar()
+        private void SetCalendarInfo()
         {
             MonthTag.Text = CalendarMonth.MonthNames[calendarMonth.Month - 1];
             YearTag.Text = Convert.ToString(CalendarMonth.Year);
         }
 
-        private void LastYearHandler(object sender, RoutedEventArgs e)
+        private void YearChangedHandler(object sender, RoutedEventArgs e)
         {
-            CalendarMonth.Year = CalendarMonth.Year - 1;
+            var s = sender as Button;
+            
+            if(s.Name == "PreviousYear")
+                CalendarMonth.Year = CalendarMonth.Year - 1;
+
+            if(s.Name == "NextYear")
+                CalendarMonth.Year = CalendarMonth.Year + 1;
+            
             Update();
         }
 
-        private void NextYearHandler(object sender, RoutedEventArgs e)
+        private void ChangedMonthHandler(object sender, RoutedEventArgs e)
         {
-            CalendarMonth.Year = CalendarMonth.Year + 1;
-            Update();
-        }
+            var s = sender as Button;
+            if(s.Name == "PreviousMonth")
+                CalendarMonth.ChangeToPreviousMonth();
 
-        private void LastMonthHandler(object sender, RoutedEventArgs e)
-        {
-            CalendarMonth.ChangeToPreviousMonth();
-            Update();
-        }
+            if (s.Name == "NextMonth")
+                CalendarMonth.ChangeToNextMonth();
 
-        private void NextMonthHandler(object sender, RoutedEventArgs e)
-        {
-            CalendarMonth.ChangeToNextMonth();
             Update();
         }
     }

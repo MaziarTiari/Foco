@@ -6,9 +6,7 @@ using System.Windows.Threading;
 
 namespace Foco.controls
 {
-    /// <summary>
-    /// Interaktionslogik für EditableLabel.xaml
-    /// </summary>
+    // Interaktionslogik für EditableLabel.xaml
     public partial class EditableLabel : UserControl
     {
 
@@ -18,12 +16,6 @@ namespace Foco.controls
         private bool allowEditing;
         private EditedCallback editedCallback;
 
-        public EditedCallback EditedCallbackFunction { get => editedCallback; set => editedCallback = value; }
-        public bool AllowEditing { get => allowEditing; set => allowEditing = value; }
-        public int MaxLength { get => EditTextBox.MaxLength; set => EditTextBox.MaxLength = value; }
-        public bool AllowNewLine { get => EditTextBox.AcceptsReturn; set => EditTextBox.AcceptsReturn = value; }
-        public string Text { get => EditLabel.Text; set { EditLabel.Text = value; EditTextBox.Text = value; } }
-
         public EditableLabel()
         {
             InitializeComponent();
@@ -31,7 +23,28 @@ namespace Foco.controls
             allowEditing = true;
         }
 
-        // Beginnt das Editieren
+        public EditedCallback EditedCallbackFunction
+        {
+            get => editedCallback; set => editedCallback = value;
+        }
+        public bool AllowEditing
+        {
+            get => allowEditing; set => allowEditing = value;
+        }
+        public int MaxLength
+        {
+            get => EditTextBox.MaxLength; set => EditTextBox.MaxLength = value;
+        }
+        public bool AllowNewLine
+        {
+            get => EditTextBox.AcceptsReturn; set => EditTextBox.AcceptsReturn = value;
+        }
+        public string Text
+        {
+            get => EditLabel.Text;
+            set { EditLabel.Text = value; EditTextBox.Text = value; }
+        }
+
         public void BeginEditing()
         {
             if (!isEditing && allowEditing)
@@ -40,9 +53,12 @@ namespace Foco.controls
                 LabelRow.Height = new GridLength(0);
                 EditTextBox.Text = EditLabel.Text;
 
-                // Workaround fuer den Fokus der Textbox (von stackoverflow.com):
+                // Workaround for focus the textbox (from stackoverflow.com):
                 // https://stackoverflow.com/questions/13955340/keyboard-focus-does-not-work-on-text-box-in-wpf
-                Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() => _BeginEditingThread())); ;
+                Dispatcher.BeginInvoke(
+                    DispatcherPriority.Input,
+                    new ThreadStart( () => _BeginEditingThread() )
+                    );
 
                 void _BeginEditingThread()
                 {
@@ -54,7 +70,6 @@ namespace Foco.controls
             }
         }
 
-        // beendet das Editieren und ruft das Callback auf
         public void EndEditing()
         {
             if (isEditing)
@@ -67,23 +82,24 @@ namespace Foco.controls
             }
         }
 
-        // Doppelklick beginnt das Editieren
         private void OnDoubleClick(object sender, MouseButtonEventArgs e)
         {
             BeginEditing();
         }
 
-        // Fokusverlust beendet das Editieren
         private void OnLostFocus(object sender, RoutedEventArgs e)
         {
             EndEditing();
         }
 
-        // Enter (ohne Shift) beendet das Editieren
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter && isEditing && !Keyboard.IsKeyDown(Key.LeftShift) && !Keyboard.IsKeyDown(Key.RightShift))
+            if (e.Key == Key.Enter && isEditing 
+                    && !Keyboard.IsKeyDown(Key.LeftShift) 
+                    && !Keyboard.IsKeyDown(Key.RightShift))
+            {
                 EndEditing();
+            }
         }
 
     }

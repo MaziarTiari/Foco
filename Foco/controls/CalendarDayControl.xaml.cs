@@ -8,14 +8,11 @@ using System.Windows.Controls;
 
 namespace Foco.controls
 {
-    /// <summary>
-    /// Interaktionslogik für CalendarDayControl.xaml
-    /// </summary>
+    // Interaktionslogik für CalendarDayControl.xaml
     public partial class CalendarDayControl : UserControl
     {
         private readonly CalendarPage calendarPage;
         private readonly CalendarDay day;
-        //private int indexOfAlreadyDefinedTaskgroup;
 
         public CalendarDayControl(CalendarDay day, CalendarPage calendarPage)
         {
@@ -28,7 +25,6 @@ namespace Foco.controls
         }
 
         public CalendarPage CalendarPage => calendarPage;
-        //public int IndexOfTaskgroupInProject { get => indexOfAlreadyDefinedTaskgroup; set => indexOfAlreadyDefinedTaskgroup = value; }
         public CalendarDay Day => day;
 
         private void Update()
@@ -37,7 +33,9 @@ namespace Foco.controls
                 return;
             foreach (Taskgroup taskgroup in Day.Taskgroups)
             {
-                AppointmentControl appointmentControl = new AppointmentControl(this, taskgroup);
+                AppointmentControl appointmentControl = new AppointmentControl(
+                        this, taskgroup
+                    );
                 AppointmentContainer.Children.Add(appointmentControl);
             }
         }
@@ -50,14 +48,19 @@ namespace Foco.controls
                 title = title.Split(' ')[0] + " " + title.Split(' ')[1] + " " + (++i);
             Taskgroup taskgroup = new Taskgroup(title) { Deadline = this.Day.Date };
             this.CalendarPage.Project.Taskgroups.Add(taskgroup);
-            AppointmentControl appointmentControl = new AppointmentControl(this, taskgroup);
+            AppointmentControl appointmentControl = new AppointmentControl(
+                    this, taskgroup
+                );
             AppointmentContainer.Children.Add(appointmentControl);
             appointmentControl.TitleLabel.BeginEditing();
         }
 
-        private void OnMouseOverChange(object sender, System.Windows.Input.MouseEventArgs e)
+        private void OnMouseOverChange( object sender,
+                                        System.Windows.Input.MouseEventArgs e )
         {
-            AddButton.Visibility = (Day.Date >= DateTime.Today && IsMouseOver) ? Visibility.Visible : Visibility.Hidden;
+            AddButton.Visibility = (Day.Date >= DateTime.Today 
+                                        && IsMouseOver) ? Visibility.Visible
+                                                        : Visibility.Hidden;
         }
     }
 }

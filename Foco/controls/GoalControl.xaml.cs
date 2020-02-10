@@ -8,16 +8,11 @@ using System.Windows.Input;
 
 namespace Foco.controls
 {
-    /// <summary>
-    /// Interaktionslogik für GoalControl.xaml
-    /// </summary>
+    // interaction-logic for GoalControl.xaml
     public partial class GoalControl : UserControl
     {
-
         private readonly Goal goal;
         private readonly HomePage homePage;
-        public Goal Goal => goal;
-        public HomePage HomePage => homePage;
 
         public GoalControl(HomePage homePage, Goal goal)
         {
@@ -28,6 +23,9 @@ namespace Foco.controls
             this.homePage = homePage;
             Update();
         }
+
+        public Goal Goal => goal;
+        public HomePage HomePage => homePage;
 
         public void Update()
         {
@@ -43,8 +41,7 @@ namespace Foco.controls
             ProjectWrap.Children.Add(addProjectControl);
         }
 
-        // Benutzer hat Label editiert
-        #pragma warning disable IDE0051 // wird eigentlich durch XAML aufgerufen
+        #pragma warning disable IDE0051 // called by XAML
         private void OnLabelEdited(string text)
         {
             if (!string.IsNullOrWhiteSpace(text))
@@ -54,14 +51,16 @@ namespace Foco.controls
         }
         #pragma warning restore IDE0051
 
-        // Benutzer hat auf Löschen geklickt
         private void OnDeleteClicked(object sender, RoutedEventArgs e)
         {
-            ConfirmWindow confirmWindow = new ConfirmWindow("Ziel löschen", "Sind Sie sicher, dass Sie das Ziel \"" + goal.Title + "\" inkl. aller Projekte löschen möchten?", ConfirmDeleteCallback);
+            ConfirmWindow confirmWindow = new ConfirmWindow(
+                "Ziel löschen", "Sind Sie sicher, dass Sie das Ziel \"" +
+                goal.Title + "\" inkl. aller Projekte löschen möchten?",
+                ConfirmDeleteCallback
+                );
             confirmWindow.ShowDialog();
         }
 
-        // Benutzer hat Löschen bestätigt
         private void ConfirmDeleteCallback(ConfirmState confirmState)
         {
             if (confirmState == ConfirmState.YES)
@@ -71,8 +70,11 @@ namespace Foco.controls
             }
         }
 
-        private void OnMouseEnter(object sender, MouseEventArgs e) => DeleteButton.Visibility = Visibility.Visible;
-        private void OnMouseLeave(object sender, MouseEventArgs e) => DeleteButton.Visibility = Visibility.Hidden;
+        private void OnMouseEnter(object sender, MouseEventArgs e)
+            => DeleteButton.Visibility = Visibility.Visible;
+
+        private void OnMouseLeave(object sender, MouseEventArgs e)
+            => DeleteButton.Visibility = Visibility.Hidden;
 
     }
 }

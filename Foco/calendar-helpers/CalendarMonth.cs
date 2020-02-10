@@ -7,7 +7,7 @@ namespace Foco.calendar
     public class CalendarMonth
     {
         public static readonly string[] MonthNames = new string[] {
-            "Jan", "Feb", "März", "Apr", "Mai", "Jun", 
+            "Jan", "Feb", "März", "Apr", "Mai", "Jun",
             "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"
         };
 
@@ -23,24 +23,24 @@ namespace Foco.calendar
             Update();
         }
 
-        public int Month 
-        { 
-            get => month; 
-            set { month = value; Update(); } 
+        public int Month
+        {
+            get => month;
+            set { month = value; Update(); }
         }
-        public int Year 
-        { 
-            get => year; 
-            set { year = value; Update(); } 
+        public int Year
+        {
+            get => year;
+            set { year = value; Update(); }
         }
-        public List<Taskgroup> Taskgroups 
+        public List<Taskgroup> Taskgroups
         { 
-            get => taskgroups; 
-            set { taskgroups = value; Update(); } 
+            get => taskgroups;
+            set { taskgroups = value; Update(); }
         }
         public CalendarDay[] Days { get => days; set => days = value; }
 
-        private int PreviousMonth() 
+        private int PreviousMonth()
         {
             if (Month == 1) return 12;
             else return Month - 1;
@@ -57,7 +57,7 @@ namespace Foco.calendar
             DateTime startDateOfMonth = new DateTime(Year, Month, 1);
             monthsFirstWeekdayIndex = startDateOfMonth.DayOfWeek.GetHashCode();
             int numberOfDaysInSelectedMonth = DateTime.DaysInMonth(Year, Month);
-            int numberOfDaysInPreviousMonth = 
+            int numberOfDaysInPreviousMonth =
                 DateTime.DaysInMonth(YearOfPreviousMonth(), PreviousMonth());
 
             int startingIndex, endingIndex, startingDay;
@@ -66,7 +66,7 @@ namespace Foco.calendar
             endingIndex = monthsFirstWeekdayIndex;
             startingDay = numberOfDaysInPreviousMonth - monthsFirstWeekdayIndex + 1;
             AddDaysOfMonth(
-                startingIndex, endingIndex, YearOfPreviousMonth(), PreviousMonth(), 
+                startingIndex, endingIndex, YearOfPreviousMonth(), PreviousMonth(),
                 startingDay, false);
 
             // Add days from selected month
@@ -81,7 +81,7 @@ namespace Foco.calendar
                 startingIndex, endingIndex, YearOfNextMonth(), NextMonth(), 1, false);
         }
 
-        private void AddDaysOfMonth(int index, int max , int y, int m, 
+        private void AddDaysOfMonth(int index, int max , int y, int m,
                                     int startingDay, bool fromSelectedMonth)
         {
             for (int i = index; i < max; i++)

@@ -17,7 +17,8 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <local:EditableLabel Grid.Column="0" x:Name="TitleLabel" EditedCallbackFunction="OnEdited" FontSize="12" Foreground="White" Text="Name" AllowNewLine="False" MaxLength="50" />
+        <local:EditableLabel Grid.Column="0" x:Name="TitleLabel" EditedCallbackFunction="OnEdited" 
+                             FontSize="12" Foreground="White" Text="Name" AllowNewLine="False" MaxLength="50" />
         <Menu Grid.Column="1" Style="{StaticResource MenuButtonGeneralStyle}">
             <MenuItem Name="EditMenu" Header="▼" Style="{StaticResource MainMenuItemStyle}">
                 <MenuItem Style="{StaticResource AppointmentChildMenuItem}" Tag="move" Header="Deadline verschieben"/>

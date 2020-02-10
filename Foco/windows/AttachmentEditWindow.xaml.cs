@@ -8,19 +8,20 @@ using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
 
 namespace Foco.windows
 {
-    /// <summary>
-    /// Interaktionslogik für AttachmentEditWindow.xaml
-    /// </summary>
+    /// interaction logic for AttachmentEditWindow.xaml
     public partial class AttachmentEditWindow : Window
     {
 
         public enum AttachmentEditWindowType { WebUrl, File }
-        public delegate void InputCallback(InputState inputState, string titleText, string linkText);
+        public delegate void InputCallback( InputState inputState, 
+                                            string titleText, string linkText );
 
         private readonly InputCallback inputCallback;
         private readonly AttachmentEditWindowType type;
 
-        public AttachmentEditWindow(string windowTitle, string defaultTitle, string defaultLink, InputCallback inputCallback, AttachmentEditWindowType type)
+        public AttachmentEditWindow( string windowTitle, string defaultTitle, 
+                                     string defaultLink, InputCallback inputCallback, 
+                                     AttachmentEditWindowType type )
         {
             InitializeComponent();
             this.inputCallback = inputCallback;
@@ -43,7 +44,6 @@ namespace Foco.windows
             TitleBox.CaretIndex = TitleBox.Text.Length;
         }
 
-        // Benutzer hat auf Button geklickt
         private void OnButtonClicked(object sender, RoutedEventArgs e)
         {
             switch ((string)((Button)sender).Tag)
@@ -55,8 +55,10 @@ namespace Foco.windows
                         return;
                     }
                     if (string.IsNullOrWhiteSpace(LinkBox.Text)
-                        || (type == AttachmentEditWindowType.WebUrl && !Attachment.IsWebUrl(LinkBox.Text))
-                        || (type == AttachmentEditWindowType.File && !File.Exists(LinkBox.Text)))
+                        || (type == AttachmentEditWindowType.WebUrl 
+                                && !Attachment.IsWebUrl(LinkBox.Text))
+                        || (type == AttachmentEditWindowType.File 
+                                && !File.Exists(LinkBox.Text)))
                     {
                         LinkBox.BorderBrush = new SolidColorBrush(Colors.Red);
                         return;
@@ -71,16 +73,16 @@ namespace Foco.windows
             }
         }
 
-        // Benutzer schließt Fenster
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
             inputCallback(InputState.Close, TitleBox.Text, LinkBox.Text);
         }
 
-        // Benutzer klickt auf [...] Button
-        private void OnFileButtonClicked(object sender, RoutedEventArgs e)
+        private void OnLoadFileButtonClicked(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog { Title = "Datei zum Anhängen auswählen" };
+            OpenFileDialog openFileDialog = new OpenFileDialog { 
+                    Title = "Datei zum Anhängen auswählen"
+                };
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 LinkBox.Text = openFileDialog.FileName;

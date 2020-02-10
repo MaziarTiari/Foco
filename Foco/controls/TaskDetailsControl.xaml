@@ -7,16 +7,20 @@
              mc:Ignorable="d">
 
     <UserControl.Resources>
-        <Style x:Key="TaskDetailsHeader" TargetType="Label" BasedOn="{StaticResource Header}">
+        <Style x:Key="TaskDetailsHeader" TargetType="Label" 
+               BasedOn="{StaticResource Header}">
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="18"/>
         </Style>
-        <Style x:Key="TaskDetailsChildMenuItem" TargetType="MenuItem" BasedOn="{StaticResource ChildMenuItemStyle}">
+        <Style x:Key="TaskDetailsChildMenuItem" TargetType="MenuItem" 
+               BasedOn="{StaticResource ChildMenuItemStyle}">
             <EventSetter Event="Click" Handler="OnAddAttachmentMenuItemClick"/>
         </Style>
         <Style x:Key="MainBorder" TargetType="Border">
-            <Setter Property="BorderBrush" Value="{StaticResource ParentItemBorderBackground}"/>
-            <Setter Property="Background" Value="{StaticResource ParentItemBorderBackground}"/>
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource ParentItemBorderBackground}"/>
+            <Setter Property="Background"
+                    Value="{StaticResource ParentItemBorderBackground}"/>
             <Setter Property="BorderThickness" Value="3"/>
             <Setter Property="Margin" Value="10"/>
             <Setter Property="CornerRadius" Value="3"/>
@@ -38,18 +42,28 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" Style="{StaticResource TaskDetailsHeader}" Content="Beschreibung"/>
+                <Label Grid.Row="0" Content="Beschreibung"
+                       Style="{StaticResource TaskDetailsHeader}"/>
 
-                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden"
+                              VerticalScrollBarVisibility="Visible">
                     <Grid>
-                        <TextBox AcceptsReturn="true" Name="TaskDescriptionEditor" AcceptsTab="true" FontSize="16" TextChanged="OnTextChanged"/>
-                        <TextBlock IsHitTestVisible="False" Text="Aufgabeschreibung" VerticalAlignment="Top" FontSize="16" Margin="3 1 3 1" HorizontalAlignment="Left" Foreground="DarkGray">
+                        <TextBox Name="TaskDescriptionEditor"
+                                 TextChanged="OnTextChanged" AcceptsTab="true"
+                                 FontSize="16" AcceptsReturn="true" />
+                        <TextBlock IsHitTestVisible="False" Text="Aufgabeschreibung"
+                                   VerticalAlignment="Top" FontSize="16" Margin="3 1 3 1"
+                                   HorizontalAlignment="Left" Foreground="DarkGray">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="Visibility" Value="Collapsed"/>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Text, ElementName=TaskDescriptionEditor}" Value="">
-                                            <Setter Property="Visibility" Value="Visible"/>
+                                        <DataTrigger
+                                            Binding="{Binding Text,
+                                                      ElementName=TaskDescriptionEditor}"
+                                            Value="">
+                                            <Setter Property="Visibility"
+                                                    Value="Visible"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -69,16 +83,24 @@
                 </Grid.RowDefinitions>
                 <Border Grid.Row="0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Label Content="Anhänge" Style="{StaticResource TaskDetailsHeader}"/>
-                        <Menu ToolTip="Anhang hinzufügen" Background="{StaticResource ParentItemBorderBackground}" VerticalAlignment="Center">
-                            <MenuItem Name="AddMenuItem" Header="▼" FontSize="16" Style="{StaticResource MainMenuItemStyle}">
-                                <MenuItem Style="{StaticResource TaskDetailsChildMenuItem}" Tag="URL" Header="Webadresse anhängen"/>
-                                <MenuItem Style="{StaticResource TaskDetailsChildMenuItem}" Tag="FILE" Header="Lokale Datei anhängen"/>
+                        <Label Content="Anhänge" 
+                               Style="{StaticResource TaskDetailsHeader}"/>
+                        <Menu ToolTip="Anhang hinzufügen" VerticalAlignment="Center"
+                              Background="{StaticResource ParentItemBorderBackground}">
+                            <MenuItem Name="AddMenuItem" Header="▼" FontSize="16"
+                                      Style="{StaticResource MainMenuItemStyle}">
+                                <MenuItem Tag="URL" Header="Webadresse anhängen"
+                                          Style="{StaticResource
+                                                  TaskDetailsChildMenuItem}"/>
+                                <MenuItem Tag="FILE" Header="Lokale Datei anhängen"
+                                          Style="{StaticResource
+                                                  TaskDetailsChildMenuItem}"/>
                             </MenuItem>
                         </Menu>
                     </StackPanel>
                 </Border>
-                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden"
+                              VerticalScrollBarVisibility="Visible">
                     <StackPanel Name="AttachmentStack" Background="White"/>
                 </ScrollViewer>
             </Grid>

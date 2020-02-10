@@ -16,9 +16,6 @@ namespace Foco.pages
         private readonly TaskgroupControl taskgroupControl;
         private readonly TaskDetailsControl taskDetailsControl;
 
-        public Taskgroup Taskgroup { get => taskgroup; set { taskgroup = value; UpdateTaskgroup(); } }
-        public Task CurrentTask { get => currentTask; set { currentTask = value; ShowTaskDetails(); } }
-
         public TaskgroupPage(Taskgroup taskgroup)
         {
             InitializeComponent();
@@ -33,6 +30,17 @@ namespace Foco.pages
             Grid.SetRow(taskDetailsControl, 0);
         }
 
+        public Taskgroup Taskgroup 
+        {
+            get => taskgroup;
+            set { taskgroup = value; UpdateTaskgroup(); }
+        }
+        public Task CurrentTask
+        {
+            get => currentTask;
+            set { currentTask = value; ShowTaskDetails(); }
+        }
+
         public void UpdateSelectedTask()
         {
             taskgroupControl.HighlightedTask.Update();
@@ -41,7 +49,9 @@ namespace Foco.pages
         private void UpdateTaskgroup()
         {
             taskgroupControl.Taskgroup = taskgroup;
-            taskgroupControl.OnTaskClicked(taskgroup.Tasks.Count > 0 ? taskgroup.Tasks[0] : null);
+            taskgroupControl.OnTaskClicked(
+                    taskgroup.Tasks.Count > 0 ? taskgroup.Tasks[0] : null
+                );
         }
 
         private void ShowTaskDetails()
@@ -54,8 +64,10 @@ namespace Foco.pages
             taskgroupControl.Height = ContentGrid.RowDefinitions[0].ActualHeight;
         }
 
-        private void OnPageLoaded(object sender, RoutedEventArgs e) => AdjustTaskgroupHeight();
-        private void OnSizeChanged(object sender, SizeChangedEventArgs e) => AdjustTaskgroupHeight();
+        private void OnPageLoaded(object sender,
+                                  RoutedEventArgs e) => AdjustTaskgroupHeight();
+        private void OnSizeChanged(object sender,
+                                   SizeChangedEventArgs e) => AdjustTaskgroupHeight();
 
     }
 }

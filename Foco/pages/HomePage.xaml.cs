@@ -7,9 +7,7 @@ using System.Windows.Controls;
 namespace Foco.pages
 {
 
-    /// <summary>
-    /// Interaktionslogik für HomePage.xaml
-    /// </summary>
+    // interaction logic for HomePage.xaml
     public partial class HomePage : Page
     {
 

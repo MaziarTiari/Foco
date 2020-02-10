@@ -7,22 +7,23 @@ using static Foco.windows.AttachmentEditWindow;
 
 namespace Foco.controls
 {
-    /// <summary>
-    /// Interaktionslogik für TaskDetailsControl.xaml
-    /// </summary>
+    // interactio logic for TaskDetailsControl.xaml
     public partial class TaskDetailsControl : UserControl
     {
 
         private Task task;
         private readonly TaskgroupPage taskgroupPage;
 
-        public Task Task { get => task; set { task = value; Update(); } }
-
         public TaskDetailsControl(Task task, TaskgroupPage taskgroupPage)
         {
             InitializeComponent();
             Task = task;
             this.taskgroupPage = taskgroupPage;
+        }
+
+        public Task Task
+        {
+            get => task; set { task = value; Update(); }
         }
 
         private void Update()
@@ -33,7 +34,10 @@ namespace Foco.controls
                 ContentGrid.Visibility = Visibility.Visible;
                 TaskDescriptionEditor.Text = task.Description;
                 foreach (Attachment attachment in task.Attachments)
-                    AttachmentStack.Children.Add(new AttachmentControl(this, attachment));
+                {
+                    AttachmentStack.Children.Add(
+                        new AttachmentControl(this, attachment));
+                }
             }
             else
             {
@@ -47,14 +51,27 @@ namespace Foco.controls
             AttachmentEditWindow attachmentEditWindow;
             switch (((MenuItem)sender).Tag.ToString())
             {
-                case "URL": attachmentEditWindow = new AttachmentEditWindow("Webadresse anhängen", "", "https://", OnAttachmentCreatedCallback, AttachmentEditWindowType.WebUrl); break;
-                case "FILE": attachmentEditWindow = new AttachmentEditWindow("Lokale Datei anhängen", "", "", OnAttachmentCreatedCallback, AttachmentEditWindowType.File); break;
+                case "URL":
+                    attachmentEditWindow = new AttachmentEditWindow(
+                            "Webadresse anhängen", "", "https://",
+                            OnAttachmentCreatedCallback,
+                            AttachmentEditWindowType.WebUrl
+                        );
+                    break;
+                case "FILE":
+                    attachmentEditWindow = new AttachmentEditWindow(
+                            "Lokale Datei anhängen", "", "",
+                            OnAttachmentCreatedCallback,
+                            AttachmentEditWindowType.File
+                        );
+                    break;
                 default: return;
             }
             attachmentEditWindow.ShowDialog();
         }
 
-        private void OnAttachmentCreatedCallback(InputState inputState, string title, string link)
+        private void OnAttachmentCreatedCallback( InputState inputState,
+                                                  string title, string link )
         {
             if (inputState == InputState.Save)
             {

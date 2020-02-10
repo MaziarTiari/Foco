@@ -10,9 +10,7 @@ using Task = Foco.models.Task;
 
 namespace Foco.controls
 {
-    /// <summary>
-    /// Interaktionslogik für TaskgroupControl.xaml
-    /// </summary>
+    /// interaction logic for TaskgroupControl.xaml
     public partial class TaskgroupControl : UserControl
     {
         private readonly ListPage listPage;
@@ -25,12 +23,14 @@ namespace Foco.controls
             Taskgroup = taskgroup;
         }
 
-        public TaskgroupControl(Taskgroup taskgroup, ListPage listPage) : this(taskgroup)
+        public TaskgroupControl(Taskgroup taskgroup,
+                                ListPage listPage) : this(taskgroup)
         {
             this.listPage = listPage;
         }
 
-        public TaskgroupControl(Taskgroup taskgroup, TaskgroupPage taskgroupPage) : this(taskgroup)
+        public TaskgroupControl(Taskgroup taskgroup,
+                                TaskgroupPage taskgroupPage) : this(taskgroup)
         {
             this.taskgroupPage = taskgroupPage;
             InfoButton.Visibility = Visibility.Collapsed;
@@ -53,9 +53,7 @@ namespace Foco.controls
             get
             {
                 foreach (TaskControl taskControl in TaskContainer.Children)
-                {
                     if (taskControl.Highlighted) return taskControl;
-                }
                 return null;
             }
         }
@@ -78,10 +76,6 @@ namespace Foco.controls
         }
 
         #pragma warning restore IDE0051
-
-        /**
-         * Alle verfügbare Tasks sollen in die TaskgroupControl geladen werden
-         */
         private void LoadTaskControls()
         {
             if (Taskgroup.Tasks.Count > 0)
@@ -94,7 +88,7 @@ namespace Foco.controls
             }
         }
 
-        #pragma warning disable IDE0051 // wird eigentlich durch XAML aufgerufen
+        #pragma warning disable IDE0051 // called by XAML
         private void OnLabelEdited(string text)
         {
             if (!string.IsNullOrWhiteSpace(text))
@@ -103,41 +97,40 @@ namespace Foco.controls
                 TaskgroupHeader.Text = taskgroup.Title;
         }
 
-        /**
-         * Bie Tätigung der Enter-Taste mit gedrückter Schift-Taste wird eine neue Zeile erstellt,
-         * ohne die Schift-Taste gedrückt bedeutet Enter: fertig mit schreiben -> neue Task erstellen
-         */
-        private void TaskEditorPreviewKeyDown(object sender, KeyEventArgs e)
+
+        private void OnTaskCreateEditorKeyDown(object sender, KeyEventArgs e)
         {
-            switch (e.Key)
+            if (e.Key == Key.Enter && !string.IsNullOrWhiteSpace(TaskCreateEditor.Text))
             {
-                case Key.Enter:
-                    if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) && !string.IsNullOrWhiteSpace(TaskCreateEditor.Text))
-                    {
-                        Task task = new Task(TaskCreateEditor.Text);
-                        TaskControl taskControl = new TaskControl(task, this);
-                        TaskContainer.Children.Add(taskControl);
-                        TaskContainerScroll.ScrollToBottom();
-                        var tasks = Taskgroup.Tasks as List<Task>;
-                        tasks.Add(task);
-                        if (tasks.Count == 1)
-                            OnTaskClicked(task);
-                        TaskCreateEditor.Text = null;
-                        e.Handled = true;
-                    }
-                    break;
+                if (!(Keyboard.IsKeyDown(Key.LeftShift)
+                        || Keyboard.IsKeyDown(Key.RightShift)))
+                {
+                    Task task = new Task(TaskCreateEditor.Text);
+                    TaskControl taskControl = new TaskControl(task, this);
+                    TaskContainer.Children.Add(taskControl);
+                    TaskContainerScroll.ScrollToBottom();
+                    var tasks = Taskgroup.Tasks as List<Task>;
+                    tasks.Add(task);
+                    if (tasks.Count == 1)
+                        OnTaskClicked(task);
+                    TaskCreateEditor.Text = null;
+                    e.Handled = true;
+                }
             }
         }
 
-        // Benutzer klickte auf Löschen
         private void OnDeleteClicked(object sender, RoutedEventArgs e)
         {
-            ConfirmWindow confirmWindow = new ConfirmWindow("Aufgabengruppe löschen", "Sind Sie sicher, dass Sie die Aufgabengruppe \"" + taskgroup.Title + "\" inkl. aller Aufgaben löschen möchten?", ConfirmDeleteCallback);
+            ConfirmWindow confirmWindow = new ConfirmWindow(
+                    "Aufgabengruppe löschen",
+                    "Sind Sie sicher, dass Sie die Aufgabengruppe \"" +
+                    taskgroup.Title + "\" inkl. aller Aufgaben löschen möchten?",
+                    ConfirmedDeleteCallback
+                );
             confirmWindow.ShowDialog();
         }
 
-        // Benutzer hat Löschen bestätigt
-        private void ConfirmDeleteCallback(ConfirmState confirmState)
+        private void ConfirmedDeleteCallback(ConfirmState confirmState)
         {
             if (confirmState == ConfirmState.YES)
             {
@@ -149,27 +142,25 @@ namespace Foco.controls
             }
         }
 
-        // Benutzer ändert Status
-        private void OnStatusComboChanged(object sender, SelectionChangedEventArgs e)
+        private void StateComboChanged(object sender, SelectionChangedEventArgs e)
         {
             taskgroup.State = (State)StateCombo.SelectedIndex;
             if(ListPage != null)
                 ListPage.Update();
         }
 
-        // Benutzer ändert Priorität
-        private void OnPrioComboChanged(object sender, SelectionChangedEventArgs e)
+        private void PriorityChanged(object sender, SelectionChangedEventArgs e)
         {
             taskgroup.Prio = (Priority)PrioCombo.SelectedIndex;
         }
 
-        // Benutzer ändert Deadline
-        private void OnDeadlinePickerChanged(object sender, SelectionChangedEventArgs e)
+        private void DeadlinePickerChanged(object sender, SelectionChangedEventArgs e)
         {
-            taskgroup.Deadline = DeadlinePicker.SelectedDate == null ? DateTime.MinValue : (DateTime)DeadlinePicker.SelectedDate;
+            taskgroup.Deadline = DeadlinePicker.SelectedDate == null
+                                 ? DateTime.MinValue
+                                 : (DateTime)DeadlinePicker.SelectedDate;
         }
 
-        // Benutzer klickt auf Task
         public void OnTaskClicked(Task task)
         {
             if (taskgroupPage != null)
@@ -180,14 +171,13 @@ namespace Foco.controls
             }
         }
 
-        // Ein Task wurde (bereits) gelöscht
+        // task (already) deleted
         public void OnTaskDeleted(Task task)
         {
             if (taskgroupPage != null && taskgroupPage.CurrentTask == task)
                 taskgroupPage.CurrentTask = null;
         }
 
-        // Benutzer klickt auf Info
         private void OnInfoClicked(object sender, RoutedEventArgs e)
         {
             if (ListPage != null)

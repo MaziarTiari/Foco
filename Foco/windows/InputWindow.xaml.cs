@@ -9,9 +9,7 @@ namespace Foco.windows
 
     public enum InputState { Save, Cancel, Close }
 
-    /// <summary>
-    /// Interaktionslogik für InputWindow.xaml
-    /// </summary>
+    /// interaction logic for InputWindow.xaml
     public partial class InputWindow : Window
     {
 
@@ -20,7 +18,8 @@ namespace Foco.windows
         private readonly InputCallback inputCallback;
         private readonly bool allowWhitespaceOnSave;
 
-        public InputWindow(string windowTitle, string labelText, string defaultText, InputCallback inputCallback, bool allowWhitespaceOnSave = true)
+        public InputWindow( string windowTitle, string labelText, string defaultText,
+                            InputCallback inputCallback, bool allowWhitespaceOnSave = true )
         {
             InitializeComponent();
             this.inputCallback = inputCallback;
@@ -33,13 +32,13 @@ namespace Foco.windows
             InputBox.CaretIndex = InputBox.Text.Length;
         }
 
-        // Benutzer hat auf Button geklickt
         private void OnButtonClicked(object sender, RoutedEventArgs e)
         {
             switch ((string)((Button)sender).Tag)
             {
                 case "Save":
-                    if (!allowWhitespaceOnSave && string.IsNullOrWhiteSpace(InputBox.Text))
+                    if (!allowWhitespaceOnSave 
+                            && string.IsNullOrWhiteSpace(InputBox.Text))
                     {
                         InputBox.BorderBrush = new SolidColorBrush(Colors.Red);
                     }
@@ -56,13 +55,11 @@ namespace Foco.windows
             }
         }
 
-        // Benutzer schließt Fenster
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
             inputCallback(InputState.Close, InputBox.Text);
         }
 
-        // Benutzer drückt Enter
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
